@@ -1,0 +1,53 @@
+/* Buttons, Text Input
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.button-green {
+  background-color: rgb(28, 184, 65);
+}
+
+.button-red {
+  background-color: rgb(190, 20, 65);
+}
+
+button, input {
+  box-sizing: border-box;
+
+  font-size: 100%;
+  width: 100%;
+  border-radius: 4px;
+  padding: .5em 1em;
+  border: 0 rgba(0,0,0,0);
+
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+button {
+  font-size: 100%;
+  width: 100%;
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px;
+  padding: .5em 1em;
+  border: 0 rgba(0,0,0,0);
+
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+
+  background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+}
+
+button:disabled {
+  background-color: rgb(120, 120, 120);
+}
