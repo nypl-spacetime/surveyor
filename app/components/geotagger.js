@@ -46,10 +46,13 @@ const GeoTagger = React.createClass({
   },
 
   nextStep: function() {
+    console.log(this.state.currentStep ,this.state.steps.length)
     if (this.state.currentStep < this.state.steps.length - 1) {
       this.setState({
         currentStep: this.state.currentStep + 1
       });
+    } else {
+      this.reset();
     }
   },
 

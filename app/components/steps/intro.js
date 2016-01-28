@@ -1,11 +1,13 @@
 import React from 'react';
 
+const earth = require('../../images/earth.svg');
+
 const StepIntro = React.createClass({
   render: function() {
     return (
       <div className='geotagger-intro-earth'>
         <a href='#' onClick={this.done}>
-          <img src='../images/earth.svg' />
+          <img src={earth} />
         </a>
       </div>
     );

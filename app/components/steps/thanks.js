@@ -5,8 +5,15 @@ const StepThanks = React.createClass({
     return (
       <div className='geotagger-step opaque'>
         Thanks for locating this image on the map!
+        <div className='margin-top'>
+          <button className='button-green' onClick={this.done}>More, more, more!</button>
+        </div>
       </div>
     );
+  },
+
+  done: function() {
+    this.props.done();
   }
 });
 
