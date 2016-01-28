@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var config = require('config');
 
 module.exports = {
   devtool: 'source-map',
@@ -15,7 +16,8 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      '__DEV__': false,
+      __CONFIG__: JSON.stringify(config),
+      '__DEV__': false
     }),
     new webpack.DefinePlugin({
       'process.env': {

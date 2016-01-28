@@ -5,7 +5,9 @@ import App from './app';
 
 import './index.scss';
 
+const apiUrl = __CONFIG__.api;
+
 render(
-  <App />,
+  <App apiUrl={apiUrl} />,
   document.getElementById('app')
 );

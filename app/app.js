@@ -3,9 +3,6 @@ import GeoTagger from './components/geotagger';
 
 import './app.scss';
 
-const apiUrl = 'http://localhost:3000/';
-// const apiUrl = 'http://spacetimewhere.herokuapp.com/';
-
 const App = React.createClass({
 
   getInitialState: function() {
@@ -44,7 +41,7 @@ const App = React.createClass({
   },
 
   loadItem: function() {
-    fetch(apiUrl + 'items/random')
+    fetch(this.props.apiUrl + 'items/random')
       .then(response => {
         return response.json();
       }).then(json => {
@@ -58,7 +55,7 @@ const App = React.createClass({
 
   sendFeature: function(id, feature, callback) {
     var uuid = this.state.item.uuid;
-    fetch(apiUrl + 'items/' + uuid, {
+    fetch(this.props.apiUrl + 'items/' + uuid, {
       method: 'post',
       headers: {
         'Accept': 'application/json',

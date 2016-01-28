@@ -1,6 +1,7 @@
 var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
+var config = require('config');
 
 var __DEV__ = process.env.NODE_ENV === 'development';
 
@@ -27,12 +28,10 @@ app.get('*', function (req, res) {
   });
 });
 
-// TODO: use node-config, and read port from config file!
-var port = 3001;
-app.listen(port, '0.0.0.0', function (err) {
+app.listen(config.port, '0.0.0.0', function (err) {
   if (err) {
     console.error(err);
     return;
   }
-  console.info('==> 🌍  Listening on port ' + port + '. Open http://0.0.0.0:' + port + ' in your browser');
+  console.info('==> 🌍  Listening on port ' + config.port + '. Open http://0.0.0.0:' + config.port + ' in your browser');
 });

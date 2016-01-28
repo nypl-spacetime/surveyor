@@ -5,7 +5,7 @@ const StepIntro = React.createClass({
     return (
       <div className='geotagger-intro-earth'>
         <a href='#' onClick={this.done}>
-          <img src='./images/earth.svg' />
+          <img src='../images/earth.svg' />
         </a>
       </div>
     );
