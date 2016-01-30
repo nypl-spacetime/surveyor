@@ -30,7 +30,9 @@ const GeoTagger = React.createClass({
         <div className='geotagger-step-container'>
           { React.createElement(step.component, {
               done: this.doneStep,
-              reset: this.reset
+              abort: this.abortStep,
+              previous: this.previousStep,
+              stepData: {}
           }) }
         </div>
       </div>
@@ -38,6 +40,8 @@ const GeoTagger = React.createClass({
   },
 
   reset: function() {
+    // TODO: reset state of all steps
+
     this.setState({
       currentStep: 1
     });
@@ -46,7 +50,10 @@ const GeoTagger = React.createClass({
   },
 
   nextStep: function() {
-    console.log(this.state.currentStep ,this.state.steps.length)
+    if (this.state.currentStep === 0) {
+      this.props.onStart();
+    }
+
     if (this.state.currentStep < this.state.steps.length - 1) {
       this.setState({
         currentStep: this.state.currentStep + 1
@@ -56,10 +63,29 @@ const GeoTagger = React.createClass({
     }
   },
 
-  doneStep: function(feature) {
-    if (feature) {
-      var step = this.state.steps[this.state.currentStep];
-      this.props.sendFeature(step.id, feature, (err) => {
+  abortStep: function() {
+    var stepIndex = this.state.currentStep;
+    var step = this.state.steps[stepIndex];
+
+    this.props.sendData(step.id, stepIndex, false, (err) => {
+      if (err) {
+        console.error('Error sending data to server', err);
+      } else {
+        this.reset();
+      }
+    });
+  },
+
+  previousStep: function() {
+    console.log('Go to previous step!');
+  },
+
+  doneStep: function(data, geometry) {
+    if (data) {
+      var stepIndex = this.state.currentStep;
+      var step = this.state.steps[stepIndex];
+
+      this.props.sendData(step.id, stepIndex, true, data, geometry, (err) => {
         if (err) {
           console.error('Error sending data to server', err);
         } else {

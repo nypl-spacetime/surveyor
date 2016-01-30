@@ -12,16 +12,27 @@
   flex-direction: column;
 }
 
-.item-image, footer {
+.draggable {
+  cursor: move;
+}
+
+.item-image-container,
+.item-image,
+footer {
   box-sizing: border-box;
   width: 100%;
 }
 
-.item-image {
+.item-image-container {
   height: 100%;
+  overflow: hidden;
+}
+
+.item-image {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100%;
 }
 
 footer {

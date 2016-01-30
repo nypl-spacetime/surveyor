@@ -8,9 +8,15 @@ const App = React.createClass({
   getInitialState: function() {
     return {
       item: null,
-      view: null
+      token: this.getToken(),
+      view: null,
+      draggable: false,
+      dragoffset: [0, 0]
     };
   },
+
+  dragging: false,
+  draggingDragoffset: [0, 0],
 
   render: function() {
     if (!this.state.item) {
@@ -20,13 +26,18 @@ const App = React.createClass({
       var url = `http://digitalcollections.nypl.org/items/${uuid}`;
 
       var imageStyle = {
-        backgroundImage: `url(${this.state.item.imageLink})`
+        backgroundImage: `url(${this.state.item.imageLink})`,
+        transform: `translate(${this.state.dragoffset[0]}px,${this.state.dragoffset[1]}px)`
       };
+
+      var className = 'item-image' + (this.state.draggable ? ' draggable' : '');
 
       return (
         <div id='item'>
-          <div style={imageStyle} className='item-image' />
-          <GeoTagger uuid={uuid} loadItem={this.loadItem} sendFeature={this.sendFeature} />
+          <div className='item-image-container'>
+            <div className={className} style={imageStyle} onMouseDown={this.startDrag} />
+          </div>
+          <GeoTagger uuid={uuid} loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
           <footer>
             <h1>{this.state.item.title}</h1>
             <div className='geotagger-spacer' />
@@ -36,40 +47,130 @@ const App = React.createClass({
     }
   },
 
+  startGeoTagging: function() {
+    this.setState({
+      draggable: true
+    });
+  },
+
+  startDrag: function(e) {
+    if (this.state.draggable) {
+      this.dragging = true;
+      var pageX = e.pageX || e.clientX + (document.documentElement.scrollLeft ?
+        document.documentElement.scrollLeft :
+        document.body.scrollLeft);
+      var pageY = e.pageY || e.clientY + (document.documentElement.scrollTop ?
+        document.documentElement.scrollTop :
+        document.body.scrollTop);
+
+      this.draggingDragoffset = [
+        pageX - this.state.dragoffset[0], //el.offsetLeft,
+        pageY - this.state.dragoffset[1] //el.offsetTop;
+      ];
+    }
+
+  },
+
+  endDrag: function() {
+    this.dragging = false;
+  },
+
+  moveDrag: function(e) {
+    if (this.state.draggable && this.dragging) {
+      var pageX = e.pageX || e.clientX + (document.documentElement.scrollLeft ?
+        document.documentElement.scrollLeft :
+        document.body.scrollLeft);
+      var pageY = e.pageY || e.clientY + (document.documentElement.scrollTop ?
+        document.documentElement.scrollTop :
+        document.body.scrollTop);
+
+      var top = (pageY - this.draggingDragoffset[0]) + "px";
+      var left = (pageX - this.draggingDragoffset[1]) + "px";
+
+      this.setState({
+        dragoffset: [
+          e.pageX - this.draggingDragoffset[0],
+          e.pageY - this.draggingDragoffset[1]
+        ]
+      });
+    }
+  },
+
   componentDidMount: function() {
     this.loadItem();
+
+    window.addEventListener('mousemove', this.moveDrag);
+    window.addEventListener('mouseup', this.endDrag);
+  },
+
+  getToken: function() {
+    return localStorage.getItem('token');
+  },
+
+  saveToken(token) {
+    localStorage.setItem('token', token);
   },
 
   loadItem: function() {
-    fetch(this.props.apiUrl + 'items/random')
+    // TODO: pass token in promise!
+    var token = this.state.token;
+
+    var options = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    if (token) {
+      options.headers = {
+        'Authorization': token
+      }
+    }
+    fetch(this.props.api.url + 'items/random', options)
       .then(response => {
+        token = response.headers.get('Authorization');
+        this.saveToken(token);
         return response.json();
       }).then(json => {
         this.setState({
-          item: json
+          item: json,
+          token: token
         });
       }).catch(err => {
         console.error(err);
       });
   },
 
-  sendFeature: function(id, feature, callback) {
+  sendData: function(step, stepIndex, completed, data, geometry, callback) {
+    if (!callback && geometry) {
+      callback = geometry;
+    }
+    if (!callback && data) {
+      callback = data;
+    }
+
     var uuid = this.state.item.uuid;
-    fetch(this.props.apiUrl + 'items/' + uuid, {
+
+    fetch(this.props.api.url + 'items/' + uuid, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': this.state.token
       },
       body: JSON.stringify({
-        step: id,
-        feature: feature
+        type: 'Feature',
+        properties: {
+          step: step,
+          stepIndex: stepIndex,
+          completed: completed,
+          data: data
+        },
+        geometry: geometry
       })
     })
     .then(function(response) {
       return response.json()
     }).then(function(json) {
-      console.log(json);
       callback();
     }).catch(function(err) {
       callback(err);

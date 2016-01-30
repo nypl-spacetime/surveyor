@@ -5,9 +5,10 @@ import App from './app';
 
 import './index.scss';
 
-const apiUrl = __CONFIG__.api;
+var api = __CONFIG__.api;
+var defaults = {};//__CONFIG__.defaults;
 
 render(
-  <App apiUrl={apiUrl} />,
+  <App api={api} defaults={defaults} />,
   document.getElementById('app')
 );

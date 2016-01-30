@@ -23,7 +23,7 @@ const StepMap = React.createClass({
           Het is echt leuk als je ons helpt en dit en dat en <a href='http://spacetime.nypl.org'>Space/Time Directory</a>!
         </div>
         <div className='margin-top'>
-          <button className='button-red' onClick={this.props.reset}>I cannot locate this image...</button>
+          <button className='button-red' onClick={this.props.abort}>I cannot locate this image...</button>
         </div>
         <div className='margin-top'>
           <Map ref='map' mapEvents={mapEvents}/>
@@ -46,13 +46,9 @@ const StepMap = React.createClass({
   done: function() {
     if (this.state.hasMoved) {
       var view = this.refs.map.getView();
-      this.props.done({
-        type: 'Feature',
-        properties: view,
-        geometry: {
-          type: 'Point',
-          coordinates: view.center
-        }
+      this.props.done({zoom: view.zoom}, {
+        type: 'Point',
+        coordinates: view.center
       });
     }
   }
