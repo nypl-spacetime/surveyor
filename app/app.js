@@ -104,11 +104,20 @@ const App = React.createClass({
   },
 
   getToken: function() {
-    return localStorage.getItem('token');
+    try {
+      return localStorage.getItem('token');
+    } catch (err) {
+      console.error('Error reading token from localStorage', err);
+      return null;
+    }
   },
 
   saveToken(token) {
-    localStorage.setItem('token', token);
+    try {
+      localStorage.setItem('token', token);
+    } catch (err) {
+      console.error('Error saving token to localStorage', err);
+    }
   },
 
   loadItem: function() {
