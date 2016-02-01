@@ -16,9 +16,6 @@ const Map = React.createClass({
     return (
       <div className='map-container'>
         <div className='map' ref='map' />
-        <div className='map-search'>
-          <input type='text' ref='search' placeholder='Search for places…' onKeyUp={this.geocode} />
-        </div>
         <div className='map-crosshair-container'>
           <div className='map-crosshair' />
         </div>
@@ -50,63 +47,6 @@ const Map = React.createClass({
     this.setState({
       map: map
     });
-  },
-
-  geocode: function(e) {
-    if (e.keyCode == 13) {
-      var node = findDOMNode(this.refs.search);
-      var query = encodeURIComponent(node.value);
-
-      var accessToken = 'pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ';
-      var types = [
-        'country',
-        'region',
-        'postcode',
-        'place',
-        'neighborhood',
-        'address'
-      ];
-      var url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${accessToken}&types=${types.join(',')}`;
-
-      fetch(url)
-        .then(response => {
-          return response.json();
-        }).then(json => {
-          if (json && json.features.length) {
-            var result = json.features[0];
-            console.log('Found: ', result.place_name);
-
-            if (result.bbox) {
-              this.state.map.fitBounds([
-                [result.bbox[0], result.bbox[1]],
-                [result.bbox[2], result.bbox[3]]
-              ]);
-            }
-            this.state.map.panTo(result.center.reverse());
-          }
-        }).catch(err => {
-          console.error(err);
-        });
-
-      // fetch(`http://nominatim.openstreetmap.org/?format=json&q=${query}&format=json&limit=1`)
-      //   .then(response => {
-      //     return response.json();
-      //   }).then(json => {
-      //     if (json && json.length) {
-      //       var result = json[0];
-      //       console.log('Found: ', result.display_name);
-      //
-      //       var boundingBox = result.boundingbox.map(parseFloat);
-      //       this.state.map.fitBounds([
-      //         [boundingBox[0], boundingBox[2]],
-      //         [boundingBox[1], boundingBox[3]]
-      //       ]);
-      //       this.state.map.panTo([result.lat, result.lon]);
-      //     }
-      //   }).catch(err => {
-      //     console.error(err);
-      //   });
-    }
   },
 
   roundCoordinates: function(coordinate) {
