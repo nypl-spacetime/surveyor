@@ -1,5 +1,6 @@
 import React from 'react';
 import GeoTagger from './components/geotagger';
+import { findDOMNode } from 'react-dom';
 
 import './app.scss';
 
@@ -16,6 +17,7 @@ const App = React.createClass({
   },
 
   dragging: false,
+  tempDragoffset: [0, 0],
   draggingDragoffset: [0, 0],
 
   render: function() {
@@ -35,7 +37,7 @@ const App = React.createClass({
       return (
         <div id='item'>
           <div className='item-image-container'>
-            <div className={className} style={imageStyle} onMouseDown={this.startDrag} />
+            <div ref='image' className={className} style={imageStyle} onMouseDown={this.startDrag} />
           </div>
           <GeoTagger uuid={uuid} loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
           <footer>
@@ -67,12 +69,27 @@ const App = React.createClass({
         pageX - this.state.dragoffset[0], //el.offsetLeft,
         pageY - this.state.dragoffset[1] //el.offsetTop;
       ];
+
+      if (e.stopPropagation) {
+        e.stopPropagation();
+      }
+      if (e.preventDefault) {
+        e.preventDefault();
+      }
+
+      e.cancelBubble = true;
+      e.returnValue = false;
+      return false;
     }
 
   },
 
   endDrag: function() {
     this.dragging = false;
+
+    this.setState({
+      dragoffset: this.tempDragoffset
+    });
   },
 
   moveDrag: function(e) {
@@ -84,15 +101,18 @@ const App = React.createClass({
         document.documentElement.scrollTop :
         document.body.scrollTop);
 
-      var top = (pageY - this.draggingDragoffset[0]) + "px";
-      var left = (pageX - this.draggingDragoffset[1]) + "px";
+      var top = (pageY - this.draggingDragoffset[0]) + 'px';
+      var left = (pageX - this.draggingDragoffset[1]) + 'px';
 
-      this.setState({
-        dragoffset: [
-          e.pageX - this.draggingDragoffset[0],
-          e.pageY - this.draggingDragoffset[1]
-        ]
-      });
+      this.tempDragoffset = [
+        e.pageX - this.draggingDragoffset[0],
+        e.pageY - this.draggingDragoffset[1]
+      ];
+
+      var transform = `translate(${this.tempDragoffset[0]}px,${this.tempDragoffset[1]}px)`;
+
+      var node = findDOMNode(this.refs.image);
+      node.style.transform = transform;
     }
   },
 

@@ -44,6 +44,10 @@ const Map = React.createClass({
     //   onEachFeature: onEachFeature
     // }).addTo(map);
 
+    if (this.props.mapCreated) {
+      this.props.mapCreated(map);
+    }
+
     this.setState({
       map: map
     });
