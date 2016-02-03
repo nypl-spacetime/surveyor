@@ -39,6 +39,7 @@ const GeoTagger = React.createClass({
         <div className='geotagger-help' />
         <div className='geotagger-step-container'>
           { React.createElement(step.component, {
+              defaults: this.props.defaults,
               done: this.doneStep,
               abort: this.abortStep,
               reset: this.reset,

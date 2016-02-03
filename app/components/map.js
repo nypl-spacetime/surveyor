@@ -27,13 +27,13 @@ const Map = React.createClass({
     var node = findDOMNode(this.refs.map);
 
     var map = L.map(node, {
-      center: [40.7127837, -74.0059413],
-      zoom: 12
+      center: this.props.defaults.map.center,
+      zoom: this.props.defaults.map.zoom
     });
 
-    var layer = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-      subdomains: '1234',
-      attribution: 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />'
+    var layer = L.tileLayer(this.props.defaults.map.tileUrl, {
+      subdomains: this.props.defaults.map.subdomains.toString(),
+      attribution: this.props.defaults.map.attribution
     }).addTo(map);
 
     if (this.props.mapEvents) {

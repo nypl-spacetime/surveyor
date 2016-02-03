@@ -29,7 +29,7 @@ const Step = React.createClass({
           <button className='button-red' onClick={this.props.abort}>I cannot locate this image...</button>
         </div>
         <div className='margin-top'>
-          <Map ref='map' mapEvents={mapEvents}/>
+          <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents}/>
         </div>
         <div className='margin-top'>
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes! Here!</button>

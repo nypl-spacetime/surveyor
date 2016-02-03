@@ -37,9 +37,11 @@ const App = React.createClass({
       return (
         <div id='item'>
           <div className='item-image-container'>
-            <div ref='image' className={className} style={imageStyle} onMouseDown={this.startDrag} />
+            <div ref='image' className={className} style={imageStyle}
+              onMouseDown={this.startDrag} />
           </div>
-          <GeoTagger uuid={uuid} loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
+          <GeoTagger defaults={this.props.defaults}uuid={uuid}
+            loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
           <footer>
             <h1>{this.state.item.title}</h1>
             <div className='geotagger-spacer' />
