@@ -4,10 +4,13 @@
   "description": "NYPL Labs - Where?",
   "main": "server.js",
   "dependencies": {
+    "field-of-view": "github:nypl-spacetime/field-of-view",
     "leaflet": "^0.7.7",
     "normalize-css": "2.3.1",
     "react": "0.14.3",
     "react-dom": "0.14.3",
+    "turf-bearing": "^1.0.2",
+    "turf-distance": "^1.1.0",
     "whatwg-fetch": "0.11.0"
   },
   "devDependencies": {
