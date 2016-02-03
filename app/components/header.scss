@@ -1,0 +1,40 @@
+header {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  margin: 1em;
+  // TODO: get geotagger width from var
+  max-width: calc(100% - 400px - 3em);
+}
+
+header .header-text {
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+
+header .header-text > * {
+  padding: 4px 7px;
+  background-color: rgba(0,0,0,.5);
+  display: inline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  line-height: 28px;
+}
+
+header .header-text h1 {
+  font-size: 22px;
+  line-height: 35px;
+}
+
+header h2 {
+  font-size: 16px;
+}
+
+header p {
+  font-size: 14px;
+}

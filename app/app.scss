@@ -1,15 +1,13 @@
 #app {
   width: 100%;
   height: 100%;
-  padding: 7px;
+  padding: 2px;
   box-sizing: border-box;
 }
 
 #item {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .draggable {
@@ -33,25 +31,4 @@ footer {
   background-repeat: no-repeat;
   background-position: center;
   height: 100%;
-}
-
-footer {
-  bottom: 0;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-}
-
-footer h1 {
-  font-size: 25px;
-  margin: 0;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.geotagger-spacer {
-  width: 400px;
-  margin-left: 2em;
 }

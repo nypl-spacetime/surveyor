@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './components/header';
 import GeoTagger from './components/geotagger';
 import { findDOMNode } from 'react-dom';
 
@@ -40,12 +41,9 @@ const App = React.createClass({
             <div ref='image' className={className} style={imageStyle}
               onMouseDown={this.startDrag} />
           </div>
+          <Header api={this.props.api} item={this.state.item} />
           <GeoTagger defaults={this.props.defaults}uuid={uuid}
             loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
-          <footer>
-            <h1>{this.state.item.title}</h1>
-            <div className='geotagger-spacer' />
-          </footer>
         </div>
       );
     }
