@@ -96,7 +96,7 @@ const Step = React.createClass({
   },
 
   mapCreated: function(map) {
-    var pointList = this.getPointList(map, this.props.stepData.map.geometry.coordinates);
+    var pointList = this.getPointList(map, this.props.stepData.location.geometry.coordinates);
 
     // Eerste stap:
     //   Probeer zo precies mogelijk foto in in 't centrum van de cirkel te plaatsen.
@@ -180,7 +180,7 @@ const Step = React.createClass({
   onMove: function() {
     if (this.state.polyline) {
 
-      var pointList = this.getPointList(this.state.map, this.props.stepData.map.geometry.coordinates);
+      var pointList = this.getPointList(this.state.map, this.props.stepData.location.geometry.coordinates);
 
 
       // var hond = document.getElementsByClassName('VISSEN')[0];
