@@ -11,8 +11,8 @@ requireAll(require.context('./steps/', false, /\.js$/));
 
 const steps = [
   'intro',
-  'map',
-  'direction',
+  'location',
+  // 'direction',
   'thanks',
 ]
 
@@ -41,6 +41,7 @@ const GeoTagger = React.createClass({
           { React.createElement(step.component, {
               done: this.doneStep,
               abort: this.abortStep,
+              reset: this.reset,
               previous: this.previousStep,
               stepData: this.state.stepData
           }) }

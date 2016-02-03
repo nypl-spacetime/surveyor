@@ -23,6 +23,9 @@ const Step = React.createClass({
           Het is echt leuk als je ons helpt en dit en dat en <a href='http://spacetime.nypl.org'>Space/Time Directory</a>!
         </div>
         <div className='margin-top'>
+          <button className='button-sred' onClick={this.props.reset}>New...</button>
+        </div>
+        <div className='margin-top'>
           <button className='button-red' onClick={this.props.abort}>I cannot locate this image...</button>
         </div>
         <div className='margin-top'>
