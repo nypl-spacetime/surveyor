@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StepThanks = React.createClass({
+const Step = React.createClass({
   render: function() {
     return (
       <div className='geotagger-step opaque'>
@@ -17,4 +17,4 @@ const StepThanks = React.createClass({
   }
 });
 
-export default StepThanks;
+export default Step;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Map from '../map';
 
-const StepMap = React.createClass({
+const Step = React.createClass({
   getInitialState: function() {
     return {
       hasMoved: false
@@ -19,7 +19,7 @@ const StepMap = React.createClass({
       <div className='geotagger-step opaque'>
         <div>
           Can you pinpoint the location of the subject of image on the map below? Only photos and drawings, no maps.
-          Do you want <a href='#'>more information</a>?
+          Do you want <a href='javascript:;'>more information</a>?
           Het is echt leuk als je ons helpt en dit en dat en <a href='http://spacetime.nypl.org'>Space/Time Directory</a>!
         </div>
         <div className='margin-top'>
@@ -55,4 +55,4 @@ const StepMap = React.createClass({
 
 });
 
-export default StepMap;
+export default Step;

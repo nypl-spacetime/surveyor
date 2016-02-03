@@ -1,9 +1,20 @@
 import React from 'react';
 
-import StepIntro from './steps/intro';
-import StepMap from './steps/map';
-import StepDirection from './steps/direction';
-import StepThanks from './steps/thanks';
+var Steps = {};
+function requireAll(r) {
+  r.keys().forEach((filename, i) => {
+    var step = filename.match(/\.\/(.*)\.js/)[1];
+    Steps[step] = r(filename).default;
+  });
+}
+requireAll(require.context('./steps/', false, /\.js$/));
+
+const steps = [
+  'intro',
+  'map',
+  'direction',
+  'thanks',
+]
 
 import './geotagger.scss';
 import './buttons.scss';
@@ -13,12 +24,11 @@ const GeoTagger = React.createClass({
   getInitialState: function() {
     return {
       currentStep: 0,
-      steps: [
-        { id: 'intro', component: StepIntro, props: { } },
-        { id: 'map', component: StepMap, props: { } },
-        { id: 'thanks', component: StepThanks, props: { } }
-        // { id: 'direction', component: StepDirection, props: { } }
-      ]
+      stepData: {},
+      steps: steps.map(step => ({
+        step: step,
+        component: Steps[step]
+      }))
     };
   },
 
@@ -32,7 +42,7 @@ const GeoTagger = React.createClass({
               done: this.doneStep,
               abort: this.abortStep,
               previous: this.previousStep,
-              stepData: {}
+              stepData: this.state.stepData
           }) }
         </div>
       </div>
@@ -49,14 +59,23 @@ const GeoTagger = React.createClass({
     this.props.loadItem();
   },
 
-  nextStep: function() {
+  nextStep: function(data, geometry) {
     if (this.state.currentStep === 0) {
       this.props.onStart();
     }
 
     if (this.state.currentStep < this.state.steps.length - 1) {
+      var stepIndex = this.state.currentStep;
+      var step = this.state.steps[stepIndex];
+      var stepData = this.state.stepData;
+      stepData[step.step] = {
+        data: data,
+        geometry: geometry
+      };
+
       this.setState({
-        currentStep: this.state.currentStep + 1
+        currentStep: this.state.currentStep + 1,
+        stepData: stepData
       });
     } else {
       this.reset();
@@ -67,7 +86,7 @@ const GeoTagger = React.createClass({
     var stepIndex = this.state.currentStep;
     var step = this.state.steps[stepIndex];
 
-    this.props.sendData(step.id, stepIndex, false, (err) => {
+    this.props.sendData(step.step, stepIndex, false, (err) => {
       if (err) {
         console.error('Error sending data to server', err);
       } else {
@@ -85,11 +104,11 @@ const GeoTagger = React.createClass({
       var stepIndex = this.state.currentStep;
       var step = this.state.steps[stepIndex];
 
-      this.props.sendData(step.id, stepIndex, true, data, geometry, (err) => {
+      this.props.sendData(step.step, stepIndex, true, data, geometry, (err) => {
         if (err) {
           console.error('Error sending data to server', err);
         } else {
-          this.nextStep();
+          this.nextStep(data, geometry);
         }
       });
     } else {
