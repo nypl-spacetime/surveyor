@@ -28,8 +28,7 @@ const Map = React.createClass({
 
     var map = L.map(node, {
       center: [40.7127837, -74.0059413],
-      zoom: 12,
-      zoomControl: false
+      zoom: 12
     });
 
     var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
