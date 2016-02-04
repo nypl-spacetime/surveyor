@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from './components/image';
 import Header from './components/header';
 import GeoTagger from './components/geotagger';
 import { findDOMNode } from 'react-dom';
@@ -11,38 +12,22 @@ const App = React.createClass({
     return {
       item: null,
       token: this.getToken(),
-      view: null,
-      draggable: false,
-      dragoffset: [0, 0]
+      collections: {},
+      startedGeoTagging: false
     };
   },
-
-  dragging: false,
-  tempDragoffset: [0, 0],
-  draggingDragoffset: [0, 0],
 
   render: function() {
     if (!this.state.item) {
       return <div id='item' />
     } else {
       var uuid = this.state.item.uuid;
-      var url = `http://digitalcollections.nypl.org/items/${uuid}`;
-
-      var imageStyle = {
-        backgroundImage: `url(${this.state.item.imageLink})`,
-        transform: `translate(${this.state.dragoffset[0]}px,${this.state.dragoffset[1]}px)`
-      };
-
-      var className = 'item-image' + (this.state.draggable ? ' draggable' : '');
 
       return (
         <div id='item'>
-          <div className='item-image-container'>
-            <div ref='image' className={className} style={imageStyle}
-              onMouseDown={this.startDrag} />
-          </div>
-          <Header api={this.props.api} item={this.state.item} />
-          <GeoTagger defaults={this.props.defaults}uuid={uuid}
+          <Image key={'i' + uuid} ref='image' item={this.state.item} draggable={this.state.startedGeoTagging} />
+          <Header key={'h' + uuid} collections={this.state.collections} api={this.props.api} item={this.state.item} />
+          <GeoTagger defaults={this.props.defaults} uuid={uuid}
             loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
         </div>
       );
@@ -51,76 +36,13 @@ const App = React.createClass({
 
   startGeoTagging: function() {
     this.setState({
-      draggable: true
+      startedGeoTagging: true
     });
-  },
-
-  startDrag: function(e) {
-    if (this.state.draggable) {
-      this.dragging = true;
-      var pageX = e.pageX || e.clientX + (document.documentElement.scrollLeft ?
-        document.documentElement.scrollLeft :
-        document.body.scrollLeft);
-      var pageY = e.pageY || e.clientY + (document.documentElement.scrollTop ?
-        document.documentElement.scrollTop :
-        document.body.scrollTop);
-
-      this.draggingDragoffset = [
-        pageX - this.state.dragoffset[0], //el.offsetLeft,
-        pageY - this.state.dragoffset[1] //el.offsetTop;
-      ];
-
-      if (e.stopPropagation) {
-        e.stopPropagation();
-      }
-      if (e.preventDefault) {
-        e.preventDefault();
-      }
-
-      e.cancelBubble = true;
-      e.returnValue = false;
-      return false;
-    }
-
-  },
-
-  endDrag: function() {
-    this.dragging = false;
-
-    this.setState({
-      dragoffset: this.tempDragoffset
-    });
-  },
-
-  moveDrag: function(e) {
-    if (this.state.draggable && this.dragging) {
-      var pageX = e.pageX || e.clientX + (document.documentElement.scrollLeft ?
-        document.documentElement.scrollLeft :
-        document.body.scrollLeft);
-      var pageY = e.pageY || e.clientY + (document.documentElement.scrollTop ?
-        document.documentElement.scrollTop :
-        document.body.scrollTop);
-
-      var top = (pageY - this.draggingDragoffset[0]) + 'px';
-      var left = (pageX - this.draggingDragoffset[1]) + 'px';
-
-      this.tempDragoffset = [
-        e.pageX - this.draggingDragoffset[0],
-        e.pageY - this.draggingDragoffset[1]
-      ];
-
-      var transform = `translate(${this.tempDragoffset[0]}px,${this.tempDragoffset[1]}px)`;
-
-      var node = findDOMNode(this.refs.image);
-      node.style.transform = transform;
-    }
   },
 
   componentDidMount: function() {
     this.loadItem();
-
-    window.addEventListener('mousemove', this.moveDrag);
-    window.addEventListener('mouseup', this.endDrag);
+    this.fetchCollections();
   },
 
   getToken: function() {
@@ -203,6 +125,21 @@ const App = React.createClass({
       callback();
     }).catch(function(err) {
       callback(err);
+    });
+  },
+
+  fetchCollections: function() {
+    fetch(`${this.props.api.url}collections`)
+    .then(function(response) {
+      return response.json();
+    }).then(json => {
+      var collections = {};
+      json.forEach(c => collections[c.uuid] = c)
+      this.setState({
+        collections: collections
+      });
+    }).catch(function(err) {
+      console.error(`Error fetching collections`, err);
     });
   }
 

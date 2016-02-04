@@ -2,7 +2,7 @@ header {
   position: absolute;
   box-sizing: border-box;
   top: 0;
-  margin: 1em;
+  margin: 16px; // image margin x 2
   // TODO: get geotagger width from var
   max-width: calc(100% - 400px - 3em);
 }
@@ -11,30 +11,37 @@ header .header-text {
   margin: 0;
   display: block;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-header .header-text > * {
-  padding: 4px 7px;
+header > * {
+  margin: 0;
+}
+
+header .header-text {
   background-color: rgba(0,0,0,.5);
   display: inline;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  padding: 5px 7px 5px 7px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  line-height: 28px;
+  line-height: 27px;
+
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // max-width: 100%;
 }
 
-header .header-text h1 {
-  font-size: 22px;
+header h1 {
+  font-size: 25px;
   line-height: 35px;
 }
 
 header h2 {
-  font-size: 16px;
+  font-size: 17px;
 }
 
 header p {
-  font-size: 14px;
+  font-size: 17px;
 }

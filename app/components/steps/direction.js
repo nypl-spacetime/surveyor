@@ -10,7 +10,11 @@ import Map from '../map';
 const Step = React.createClass({
   getInitialState: function() {
     return {
-      hasMoved: false
+      hasMoved: false,
+      initialView: {
+        zoom: this.props.stepData.location.data.zoom,
+        center: this.props.stepData.location.geometry.coordinates
+      }
     };
   },
 
@@ -21,6 +25,8 @@ const Step = React.createClass({
       movestart: this.onMoveStart
     };
 
+
+
     return (
       <div className='geotagger-step opaque'>
         <div>
@@ -30,7 +36,7 @@ const Step = React.createClass({
           <button className='button-red' onClick={this.props.abort}>I cannot set the direction of this image...</button>
         </div>
         <div className='margin-top'>
-          <Map ref='map' mapEvents={mapEvents} mapCreated={this.mapCreated} />
+          <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} mapCreated={this.mapCreated} />
         </div>
         <div className='margin-top'>
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes! Go!</button>

@@ -6,7 +6,6 @@ const Header = React.createClass({
 
   getInitialState: function() {
     return {
-      collections: {},
       mods: {
         subject: [],
         originInfo: {}
@@ -35,18 +34,20 @@ const Header = React.createClass({
         return b.length - a.length;
       });
 
-    var geographic = subject.filter(s => s.geographic && s.geographic['$'])
+    var geographic = subject.filter(s => s && s.geographic && s.geographic['$'])
       .map(s => s.geographic['$'])
       .sort(function(a, b) {
         return b.length - a.length;
       });
 
     var collectionHeader;
-    if (this.state.collections[this.props.item.collection]) {
+    if (this.props.collections[this.props.item.collection]) {
       collectionHeader = (
-        <div className='header-text'>
-          <h2>From <a href={`http://digitalcollections.nypl.org/items/${this.props.item.collection}`}>{this.state.collections[this.props.item.collection].title.trim()}</a></h2>
-        </div>
+        <h2>
+          <span className='header-text'>
+            From <a href={`http://digitalcollections.nypl.org/items/${this.props.item.collection}`} target='_black'>{this.props.collections[this.props.item.collection].title.trim()}</a>
+          </span>
+        </h2>
       );
     }
 
@@ -69,35 +70,32 @@ const Header = React.createClass({
       }
 
       geoDateHeader = (
-        <div className='header-text'>
-          <h2>
-          {spans.map(function(span, i) {
-            return <span key={i}>{i ? span.key.toLowerCase() : span.key}: {span.value}{i < (spans.length - 1) ? ', ' : ''}</span>;
-          })}
-          </h2>
+        <div>
+          <span className='header-text'>
+            {spans.map(function(span, i) {
+              return <span key={i}>{i ? span.key.toLowerCase() : span.key}: {span.value}{i < (spans.length - 1) ? ', ' : ''}</span>;
+            })}
+          </span>
         </div>
       );
     }
 
-
-
     return (
       <header>
-        <div className='header-text'>
-          <h1>{this.props.item.title}</h1>
-        </div>
+        <h1>
+          <span className='header-text'>{this.props.item.title}</span>
+        </h1>
         {collectionHeader}
         {geoDateHeader}
-        <div className='header-text'>
-          <a href={`http://digitalcollections.nypl.org/items/${uuid}`}>Open item in Digital Collections</a>
-        </div>
+        <span className='header-text light'>
+          <a href={`http://digitalcollections.nypl.org/items/${uuid}`} target='_black'>Open item in Digital Collections</a>
+        </span>
       </header>
     );
   },
 
   componentDidMount: function() {
     this.fetchMods(this.props.item.uuid);
-    this.fetchCollections();
   },
 
   componentDidUpdate: function(prevProps) {
@@ -107,21 +105,6 @@ const Header = React.createClass({
     if (prevUuid !== uuid) {
       this.fetchMods(uuid);
     }
-  },
-
-  fetchCollections: function() {
-    fetch(`${this.props.api.url}collections`)
-    .then(function(response) {
-      return response.json();
-    }).then(json => {
-      var collections = {};
-      json.forEach(c => collections[c.uuid] = c)
-      this.setState({
-        collections: collections
-      });
-    }).catch(function(err) {
-      console.error(`Error fetching collections`, err);
-    });
   },
 
   fetchMods: function(uuid) {

@@ -1,34 +1,10 @@
 #app {
   width: 100%;
   height: 100%;
-  padding: 2px;
   box-sizing: border-box;
 }
 
 #item {
   width: 100%;
-  height: 100%;
-}
-
-.draggable {
-  cursor: move;
-}
-
-.item-image-container,
-.item-image,
-footer {
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.item-image-container {
-  height: 100%;
-  overflow: hidden;
-}
-
-.item-image {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   height: 100%;
 }

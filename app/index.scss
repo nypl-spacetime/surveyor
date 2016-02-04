@@ -7,15 +7,38 @@
   outline: none;
 }
 
+a {
+  outline: none;
+}
+
 body {
-  font-family: 'Source Sans Pro';
+  font-family: 'Kievit';
   width: 100%;
   height: 100%;
   position: absolute;
   margin: 0;
   background-color: black;
+  font-size: 17px;
+}
+
+h1 {
+  font-family: 'MiloSlab';
 }
 
 body, a, a:visited {
   color: #eee;
+}
+
+.light {
+  font-weight: 300;
+  opacity: .8;
+}
+
+.centered {
+  text-align: center;
+}
+
+.centered-block {
+  display: block;
+  margin: 0 auto;
 }

@@ -15,24 +15,33 @@ const Step = React.createClass({
       movestart: this.onMoveStart
     };
 
+    var noLocation = 'No location';
+
     return (
-      <div className='geotagger-step opaque'>
+      <div className='geotagger-step opaque all-margin-top'>
+        <h1>Where is this?</h1>
+        <div className='light'>
+          Help the New York Public Libary build
+          a <a href='http://spacetime.nypl.org/' target='_blank'>Space/Time Directory</a> by <a href='https://en.wikipedia.org/wiki/Geotagging' target='_blank'>geotagging</a> its
+          collection!
+        </div>
         <div>
-          Can you pinpoint the location of the subject of image on the map below? Only photos and drawings, no maps.
-          Do you want <a href='javascript:;'>more information</a>?
-          Het is echt leuk als je ons helpt en dit en dat en <a href='http://spacetime.nypl.org'>Space/Time Directory</a>!
+          Can you center the map as precisely as you can on the location of the image?
         </div>
-        <div className='margin-top'>
-          <button className='button-sred' onClick={this.props.reset}>New...</button>
+
+        <div className='light'>
+          (Some images, like documents or maps do not depict a location — in that case,
+          you can use the <b>{noLocation.toLowerCase()}</b> button.)
         </div>
-        <div className='margin-top'>
-          <button className='button-red' onClick={this.props.abort}>I cannot locate this image...</button>
-        </div>
-        <div className='margin-top'>
+        <div>
           <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents}/>
         </div>
-        <div className='margin-top'>
-          <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes! Here!</button>
+        <div className='buttons'>
+          <button className='button-red' onClick={this.props.abort}>{noLocation}</button>
+          <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here!</button>
+        </div>
+        <div className='centered'>
+          <a href='javascript:;' onClick={this.props.reset}>I don't like this image, show me a new one 🚀</a>
         </div>
       </div>
     );
