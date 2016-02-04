@@ -25,10 +25,10 @@ const Step = React.createClass({
           visualizations to browse through the library's collection in space and time — keep an eye on the website of the <a href='http://spacetime.nypl.org/' target='_blank'>Space/Time Directory</a> project.
         </div>
         <div>
-          <img className='centered-block' src={owl} />
+          <img className='centered-block geotagger-thanks-owl' src={owl} />
         </div>
         <div>
-          <div className='timer-bar' style={timerBarStyle} />
+          <div className='geotagger-thanks-timer-bar' style={timerBarStyle} />
         </div>
         <div>
           <button className='button-green' onClick={this.done}>Show me another image!</button>

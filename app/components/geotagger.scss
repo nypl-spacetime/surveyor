@@ -75,10 +75,36 @@
   margin-top: 8px;
 }
 
-.timer-bar {
+.geotagger-thanks-timer-bar {
   border-radius: 4px;
   height: 3px;
   background-color: rgb(100, 200, 102);
   transition-property: width;
   transition-timing-function: linear;
+}
+
+.geotagger-thanks-owl {
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: owl;
+  -webkit-animation-name: owl;
+  animation-duration: .5s;
+  -webkit-animation-duration: .5s;
+  animation-direction: alternate;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+
+}
+
+@keyframes owl {
+  from {
+    transform: rotate(-2deg);
+    -webkit-transform: rotate(-2deg);
+  }
+
+  to {
+    transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+  }
 }
