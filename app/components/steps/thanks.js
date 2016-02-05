@@ -7,9 +7,12 @@ const Step = React.createClass({
   getInitialState: function() {
     return {
       timerStarted: false,
-      duration: 4
+      duration: 6
     };
   },
+
+  intitialTimeout: null,
+  timerBarTimeout: null,
 
   render: function() {
     var timerBarStyle = {
@@ -38,16 +41,24 @@ const Step = React.createClass({
   },
 
   componentDidMount() {
-    setTimeout(() => {
+    this.intitialTimeout = setTimeout(() => {
       this.setState({
         timerStarted: true
       });
       // Initialize timer which proceeds to first step
-      setTimeout(this.done, this.state.duration * 1000);
+      this.timerBarTimeout = setTimeout(this.done, this.state.duration * 1000);
     }, 100);
   },
 
   done: function() {
+    if (this.intitialTimeout) {
+      clearTimeout(this.intitialTimeout);
+    }
+
+    if (this.timerBarTimeout) {
+      clearTimeout(this.timerBarTimeout);
+    }
+
     this.props.done();
   }
 });
