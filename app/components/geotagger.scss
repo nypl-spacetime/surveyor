@@ -24,30 +24,6 @@
   float: right;
 }
 
-.geotagger-intro-help {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url('../images/help.svg');
-  height: 170px;
-  width: 200px;
-}
-
-.geotagger-intro-earth {
-  background-size: contain;
-  background-repeat: no-repeat;
-  // background-position: center;
-  height: 120px;
-  width: 120px;
-  margin: 0 auto;
-}
-
-.geotagger-intro-earth {
-  transition-property: height;
-  transition-timing-function: cubic-bezier(0,1,1,0);
-}
-
-
 .geotagger-step-container {
   width: 100%;
 }
@@ -94,7 +70,6 @@
   -webkit-animation-direction: alternate;
   -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
-
 }
 
 @keyframes owl {
