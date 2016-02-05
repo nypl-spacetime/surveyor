@@ -12,11 +12,11 @@
 }
 
 .button-green {
-  background-color: rgb(28, 184, 65);
+  background-color: #579b34;
 }
 
 .button-red {
-  background-color: rgb(190, 20, 65);
+  background-color: #cf1d1e;
 }
 
 button, input {
@@ -40,7 +40,7 @@ button {
   font-size: 100%;
   width: 100%;
   color: white;
-  border-radius: 2px;
+  border-radius: 3px;
 
   padding: .5em 1em;
   border: 0 rgba(0,0,0,0);
@@ -65,5 +65,6 @@ button:hover {
 
 button:disabled {
   background-color: rgb(120, 120, 120);
+  color: rgb(190, 190, 190);
   opacity: 0.85;
 }
