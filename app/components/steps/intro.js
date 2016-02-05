@@ -1,41 +1,27 @@
 import React from 'react';
 
-const earth = require('../../images/earth.svg');
+import '../pin.scss';
+
+var svgs = {
+  help: require('../../images/help.svg'),
+  pin: require('../../images/pin.svg'),
+  shadow: require('../../images/shadow.svg'),
+  earth: require('../../images/earth.svg')
+};
 
 const Step = React.createClass({
 
-  getInitialState: function() {
-    return {
-      animationStarted: false,
-      duration: 1
-    };
-  },
-
   render: function() {
-
-    var earthStyle = {
-      height: this.state.animationStarted ? '100%' : '60%',
-      transitionDuration: `${this.state.duration}s`
-    };
-
     return (
       <div className='geotagger-step geotagger-intro'>
-        <div className='geotagger-intro-help' />
-        <div className='geotagger-intro-earth'>
-          <a href='javascript:;' onClick={this.done}>
-            <img className='geotagger-intro-earth' src={earth} style={earthStyle} />
-          </a>
+        <div className='geotagger-intro-pin-container' onClick={this.done}>
+          <img src={svgs.help} className='geotagger-intro-help' />
+          <img src={svgs.pin} className='geotagger-intro-pin' />
+          <img src={svgs.shadow} className='geotagger-intro-shadow' />
+          <img src={svgs.earth} className='geotagger-intro-earth' />
         </div>
       </div>
     );
-  },
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        animationStarted: true
-      });
-    }, 100);
   },
 
   done: function() {

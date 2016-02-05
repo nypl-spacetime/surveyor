@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="80px" height="129px" viewBox="0 0 80 129" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>pin</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="pin" sketch:type="MSLayerGroup" fill="#068A7F">
+            <path d="M39.5676706,129 C39.5676706,129 79.1353412,61.4359166 79.1353412,39.5832956 C79.1353412,17.7306745 61.4202916,0.015625 39.5676706,0.015625 C17.7150495,0.015625 0,17.7306745 0,39.5832956 C0,61.4359166 39.5676706,129 39.5676706,129 Z M39.8792271,55.4726751 C48.4826212,55.4726751 55.4570501,48.4982462 55.4570501,39.8948521 C55.4570501,31.2914579 48.4826212,24.317029 39.8792271,24.317029 C31.2758329,24.317029 24.301404,31.2914579 24.301404,39.8948521 C24.301404,48.4982462 31.2758329,55.4726751 39.8792271,55.4726751 Z" id="Oval-1" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

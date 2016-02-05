@@ -1,0 +1,57 @@
+@-webkit-keyframes fall { 0% { bottom:750px; transform:scaleY(1); } 80% { bottom:65px; transform:scaleY(1); } 95% { bottom:35px; transform:scaleY(.5); } 100% { bottom:65px; transform:scaleY(1); } }
+@-moz-keyframes fall { 0% { bottom:750px; transform:scaleY(1); } 80% { bottom:65px; transform:scaleY(1); } 95% { bottom:35px; transform:scaleY(.5); } 100% { bottom:65px; transform:scaleY(1); } }
+@-o-keyframes fall { 0% { bottom:750px; transform:scaleY(1); } 80% { bottom:65px; transform:scaleY(1); } 95% { bottom:35px; transform:scaleY(.5); } 100% { bottom:65px; transform:scaleY(1); } }
+@keyframes fall { 0% { bottom:750px; transform:scaleY(1); } 80% { bottom:65px; transform:scaleY(1); } 95% { bottom:35px; transform:scaleY(.5); } 100% { bottom:65px; transform:scaleY(1); } }
+
+@-webkit-keyframes shadow { 0% { transform:scale(.1); } 100% { transform:scale(1); } }
+@-moz-keyframes shadow { 0% { transform:scale(.1); } 100% { transform:scale(1); } }
+@-o-keyframes shadow { 0% { transform:scale(.1); } 100% { transform:scale(1); } }
+@keyframes shadow { 0% { transform:scale(.1); } 100% { transform:scale(1); } }
+
+.geotagger-intro-pin-container {
+  position: relative;
+  width: 100%;
+  float: left;
+  cursor: pointer;
+}
+
+.geotagger-intro-help,
+.geotagger-intro-pin,
+.geotagger-intro-shadow,
+.geotagger-intro-earth {
+  width: 50%;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.geotagger-intro-earth {
+  width: 100px;
+  bottom: 0;
+}
+
+.geotagger-intro-pin {
+  width: 80px;
+  bottom: 55px;
+  z-index: 2;
+  -webkit-animation: .5s ease-in fall;
+  -moz-animation: .5s ease-in fall;
+  -o-animation: .5s ease-in fall;
+  animation: .5s ease-in fall;
+}
+
+.geotagger-intro-shadow {
+  width: 32px;
+  bottom: 50px;
+  z-index: 1;
+  -webkit-animation: .5s ease-in shadow;
+  -moz-animation: .5s ease-in shadow;
+  -o-animation: .5s ease-in shadow;
+  animation: .5s ease-in shadow;
+}
+
+.geotagger-intro-help {
+  width: 200px;
+  bottom: 200px;
+}
