@@ -12,28 +12,55 @@ const Map = React.createClass({
     return {};
   },
 
+  getDefaultProps: function() {
+    return {
+      options: {},
+      crosshair: true
+    };
+  },
+
   render: function() {
-    return (
-      <div className='map-container'>
-        <div className='map' ref='map' />
+
+    var crosshair;
+    if (this.props.crosshair) {
+      crosshair = (
         <div className='map-crosshair-container'>
           <div className='map-crosshair' />
         </div>
+      );
+    }
+
+    return (
+      <div className='map-container'>
+        <div className='map' ref='map' />
+        {crosshair}
       </div>
     );
   },
 
+  getOptions: function(key) {
+    return this.props.options[key] || this.props.defaults.map[key];
+  },
+
   componentDidMount: function() {
+    var options = {
+      tileUrl: this.getOptions('tileUrl'),
+      center: this.getOptions('center'),
+      zoom: this.getOptions('zoom'),
+      subdomains: this.getOptions('subdomains'),
+      attribution: this.getOptions('attribution')
+    };
+
     var node = findDOMNode(this.refs.map);
 
     var map = L.map(node, {
-      center: this.props.defaults.map.center,
-      zoom: this.props.defaults.map.zoom
+      center: options.center,
+      zoom: options.zoom
     });
 
-    var layer = L.tileLayer(this.props.defaults.map.tileUrl, {
-      subdomains: this.props.defaults.map.subdomains.toString(),
-      attribution: this.props.defaults.map.attribution
+    var layer = L.tileLayer(options.tileUrl, {
+      subdomains: options.subdomains.toString(),
+      attribution: options.attribution
     }).addTo(map);
 
     if (this.props.mapEvents) {
@@ -55,6 +82,16 @@ const Map = React.createClass({
 
   roundCoordinates: function(coordinate) {
     return Math.round(coordinate * 1000000) / 1000000;
+  },
+
+  getMap: function() {
+    return this.state.map;
+  },
+
+  setView: function(center, zoom) {
+    if (this.state.map) {
+      this.state.map.setView(center, zoom);
+    }
   },
 
   getView: function() {
