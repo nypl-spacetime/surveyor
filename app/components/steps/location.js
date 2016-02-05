@@ -13,6 +13,7 @@ const Step = React.createClass({
 
     var mapEvents = {
       movestart: this.onMoveStart
+      // click: this.onClick
     };
 
     var noLocation = 'No location';
@@ -30,7 +31,7 @@ const Step = React.createClass({
         </div>
 
         <div className='light'>
-          (Some images, like documents or maps do not depict a location — in that case,
+          (Some images, like documents or maps, do not depict a location — in that case,
           you can use the <b>{noLocation.toLowerCase()}</b> button.)
         </div>
         <div>
@@ -41,7 +42,7 @@ const Step = React.createClass({
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here!</button>
         </div>
         <div className='centered'>
-          <a href='javascript:;' onClick={this.props.reset}>I don't like this image, show me a new one 🚀</a>
+          <a href='javascript:;' onClick={this.props.reset}>I don&#39;t like this image, show me a new one</a>
         </div>
       </div>
     );
@@ -54,6 +55,10 @@ const Step = React.createClass({
       });
     }
   },
+
+  // onClick: function(e) {
+  //   this.refs.map.setView(e.latlng);
+  // },
 
   done: function() {
     if (this.state.hasMoved) {
