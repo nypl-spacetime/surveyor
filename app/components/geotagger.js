@@ -12,9 +12,9 @@ requireAll(require.context('./steps/', false, /\.js$/));
 const steps = [
   'intro',
   'location',
-  // 'direction',
+  'bearing',
   'thanks',
-]
+];
 
 import './geotagger.scss';
 import './buttons.scss';
