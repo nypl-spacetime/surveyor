@@ -7,7 +7,7 @@ const Step = React.createClass({
   getInitialState: function() {
     return {
       timerStarted: false,
-      duration: 6
+      duration: 2.5
     };
   },
 
@@ -22,11 +22,7 @@ const Step = React.createClass({
 
     return (
       <div className='geotagger-step all-margin-top opaque'>
-        <h1>Thanks!</h1>
-        <div>
-          Thanks for geotagging this image. Soon, we will create new tools and
-          visualizations to browse through the library's collection in space and time — keep an eye on the website of the <a href='http://spacetime.nypl.org/' target='_blank'>Space/Time Directory</a> project.
-        </div>
+        <h1>Thanks you!</h1>
         <div>
           <img className='centered-block geotagger-thanks-owl' src={owl} />
         </div>
