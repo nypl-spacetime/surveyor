@@ -98,6 +98,10 @@ const Header = React.createClass({
     this.fetchMods(this.props.item.uuid);
   },
 
+  componentWillUnmount: function() {
+    this.unmounted = true;
+  },
+
   componentDidUpdate: function(prevProps) {
     var prevUuid = prevProps.item.uuid;
     var uuid = this.props.item.uuid;
@@ -109,15 +113,17 @@ const Header = React.createClass({
 
   fetchMods: function(uuid) {
     fetch(`${this.props.api.url}items/${uuid}/mods`)
-    .then(function(response) {
-      return response.json();
-    }).then(json => {
-      this.setState({
-        mods: json
+      .then(function(response) {
+        return response.json();
+      }).then(json => {
+        if (!this.unmounted) {
+          this.setState({
+            mods: json
+          });
+        }
+      }).catch(function(err) {
+        console.error(`Error fetching MODS for ${uuid}`, err);
       });
-    }).catch(function(err) {
-      console.error(`Error fetching MODS for ${uuid}`, err);
-    });
   }
 
 });
