@@ -11,6 +11,7 @@
     "react-dom": "0.14.3",
     "turf-bearing": "^1.0.2",
     "turf-distance": "^1.1.0",
+    "turf-extent": "^1.0.4",
     "whatwg-fetch": "0.11.0"
   },
   "devDependencies": {

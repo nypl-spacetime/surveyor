@@ -4,6 +4,7 @@ import L from 'leaflet';
 import {fromFeature} from 'field-of-view';
 import turfDistance from 'turf-distance';
 import turfBearing from 'turf-bearing';
+import turfExtent from 'turf-extent';
 
 var cameraSvg = require('../../images/camera.svg');
 var locationSvg = require('../../images/location.svg');
@@ -106,6 +107,11 @@ const Step = React.createClass({
     ];
   },
 
+  percentageInRange: function(value, range) {
+    var f = (value - range[0]) / (range[1] - range[0]);
+    return this.roundNumber(f * 100);
+  },
+
   drawFieldOfView: function(origin, target) {
     if (this.state.polyline) {
       var fieldOfView = this.getFieldOfView(
@@ -118,13 +124,22 @@ const Step = React.createClass({
       // Store bearing;
       this.bearing = fieldOfView.properties.bearing;
 
+      // Compute list of Leaflet points, and update Leaflet geometries
       var pointList = this.getPointList(fieldOfView);
-
-      var polygonSvg = document.getElementsByClassName('field-of-view')[0];
-      polygonSvg.setAttribute('fill', 'url(#gradient)')
-
       this.state.polyline.setLatLngs(pointList);
       this.state.polygon.setLatLngs(pointList);
+
+      // Update gradient's origin
+      var fieldOfViewBounds = turfExtent(fieldOfView);
+
+      var cx = this.percentageInRange(origin.lng, [fieldOfViewBounds[0], fieldOfViewBounds[2]]);
+      var cy = this.percentageInRange(origin.lat, [fieldOfViewBounds[1], fieldOfViewBounds[3]]);
+
+      var gradient = document.getElementById('gradient')
+      gradient.setAttribute('cx', `${cx}%`);
+      gradient.setAttribute('cy', `${100 - cy}%`);
+
+
     }
   },
 
@@ -248,25 +263,36 @@ const Step = React.createClass({
 
     svg.appendChild(defs);
 
-    var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
     gradient.setAttribute('id', 'gradient');
-    gradient.setAttribute('x1', '0%');
-    gradient.setAttribute('x2', '0%');
-    gradient.setAttribute('y1', '0%');
-    gradient.setAttribute('y2', '100%');
+    gradient.setAttribute('cx', '0%');
+    gradient.setAttribute('cy', '50%');
+    gradient.setAttribute('r', '100%');
+    // gradient.setAttribute('fx', '100%');
+    // gradient.setAttribute('fy', '100%');
 
     defs.appendChild(gradient);
 
     // Stops
     var stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
     stop1.setAttribute('offset', '0%');
-    stop1.setAttribute("stop-color", 'red');
+    stop1.setAttribute("stop-color", '#ffd503');
     gradient.appendChild(stop1);
 
     var stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-    stop2.setAttribute('offset', '100%');
-    stop2.setAttribute('stop-color', 'yellow');
+    stop2.setAttribute('offset', '60%');
+    stop2.setAttribute("stop-color", '#ffd503');
     gradient.appendChild(stop2);
+
+    var stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop3.setAttribute('offset', '100%');
+    stop3.setAttribute('stop-opacity', 0);
+    stop3.setAttribute('stop-color', 'white');
+    gradient.appendChild(stop3);
+
+    // Apply gradient to Leaflet polygon
+    var polygonSvg = document.getElementsByClassName('field-of-view')[0];
+    polygonSvg.setAttribute('fill', 'url(#gradient)');
 
     // Update field of view after 25ms, when state change has certainly happened
     setTimeout(() => {
