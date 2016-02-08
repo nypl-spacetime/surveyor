@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "uuid": "510d47d9-4ec5-a3d9-e040-e00a18064a99",
+        "imageId": "482572",
+        "step": "bearing",
+        "completed": true,
+        "url": "http://digitalcollections.nypl.org/items/510d47d9-4ec5-a3d9-e040-e00a18064a99",
+        "data": {
+          "angle": 62,
+          "bearing": 46.02,
+          "distance": 35.82
+        }
+      },
+      "geometry": {
+        "type": "GeometryCollection",
+        "geometries": [
+          {
+            "type": "Point",
+            "coordinates": [
+              -73.94444167613983,
+              40.714447822244466
+            ]
+          },
+          {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -73.94395862435081,
+                40.71453219693834
+              ],
+              [
+                -73.94431318501506,
+                40.71481071392878
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
