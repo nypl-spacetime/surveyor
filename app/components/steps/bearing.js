@@ -12,10 +12,11 @@ import Map from '../map';
 
 const Step = React.createClass({
   getInitialState: function() {
+    var zoom = Math.min(this.props.stepData.location.data.zoom + 2, this.props.defaults.map.maxZoom);
     return {
       hasMoved: false,
       initialView: {
-        zoom: this.props.stepData.location.data.zoom + 2,
+        zoom: zoom,
         center: [
           this.props.stepData.location.geometry.coordinates[1],
           this.props.stepData.location.geometry.coordinates[0]
@@ -162,8 +163,7 @@ const Step = React.createClass({
       color: 'black',
       opacity: 0.5,
       weight: 2,
-    })
-      .addTo(map);
+    }).addTo(map);
 
     var polygon = L.polygon(pointList, {
       weight: 0,
@@ -198,13 +198,22 @@ const Step = React.createClass({
       }
     });
 
+    // Set latLng of image location to the results of previous step
     var locationLatLng = [
       this.props.stepData.location.geometry.coordinates[1],
       this.props.stepData.location.geometry.coordinates[0]
     ];
 
-    // TODO: Compute point with turf.distance!!!
-    var cameraLatLng = locationLatLng.map(c => c + 0.0101);
+    // Set latLng of camera south east of map center, three thirds of
+    //   map container size
+    var element = map.getContainer();
+    var point = [
+      element.clientWidth * .75,
+      element.clientHeight * .75
+    ];
+
+    // Convert pixel coordinates to latLng
+    var cameraLatLng = map.containerPointToLatLng(point)
 
     var cameraMarker = L.marker(cameraLatLng, {
       icon: cameraIcon,

@@ -47,6 +47,7 @@ const Map = React.createClass({
       tileUrl: this.getOptions('tileUrl'),
       center: this.getOptions('center'),
       zoom: this.getOptions('zoom'),
+      maxZoom: this.getOptions('maxZoom'),
       subdomains: this.getOptions('subdomains'),
       attribution: this.getOptions('attribution')
     };
