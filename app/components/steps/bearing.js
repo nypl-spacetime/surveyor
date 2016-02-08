@@ -11,11 +11,14 @@ var locationSvg = require('../../images/location.svg');
 
 import Map from '../map';
 
+import '../range.scss';
+
 const Step = React.createClass({
   getInitialState: function() {
     var zoom = Math.min(this.props.stepData.location.data.zoom + 2, this.props.defaults.map.maxZoom);
     return {
       hasMoved: false,
+      angle: 40,
       initialView: {
         zoom: zoom,
         center: [
@@ -37,9 +40,15 @@ const Step = React.createClass({
 
     return (
       <div className='geotagger-step opaque all-margin-top'>
-        <h1>Direction</h1>
+        <h1>What's the direction?</h1>
         <div>
-          Can you determine the direction of the image???? TODO: WRITE EXPLANATION!!!!!!
+          Thanks! Could you also try to determine
+          the direction of the image by dragging and positioning the camera icon and the
+          subject icon.
+        </div>
+        <div className='geotagger-bearing-angle-container'>
+          <label htmlFor='geotagger-bearing-angle'>View angle:</label>
+          <input id='geotagger-bearing-angle' type='range' min='20' max='120' step='1' defaultValue={this.state.angle} onInput={this.onSliderInput} />
         </div>
         <div>
           <Map ref='map' options={options} defaults={this.props.defaults}
@@ -47,7 +56,7 @@ const Step = React.createClass({
         </div>
         <div className='margin-top buttons'>
           <button className='button-red' onClick={this.props.abort}>Impossible</button>
-          <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes! Go!</button>
+          <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, done!</button>
         </div>
         <div className='centered'>
           <a href='javascript:;' onClick={this.props.reset}>No, I&#39;d rather geotag another image!</a>
@@ -80,7 +89,7 @@ const Step = React.createClass({
       type: 'Feature',
       properties: {
         distance: distance,
-        angle: 30,
+        angle: this.state.angle,
         bearing: bearing
       },
       geometry: {
@@ -138,8 +147,6 @@ const Step = React.createClass({
       var gradient = document.getElementById('gradient')
       gradient.setAttribute('cx', `${cx}%`);
       gradient.setAttribute('cy', `${100 - cy}%`);
-
-
     }
   },
 
@@ -178,6 +185,9 @@ const Step = React.createClass({
       color: 'black',
       opacity: 0.5,
       weight: 2,
+      dashArray: '5, 7',
+      lineCap: 'round',
+      lineJoin: 'round'
     }).addTo(map);
 
     var polygon = L.polygon(pointList, {
@@ -305,6 +315,14 @@ const Step = React.createClass({
     return Math.round(n * 100) / 100;
   },
 
+  onSliderInput: function(e) {
+    this.setState({
+      angle: parseInt(e.target.value)
+    });
+
+    this.updateFieldOfView();
+  },
+
   onMarkerDrag: function() {
     if (!this.state.hasMoved) {
       this.setState({
@@ -333,6 +351,7 @@ const Step = React.createClass({
     if (this.state.hasMoved) {
       var fieldOfView = this.state.fieldOfView;
       var data = {
+        angle: fieldOfView.properties.angle,
         bearing: this.roundNumber(fieldOfView.properties.bearing),
         distance: this.roundNumber(fieldOfView.properties.distance)
       }

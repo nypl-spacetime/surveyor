@@ -51,6 +51,24 @@
   margin-top: 8px;
 }
 
+.geotagger-bearing-angle-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.geotagger-bearing-angle-container label {
+  margin-right: 1em;
+}
+
+#geotagger-bearing-angle {
+  flex-grow: 3;
+  width: 260px;
+  padding: 0;
+  margin: 0;
+}
+
 .geotagger-thanks-timer-bar {
   border-radius: 4px;
   height: 4px;
