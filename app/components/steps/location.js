@@ -21,8 +21,8 @@ const Step = React.createClass({
         <h1>Where is this?</h1>
         <div className='light'>
           Help us build
-          a <a href='http://spacetime.nypl.org/' target='_blank'>Space/Time Directory</a> by <a href='https://en.wikipedia.org/wiki/Geotagging' target='_blank'>geotagging</a> its
-          collection!
+          a <a href='http://spacetime.nypl.org/' target='_blank'>Space/Time Directory</a> by <a href='https://en.wikipedia.org/wiki/Geotagging' target='_blank'>geotagging</a> our
+          collection.
         </div>
         <div>
           Can you center the map as precisely as you can on the location of the image?
