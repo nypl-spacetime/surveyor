@@ -5,6 +5,8 @@ import App from './app';
 
 import './index.scss';
 
+require('./images/favicon.png');
+
 var api = __CONFIG__.api;
 var defaults = __CONFIG__.defaults;
 
