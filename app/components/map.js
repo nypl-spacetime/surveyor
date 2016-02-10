@@ -48,34 +48,24 @@ const Map = React.createClass({
   },
 
   componentDidMount: function() {
-    var options = {
-      tileUrl: this.getOptions('tileUrl'),
-      center: this.getOptions('center'),
-      zoom: this.getOptions('zoom'),
-      maxZoom: this.getOptions('maxZoom'),
-      subdomains: this.getOptions('subdomains'),
-      attribution: this.getOptions('attribution')
-    };
-
     var node = findDOMNode(this.refs.map);
 
     var map = L.map(node, {
-      center: options.center,
-      zoom: options.zoom
+      center: this.getOptions('center'),
+      zoom: this.getOptions('zoom'),
+      maxZoom: this.getOptions('maxZoom'),
+      scrollWheelZoom: 'center',
+      doubleClickZoom: 'center'
     });
 
-    var layer = L.tileLayer(options.tileUrl, {
-      subdomains: options.subdomains.toString(),
-      attribution: options.attribution
+    var layer = L.tileLayer(this.getOptions('tileUrl'), {
+      subdomains: this.getOptions('subdomains').toString(),
+      attribution: this.getOptions('attribution')
     }).addTo(map);
 
     if (this.props.mapEvents) {
       Object.keys(this.props.mapEvents).forEach(event => map.on(event, this.props.mapEvents[event]));
     }
-
-    // var geoJsonLayer = L.geoJson(null, {
-    //   onEachFeature: onEachFeature
-    // }).addTo(map);
 
     if (this.props.mapCreated) {
       this.props.mapCreated(map);
