@@ -55,7 +55,7 @@ const Step = React.createClass({
             mapCreated={this.mapCreated} crosshair={false} />
         </div>
         <div className='margin-top buttons'>
-          <button className='button-red' onClick={this.props.abort}>Impossible</button>
+          <button className='button-red' onClick={this.props.abort}>Not sure</button>
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, done!</button>
         </div>
         <div className='centered'>
