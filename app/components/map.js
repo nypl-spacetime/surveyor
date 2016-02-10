@@ -30,8 +30,13 @@ const Map = React.createClass({
       );
     }
 
+    var className = 'map-container';
+    if (this.getOptions('grayscale')) {
+      className += ' grayscale';
+    }
+
     return (
-      <div className='map-container'>
+      <div className={className}>
         <div className='map' ref='map' />
         {crosshair}
       </div>

@@ -5,9 +5,13 @@ api:
 
 defaults:
   map:
-    tileUrl: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
-    subdomains: abcd
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    grayscale: true
+    tileUrl: http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png
+    subdomains: 1234
+    attribution: 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />'
+    # tileUrl: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
+    # subdomains: abcd
+    # attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
     center: [40.75295,-73.98241]
     zoom: 10
     maxZoom: 18
