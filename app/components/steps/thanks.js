@@ -22,7 +22,7 @@ const Step = React.createClass({
 
     return (
       <div className='geotagger-step all-margin-top opaque'>
-        <h1>Thanks you!</h1>
+        <h1>Thank you!</h1>
         <div>
           <img className='centered-block geotagger-thanks-owl' src={owl} />
         </div>

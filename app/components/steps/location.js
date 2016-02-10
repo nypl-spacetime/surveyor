@@ -22,7 +22,7 @@ const Step = React.createClass({
       <div className='geotagger-step opaque all-margin-top'>
         <h1>Where is this?</h1>
         <div className='light'>
-          Help the New York Public Libary build
+          Help us build
           a <a href='http://spacetime.nypl.org/' target='_blank'>Space/Time Directory</a> by <a href='https://en.wikipedia.org/wiki/Geotagging' target='_blank'>geotagging</a> its
           collection!
         </div>
