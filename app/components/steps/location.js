@@ -16,8 +16,6 @@ const Step = React.createClass({
       // click: this.onClick
     };
 
-    var noLocation = 'No location';
-
     return (
       <div className='geotagger-step opaque all-margin-top'>
         <h1>Where is this?</h1>
@@ -33,7 +31,7 @@ const Step = React.createClass({
           <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents}/>
         </div>
         <div className='buttons'>
-          <button className='button-red' onClick={this.props.abort}>{noLocation}</button>
+          <button className='button-red' onClick={this.props.abort}>No location</button>
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here!</button>
         </div>
         <div className='centered'>
