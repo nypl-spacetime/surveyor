@@ -59,7 +59,7 @@ const Step = React.createClass({
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, done!</button>
         </div>
         <div className='centered'>
-          <a href='javascript:;' onClick={this.props.reset}>No, I&#39;d rather geotag another image!</a>
+          <a href='javascript:;' onClick={this.props.thanks}>No, I&#39;d rather geotag another image!</a>
         </div>
       </div>
     );

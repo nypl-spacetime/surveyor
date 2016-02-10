@@ -42,7 +42,7 @@ const GeoTagger = React.createClass({
               done: this.doneStep,
               abort: this.abortStep,
               reset: this.reset,
-              previous: this.previousStep,
+              thanks: this.thanks,
               stepData: this.state.stepData
           }) }
         </div>
@@ -51,13 +51,17 @@ const GeoTagger = React.createClass({
   },
 
   reset: function() {
-    // TODO: reset state of all steps
-
     this.setState({
       currentStep: 1
     });
 
     this.props.loadItem();
+  },
+
+  thanks: function() {
+    this.setState({
+      currentStep: this.state.steps.length - 1
+    });
   },
 
   nextStep: function(data, geometry) {
@@ -91,7 +95,7 @@ const GeoTagger = React.createClass({
       if (err) {
         console.error('Error sending data to server', err);
       } else {
-        this.reset();
+        this.thanks();
       }
     });
   },
