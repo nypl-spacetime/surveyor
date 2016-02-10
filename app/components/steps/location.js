@@ -29,11 +29,6 @@ const Step = React.createClass({
         <div>
           Can you center the map as precisely as you can on the location of the image?
         </div>
-
-        <div className='light'>
-          (Some images, like documents or maps, do not depict a location — in that case,
-          you can use the <b>{noLocation.toLowerCase()}</b> button.)
-        </div>
         <div>
           <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents}/>
         </div>
