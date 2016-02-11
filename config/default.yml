@@ -12,6 +12,6 @@ defaults:
     # tileUrl: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
     # subdomains: abcd
     # attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-    center: [40.75295,-73.98241]
+    center: [40.75319,-73.98224]
     zoom: 10
     maxZoom: 18
