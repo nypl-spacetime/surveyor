@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var config = require('config');
 
 module.exports = {
-  devtool: 'source-map',
+  // devtool: 'source-map',
   entry: [
     'normalize-css',
     './app/index',
