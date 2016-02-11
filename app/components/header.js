@@ -43,11 +43,11 @@ const Header = React.createClass({
     var collectionHeader;
     if (this.props.collections[this.props.item.collection]) {
       collectionHeader = (
-        <h2>
+        <div>
           <span className='header-text'>
             From <a href={`http://digitalcollections.nypl.org/items/${this.props.item.collection}`} target='_black'>{this.props.collections[this.props.item.collection].title.trim()}</a>
           </span>
-        </h2>
+        </div>
       );
     }
 
@@ -87,7 +87,7 @@ const Header = React.createClass({
         </h1>
         {collectionHeader}
         {geoDateHeader}
-        <span className='header-text light'>
+        <span className='header-text'>
           <a href={`http://digitalcollections.nypl.org/items/${uuid}`} target='_black'>Open item in Digital Collections</a>
         </span>
       </header>
