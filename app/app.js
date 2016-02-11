@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from './components/image';
 import Header from './components/header';
+import Loading from './components/loading';
 import GeoTagger from './components/geotagger';
 import { findDOMNode } from 'react-dom';
 
@@ -13,13 +14,14 @@ const App = React.createClass({
       item: null,
       token: this.getToken(),
       collections: {},
-      startedGeoTagging: false
+      startedGeoTagging: false,
+      error: null
     };
   },
 
   render: function() {
     if (!this.state.item) {
-      return <div id='item' />
+      return <Loading error={this.state.error} />;
     } else {
       var uuid = this.state.item.uuid;
 
@@ -88,6 +90,9 @@ const App = React.createClass({
         });
       }).catch(err => {
         console.error(err);
+        this.setState({
+          error: 'could not load image from server'
+        });
       });
   },
 
