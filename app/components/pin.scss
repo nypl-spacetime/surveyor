@@ -26,6 +26,12 @@
   right: 0;
 }
 
+.geotagger-intro-pin,
+.geotagger-intro-shadow,
+.geotagger-intro-earth {
+  left: 30px;
+}
+
 .geotagger-intro-earth {
   width: 80px;
   bottom: 0;
@@ -52,6 +58,6 @@
 }
 
 .geotagger-intro-help {
-  width: 180px;
+  width: 160px;
   bottom: 120px;
 }
