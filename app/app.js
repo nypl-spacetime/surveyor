@@ -20,7 +20,7 @@ const App = React.createClass({
   },
 
   render: function() {
-    if (!this.state.item) {
+    if (!this.state.item || this.state.error) {
       return <Loading error={this.state.error} />;
     } else {
       var uuid = this.state.item.uuid;
@@ -56,16 +56,28 @@ const App = React.createClass({
     }
   },
 
-  saveToken(token) {
-    try {
-      localStorage.setItem('token', token);
-    } catch (err) {
-      console.error('Error saving token to localStorage', err);
+  checkStatus: function(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response;
+    } else {
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
     }
   },
 
+  saveToken: function(response) {
+    var token = response.headers.get('Authorization');
+    localStorage.setItem('token', token);
+
+    return response;
+  },
+
+  parseJSON: function(response) {
+    return response.json();
+  },
+
   loadItem: function() {
-    // TODO: pass token in promise!
     var token = this.state.token;
 
     var options = {
@@ -79,11 +91,10 @@ const App = React.createClass({
       }
     }
     fetch(this.props.api.url + 'items/random', options)
-      .then(response => {
-        token = response.headers.get('Authorization');
-        this.saveToken(token);
-        return response.json();
-      }).then(json => {
+      .then(this.checkStatus)
+      .then(this.saveToken)
+      .then(this.parseJSON)
+      .then(json => {
         this.setState({
           item: json,
           token: token
@@ -91,7 +102,7 @@ const App = React.createClass({
       }).catch(err => {
         console.error(err);
         this.setState({
-          error: 'could not load image from server'
+          error: `could not load image from server (${err.message})`
         });
       });
   },
@@ -124,28 +135,31 @@ const App = React.createClass({
         geometry: geometry
       })
     })
-    .then(function(response) {
-      return response.json()
-    }).then(function(json) {
-      callback();
-    }).catch(function(err) {
-      callback(err);
-    });
+      .then(this.checkStatus)
+      .then(this.parseJSON)
+      .then(() => {
+        callback();
+      }).catch(err => {
+        console.error(err);
+        this.setState({
+          error: `could not send data to server (${err.message})`
+        });
+      });
   },
 
   fetchCollections: function() {
     fetch(`${this.props.api.url}collections`)
-    .then(function(response) {
-      return response.json();
-    }).then(json => {
-      var collections = {};
-      json.forEach(c => collections[c.uuid] = c)
-      this.setState({
-        collections: collections
+      .then(this.checkStatus)
+      .then(this.parseJSON)
+      .then(json => {
+        var collections = {};
+        json.forEach(c => collections[c.uuid] = c)
+        this.setState({
+          collections: collections
+        });
+      }).catch(err => {
+        console.error(`Error fetching collections`, err);
       });
-    }).catch(function(err) {
-      console.error(`Error fetching collections`, err);
-    });
   }
 
 });
