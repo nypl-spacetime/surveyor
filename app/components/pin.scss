@@ -27,13 +27,13 @@
 }
 
 .geotagger-intro-earth {
-  width: 100px;
+  width: 80px;
   bottom: 0;
 }
 
 .geotagger-intro-pin {
-  width: 80px;
-  bottom: 57px;
+  width: 50px;
+  bottom: 45px;
   z-index: 2;
   -webkit-animation: .5s ease-in fall;
   -moz-animation: .5s ease-in fall;
@@ -42,8 +42,8 @@
 }
 
 .geotagger-intro-shadow {
-  width: 32px;
-  bottom: 50px;
+  width: 23px;
+  bottom: 40px;
   z-index: 1;
   -webkit-animation: .5s ease-in shadow;
   -moz-animation: .5s ease-in shadow;
@@ -52,6 +52,6 @@
 }
 
 .geotagger-intro-help {
-  width: 200px;
-  bottom: 180px;
+  width: 180px;
+  bottom: 120px;
 }
