@@ -5,6 +5,12 @@ import './loading.scss';
 var nypl = require('../images/nypl-white.svg')
 
 const Loading = React.createClass({
+  getInitialState: function() {
+    return {
+      loading: true
+    }
+  },
+
   render: function() {
     var message = 'Loading…';
     var className='loading-message';
@@ -14,13 +20,22 @@ const Loading = React.createClass({
       className += ' loading-error'
     }
 
-    return (
-      <div className='loading'>
-        <img src={nypl} />
-        <div className={className}>{message}</div>
-      </div>
-    );
+    if (!this.state.loading || this.props.error) {
+      return (
+        <div className='loading'>
+          <img src={nypl} />
+          <div className={className}>{message}</div>
+        </div>
+      );
+    } else {
+      return null
+    }
+  },
 
+  componentDidMount: function() {
+    window.setTimeout(() => this.setState({
+      loading: false
+    }), 500);
   }
 
 });
