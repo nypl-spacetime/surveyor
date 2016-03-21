@@ -28,14 +28,14 @@ const Step = React.createClass({
           Can you center the map as precisely as you can on the location of the image?
         </div>
         <div>
-          <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents}/>
+          <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} geocoder={true} />
         </div>
         <div className='buttons'>
           <button className='button-red' onClick={this.props.abort}>No location</button>
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here!</button>
         </div>
         <div className='centered'>
-          <a href='javascript:;' onClick={this.props.reset}>I don&#39;t like this image, show me a new one</a>
+          <a href='javascript:;' onClick={this.props.reset}>Skip this image, try another one</a>
         </div>
       </div>
     );

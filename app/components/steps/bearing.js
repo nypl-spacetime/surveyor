@@ -43,8 +43,8 @@ const Step = React.createClass({
         <h1>What's the direction?</h1>
         <div>
           Thanks! Could you also try to determine
-          the direction of the image by dragging and positioning the camera icon and the
-          subject icon.
+          the direction of the image by dragging and positioning the camera and the
+          subject?
         </div>
         <div className='geotagger-bearing-angle-container'>
           <label htmlFor='geotagger-bearing-angle'>View angle:</label>
@@ -59,7 +59,7 @@ const Step = React.createClass({
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, done!</button>
         </div>
         <div className='centered'>
-          <a href='javascript:;' onClick={this.props.thanks}>No, I&#39;d rather geotag another image!</a>
+          <a href='javascript:;' onClick={this.props.thanks}>Skip this step, geotag another image instead</a>
         </div>
       </div>
     );
