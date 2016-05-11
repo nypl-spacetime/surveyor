@@ -3,6 +3,7 @@ import Image from './components/image';
 import Header from './components/header';
 import Loading from './components/loading';
 import GeoTagger from './components/geotagger';
+import Help from './components/help';
 import { findDOMNode } from 'react-dom';
 
 import './app.scss';
@@ -15,25 +16,53 @@ const App = React.createClass({
       token: this.getToken(),
       collections: {},
       startedGeoTagging: false,
-      error: null
+      error: null,
+      help: {
+        show: false,
+        step: ''
+      }
     };
   },
 
   render: function() {
     if (!this.state.item || this.state.error) {
-      return <Loading error={this.state.error} />;
+      return <Loading error={this.state.error} />
     } else {
-      var uuid = this.state.item.uuid;
+      var uuid = this.state.item.uuid
+
+      var help
+      if (this.state.help.show) {
+        help = <Help close={this.closeHelp} />
+      }
 
       return (
         <div id='item'>
           <Image key={'i' + uuid} ref='image' item={this.state.item} draggable={this.state.startedGeoTagging} />
           <Header key={'h' + uuid} collections={this.state.collections} api={this.props.api} item={this.state.item} />
-          <GeoTagger defaults={this.props.defaults} uuid={uuid}
+          <GeoTagger defaults={this.props.defaults} uuid={uuid} showHelp={this.showHelp}
             loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
+          {help}
         </div>
       );
     }
+  },
+
+  showHelp: function(step) {
+    this.setState({
+      help: {
+        show: true,
+        step: step
+      }
+    })
+  },
+
+  closeHelp: function() {
+    this.setState({
+      help: {
+        show: false,
+        step: ''
+      }
+    })
   },
 
   startGeoTagging: function() {
