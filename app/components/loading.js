@@ -33,9 +33,13 @@ const Loading = React.createClass({
   },
 
   componentDidMount: function() {
-    window.setTimeout(() => this.setState({
+    this.timeout = window.setTimeout(() => this.setState({
       loading: false
     }), 500);
+  },
+
+  componentWillUnmount: function() {
+    window.clearTimeout(this.timeout)
   }
 
 });
