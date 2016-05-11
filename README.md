@@ -65,3 +65,11 @@ See [Where? API](https://github.com/nypl-spacetime/where-api).
 ## Other image collections
 
 Currently, Where? works with images from NYPL's [Digital Collections](http://digitalcollections.nypl.org/). However, it should be very easy to add images from other, non-NYPL collections.
+
+## Public Domain Thank You Animals
+
+- http://digitalcollections.nypl.org/items/510d47da-9f1f-a3d9-e040-e00a18064a99
+- http://digitalcollections.nypl.org/items/510d47da-9ed9-a3d9-e040-e00a18064a99
+- http://digitalcollections.nypl.org/items/510d47da-9eda-a3d9-e040-e00a18064a99
+- http://digitalcollections.nypl.org/items/510d47da-9f5a-a3d9-e040-e00a18064a99
+- http://digitalcollections.nypl.org/items/510d47da-b502-a3d9-e040-e00a18064a99
