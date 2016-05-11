@@ -86,6 +86,10 @@
   animation-timing-function: linear;
 }
 
+.bearing-explanation {
+  width: 200px;
+}
+
 @keyframes owl {
   from {
     transform: rotate(-2deg);

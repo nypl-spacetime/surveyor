@@ -25,14 +25,14 @@ const Step = React.createClass({
           collection.
         </div>
         <div>
-          Can you center the map as precisely as you can on the location of the image?
+          Can you center the map as precisely as you can on the location of the image? <a href='javascript:void(0)' onClick={this.props.help}>Help!</a>
         </div>
         <div>
           <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} geocoder={true} />
         </div>
         <div className='buttons'>
-          <button className='button-red' onClick={this.props.abort}>No location</button>
-          <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here!</button>
+          <button className='button-red' onClick={this.props.abort}>No clear location</button>
+          <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here</button>
         </div>
         <div className='centered'>
           <a href='javascript:;' onClick={this.props.reset}>Skip this image, try another one</a>

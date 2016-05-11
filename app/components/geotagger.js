@@ -12,6 +12,7 @@ requireAll(require.context('./steps/', false, /\.js$/));
 const steps = [
   'intro',
   'location',
+  'bearing-introduction',
   'bearing',
   'thanks',
 ];
@@ -43,6 +44,7 @@ const GeoTagger = React.createClass({
               abort: this.abortStep,
               reset: this.reset,
               thanks: this.thanks,
+              help: this.help,
               stepData: this.state.stepData
           }) }
         </div>
@@ -62,6 +64,12 @@ const GeoTagger = React.createClass({
     this.setState({
       currentStep: this.state.steps.length - 1
     });
+  },
+
+  help: function() {
+    var stepIndex = this.state.currentStep
+    var step = this.state.steps[stepIndex]
+    this.props.showHelp(step)
   },
 
   nextStep: function(data, geometry) {

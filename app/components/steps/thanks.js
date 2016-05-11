@@ -23,6 +23,7 @@ const Step = React.createClass({
     return (
       <div className='geotagger-step all-margin-top opaque'>
         <h1>Thank you!</h1>
+
         <div>
           <img className='centered-block geotagger-thanks-owl' src={owl} />
         </div>
@@ -30,7 +31,7 @@ const Step = React.createClass({
           <div className='geotagger-thanks-timer-bar' style={timerBarStyle} />
         </div>
         <div>
-          <button className='button-green' onClick={this.done}>Show me another image!</button>
+          <button className='button-green' onClick={this.done}>Show me another image</button>
         </div>
       </div>
     );
