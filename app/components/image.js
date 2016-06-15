@@ -20,7 +20,7 @@ const Image = React.createClass({
     var url = `http://digitalcollections.nypl.org/items/${uuid}`;
 
     var imageStyle = {
-      backgroundImage: `url(${this.props.item.imageLink})`,
+      backgroundImage: `url(${this.props.item.image_link})`,
       transform: `translate(${this.state.dragoffset[0]}px,${this.state.dragoffset[1]}px)`
     };
 

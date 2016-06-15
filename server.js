@@ -5,6 +5,8 @@ var config = require('config');
 
 var __DEV__ = process.env.NODE_ENV === 'development';
 
+const PORT = process.env.PORT || config.port
+
 var app = express();
 
 if (__DEV__) {
@@ -28,10 +30,10 @@ app.get('*', function (req, res) {
   });
 });
 
-app.listen(config.port, '0.0.0.0', function (err) {
+app.listen(PORT, '0.0.0.0', (err) => {
   if (err) {
     console.error(err);
     return;
   }
-  console.info('==> 🌍  Listening on port ' + config.port + '. Open http://0.0.0.0:' + config.port + ' in your browser');
+  console.info('==> 🌍  Listening on port ' + PORT + '. Open http://0.0.0.0:' + PORT + ' in your browser');
 });

@@ -31,11 +31,8 @@ const Step = React.createClass({
           <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} geocoder={true} />
         </div>
         <div className='buttons'>
-          <button className='button-red' onClick={this.props.abort}>No clear location</button>
+          <button className='button-red' onClick={this.props.skip}>Skip this image</button>
           <button className='button-green' disabled={!this.state.hasMoved} onClick={this.done}>Yes, here</button>
-        </div>
-        <div className='centered'>
-          <a href='javascript:;' onClick={this.props.reset}>Skip this image, try another one</a>
         </div>
       </div>
     );

@@ -1,131 +1,110 @@
 import React from 'react';
 
+import OAuthMenu from './menus/oauth'
+import SubmissionsMenu from './menus/submissions'
+
 import './header.scss';
 
 const Header = React.createClass({
 
   getInitialState: function() {
-    return {
-      mods: {
-        subject: [],
-        originInfo: {}
-      }
-    };
+    return {}
   },
 
   render: function() {
-    var uuid = this.props.item.uuid;
-
-    var subject = this.state.mods.subject;
-    if (!Array.isArray(subject)) {
-      subject = [subject];
+    var submissions = 0
+    if (this.state.submissions) {
+      submissions = this.state.submissions
     }
 
-    var originInfo = this.state.mods.originInfo;
-    if (!Array.isArray(originInfo)) {
-      originInfo = [originInfo];
+    var authenticate = ''
+    if (this.state.oauth) {
+      authenticate = this.state.oauth.oauth.data.name
+    } else {
+      authenticate = 'Log in'
     }
 
-    var date = originInfo.filter(o => o.dateCreated || o.dateIssued || o.dateOther)
-      .map(o => o.dateCreated || o.dateIssued || o.dateOther)
-      .filter(o => o.keyDate)
-      .map(o => o['$'])
-      .sort(function(a, b) {
-        return b.length - a.length;
-      });
-
-    var geographic = subject.filter(s => s && s.geographic && s.geographic['$'])
-      .map(s => s.geographic['$'])
-      .sort(function(a, b) {
-        return b.length - a.length;
-      });
-
-    var collectionHeader;
-    if (this.props.collections[this.props.item.collection]) {
-      collectionHeader = (
-        <div>
-          <span className='header-text'>
-            From <a href={`http://digitalcollections.nypl.org/items/${this.props.item.collection}`} target='_black'>{this.props.collections[this.props.item.collection].title.trim()}</a>
-          </span>
-        </div>
-      );
-    }
-
-    var geoDateHeader;
-    if (geographic[0] || date[0]) {
-      var spans = [];
-
-      if (geographic[0]) {
-        spans.push({
-          key: 'Location',
-          value: geographic[0]
-        });
-      }
-
-      if (date[0]) {
-        spans.push({
-          key: 'Date',
-          value: date[0]
-        });
-      }
-
-      geoDateHeader = (
-        <div>
-          <span className='header-text'>
-            {spans.map(function(span, i) {
-              return <span key={i}>{i ? span.key.toLowerCase() : span.key}: {span.value}{i < (spans.length - 1) ? ', ' : ''}</span>;
-            })}
-          </span>
-        </div>
-      );
+    var menu
+    if (this.state.oauth) {
+      menu = (
+        <OAuthMenu oauth={this.state.oauth} />
+      )
     }
 
     return (
       <header>
         <h1>
-          <span className='header-text'>{this.props.item.title}</span>
+          NYPL Labs - Where?
         </h1>
-        {collectionHeader}
-        {geoDateHeader}
-        <span className='header-text'>
-          <a href={`http://digitalcollections.nypl.org/items/${uuid}`} target='_black'>Open item in Digital Collections</a>
-        </span>
+        <div id='user'>
+          <span id='user-submission-count'>
+            {submissions}
+          </span>
+          <span id='user-authenticate'>
+            {authenticate}
+          </span>
+        </div>
+        <div id='menu'>
+          {menu}
+        </div>
       </header>
-    );
+    )
   },
 
   componentDidMount: function() {
-    this.fetchMods(this.props.item.uuid);
+    this.fetchOAuth()
+    this.fetchSubmissions()
   },
 
-  componentWillUnmount: function() {
-    this.unmounted = true;
-  },
+  fetchOAuth: function () {
 
-  componentDidUpdate: function(prevProps) {
-    var prevUuid = prevProps.item.uuid;
-    var uuid = this.props.item.uuid;
 
-    if (prevUuid !== uuid) {
-      this.fetchMods(uuid);
+    // TODO: move ALL fetch logic to lib module
+    function handleErrors(response) {
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      return response
     }
+
+    fetch(`${this.props.api.url}oauth`, {
+      credentials: 'include'
+    })
+      .then(handleErrors)
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({
+          oauth: json
+        })
+      }).catch((err) => {
+        console.error(`Error fetching OAuth details`, err)
+      })
   },
 
-  fetchMods: function(uuid) {
-    fetch(`${this.props.api.url}items/${uuid}/mods`)
-      .then(function(response) {
-        return response.json();
-      }).then(json => {
-        if (!this.unmounted) {
-          this.setState({
-            mods: json
-          });
-        }
-      }).catch(function(err) {
-        console.error(`Error fetching MODS for ${uuid}`, err);
-      });
+  fetchSubmissions: function () {
+
+    function handleErrors(response) {
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      return response
+    }
+
+    fetch(`${this.props.api.url}submissions/count`, {
+      credentials: 'include'
+    })
+      .then(handleErrors)
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({
+          submissions: json.submissions
+        })
+      }).catch((err) => {
+        console.error(`Error fetching submissions count`, err)
+      })
   }
 
-});
 
-export default Header;
+})
+
+export default Header

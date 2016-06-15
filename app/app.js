@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from './components/image';
 import Header from './components/header';
+import Details from './components/details';
 import Loading from './components/loading';
 import GeoTagger from './components/geotagger';
 import Help from './components/help';
@@ -13,7 +14,6 @@ const App = React.createClass({
   getInitialState: function() {
     return {
       item: null,
-      token: this.getToken(),
       collections: {},
       startedGeoTagging: false,
       error: null,
@@ -36,12 +36,15 @@ const App = React.createClass({
       }
 
       return (
-        <div id='item'>
-          <Image key={'i' + uuid} ref='image' item={this.state.item} draggable={this.state.startedGeoTagging} />
-          <Header key={'h' + uuid} collections={this.state.collections} api={this.props.api} item={this.state.item} />
-          <GeoTagger defaults={this.props.defaults} uuid={uuid} showHelp={this.showHelp}
-            loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
-          {help}
+        <div id='container'>
+          <Header api={this.props.api} />
+          <div id='item'>
+            <Image key={'i' + uuid} ref='image' item={this.state.item} draggable={this.state.startedGeoTagging} />
+            <Details key={'h' + uuid} collections={this.state.collections} api={this.props.api} item={this.state.item} />
+            <GeoTagger defaults={this.props.defaults} uuid={uuid} showHelp={this.showHelp}
+              loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
+            {help}
+          </div>
         </div>
       );
     }
@@ -76,15 +79,6 @@ const App = React.createClass({
     this.fetchCollections();
   },
 
-  getToken: function() {
-    try {
-      return localStorage.getItem('token');
-    } catch (err) {
-      console.error('Error reading token from localStorage', err);
-      return null;
-    }
-  },
-
   checkStatus: function(response) {
     if (response.status >= 200 && response.status < 300) {
       return response;
@@ -95,48 +89,29 @@ const App = React.createClass({
     }
   },
 
-  saveToken: function(response) {
-    var token = response.headers.get('Authorization');
-    localStorage.setItem('token', token);
-
-    return response;
-  },
-
   parseJSON: function(response) {
     return response.json();
   },
 
   loadItem: function() {
-    var token = this.state.token;
-
-    var options = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    };
-
-    if (token) {
-      options.headers = {
-        'Authorization': token
-      }
-    }
-    fetch(this.props.api.url + 'items/random', options)
+    fetch(this.props.api.url + 'items/random', {
+      credentials: 'include'
+    })
       .then(this.checkStatus)
-      .then(this.saveToken)
       .then(this.parseJSON)
       .then(json => {
         this.setState({
-          item: json,
-          token: token
+          item: json
         });
       }).catch(err => {
-        console.error(err);
+        console.error(err)
         this.setState({
           error: `could not load image from server (${err.message})`
-        });
-      });
+        })
+      })
   },
 
-  sendData: function(step, stepIndex, completed, data, geometry, callback) {
+  sendData: function(step, stepIndex, skipped, data, geometry, callback) {
     if (!callback && geometry) {
       callback = geometry;
     }
@@ -147,18 +122,18 @@ const App = React.createClass({
     var uuid = this.state.item.uuid;
 
     fetch(this.props.api.url + 'items/' + uuid, {
+      credentials: 'include',
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': this.state.token
       },
       body: JSON.stringify({
         type: 'Feature',
         properties: {
           step: step,
           stepIndex: stepIndex,
-          completed: completed,
+          skipped: skipped,
           data: data
         },
         geometry: geometry
@@ -169,28 +144,29 @@ const App = React.createClass({
       .then(() => {
         callback();
       }).catch(err => {
-        console.error(err);
+        console.error(err)
         this.setState({
           error: `could not send data to server (${err.message})`
-        });
-      });
+        })
+      })
   },
 
   fetchCollections: function() {
-    fetch(`${this.props.api.url}collections`)
+    fetch(`${this.props.api.url}collections`, {
+      credentials: 'include'
+    })
       .then(this.checkStatus)
       .then(this.parseJSON)
       .then(json => {
-        var collections = {};
+        var collections = {}
         json.forEach(c => collections[c.uuid] = c)
         this.setState({
           collections: collections
-        });
+        })
       }).catch(err => {
-        console.error(`Error fetching collections`, err);
-      });
+        console.error(`Error fetching collections`, err)
+      })
   }
+})
 
-});
-
-export default App;
+export default App

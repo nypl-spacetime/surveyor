@@ -1,7 +1,7 @@
 port: 3012
 
 api:
-  url: http://localhost:3011/
+  url: http://where-api.dev/
 
 defaults:
   map:

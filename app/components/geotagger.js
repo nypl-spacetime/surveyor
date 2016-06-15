@@ -41,7 +41,7 @@ const GeoTagger = React.createClass({
           { React.createElement(step.component, {
               defaults: this.props.defaults,
               done: this.doneStep,
-              abort: this.abortStep,
+              skip: this.skipStep,
               reset: this.reset,
               thanks: this.thanks,
               help: this.help,
@@ -95,11 +95,11 @@ const GeoTagger = React.createClass({
     }
   },
 
-  abortStep: function() {
+  skipStep: function() {
     var stepIndex = this.state.currentStep;
     var step = this.state.steps[stepIndex];
 
-    this.props.sendData(step.step, stepIndex, false, (err) => {
+    this.props.sendData(step.step, stepIndex, true, (err) => {
       if (err) {
         console.error('Error sending data to server', err);
       } else {
@@ -117,7 +117,7 @@ const GeoTagger = React.createClass({
       var stepIndex = this.state.currentStep;
       var step = this.state.steps[stepIndex];
 
-      this.props.sendData(step.step, stepIndex, true, data, geometry, (err) => {
+      this.props.sendData(step.step, stepIndex, false, data, geometry, (err) => {
         if (err) {
           console.error('Error sending data to server', err);
         } else {
