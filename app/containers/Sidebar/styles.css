@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.resizer {
+  flex-shrink: 0;
+  width: 30px;
+  background-color: #76777b;
+  color: white;
+  cursor: col-resize;
+  overflow: hidden;
+  position: relative;
+}
+
+.resizer span {
+  color: #dededf;
+  display: block;
+  font-size: 3rem;
+  margin-top: -25px;
+  margin-left: -2px;
+  position: absolute;
+  text-align: center;
+  text-shadow: 0 2px black;
+  top: 50%;
+  width: 100%;
+}
+
+.contents {
+  background-color: #fafafa;
+  width: 100%;
+}

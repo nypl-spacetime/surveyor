@@ -1,0 +1,35 @@
+/* Global styles */
+
+:root {
+  overflow-y: auto;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+
+  background-color: #111;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body.fontLoaded {
+  font-family: 'Kievit';
+}
+
+:global(#app) {
+  background-color: #FAFAFA;
+  /*min-height: 100%;
+  min-width: 100%;*/
+}
+
+.wrapper {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

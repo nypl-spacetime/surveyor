@@ -1,86 +1,26 @@
-
-> nypllabs-where@0.1.0 start /Users/bertspaan/code/nypl-spacetime/where
-> NODE_ENV=development nodemon server.js --ignore 'app'
-
-[33m[nodemon] 1.8.1[39m
-[33m[nodemon] to restart at any time, enter `rs`[39m
-[33m[nodemon] watching: *.*[39m
+[32m[nodemon] restarting due to changes...[39m
 [32m[nodemon] starting `node server.js`[39m
-==> 🌍  Listening on port 49624. Open http://0.0.0.0:49624 in your browser
-(node) v8::ObjectTemplate::Set() with non-primitive values is deprecated
-(node) and will stop working in the next major release.
+module.js:442
+    throw err;
+    ^
 
-==== JS stack trace =========================================
+Error: Cannot find module '/Users/bertspaan/code/nypl-spacetime/where/server.js'
+    at Function.Module._resolveFilename (module.js:440:15)
+    at Function.Module._load (module.js:388:25)
+    at Function.Module.runMain (module.js:575:10)
+    at startup (node.js:160:18)
+    at node.js:449:3
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+module.js:442
+    throw err;
+    ^
 
-Security context: 0x272abbc9e59 <JS Object>#0#
-    1: .node [module.js:568] [pc=0x104d270f8c64] (this=0xfb9c0447741 <an Object with map 0x619f8918161>#1#,module=0x1f546fb6bec1 <a Module with map 0x619f8918739>#2#,filename=0x1f546fb6be41 <String[99]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/vendor/darwin-x64-48/binding.node>)
-    2: load [module.js:~449] [pc=0x104d26b84eb6] (this=0x1f546fb6bec1 <a Module with map 0x619f8918739>#2#,filename=0x1f546fb6be41 <String[99]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/vendor/darwin-x64-48/binding.node>)
-    3: tryModuleLoad(aka tryModuleLoad) [module.js:417] [pc=0x104d2683921d] (this=0x272abb04189 <undefined>,module=0x1f546fb6bec1 <a Module with map 0x619f8918739>#2#,filename=0x1f546fb6be41 <String[99]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/vendor/darwin-x64-48/binding.node>)
-    4: _load [module.js:~383] [pc=0x104d26d6ca85] (this=0xfb9c04477c1 <JS Function Module (SharedFunctionInfo 0x392f1cc25909)>#3#,request=0x1f546fb6ad81 <String[99]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/vendor/darwin-x64-48/binding.node>,parent=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,isMain=0x272abb04299 <false>)
-    5: require [module.js:~465] [pc=0x104d268a03eb] (this=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,path=0x1f546fb6ad81 <String[99]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/vendor/darwin-x64-48/binding.node>)
-    6: require(aka require) [internal/module.js:20] [pc=0x104d268433c6] (this=0x272abb04189 <undefined>,path=0x1f546fb6ad81 <String[99]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/vendor/darwin-x64-48/binding.node>)
-    7: /* anonymous */ [/Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js:16] [pc=0x104d270f62f1] (this=0x1f546fb5c001 <an Object with map 0x75a36507bc9>#5#,exports=0x1f546fb5c001 <an Object with map 0x75a36507bc9>#5#,require=0x1f546fb601e9 <JS Function require (SharedFunctionInfo 0x392f1cc56031)>#6#,module=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,__filename=0x1f546fb5bf49 <String[78]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js>,__dirname=0x1f546fb60181 <String[69]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib>)
-    8: _compile [module.js:~481] [pc=0x104d26da3922] (this=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,content=0x1f546fb5cad9 <Very long string[9231]>#7#,filename=0x1f546fb5bf49 <String[78]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js>)
-    9: .js [module.js:~548] [pc=0x104d26a80f64] (this=0xfb9c0447741 <an Object with map 0x619f8918161>#1#,module=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,filename=0x1f546fb5bf49 <String[78]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js>)
-   10: load [module.js:~449] [pc=0x104d26b84eb6] (this=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,filename=0x1f546fb5bf49 <String[78]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js>)
-   11: tryModuleLoad(aka tryModuleLoad) [module.js:417] [pc=0x104d2683921d] (this=0x272abb04189 <undefined>,module=0x1f546fb5bfb1 <a Module with map 0x619f8918739>#4#,filename=0x1f546fb5bf49 <String[78]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js>)
-   12: _load [module.js:~383] [pc=0x104d26d6ca85] (this=0xfb9c04477c1 <JS Function Module (SharedFunctionInfo 0x392f1cc25909)>#3#,request=0x647146579d9 <String[9]: node-sass>,parent=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,isMain=0x272abb04299 <false>)
-   13: require [module.js:~465] [pc=0x104d268a03eb] (this=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,path=0x647146579d9 <String[9]: node-sass>)
-   14: require(aka require) [internal/module.js:20] [pc=0x104d268433c6] (this=0x272abb04189 <undefined>,path=0x647146579d9 <String[9]: node-sass>)
-   15: /* anonymous */ [/Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js:4] [pc=0x104d270f56c6] (this=0x1f546fb4db79 <an Object with map 0x75a36507bc9>#9#,exports=0x1f546fb4db79 <an Object with map 0x75a36507bc9>#9#,require=0x1f546fb55611 <JS Function require (SharedFunctionInfo 0x392f1cc56031)>#10#,module=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,__filename=0x1f546fb4dac1 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>,__dirname=0x1f546fb555a9 <String[67]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader>)
-   16: _compile [module.js:~481] [pc=0x104d26da3922] (this=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,content=0x1f546fb4e531 <Very long string[13927]>#11#,filename=0x1f546fb4dac1 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>)
-   17: .js [module.js:~548] [pc=0x104d26a80f64] (this=0xfb9c0447741 <an Object with map 0x619f8918161>#1#,module=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,filename=0x1f546fb4dac1 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>)
-   18: load [module.js:~449] [pc=0x104d26b84eb6] (this=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,filename=0x1f546fb4dac1 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>)
-   19: tryModuleLoad(aka tryModuleLoad) [module.js:417] [pc=0x104d2683921d] (this=0x272abb04189 <undefined>,module=0x1f546fb4db29 <a Module with map 0x619f8918739>#8#,filename=0x1f546fb4dac1 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>)
-   20: _load [module.js:~383] [pc=0x104d26d6ca85] (this=0xfb9c04477c1 <JS Function Module (SharedFunctionInfo 0x392f1cc25909)>#3#,request=0x119bb4f74649 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>,parent=0x4051cf164d1 <a Module with map 0x619f8918739>#12#,isMain=0x272abb04299 <false>)
-   21: require [module.js:~465] [pc=0x104d268a03eb] (this=0x4051cf164d1 <a Module with map 0x619f8918739>#12#,path=0x119bb4f74649 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>)
-   22: require(aka require) [internal/module.js:20] [pc=0x104d268433c6] (this=0x272abb04189 <undefined>,path=0x119bb4f74649 <String[76]: /Users/bertspaan/code/nypl-spacetime/where/node_modules/sass-loader/index.js>)
-   23: loadPitch [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack-core/lib/NormalModuleMixin.js:193] [pc=0x104d26a264a0] (this=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#)
-   24: loadPitch [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack-core/lib/NormalModuleMixin.js:186] [pc=0x104d26a260b3] (this=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#)
-   25: loadPitch [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack-core/lib/NormalModuleMixin.js:223] [pc=0x104d26a26bb3] (this=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#)
-   26: doBuild [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack-core/lib/NormalModuleMixin.js:241] [pc=0x104d26a27cd2] (this=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#,options=0x328748b79ed9 <an Object with map 0x619f89a3dd1>#14#,moduleContext=0x3f948c08f109 <a Compilation with map 0x619f89bc191>#15#,resolver=0x328748b79e79 <a Resolver with map 0x619f89afa89>#16#,fs=0x328748b79df9 <a CachedInputFileSystem with map 0x619f89b0bb9>#17#,callback=0x119bb4f13d39 <JS BoundFunction bound  (BoundTargetFunction 0x119bb4f9c389)>#18#)
-   27: build [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack/lib/NormalModule.js:84] [pc=0x104d26a254da] (this=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#,options=0x328748b79ed9 <an Object with map 0x619f89a3dd1>#14#,compilation=0x3f948c08f109 <a Compilation with map 0x619f89bc191>#15#,resolver=0x328748b79e79 <a Resolver with map 0x619f89afa89>#16#,fs=0x328748b79df9 <a CachedInputFileSystem with map 0x619f89b0bb9>#17#,callback=0x119bb4f13dc1 <JS BoundFunction bound  (BoundTargetFunction 0x119bb4f9c3d1)>#19#)
-   28: buildModule [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack/lib/Compilation.js:126] [pc=0x104d269a4381] (this=0x3f948c08f109 <a Compilation with map 0x619f89bc191>#15#,module=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#,thisCallback=0x119bb4f13e49 <JS Function (SharedFunctionInfo 0x31b618f18871)>#20#)
-   29: /* anonymous */ [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack/lib/Compilation.js:309] [pc=0x104d26a24378] (this=0x272abbe4d49 <JS Global Object>#21#,err=0x272abb04101 <null>,dependantModule=0x119bb4f13bb9 <a NormalModule with map 0x619f89ce511>#13#)
-   30: /* anonymous */ [/Users/bertspaan/code/nypl-spacetime/where/node_modules/webpack/lib/NormalModuleFactory.js:58] [pc=0x104d26a21f59] (this=0x272abbe4d49 <JS Global Object>#21#,err=0x272abb04101 <null>,result=0x119bb4f13fa9 <an Object with map 0x619f89cd649>#22#)
-   31: applyPluginsAsyncWaterfall [/Users/bertspaan/code/nypl-spacetime/where/node_modules/tapable/lib/Tapable.js:75] [pc=0x104d269a83b6] (this=0x3f948c08f521 <a NormalModuleFactory with map 0x619f89bc3a1>#23#,name=0x883f64a3071 <String[13]: after-resolve>,init=0x119bb4f13fa9 <an Object with map 0x619f89cd649>#22#,callback=0x119bb4f13f29 <JS Function (SharedFunctionInfo 0x31b618f16c41)>#24#)
-
- 1: v8::Template::Set(v8::Local<v8::Name>, v8::Local<v8::Data>, v8::PropertyAttribute)
- 2: SassTypes::Boolean::get_constructor()
- 3: SassTypes::Factory::initExports(v8::Local<v8::Object>)
- 4: RegisterModule(v8::Local<v8::Object>)
- 5: node::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)
- 6: v8::internal::FunctionCallbackArguments::Call(void (*)(v8::FunctionCallbackInfo<v8::Value> const&))
- 7: v8::internal::MaybeHandle<v8::internal::Object> v8::internal::(anonymous namespace)::HandleApiCallHelper<false>(v8::internal::Isolate*, v8::internal::(anonymous namespace)::BuiltinArguments<(v8::internal::BuiltinExtraArguments)1>)
- 8: v8::internal::Builtin_HandleApiCall(int, v8::internal::Object**, v8::internal::Isolate*)
- 9: 0x104d2670961b
-(node) v8::ObjectTemplate::Set() with non-primitive values is deprecated
-(node) and will stop working in the next major release.
-
-==== JS stack trace =========================================
-
-Security context: 0x272abbc9e59 <JS Object>#0#
-    1: /* anonymous */ [/Users/bertspaan/code/nypl-spacetime/where/node_modules/node-sass/lib/index.js:356] [pc=0x104d271149a8] (this=0x272abbe4d49 <JS Global Object>#1#,options=0x1f546fcf2c79 <an Object with map 0x38bea4151941>#2#,cb=0x1f546fd2a009 <JS Function (SharedFunctionInfo 0x196999aadc11)>#3#)
-    2: /* anonymous */ [/Users/bertspaan/code/nypl-spacetime/where/node_modules/async/lib/async.js:987] [pc=0x104d2711446e] (this=0x272abbe4d49 <JS Global Object>#1#,items=0x1f546fd29e79 <JS Array[1]>#4#,cb=0x1f546fd2a009 <JS Function (SharedFunctionInfo 0x196999aadc11)>#3#)
-    3: _onImmediate [/Users/bertspaan/code/nypl-spacetime/where/node_modules/async/lib/async.js:953] [pc=0x104d27113e3d] (this=0x1f546fcf3da9 <an Immediate with map 0x38bea414fc09>#5#)
-    4: tryOnImmediate(aka tryOnImmediate) [timers.js:543] [pc=0x104d2711357a] (this=0x272abb04189 <undefined>,immediate=0x1f546fcf3da9 <an Immediate with map 0x38bea414fc09>#5#,queue=0xfb9c04bcc59 <an Object with map 0x619f890ad49>#6#)
-    5: _immediateCallback(aka processImmediate) [timers.js:523] [pc=0x104d2711300e] (this=0x272abbe0e79 <a process with map 0x75a36511571>#7#)
-=====================
-
-
-==== C stack trace ===============================
-
- 1: v8::Template::Set(v8::Local<v8::Name>, v8::Local<v8::Data>, v8::PropertyAttribute)
- 2: CallbackBridge<Sass_Import**, void*>::get_wrapper_constructor()
- 3: CallbackBridge<Sass_Import**, void*>::CallbackBridge(v8::Local<v8::Function>, bool)
- 4: ExtractOptions(v8::Local<v8::Object>, void*, sass_context_wrapper*, bool, bool)
- 5: render(Nan::FunctionCallbackInfo<v8::Value> const&)
- 6: Nan::imp::FunctionCallbackWrapper(v8::FunctionCallbackInfo<v8::Value> const&)
- 7: v8::internal::FunctionCallbackArguments::Call(void (*)(v8::FunctionCallbackInfo<v8::Value> const&))
- 8: v8::internal::MaybeHandle<v8::internal::Object> v8::internal::(anonymous namespace)::HandleApiCallHelper<false>(v8::internal::Isolate*, v8::internal::(anonymous namespace)::BuiltinArguments<(v8::internal::BuiltinExtraArguments)1>)
- 9: v8::internal::Builtin_HandleApiCall(int, v8::internal::Object**, v8::internal::Isolate*)
-10: 0x104d2670961b
-11: 0x104d271149a8
-12: 0x104d2711446e
-13: 0x104d27113e3d
-webpack built 44548f916f2ca54dceb5 in 5678ms
+Error: Cannot find module '/Users/bertspaan/code/nypl-spacetime/where/server.js'
+    at Function.Module._resolveFilename (module.js:440:15)
+    at Function.Module._load (module.js:388:25)
+    at Function.Module.runMain (module.js:575:10)
+    at startup (node.js:160:18)
+    at node.js:449:3
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m

@@ -1,0 +1,22 @@
+.draggable {
+  cursor: move;
+}
+
+.container,
+.image {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+}
+
+.container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+}

@@ -1,0 +1,18 @@
+.button {
+  background-color: #d0343a;
+}
+
+.buttons {
+  background-color: #dededf;
+  border-radius: 2rem;
+  color: white;
+  display: inline-block;
+  margin: 15px 1rem;
+  padding: 0.7rem 1.7rem 0.5rem;
+  text-transform: uppercase;
+}
+
+.button:active {
+  background: #41ADDD;
+  color: #FFF;
+}

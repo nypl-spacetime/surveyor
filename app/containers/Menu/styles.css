@@ -1,0 +1,64 @@
+.arrow_box {
+	position: relative;
+	background: white;
+	border: 2px solid black;
+  color: black;
+}
+
+.link,
+.link:visited {
+  color: black;
+	text-decoration: underline;
+}
+
+.link img {
+	width: 16px;
+}
+
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: white;
+	border-width: 20px;
+	margin-left: -20px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-bottom-color: black;
+	border-width: 23px;
+	margin-left: -23px;
+}
+
+.menu {
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px;
+  top: 65px;
+  right: 110px;
+  width: 250px;
+
+	z-index: 9999;
+	font-size: 1rem;
+}
+
+.menu ul, .menu ol {
+	list-style-type: none;
+}
+
+.menu li:hover {
+	background-color: #eee;
+}
+
+.hr {
+  height: 1px;
+}

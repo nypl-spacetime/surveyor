@@ -1,7 +1,11 @@
-port: 3012
-
 api:
   url: http://where-api.dev/
+
+steps:
+  - location
+  - bearing-introduction
+  - bearing
+  - thanks
 
 defaults:
   map:
