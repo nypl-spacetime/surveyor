@@ -17,16 +17,16 @@ export class Step extends React.Component {
         <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} geocoder={true} />
         <Buttons>
           <Button onClick={this.props.skip}>Skip</Button>
-          <Button onClick={this.done.bind(this)}>Submit</Button>
+          <Button onClick={this.submit.bind(this)}>Submit</Button>
         </Buttons>
       </div>
     );
   }
 
-  done () {
+  submit () {
     if (true || this.state.hasMoved) {
       var view = this.refs.map.getWrappedInstance().getView();
-      this.props.done({
+      this.props.submit({
         zoom: view.zoom
       }, {
         type: 'Point',

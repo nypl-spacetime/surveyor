@@ -36,7 +36,7 @@ export class Step extends React.Component {
           <div className={styles['timer-bar']} style={timerBarStyle} />
         </div>
         <Buttons>
-          <Button className='button-green' onClick={this.done.bind(this)}>Show me another image</Button>
+          <Button className='button-green' onClick={this.next.bind(this)}>Show me another image</Button>
         </Buttons>
       </div>
     );
@@ -49,11 +49,11 @@ export class Step extends React.Component {
       });
 
       // Initialize timer which proceeds to first step
-      this.timerBarTimeout = setTimeout(this.done.bind(this), this.state.duration * 1000);
+      this.timerBarTimeout = setTimeout(this.next.bind(this), this.state.duration * 1000);
     }, 100);
   }
 
-  done() {
+  next() {
     if (this.intitialTimeout) {
       clearTimeout(this.intitialTimeout);
     }
@@ -62,7 +62,7 @@ export class Step extends React.Component {
       clearTimeout(this.timerBarTimeout);
     }
 
-    this.props.done();
+    this.props.next();
   }
 }
 

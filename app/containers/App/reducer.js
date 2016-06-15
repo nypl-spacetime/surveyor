@@ -148,12 +148,22 @@ function appReducer(state = initialState, action) {
       return state
 
     case SKIP_STEP_SUCCESS:
-      // TODO: make function which resets items + steps!
-      return state
-        .set('steps', fromJS([]))
-        .set('item', null)
-        .set('mods', null)
-        .set('uuid', null)
+      const stepsWithData = state
+        .get('steps').toJS()
+        .filter((step) => step)
+
+      if (stepsWithData.length) {
+        // Go to thanks step (last step)
+        const stepsTotalCount = state.getIn(['config', 'steps']).size
+        return state.update('steps', (steps) => steps.setSize(stepsTotalCount - 1))
+      } else {
+        // TODO: make function which resets items + steps!
+        return state
+          .set('steps', fromJS([]))
+          .set('item', null)
+          .set('mods', null)
+          .set('uuid', null)
+      }
 
     case SKIP_STEP_ERROR:
       return state
@@ -162,16 +172,9 @@ function appReducer(state = initialState, action) {
     case NEXT_STEP:
       var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size
 
-      console.log(wasLastStep, 'wasLastStep')
-
       if (!wasLastStep) {
-        const stepData = {
-          uuid: action.uuid,
-          step: action.step
-        }
-
         return state
-          .set('steps', state.get('steps').push(fromJS(stepData)))
+          .set('steps', state.get('steps').push(undefined))
       } else {
         // TODO: make function which resets items + steps!
         var newState = state

@@ -10,15 +10,15 @@ export class Step extends React.Component {
       <div>
         BEaring camera??!?? wil je het doen?
         <Buttons>
-          <Button onClick={this.props.reset}>Skip</Button>
-          <Button onClick={this.done.bind(this)}>Submit</Button>
+          <Button onClick={this.props.skip}>Skip</Button>
+          <Button onClick={this.next.bind(this)}>Submit</Button>
         </Buttons>
       </div>
     );
   }
 
-  done () {
-    this.props.done()
+  next () {
+    this.props.next()
   }
 
 }

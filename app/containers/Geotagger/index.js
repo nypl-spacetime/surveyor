@@ -55,24 +55,19 @@ export class Geotagger extends React.Component {
     return (
       <div className={`${styles.container}`}>
         { React.createElement(step.component, {
-            done: this.doneStep.bind(this),
-            skip: this.skipStep.bind(this),
-            reset: this.resetStep.bind(this)
+          next: this.nextStep.bind(this),
+          submit: this.submitStep.bind(this),
+          skip: this.skipStep.bind(this)
         }) }
       </div>
     );
   }
 
-  resetStep() {
-    this.props.lastStep()
+  nextStep() {
+    this.props.nextStep()
   }
 
-  skipStep(submit) {
-    if (submit) {
-
-    } else {
-
-    }
+  skipStep() {
     this.props.skipStep(
       this.props.uuid,
       this.props.currentStep,
@@ -80,18 +75,14 @@ export class Geotagger extends React.Component {
     )
   }
 
-  doneStep(data, geometry) {
-    if (data) {
-      this.props.submitStep(
-        this.props.uuid,
-        this.props.currentStep,
-        this.props.currentStepIndex,
-        data,
-        geometry
-      )
-    } else {
-      this.props.nextStep()
-    }
+  submitStep(data, geometry) {
+    this.props.submitStep(
+      this.props.uuid,
+      this.props.currentStep,
+      this.props.currentStepIndex,
+      data,
+      geometry
+    )
   }
 }
 
