@@ -26,6 +26,8 @@ import Menu from 'containers/Menu';
 
 import styles from './styles.css';
 
+import nypl from 'images/nypl.svg';
+
 export class Header extends React.Component {
 
   /**
@@ -70,10 +72,12 @@ export class Header extends React.Component {
       )
     }
 
+
+
     return (
       <header className={`${styles.header} ${styles['align-center']}`}>
         <div className={`${styles['align-center']}`}>
-          <a className={`${styles.nypl}`} href="//nypl.org" target="_blank">
+          <a style={{backgroundImage: `url(${nypl})`}} className={`${styles.nypl}`} href='//nypl.org' target='_blank'>
           </a>
           <h1>
             <span className={`${styles['header-red']}`}>NYC Space/Time Directory</span>: Where?

@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.nav {
+
+}
+
 nav > a,
 a span:first-child {
   margin-right: 1rem;
@@ -29,7 +33,6 @@ a span:first-child {
 .nypl {
   width: 35px;
   height: 35px;
-  background-image: url(images/nypl.svg);
   background-size: contain;
   background-position: center;
   margin-top: -3px;
