@@ -135,18 +135,19 @@ function* requestDataNew(constant, getUrl, options) {
 
 export function* setRoute(action) {
   while (true) {
-    yield take([SUBMIT_STEP_SUCCESS, SKIP_STEP_SUCCESS, NEXT_STEP, LOAD_ITEM_SUCCESS]);
+    // yield take([SUBMIT_STEP_SUCCESS, SKIP_STEP_SUCCESS, NEXT_STEP, LOAD_ITEM_SUCCESS]);
+    yield take(LOAD_ITEM_SUCCESS);
 
-    const stepIndex = yield select(selectCurrentStepIndex());
+    // const stepIndex = yield select(selectCurrentStepIndex());
     const uuid = yield select(selectUuid());
 
     if (uuid) {
       var path = `/${uuid}`
 
-      if (stepIndex > 0) {
-        const step = yield select(selectCurrentStep());
-        path += `/${step}`
-      }
+      // if (stepIndex > 0) {
+      //   const step = yield select(selectCurrentStep());
+      //   path += `/${step}`
+      // }
 
       yield(put(push(path)))
     }

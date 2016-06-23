@@ -25,17 +25,9 @@ import styles from './styles.css';
 export class App extends React.Component {
 
   componentWillMount = () => {
-  // componentWillMount() {
-    this.props.loadOAuth()
-    this.props.loadCollections()
-
-    const route = {
-      uuid: this.props.params.uuid,
-      step: this.props.params.step,
-    }
-
-    this.props.loadItem(route.uuid);
-    // TODO: setStep!!!!!!!!!!!!!!!!!!
+    this.props.loadOAuth();
+    this.props.loadCollections();
+    this.props.loadItem(this.props.params.uuid);
   }
 
   render() {

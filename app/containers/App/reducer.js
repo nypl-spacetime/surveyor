@@ -86,7 +86,7 @@ function appReducer(state = initialState, action) {
         .set('item', action.item)
         .set('uuid', action.item.uuid)
     case LOAD_ITEM_ERROR:
-      console.error('Fout geen goede UUID!')
+      console.error('Error: incorrect UUID!')
       return state
         .set('error', action.error)
     case LOAD_MODS_SUCCESS:
