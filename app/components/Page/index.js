@@ -7,11 +7,14 @@ import styles from './styles.css';
 
 function Page(props) {
   return (
-    <article>
-      <div>
+    <div className={styles.container}>
+      <article className={styles.article}>
         {props.children}
-      </div>
-    </article>
+      </article>
+      <Buttons>
+        <Button onClick={props.buttonAction} type='primary'>Back</Button>
+      </Buttons>
+    </div>
   );
 }
 

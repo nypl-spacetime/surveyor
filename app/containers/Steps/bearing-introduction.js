@@ -1,5 +1,6 @@
 import React from 'react';
 
+import StepContainer from 'components/StepContainer';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
 
@@ -10,8 +11,8 @@ export class Step extends React.Component {
       <div>
         BEaring camera??!?? wil je het doen?
         <Buttons>
-          <Button onClick={this.props.skip}>Skip</Button>
-          <Button onClick={this.next.bind(this)}>Submit</Button>
+          <Button onClick={this.props.skip} type='secondary'>Skip</Button>
+          <Button onClick={this.next.bind(this)} type='primary'>OK</Button>
         </Buttons>
       </div>
     );

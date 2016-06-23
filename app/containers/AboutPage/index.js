@@ -9,10 +9,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import Button from 'components/Button';
+import Page from 'components/Page';
 import H1 from 'components/H1';
 
-// import styles from './styles.css';
+var about = require('html!./about.md');
 
 export class AboutPage extends React.Component {
 
@@ -28,16 +28,15 @@ export class AboutPage extends React.Component {
   /**
    * Changed route to '/'
    */
-  openHomePage = () => {
+  backToHomePage = () => {
     this.openRoute('/');
   };
 
   render() {
     return (
-      <div>
-        <H1>Bout!!</H1>
-        <Button handleRoute={this.openHomePage}>Home</Button>
-      </div>
+      <Page buttonAction={this.backToHomePage}>
+        <div dangerouslySetInnerHTML={{__html: about}} />
+      </Page>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import StepContainer from 'components/StepContainer';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
 
@@ -27,18 +28,16 @@ export class Step extends React.Component {
     };
 
     return (
-      <div>
-        <h3>Thank you!</h3>
-        <div>
-          <img className={`centered-block ${styles.animal}`} src={owl} />
-        </div>
-        <div>
+      <StepContainer>
+        <div className='sidebar-padding'>
+          <h3>Thank you!</h3>
+          <img className={styles.animal} src={owl} />
           <div className={styles['timer-bar']} style={timerBarStyle} />
         </div>
         <Buttons>
-          <Button className='button-green' onClick={this.next.bind(this)}>Show me another image</Button>
+          <Button type='primary' onClick={this.next.bind(this)}>Next image</Button>
         </Buttons>
-      </div>
+      </StepContainer>
     );
   }
 

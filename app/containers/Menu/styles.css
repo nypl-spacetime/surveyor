@@ -42,17 +42,20 @@
 .menu {
   position: absolute;
   border-radius: 5px;
-  padding: 5px;
   top: 65px;
   right: 110px;
-  width: 250px;
+  width: 350px;
 
 	z-index: 9999;
-	font-size: 1rem;
+	/*font-size: 1rem;*/
 }
 
 .menu ul, .menu ol {
 	list-style-type: none;
+}
+
+.menu li {
+	padding: 10px;
 }
 
 .menu li:hover {

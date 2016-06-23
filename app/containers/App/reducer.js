@@ -53,7 +53,7 @@ import { fromJS } from 'immutable';
 // The initial state of the App
 const initialState = fromJS({
   uuid: null,
-  item: null,
+  item: fromJS({}),
   mods: null,
   oauth: null,
   collections: [],
@@ -67,7 +67,7 @@ const initialState = fromJS({
     allItems: false
   },
 
-  loading: false,
+  loading: true,
   error: false
 });
 
@@ -78,10 +78,11 @@ function appReducer(state = initialState, action) {
       // TODO: mods op null, item op null?
       return state
         .set('uuid', action.uuid)
-        .set('mods', null)
+        // .set('mods', null)
         // .set('item', null)
     case LOAD_ITEM_SUCCESS:
       return state
+        .set('loading', false)
         .set('item', action.item)
         .set('uuid', action.item.uuid)
     case LOAD_ITEM_ERROR:
@@ -137,9 +138,9 @@ function appReducer(state = initialState, action) {
         // TODO: make function which resets items + steps!
         return state
           .set('steps', fromJS([]))
-          .set('item', null)
-          .set('mods', null)
-          .set('uuid', null)
+          // .set('item', null)
+          // .set('mods', null)
+          // .set('uuid', null)
       }
     case SUBMIT_STEP_ERROR:
       return state
@@ -160,9 +161,9 @@ function appReducer(state = initialState, action) {
         // TODO: make function which resets items + steps!
         return state
           .set('steps', fromJS([]))
-          .set('item', null)
-          .set('mods', null)
-          .set('uuid', null)
+          // .set('item', null)
+          // .set('mods', null)
+          // .set('uuid', null)
       }
 
     case SKIP_STEP_ERROR:
@@ -179,9 +180,9 @@ function appReducer(state = initialState, action) {
         // TODO: make function which resets items + steps!
         var newState = state
           .set('steps', fromJS([]))
-          .set('item', null)
-          .set('mods', null)
-          .set('uuid', null)
+          // .set('item', null)
+          // .set('mods', null)
+          // .set('uuid', null)
 
         return newState
       }

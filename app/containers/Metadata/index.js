@@ -15,7 +15,8 @@ import {
   selectModsTitle,
   selectModsLocation,
   selectModsDate,
-  selectCollectionForItem
+  selectCollectionForItem,
+  selectSearchButtons
 } from 'containers/App/selectors';
 
 import styles from './styles.css';
@@ -59,12 +60,36 @@ export class Metadata extends React.Component {
       )
     }
 
+    const titleLength = this.props.title ? this.props.title.length : 0
+    // Default fontSize = 36px, approx 30 character
+    // per line, when metadata box has default width
+
+    var fontSize = 36;
+    if (titleLength > 300) {
+      fontSize = 16;
+    } else if (titleLength > 200) {
+      fontSize = 26;
+    }
+
+    const titleStyle = {
+      fontSize: `${fontSize}px`
+    };
+
     return (
-      <div>
-        <h1 className={styles.title}>{this.props.title}</h1>
-        <div>From: {collectionLink}</div>
+      <div className={`${styles.metadata} sidebar-padding`}>
+        <h1 style={titleStyle} className={styles.title} title={this.props.title}>{this.props.title}</h1>
+        <h2 className={styles.subtitle}>From: {collectionLink}</h2>
         {geoDateHeader}
-        Search buttons
+        <div>
+          Search in new tab:
+          <ul className={styles['search-buttons']}>
+            { this.props.searchButtons.map((searchButton, i) => {
+              return (<li key={i}>
+                <a target='_blank' href={searchButton.url}>{searchButton.title}</a>
+              </li>)
+            }) }
+          </ul>
+        </div>
       </div>
     );
   }
@@ -104,8 +129,9 @@ export default connect(createSelector(
   selectCollectionForItem(),
   selectModsLocation(),
   selectModsDate(),
-  (title, collection, location, date) => ({
-    title, collection, location, date
+  selectSearchButtons(),
+  (title, collection, location, date, searchButtons) => ({
+    title, collection, location, date, searchButtons
   })
 ))(Metadata);
 

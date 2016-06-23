@@ -27,6 +27,9 @@ import {
   loadItem
 } from '../App/actions';
 
+import Error from 'containers/Error';
+import Loading from 'containers/Loading';
+
 import Image from 'containers/Image';
 import Sidebar from 'containers/Sidebar';
 
@@ -36,9 +39,6 @@ import H2 from 'components/H2';
 import styles from './styles.css';
 
 export class HomePage extends React.Component {
-
-  // componentDidMount: NU ITEM PAKKEN!
-  // HOND HOND HOND
 
   /**
    * Changes the route
@@ -59,27 +59,17 @@ export class HomePage extends React.Component {
   //   }
   // }
 
-  // componentWillReceiveProps = () => {
-  //   if (this.props.item && (this.props.item.uuid !== this.props.params.uuid)) {
-  //     this.openRoute(`/${this.props.item.uuid}`)
-  //     // this.props.loadItem(routeUuid);
-  //   }
-  // }
-
   render() {
     let mainContent = null;
 
-    // Show a loading indicator when we're loading
-    if (false && this.props.loading) {
-      // TODO: show loading
-      mainContent = null
-    } else if (false && this.props.error) {
-      // TODO: show error
-      mainContent = null
+    if (this.props.loading) {
+      mainContent = <Loading />
+    } else if (this.props.error) {
+      mainContent = <Error />
     } else {
       mainContent = (
         <div className={`${styles.container}`}>
-          <Image item={this.props.item} />,
+          <Image item={this.props.item} />
           <Sidebar mods={this.props.mods} />
         </div>
       );
@@ -112,16 +102,9 @@ function mapDispatchToProps(dispatch) {
     nextItem: () => {
       dispatch(loadItem());
     },
-
     loadItem: (uuid) => {
       dispatch(loadItem(uuid));
     },
-
-    onSubmitForm: (evt) => {
-      evt.preventDefault();
-      dispatch(loadRepos());
-    },
-
     dispatch
   };
 }

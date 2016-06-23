@@ -8,6 +8,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { Link } from 'react-router';
 
 import { createSelector } from 'reselect';
 
@@ -72,15 +73,15 @@ export class Header extends React.Component {
       )
     }
 
-
-
     return (
       <header className={`${styles.header} ${styles['align-center']}`}>
         <div className={`${styles['align-center']}`}>
           <a style={{backgroundImage: `url(${nypl})`}} className={`${styles.nypl}`} href='//nypl.org' target='_blank'>
           </a>
           <h1>
-            <span className={`${styles['header-red']}`}>NYC Space/Time Directory</span>: Where?
+            <Link to='/'>
+              <span className={`${styles['header-red']}`}>NYC Space/Time Directory</span>: Surveyor
+            </Link>
           </h1>
         </div>
         <nav className={`${styles.nav} ${styles['align-center']}`}>
@@ -92,12 +93,14 @@ export class Header extends React.Component {
              {authentication}
             </span>
           </a>
-          <a href='javascript:void(0)' onClick={this.openAbout}>
-            About
-          </a>
-          <a href='javascript:void(0)' onClick={this.openHelp}>
-            Help
-          </a>
+          <Link to='/about'>
+            <span className={styles.wide}>About</span>
+            <span className={styles.narrow}>ⓘ</span>
+          </Link>
+          <Link to='/help'>
+            <span className={styles.wide}>Help</span>
+            <span className={styles.narrow}>?</span>
+          </Link>
         </nav>
         {menu}
       </header>
@@ -106,6 +109,7 @@ export class Header extends React.Component {
 
   toggleMenu = (e) => {
     this.props.toggleMenu(e.nativeEvent.shiftKey)
+    e.preventDefault()
   }
 
 }

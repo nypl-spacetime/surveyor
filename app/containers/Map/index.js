@@ -162,6 +162,8 @@ export class Map extends React.Component {
     }
   }
 
+  getMap = () => this.map;
+
   getOptions = (key) => {
     return this.props.options[key] || this.props.defaults[key];
   }
@@ -173,7 +175,8 @@ export class Map extends React.Component {
       center: this.getOptions('center'),
       zoom: this.getOptions('zoom'),
       maxZoom: this.getOptions('maxZoom'),
-      scrollWheelZoom: 'center',
+      scrollWheelZoom: false,
+      // scrollWheelZoom: 'center',
       doubleClickZoom: 'center'
     });
 
@@ -182,28 +185,21 @@ export class Map extends React.Component {
       attribution: this.getOptions('attribution')
     }).addTo(map);
 
+    if (this.props.mapEvents) {
+      Object.keys(this.props.mapEvents).forEach((event) => map.on(event, this.props.mapEvents[event]));
+    }
+
+    if (this.props.mapCreated) {
+      this.props.mapCreated(map);
+    }
+
     this.map = map;
-  //
-  //   if (this.props.mapEvents) {
-  //     Object.keys(this.props.mapEvents).forEach(event => map.on(event, this.props.mapEvents[event]));
-  //   }
-  //
-  //   if (this.props.mapCreated) {
-  //     this.props.mapCreated(map);
-  //   }
-  //
-  //   this.setState({
-  //     map: map
-  //   });
   }
   //
   // roundCoordinates: function(coordinate) {
   //   return Math.round(coordinate * 1000000) / 1000000;
   // },
   //
-  // getMap: function() {
-  //   return this.state.map;
-  // },
   //
   // setView: function(center, zoom) {
   //   if (this.state.map) {
@@ -211,20 +207,7 @@ export class Map extends React.Component {
   //   }
   // },
   //
-  // getView: function() {
-  //   if (this.state.map) {
-  //     var center = this.state.map.getCenter();
-  //     return {
-  //       center: [
-  //         center.lng,
-  //         center.lat
-  //       ].map(this.roundCoordinates),
-  //       zoom: this.state.map.getZoom(),
-  //     };
-  //   } else {
-  //     return null;
-  //   }
-  // }
+
 
 }
 

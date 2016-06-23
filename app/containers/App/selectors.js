@@ -36,13 +36,43 @@ const selectMapDefaults = () => createSelector(
   (globalState) => globalState.getIn(['config', 'defaults', 'map']).toJS()
 );
 
+const selectCSSVariables = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.getIn(['config', 'css_variables']).toJS()
+);
+
+const selectStepData = (step) => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('steps')
+      .toJS()
+      .filter((s) => s && s.step === step)[0]
+);
+
 const selectSteps = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.getIn(['config', 'steps']).toJS()
 );
 
-
-
+const selectSearchButtons = () => createSelector(
+  selectGlobal(),
+  (globalState) => {
+    const item = globalState.get('item')//.toJS();
+    const reg = new RegExp(/\{(\w+)\}/g);
+    return globalState.getIn(['config', 'search_buttons']).toJS()
+      .map((searchButton) => {
+        var result;
+        while((result = reg.exec(searchButton.url)) !== null) {
+          const key = result[1];
+          if (item[key]) {
+            searchButton.url = searchButton.url.replace(`{${key}}`, item[key])
+          } else {
+            searchButton.url = ''
+          }
+        }
+        return searchButton
+      })
+  }
+);
 
 const selectUuid = () => createSelector(
   selectGlobal(),
@@ -222,8 +252,11 @@ export {
   selectShowAllMenuItems,
 
   selectConfig,
+  selectCSSVariables,
+  selectStepData,
   selectSteps,
   selectMapDefaults,
+  selectSearchButtons,
 
   selectCurrentUser,
   selectLoading,

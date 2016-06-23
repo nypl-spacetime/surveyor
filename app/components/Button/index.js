@@ -11,17 +11,24 @@ import React, { PropTypes } from 'react';
 import styles from './styles.css';
 
 function Button(props) {
-  const className = props.className ? props.className : styles.button;
+  var classNames = [
+    styles.button,
+    (props.type && styles[props.type]) ? styles[props.type] : '',
+    props.disabled ? styles.disabled : ''
+  ];
+
+  var onClick;
+  if (!props.disabled) {
+    onClick = props.onClick
+  }
 
   return (
-    <button className={className} onClick={props.onClick}>{props.children}</button>
+    <button className={classNames.join(' ')} onClick={onClick}>{props.children}</button>
   );
 }
 
 Button.propTypes = {
   className: PropTypes.string,
-  handleRoute: PropTypes.func,
-  href: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
 };

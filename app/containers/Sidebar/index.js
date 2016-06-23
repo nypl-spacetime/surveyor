@@ -9,6 +9,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 
+
+import { createSelector } from 'reselect';
+
+import {
+  selectCSSVariables
+} from 'containers/App/selectors';
+
 import Metadata from 'containers/Metadata';
 import Geotagger from 'containers/Geotagger';
 
@@ -22,9 +29,16 @@ export class Sidebar extends React.Component {
       width: 450,
       minWidth: 300,
       maxWidth: 800,
+
+      height: 450,
+      minHeight: 300,
+      maxHeight: 800,
+
       resizeMode: 'horizontal'
     };
   }
+
+  mobileWidth = parseInt(this.props.cssVariables.mobileWidth);
 
   dragging = false;
   startPos = undefined;
@@ -34,19 +48,33 @@ export class Sidebar extends React.Component {
     y: -1
   };
 
+  // TODO: >= or >?
+  orientation = () => screen.width >= this.mobileWidth ? 'horizontal' : 'vertical'
+
   render() {
-    const style = {
-      width: `${this.state.width}px`,
-      minWidth: `${this.state.minWidth}px`,
-      maxWidth: `${this.state.maxWidth}px`
+    var style;
+
+    if (this.orientation() === 'horizontal') {
+      style = {
+        width: `${this.state.width}px`,
+        minWidth: `${this.state.minWidth}px`,
+        maxWidth: `${this.state.maxWidth}px`
+      }
+    } else {
+      style = {
+        height: `${this.state.height}px`,
+        minHeight: `${this.state.minHeight}px`,
+        maxHeight: `${this.state.maxHeight}px`
+      }
     }
 
     return (
       <div className={`${styles.container}`}>
-        <div className={`${styles.resizer}`} onClick={this.resizerClick}
+        <div className={`${styles.resizer}`}
+          onClick={this.resizerClick}
           onMouseDown={this.dragStart}
           onTouchStart={this.dragStart} >
-          <span>⋮</span>
+          <span></span>
         </div>
         <div className={`${styles.contents}`} ref='contents' style={style}>
           <Metadata />
@@ -57,14 +85,24 @@ export class Sidebar extends React.Component {
   }
 
   dragStart = (e) => {
+    console.log('STARTEN')
+
     this.contentsElement = findDOMNode(this.refs.contents);
 
     this.dragging = true
     // resizer.classList.add("active")
 
-    var xy = e.clientY ? {x: e.clientX, y: e.clientY} : {x: e.pageX, y: e.pageY}
+    var xy
+    if (e.changedTouches) {
+      xy = {
+        x: e.changedTouches[0].pageX,
+        y: e.changedTouches[0].pageY
+      }
+    } else {
+      xy = e.clientY ? {x: e.clientX, y: e.clientY} : {x: e.pageX, y: e.pageY}
+    }
 
-    if (this.state.resizeMode === 'horizontal') {
+    if (this.orientation() === 'horizontal') {
       this.startPos = xy.x - this.contentsElement.offsetLeft
     } else {
       this.startPos = xy.y - this.contentsElement.offsetTop
@@ -88,23 +126,37 @@ export class Sidebar extends React.Component {
       return
     }
 
-    if (this.state.resizeMode === 'horizontal') {
-      var clientX = e.clientX ? e.clientX : e.pageX;
+    if (this.orientation() === 'horizontal') {
+      var clientX;
+      if (e.changedTouches) {
+        clientX = e.changedTouches[0].pageX;
+      } else {
+        clientX = e.clientX ? e.clientX : e.pageX;
+      }
+
       var width = window.innerWidth - clientX;
 
       if (this.startPos !== undefined) {
-        width += this.startPos
+        width += this.startPos;
       }
 
-      this.contentsElement.style.width = `${width}px`
+      this.contentsElement.style.height = null;
+      this.contentsElement.style.width = `${width}px`;
     } else {
-      var clientY = e.clientY ? e.clientY : e.pageY
+      var clientY;
 
-      if (startPos !== undefined) {
+      if (e.changedTouches) {
+        clientY = e.changedTouches[0].pageY;
+      } else {
+        clientX =   e.clientY ? e.clientY : e.pageY;
+      }
+
+      if (this.startPos !== undefined) {
         clientY -= this.startPos
       }
 
-      // this.contentsElement.style.height = `${width}px`
+      this.contentsElement.style.height = `${clientY}px`
+      this.contentsElement.style.width = null;
     }
     e.preventDefault()
   }
@@ -121,7 +173,17 @@ export class Sidebar extends React.Component {
   }
 
   resizerClick = (e) => {
-    var pos = e.clientY ? {x: e.clientX, y: e.clientY} : {x: e.pageX, y: e.pageY}
+    console.log('CLICK')
+    var pos;
+    if (e.changedTouches) {
+      pos = {
+        x: e.changedTouches[0].pageX,
+        y: e.changedTouches[0].pageY
+      }
+    } else {
+      pos = e.clientY ? {x: e.clientX, y: e.clientY} : {x: e.pageX, y: e.pageY}
+    }
+
     var hasMoved = (pos.x !== this.xy.x && pos.y !== this.xy.y)
 
     if (!hasMoved) {
@@ -141,13 +203,17 @@ export class Sidebar extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    // changeRoute: (url) => dispatch(push(url)),
-  };
-}
+export default connect(createSelector(
+  selectCSSVariables(),
+  (cssVariables) => ({
+    cssVariables
+  })
+))(Sidebar);
 
-export default connect(null, mapDispatchToProps)(Sidebar);
+
+
+
+
 
 
 

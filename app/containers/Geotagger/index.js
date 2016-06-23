@@ -34,8 +34,6 @@ function requireAll(r) {
 }
 requireAll(require.context('containers/Steps/', false, /\.js$/));
 
-import styles from './styles.css';
-
 export class Geotagger extends React.Component {
 
   constructor(props) {
@@ -52,15 +50,11 @@ export class Geotagger extends React.Component {
   render() {
     var step = this.state.steps[this.props.currentStepIndex];
 
-    return (
-      <div className={`${styles.container}`}>
-        { React.createElement(step.component, {
-          next: this.nextStep.bind(this),
-          submit: this.submitStep.bind(this),
-          skip: this.skipStep.bind(this)
-        }) }
-      </div>
-    );
+    return React.createElement(step.component, {
+      next: this.nextStep.bind(this),
+      submit: this.submitStep.bind(this),
+      skip: this.skipStep.bind(this)
+    })
   }
 
   nextStep() {
@@ -100,13 +94,6 @@ function mapDispatchToProps(dispatch) {
     dispatch
   };
 }
-
-
-export default connect(null, mapDispatchToProps)(Geotagger);
-
-
-
-
 
 // Wrap the component to inject dispatch and state into it
 export default connect(createSelector(

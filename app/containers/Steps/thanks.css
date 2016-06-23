@@ -1,12 +1,16 @@
 .timer-bar {
   border-radius: 4px;
   height: 4px;
-  background-color: #579b34;
+  background-color: #d0343a;
   transition-property: width;
   transition-timing-function: linear;
 }
 
 .animal {
+  margin: 0 auto;
+  width : 200px;
+  display: block;
+  margin-bottom: 20px;
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
   animation-name: animal-animation;

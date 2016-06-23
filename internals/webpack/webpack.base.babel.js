@@ -41,6 +41,9 @@ module.exports = (options) => ({
         'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}',
       ],
     }, {
+      test: /\.md$/,
+      loader: 'remarkable'
+     }, {
       test: /\.html$/,
       loader: 'html-loader',
     }, {
@@ -69,6 +72,11 @@ module.exports = (options) => ({
       },
     }),
   ]),
+  remarkable: {
+    preset: 'full',
+    linkify: true,
+    typographer: true
+  },
   postcss: () => options.postcssPlugins,
   resolve: {
     modules: ['app', 'node_modules'],
