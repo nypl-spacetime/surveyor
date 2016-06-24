@@ -61,7 +61,7 @@ export default [
   submitStep,
   skipStep,
   getLogOut,
-  getLogOutSuccess // TODO: this is not the right way!
+  getLogOutSuccess // TODO: this is not the right way!?
 ];
 
 const API_URL = __CONFIG__.api.url
@@ -71,7 +71,7 @@ function isFunction(functionToCheck) {
   return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
-function* requestDataNew(constant, getUrl, options) {
+function* requestData(constant, getUrl, options) {
   while (true) {
     const action = yield take(constant);
 
@@ -133,7 +133,7 @@ function* requestDataNew(constant, getUrl, options) {
   }
 }
 
-export function* setRoute(action) {
+export function* setRoute() {
   while (true) {
     // yield take([SUBMIT_STEP_SUCCESS, SKIP_STEP_SUCCESS, NEXT_STEP, LOAD_ITEM_SUCCESS]);
     yield take(LOAD_ITEM_SUCCESS);
@@ -154,7 +154,7 @@ export function* setRoute(action) {
   }
 }
 
-export function* resetItem(action) {
+export function* resetItem() {
   while (true) {
     yield take([SUBMIT_STEP_SUCCESS, SKIP_STEP_SUCCESS, NEXT_STEP]);
 
@@ -167,7 +167,7 @@ export function* resetItem(action) {
   }
 }
 
-export function* getItem(action) {
+export function* getItem() {
   const getUrl = (action) => {
     var uuid = action.uuid;
     if (!uuid) {
@@ -176,7 +176,7 @@ export function* getItem(action) {
     return `${API_URL}items/${uuid}`;
   }
 
-  yield* requestDataNew(LOAD_ITEM, getUrl, {
+  yield* requestData(LOAD_ITEM, getUrl, {
     actionSuccess: itemLoaded,
     actionError: itemLoadingError
   })
@@ -202,7 +202,7 @@ export function* submitStep() {
     })
   })
 
-  yield* requestDataNew(SUBMIT_STEP, getUrl, {
+  yield* requestData(SUBMIT_STEP, getUrl, {
     fetchOptions,
     actionSuccess: stepSubmitted,
     actionSuccessParams: (action, resultData) => [
@@ -235,7 +235,7 @@ export function* skipStep() {
     })
   })
 
-  yield* requestDataNew(SKIP_STEP, getUrl, {
+  yield* requestData(SKIP_STEP, getUrl, {
     fetchOptions,
     actionSuccess: stepSkipped,
     actionSuccessParams: (action, resultData) => [
@@ -248,7 +248,7 @@ export function* skipStep() {
 }
 
 export function* getCollections() {
-  yield* requestDataNew(LOAD_COLLECTIONS, `${API_URL}collections`, {
+  yield* requestData(LOAD_COLLECTIONS, `${API_URL}collections`, {
     actionSuccess: collectionsLoaded,
     actionError: collectionsLoaded
   })
@@ -264,14 +264,14 @@ export function* getMods() {
     }
   }
 
-  yield* requestDataNew(LOAD_ITEM_SUCCESS, getUrl, {
+  yield* requestData(LOAD_ITEM_SUCCESS, getUrl, {
     actionSuccess: modsLoaded,
     actionError: modsLoadingError
   })
 }
 
 export function* getLogOut() {
-  yield* requestDataNew(LOG_OUT, `${API_URL}oauth/disconnect`, {
+  yield* requestData(LOG_OUT, `${API_URL}oauth/disconnect`, {
     actionSuccess: logOutSuccess,
     actionError: logOutError
   })
@@ -279,7 +279,7 @@ export function* getLogOut() {
 }
 
 export function* getSubmissions() {
-  yield* requestDataNew(LOAD_OAUTH_SUCCESS, `${API_URL}submissions/count`, {
+  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}submissions/count`, {
     actionSuccess: submissionsLoaded,
     actionError: submissionsLoadingError
   })
@@ -293,7 +293,7 @@ export function* getLogOutSuccess() {
 }
 
 export function* getOAuth() {
-  yield* requestDataNew(LOAD_OAUTH, `${API_URL}oauth`, {
+  yield* requestData(LOAD_OAUTH, `${API_URL}oauth`, {
     actionSuccess: oauthLoaded,
     actionError: oauthLoadingError
   })

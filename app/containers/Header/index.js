@@ -47,13 +47,6 @@ export class Header extends React.Component {
     this.openRoute('/about');
   };
 
-  /**
-   * Changed route to '/help'
-   */
-  openHelp = () => {
-    this.openRoute('/help');
-  };
-
   render() {
     var submissions = 0
     if (this.props.submissions) {
@@ -80,7 +73,13 @@ export class Header extends React.Component {
           </a>
           <h1>
             <Link to='/'>
-              <span className={`${styles['header-red']}`}>NYC Space/Time Directory</span>: Surveyor
+              <span className='orientation-horizontal'>
+                <span className={`${styles['header-red']}`}>Space/Time Directory</span>
+                <span>:</span>
+              </span>
+              <span>
+                Surveyor
+              </span>
             </Link>
           </h1>
         </div>
@@ -94,12 +93,8 @@ export class Header extends React.Component {
             </span>
           </a>
           <Link to='/about'>
-            <span className={styles.wide}>About</span>
-            <span className={styles.narrow}>ⓘ</span>
-          </Link>
-          <Link to='/help'>
-            <span className={styles.wide}>Help</span>
-            <span className={styles.narrow}>?</span>
+            <span className='orientation-horizontal'>About</span>
+            <span className='orientation-vertical'>ⓘ</span>
           </Link>
         </nav>
         {menu}

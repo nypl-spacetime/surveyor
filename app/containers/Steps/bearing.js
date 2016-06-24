@@ -276,17 +276,6 @@ export class Step extends React.Component {
     cameraMarker.on('dragend', this.onMarkerDragEnd.bind(this));
     locationMarker.on('dragend', this.onMarkerDragEnd.bind(this));
 
-  //     this.setState({
-  //       map: map,
-  //       polyline: polyline,
-  //       polygon: polygon,
-  //       markers: {
-  //         camera: cameraMarker,
-  //         location: locationMarker
-  //       }
-  //     });
-
-
     this.map = map;
     this.polyline = polyline;
     this.polygon = polygon;

@@ -49,7 +49,7 @@ export class Sidebar extends React.Component {
   };
 
   // TODO: >= or >?
-  orientation = () => screen.width >= this.mobileWidth ? 'horizontal' : 'vertical'
+  orientation = () => window.innerWidth >= this.mobileWidth ? 'horizontal' : 'vertical'
 
   render() {
     var style;
@@ -108,6 +108,9 @@ export class Sidebar extends React.Component {
       this.startPos = xy.y - this.contentsElement.offsetTop
     }
 
+    console.log(xy, this.startPos, this.orientation())
+    console.log(screen.width, this.mobileWidth , window.devicePixelRatio)
+
     this.xy = xy
 
     window.addEventListener('mousemove', this.dragMove)
@@ -148,15 +151,18 @@ export class Sidebar extends React.Component {
       if (e.changedTouches) {
         clientY = e.changedTouches[0].pageY;
       } else {
-        clientX =   e.clientY ? e.clientY : e.pageY;
+        clientY = e.clientY ? e.clientY : e.pageY;
       }
 
       if (this.startPos !== undefined) {
         clientY -= this.startPos
       }
 
-      this.contentsElement.style.height = `${clientY}px`
+      console.log(clientY, this.startPos, window.innerHeight)
+
       this.contentsElement.style.width = null;
+      this.contentsElement.style.height = `${window.innerHeight - clientY}px`
+
     }
     e.preventDefault()
   }

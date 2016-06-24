@@ -49,13 +49,9 @@ header a:visited {
   font-weight: bold;
 }
 
-.narrow {
-  display: none;
-}
-
 @media only screen and (max-width: $mobileWidth) {
   .header h1 {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   nav > a,
@@ -65,13 +61,5 @@ header a:visited {
 
   .submissions {
     font-size: 1.5rem;
-  }
-
-  .narrow {
-    display: inherit;
-  }
-
-  .wide {
-    display: none;
   }
 }

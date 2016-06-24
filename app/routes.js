@@ -26,15 +26,6 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       }
     }, {
-      path: '/help',
-      name: 'help',
-      getComponent(nextState, cb) {
-        System.import('containers/HelpPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      }
-    }, {
-      // path: '/',
       path: '/(:uuid)',
       name: 'home',
       getComponent(nextState, cb) {
@@ -46,7 +37,7 @@ export default function createRoutes(store) {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
-        System.import('containers/NotFoundPage')
+        System.import('containers/HomePage')
           .then(loadModule(cb))
           .catch(errorLoading);
       }

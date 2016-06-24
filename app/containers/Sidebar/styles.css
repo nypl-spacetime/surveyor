@@ -46,6 +46,7 @@
   .resizer {
     height: 30px;
     width: 100%;
+    cursor: row-resize;
   }
 
   .resizer span {

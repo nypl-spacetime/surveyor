@@ -6,7 +6,11 @@ import Buttons from 'components/Buttons';
 
 import styles from './thanks.css';
 
-var owl = require('../../images/owl-small.png');
+const requireAll = (requireContext) => requireContext.keys().map(requireContext);
+
+var thankYouAnimals = requireAll(
+  require.context('images/public-domain-animals/', false, /-small.png$/)
+);
 
 export class Step extends React.Component {
 
@@ -17,8 +21,13 @@ export class Step extends React.Component {
     super(props);
     this.state = {
       timerStarted: false,
-      duration: 2.5
+      duration: 2.5,
+      animalSrc: this.randomAnimal()
     };
+  }
+
+  randomAnimal() {
+    return thankYouAnimals[Math.floor(Math.random() * thankYouAnimals.length)];
   }
 
   render() {
@@ -31,7 +40,7 @@ export class Step extends React.Component {
       <StepContainer>
         <div className='sidebar-padding'>
           <h3>Thank you!</h3>
-          <img className={styles.animal} src={owl} />
+          <img className={styles.animal} src={this.state.animalSrc}/>
           <div className={styles['timer-bar']} style={timerBarStyle} />
         </div>
         <Buttons>
