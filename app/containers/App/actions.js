@@ -36,10 +36,6 @@ import {
   LOAD_SUBMISSIONS_SUCCESS,
   LOAD_SUBMISSIONS_ERROR,
 
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
-
   SUBMIT_STEP,
   SUBMIT_STEP_SUCCESS,
   SUBMIT_STEP_ERROR,
@@ -119,12 +115,6 @@ export function stepSkipError(error) {
   };
 }
 
-
-/**
- * Load the repositories, this action starts the ...loadItem saga
- *
- * @return {object} An action object with a type of LOAD_OAUTH
- */
 export function loadItem(uuid) {
   return {
     type: LOAD_ITEM,
@@ -132,15 +122,6 @@ export function loadItem(uuid) {
   };
 }
 
-
-/**
- * Dispatched when the repositories are loaded by the getGithubData saga
- *
- * @param  {object} oauth The OAuth data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
 export function itemLoaded(item) {
   return {
     type: LOAD_ITEM_SUCCESS,
@@ -148,23 +129,12 @@ export function itemLoaded(item) {
   };
 }
 
-/**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
- */
 export function itemLoadingError(error) {
   return {
     type: LOAD_ITEM_ERROR,
     error,
   };
 }
-
-
-
-
 
 export function loadCollections() {
   return {
@@ -186,14 +156,6 @@ export function collectionsLoadingError(error) {
   };
 }
 
-
-
-
-/**
- * Load the repositories, this action starts the ...loadItem saga
- *
- * @return {object} An action object with a type of LOAD_OAUTH
- */
 export function loadMods(uuid) {
   return {
     type: LOAD_MODS,
@@ -201,15 +163,6 @@ export function loadMods(uuid) {
   };
 }
 
-
-/**
- * Dispatched when the repositories are loaded by the getGithubData saga
- *
- * @param  {object} oauth The OAuth data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
 export function modsLoaded(mods) {
   return {
     type: LOAD_MODS_SUCCESS,
@@ -217,13 +170,6 @@ export function modsLoaded(mods) {
   };
 }
 
-/**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
- */
 export function modsLoadingError(error) {
   return {
     type: LOAD_MODS_ERROR,
@@ -231,16 +177,6 @@ export function modsLoadingError(error) {
   };
 }
 
-
-
-/**
- * Dispatched when the repositories are loaded by the getGithubData saga
- *
- * @param  {object} oauth The OAuth data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
 export function submissionsLoaded(submissions) {
   return {
     type: LOAD_SUBMISSIONS_SUCCESS,
@@ -248,13 +184,6 @@ export function submissionsLoaded(submissions) {
   };
 }
 
-/**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
- */
 export function submissionsLoadingError(error) {
   return {
     type: LOAD_SUBMISSIONS_ERROR,
@@ -262,37 +191,12 @@ export function submissionsLoadingError(error) {
   };
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Load the repositories, this action starts the ... saga
- *
- * @return {object} An action object with a type of LOAD_OAUTH
- */
 export function loadOAuth() {
   return {
     type: LOAD_OAUTH,
   };
 }
 
-
-/**
- * Dispatched when the repositories are loaded by the getGithubData saga
- *
- * @param  {object} oauth The OAuth data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
 export function oauthLoaded(oauth) {
   return {
     type: LOAD_OAUTH_SUCCESS,
@@ -300,13 +204,6 @@ export function oauthLoaded(oauth) {
   };
 }
 
-/**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
- */
 export function oauthLoadingError(error) {
   return {
     type: LOAD_OAUTH_ERROR,
@@ -314,18 +211,6 @@ export function oauthLoadingError(error) {
   };
 }
 
-
-
-
-
-/**
- * Dispatched when ...
- *
- * @param  {object} oauth The OAuth data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
 export function loadItem(uuid) {
   return {
     type: LOAD_ITEM,
@@ -333,69 +218,12 @@ export function loadItem(uuid) {
   };
 }
 
-
-
-
-
-
-
-
-
-/**
- * Load the repositories, this action starts the getGithubData saga
- *
- * @return {object} An action object with a type of LOAD_REPOS
- */
-export function loadRepos() {
-  return {
-    type: LOAD_REPOS,
-  };
-}
-
-/**
- * Dispatched when the repositories are loaded by the getGithubData saga
- *
- * @param  {array} repos The repository data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
-export function reposLoaded(repos, username) {
-  return {
-    type: LOAD_REPOS_SUCCESS,
-    repos,
-    username,
-  };
-}
-
-/**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
- */
-export function repoLoadingError(error) {
-  return {
-    type: LOAD_REPOS_ERROR,
-    error,
-  };
-}
-
-/**
- * Changes the input field of the form
- *
- * @param  {name} name The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_USERNAME
- */
 export function toggleMenu(allItems) {
   return {
     type: TOGGLE_MENU,
     allItems
   };
 }
-
 
 export function logOut() {
   return {

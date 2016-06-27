@@ -1,20 +1,8 @@
 .container {
-  /*TODO: load from css params, in config yml*/
-  background-color: black;
-  color: white;
-
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loading {
   width: 150px;
 }
 
-.text {
+.loading {
   margin: 0 auto;
   width: 93px;
 }

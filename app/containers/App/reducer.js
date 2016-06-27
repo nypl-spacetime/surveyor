@@ -29,10 +29,6 @@ import {
   LOAD_SUBMISSIONS_SUCCESS,
   LOAD_SUBMISSIONS_ERROR,
 
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
-
   TOGGLE_MENU,
 
   SUBMIT_STEP,
@@ -77,45 +73,32 @@ function appReducer(state = initialState, action) {
     case LOAD_ITEM:
       // TODO: mods op null, item op null?
       return state
-        .set('uuid', action.uuid)
+        .set('uuid', action.uuid);
         // .set('mods', null)
         // .set('item', null)
     case LOAD_ITEM_SUCCESS:
       return state
         .set('loading', false)
         .set('item', action.item)
-        .set('uuid', action.item.uuid)
-    case LOAD_ITEM_ERROR:
-      console.error('Error: incorrect UUID!')
-      return state
-        .set('error', action.error)
+        .set('uuid', action.item.uuid);
     case LOAD_MODS_SUCCESS:
       return state
-        .set('mods', action.mods)
+        .set('mods', action.mods);
     case LOAD_COLLECTIONS_SUCCESS:
       return state
-        .set('collections', action.collections)
-
-    case LOAD_OAUTH:
-      // return state
-      //   .set('loading', true)
-      //   .set('error', false)
-      //   .setIn(['userData', 'repositories'], false);
-      return state
+        .set('collections', action.collections);
     case LOAD_OAUTH_SUCCESS:
       return state
-        .set('oauth', action.oauth)
+        .set('oauth', action.oauth);
     case LOAD_SUBMISSIONS_SUCCESS:
       return state
-        .set('submissions', fromJS(action.submissions))
+        .set('submissions', fromJS(action.submissions));
     case TOGGLE_MENU:
       return state
         .setIn(['menu', 'shown'], !state.getIn(['menu', 'shown']))
-        .setIn(['menu', 'allItems'], action.allItems)
-    case SUBMIT_STEP:
-      return state
+        .setIn(['menu', 'allItems'], action.allItems);
     case SUBMIT_STEP_SUCCESS:
-      var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size
+      var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size;
 
       if (!wasLastStep) {
         const stepData = {
@@ -123,85 +106,100 @@ function appReducer(state = initialState, action) {
           step: action.step,
           data: action.data,
           geometry: action.geometry
-        }
+        };
 
         var newState = state
-          .set('steps', state.get('steps').push(fromJS(stepData)))
+          .set('steps', state.get('steps').push(fromJS(stepData)));
 
         if (newState.get('steps').size === 1) {
           newState = newState
             .updateIn(['submissions', 'completed'], completed => completed + 1);
         }
 
-        return newState
+        return newState;
       } else {
         // TODO: make function which resets items + steps!
         return state
-          .set('steps', fromJS([]))
+          .set('steps', fromJS([]));
           // .set('item', null)
           // .set('mods', null)
           // .set('uuid', null)
       }
-    case SUBMIT_STEP_ERROR:
-      return state
-
-    case SKIP_STEP:
-      return state
-
     case SKIP_STEP_SUCCESS:
       const stepsWithData = state
         .get('steps').toJS()
-        .filter((step) => step)
+        .filter((step) => step);
 
       if (stepsWithData.length) {
         // Go to thanks step (last step)
-        const stepsTotalCount = state.getIn(['config', 'steps']).size
-        return state.update('steps', (steps) => steps.setSize(stepsTotalCount - 1))
+        const stepsTotalCount = state.getIn(['config', 'steps']).size;
+        return state.update('steps', (steps) => steps.setSize(stepsTotalCount - 1));
       } else {
         // TODO: make function which resets items + steps!
         return state
-          .set('steps', fromJS([]))
+          .set('steps', fromJS([]));
           // .set('item', null)
           // .set('mods', null)
           // .set('uuid', null)
       }
-
-    case SKIP_STEP_ERROR:
-      return state
-
-
     case NEXT_STEP:
-      var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size
+      var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size;
 
       if (!wasLastStep) {
         return state
-          .set('steps', state.get('steps').push(undefined))
+          .set('steps', state.get('steps').push(undefined));
       } else {
         // TODO: make function which resets items + steps!
         var newState = state
-          .set('steps', fromJS([]))
+          .set('steps', fromJS([]));
           // .set('item', null)
           // .set('mods', null)
           // .set('uuid', null)
 
-        return newState
+        return newState;
       }
-
-
-
-
-
-    case SKIP_STEP:
-      return state
-    case LOG_OUT:
-      return state
     case LOG_OUT_SUCCESS:
       return state
         .set('oauth', null)
         .set('submissions', 0)
+    case LOAD_ITEM_ERROR:
+      return state
+        .set('error', {
+          type: action.type,
+          message: 'Error loading image',
+          error: action.error
+        });
+    case LOAD_MODS_ERROR:
+      return state
+        .set('error', {
+          type: action.type,
+          message: 'Error loading metadata',
+          error: action.error
+        });
+    case LOAD_COLLECTIONS_ERROR:
+    case LOAD_OAUTH_ERROR:
+    case LOAD_SUBMISSIONS_ERROR:
+    return state
+      .set('error', {
+        type: action.type,
+        message: 'Error connecting to API',
+        error: action.error
+      });
+    case SKIP_STEP_ERROR:
+    case SUBMIT_STEP_ERROR:
+      return state
+        .set('error', {
+          type: action.type,
+          message: 'Error submitting data to API',
+          error: action.error
+        });
     case LOG_OUT_ERROR:
       return state
-
+        .set('error', {
+          type: action.type,
+          message: 'Error logging out',
+          error: action.error
+        });
     default:
       return state;
   }

@@ -121,12 +121,13 @@ function* requestData(constant, getUrl, options) {
           yield put(options.actionSuccess.apply(null, actionSuccessParams(action, result.data)));
         }
       } else {
-        console.log(result.err.response); // eslint-disable-line no-console
-
         // TODO: add actionErrorParams?
-
         if (options.actionError) {
-          yield put(options.actionError(result.err));
+          yield put(options.actionError({
+            message: result.err.message,
+            status: result.err.response.status,
+            url: result.err.response.url
+          }));
         }
       }
     }

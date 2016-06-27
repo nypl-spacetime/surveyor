@@ -24,6 +24,11 @@ css_variables:
   # mainColor: red
   # altColor: blue
   mobileWidth: 800px
+  textColor: ''
+  linkColor: '#d0343a'
+  headerBackground: ''
+  appBackground: ''
+  sidebarBackground: ''
 
 defaults:
   map:

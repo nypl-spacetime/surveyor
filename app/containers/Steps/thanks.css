@@ -12,14 +12,9 @@
   display: block;
   margin-bottom: 20px;
   animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
   animation-name: animal-animation;
-  -webkit-animation-name: animal-animation;
   animation-duration: .5s;
-  -webkit-animation-duration: .5s;
   animation-direction: alternate;
-  -webkit-animation-direction: alternate;
-  -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
 }
 

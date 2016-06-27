@@ -39,10 +39,10 @@ export class HomePage extends React.Component {
   render() {
     let mainContent = null;
 
-    if (this.props.loading) {
+    if (this.props.error) {
+    mainContent = <Error />
+    } else if (this.props.loading) {
       mainContent = <Loading />
-    } else if (this.props.error) {
-      mainContent = <Error />
     } else {
       mainContent = (
         <div className={`${styles.container}`}>

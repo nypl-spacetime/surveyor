@@ -1,5 +1,7 @@
 import React from 'react';
 
+import CenteredItemPage from 'components/CenteredItemPage';
+
 import styles from './styles.css';
 
 var nypl = require('images/nypl-white.svg');
@@ -15,14 +17,14 @@ export class Loading extends React.Component {
   }
 
   render() {
-    var text = `Loading${(new Array(this.state.dots + 1).join('.'))}`;
+    var loading = `Loading${(new Array(this.state.dots + 1).join('.'))}`;
     return (
-      <div className={styles.container}>
-        <div className={styles.loading}>
+      <CenteredItemPage>
+        <div className={styles.container}>
           <img src={nypl} />
-          <div className={styles.text}>{text}</div>
+          <div className={styles.loading}>{loading}</div>
         </div>
-      </div>
+      </CenteredItemPage>
     );
   }
 
