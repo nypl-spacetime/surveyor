@@ -27,7 +27,6 @@ export class App extends React.Component {
   componentWillMount = () => {
     this.props.loadOAuth();
     this.props.loadCollections();
-    this.props.loadItem(this.props.params.uuid);
   }
 
   render() {

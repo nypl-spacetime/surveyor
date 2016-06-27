@@ -9,6 +9,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
+import { createSelector } from 'reselect';
+
+import {
+  selectItem
+} from 'containers/App/selectors';
+
 import styles from './styles.css';
 
 export class Image extends React.Component {
@@ -30,13 +36,13 @@ export class Image extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    // changeRoute: (url) => dispatch(push(url)),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(Image);
+// Wrap the component to inject dispatch and state into it
+export default connect(createSelector(
+  selectItem(),
+  (item) => ({
+    item
+  })
+))(Image);
 
 //
 // import React from 'react';
