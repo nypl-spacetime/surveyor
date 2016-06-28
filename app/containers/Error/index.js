@@ -17,6 +17,7 @@ import {
 import styles from './styles.css';
 
 var nypl = require('images/nypl-white.svg');
+var rainbow = require('images/nypl-rainbow.svg');
 var eye = require('images/error.svg');
 
 export class Error extends React.Component {
@@ -36,27 +37,52 @@ export class Error extends React.Component {
       error.error.status === 404 && error.error.url &&
       error.error.url.endsWith('random')
 
-    const message = error ? error.message : ''
+    var message = error ? error.message : ''
 
-    // TODO: if /items/random returns 404,
-    // user has geotagged ALL availeble items!
-    // this should be celebrated!
-
-    return (
-      <CenteredItemPage>
-        <div className={styles.container}>
-          <div className={styles.lion}>
-            <img src={nypl} />
-            <img src={eye} className={styles.eye}/>
+    if (!wasRandomItem) {
+      return (
+        <CenteredItemPage>
+          <div className={styles.container}>
+            <div className={styles.lion}>
+              <img src={nypl} />
+              <img src={eye} className={styles.eye}/>
+            </div>
+            <div className={styles.error}>{message}</div>
+            <Buttons>
+              <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
+            </Buttons>
           </div>
-          <div className={styles.error}>{message}</div>
-          <Buttons>
-            <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
-          </Buttons>
-        </div>
-      </CenteredItemPage>
-    );
+        </CenteredItemPage>
+      );
+    } else {
+      // TODO: if /items/random returns 404,
+      // user has geotagged ALL availeble items!
+      // this should be celebrated!
+
+      return (
+        <CenteredItemPage>
+          <div className={styles.container}>
+            <div className={styles.lion}>
+              <img src={rainbow} />
+            </div>
+            <div className={styles.error}>
+              Wow! You've geotagged <b>all</b> available images...
+            </div>
+            <Buttons>
+              <a href='http://spacetime.nypl.org/'>Find other projects to contribute to</a>
+            </Buttons>
+          </div>
+        </CenteredItemPage>
+      );
+
+    }
   }
+
+  spacetime() {
+    // this.openAbout()
+    // location.reload();
+  }
+
 
   reload() {
     this.openAbout()

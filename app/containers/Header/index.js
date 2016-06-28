@@ -65,7 +65,7 @@ export class Header extends React.Component {
           </a>
           <h1>
             <Link to='/'>
-              <span className='orientation-horizontal'>
+              <span className={`orientation-horizontal ${styles['subtitle-spacing']}`}>
                 <span className={`${styles['header-red']}`}>Space/Time Directory</span>
                 <span>:</span>
               </span>

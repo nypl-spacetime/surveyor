@@ -214,7 +214,7 @@ export function* submitStep() {
       action.geometry
     ],
     actionError: stepSubmitError
-  })
+  });
 }
 
 export function* skipStep() {
@@ -234,7 +234,7 @@ export function* skipStep() {
         skipped: true
       }
     })
-  })
+  });
 
   yield* requestData(SKIP_STEP, getUrl, {
     fetchOptions,
@@ -245,14 +245,14 @@ export function* skipStep() {
       action.stepIndex
     ],
     actionError: stepSkipError
-  })
+  });
 }
 
 export function* getCollections() {
   yield* requestData(LOAD_COLLECTIONS, `${API_URL}collections`, {
     actionSuccess: collectionsLoaded,
     actionError: collectionsLoaded
-  })
+  });
 }
 
 export function* getMods() {
@@ -261,29 +261,28 @@ export function* getMods() {
     if (uuid) {
       return `${API_URL}items/${uuid}/mods`;
     } else {
-      return null
+      return null;
     }
   }
 
   yield* requestData(LOAD_ITEM_SUCCESS, getUrl, {
     actionSuccess: modsLoaded,
     actionError: modsLoadingError
-  })
+  });
 }
 
 export function* getLogOut() {
   yield* requestData(LOG_OUT, `${API_URL}oauth/disconnect`, {
     actionSuccess: logOutSuccess,
     actionError: logOutError
-  })
-
+  });
 }
 
 export function* getSubmissions() {
   yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}submissions/count`, {
     actionSuccess: submissionsLoaded,
     actionError: submissionsLoadingError
-  })
+  });
 }
 
 export function* getLogOutSuccess() {
