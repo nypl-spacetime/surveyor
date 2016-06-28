@@ -36,6 +36,24 @@ export class HomePage extends React.Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    // user types in new route uuid
+    var newRouteUuid = this.props.uuid === this.props.params.uuid &&
+      props.uuid === this.props.uuid && props.uuid &&
+      props.params.uuid !== this.props.params.uuid;
+
+    // path is /:incorrect-uuid, user/app wants to go to /
+    var fromIncorrectUuidToRandomUuid = this.props.error && !props.params.uuid && this.props.params.uuid;
+
+    // path is /:incorrect-uuid, user types in new uuid
+    var fromIncorrectUuidToNewUuid = this.props.error && props.params.uuid && props.params.uuid !== this.props.params.uuid;
+
+    if (newRouteUuid || fromIncorrectUuidToRandomUuid || fromIncorrectUuidToNewUuid) {
+      // Call loadItem with uuid from route (or undefined)
+      this.props.loadItem(props.params.uuid);
+    }
+  }
+
   render() {
     let mainContent = null;
 

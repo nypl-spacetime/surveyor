@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { push } from 'react-router-redux';
+import { Link } from 'react-router';
+
 import CenteredItemPage from 'components/CenteredItemPage';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
@@ -18,10 +21,22 @@ var eye = require('images/error.svg');
 
 export class Error extends React.Component {
 
+  openRoute = (route) => {
+    this.props.changeRoute(route);
+  };
+
+  openAbout = () => {
+    this.openRoute('/');
+  };
+
   render() {
     const error = this.props.error
-    const wasRandomItem = error.error.status === 404 && error.error.url &&
+
+    const wasRandomItem = error && error.error &&
+      error.error.status === 404 && error.error.url &&
       error.error.url.endsWith('random')
+
+    const message = error ? error.message : ''
 
     // TODO: if /items/random returns 404,
     // user has geotagged ALL availeble items!
@@ -34,9 +49,9 @@ export class Error extends React.Component {
             <img src={nypl} />
             <img src={eye} className={styles.eye}/>
           </div>
-          <div className={styles.error}>{this.props.error.message}</div>
+          <div className={styles.error}>{message}</div>
           <Buttons>
-            <Button type='primary' onClick={this.reload}>Try again</Button>
+            <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
           </Buttons>
         </div>
       </CenteredItemPage>
@@ -44,15 +59,14 @@ export class Error extends React.Component {
   }
 
   reload() {
-    location.reload();
+    this.openAbout()
+    // location.reload();
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    // loadItem: (uuid) => {
-    //   dispatch(loadItem(uuid));
-    // },
+    changeRoute: (url) => dispatch(push(url)),
     dispatch
   };
 }

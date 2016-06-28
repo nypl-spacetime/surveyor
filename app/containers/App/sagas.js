@@ -125,8 +125,8 @@ function* requestData(constant, getUrl, options) {
         if (options.actionError) {
           yield put(options.actionError({
             message: result.err.message,
-            status: result.err.response.status,
-            url: result.err.response.url
+            status: result.err.response ? result.err.response.status : -1,
+            url: url
           }));
         }
       }

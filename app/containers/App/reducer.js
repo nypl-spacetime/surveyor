@@ -64,18 +64,19 @@ const initialState = fromJS({
   },
 
   loading: true,
-  error: false
+  error: null
 });
 
 function appReducer(state = initialState, action) {
   console.log('appReducer', action.type)
   switch (action.type) {
     case LOAD_ITEM:
-      // TODO: mods op null, item op null?
       return state
-        .set('uuid', action.uuid);
-        // .set('mods', null)
-        // .set('item', null)
+        .set('error', null)
+        .set('loading', true)
+        .set('uuid', null)
+        .set('mods', null)
+        .set('item', fromJS({}))
     case LOAD_ITEM_SUCCESS:
       return state
         .set('loading', false)
@@ -120,10 +121,10 @@ function appReducer(state = initialState, action) {
       } else {
         // TODO: make function which resets items + steps!
         return state
-          .set('steps', fromJS([]));
+          .set('steps', fromJS([]))
+          .set('loading', true)
+          .set('uuid', null);
           // .set('item', null)
-          // .set('mods', null)
-          // .set('uuid', null)
       }
     case SKIP_STEP_SUCCESS:
       const stepsWithData = state
@@ -137,6 +138,8 @@ function appReducer(state = initialState, action) {
       } else {
         // TODO: make function which resets items + steps!
         return state
+          .set('uuid', null)
+          .set('loading', true)
           .set('steps', fromJS([]));
           // .set('item', null)
           // .set('mods', null)
@@ -151,6 +154,8 @@ function appReducer(state = initialState, action) {
       } else {
         // TODO: make function which resets items + steps!
         var newState = state
+          .set('uuid', null)
+          .set('loading', true)
           .set('steps', fromJS([]));
           // .set('item', null)
           // .set('mods', null)
@@ -164,6 +169,7 @@ function appReducer(state = initialState, action) {
         .set('submissions', 0)
     case LOAD_ITEM_ERROR:
       return state
+        .set('loading', false)
         .set('error', {
           type: action.type,
           message: 'Error loading image',
