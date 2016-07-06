@@ -31,18 +31,10 @@ import nypl from 'images/nypl.svg';
 
 export class Header extends React.Component {
 
-  /**
-   * Changes the route
-   *
-   * @param  {string} route The route we want to go to
-   */
   openRoute = (route) => {
     this.props.changeRoute(route);
   };
 
-  /**
-   * Changed route to '/about'
-   */
   openAbout = () => {
     this.openRoute('/about');
   };
@@ -73,7 +65,7 @@ export class Header extends React.Component {
           </a>
           <h1>
             <Link to='/'>
-              <span className='orientation-horizontal'>
+              <span className={`orientation-horizontal ${styles['subtitle-spacing']}`}>
                 <span className={`${styles['header-red']}`}>Space/Time Directory</span>
                 <span>:</span>
               </span>

@@ -10,10 +10,10 @@ This is a pilot experiment. As we receive the initial wave of submissions, we wi
 * [Pictorial Description of Broadway](http://digitalcollections.nypl.org/collections/pictorial-description-of-broadway#/?tab=about)  
 * [Fifth Avenue, New York, from start to finish](http://digitalcollections.nypl.org/collections/fifth-avenue-new-york-from-start-to-finish#/?tab=about)  
 
-NYPL Where is a Space/Time project. Visit Space/Time About to learn more about this initiative. Sign up for our mailing list to receive updates about the Space/Time Initiative and NYPL Where?, including the launch of our map interface.
+NYPL Surveyor is an [NYC Space/Time project](http://spacetime.nypl.org/) a major civic initiative aimed at turning historical maps and other geographic sources into a digital time-travel service for New York City. Sign up for our mailing list to receive updates about the Space/Time Initiative and NYPL Surveyor, including the launch of our map interface.
 
 ## Rules & Guidance
-There are two guiding principles of geotagging in NYPL Where? **Take your best guess** and remembering **it’s okay to skip**! With geotagger, we’re starting from scratch. So take your best guess, because even getting an item in the right time zone is helpful! Remember, it’s okay to skip items. This project is a shared effort and if you don’t recognize a location, others might.
+There are two guiding principles of geotagging in NYPL Surveyor **Take your best guess** and remembering **it’s okay to skip**! With geotagger, we’re starting from scratch. So take your best guess, because even getting an item in the right time zone is helpful! Remember, it’s okay to skip items. This project is a shared effort and if you don’t recognize a location, others might.
 
 ## Frequently Asked Questions
 
