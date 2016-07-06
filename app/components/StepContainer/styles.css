@@ -5,9 +5,10 @@
   display: flex;
   flex-direction: column;
 
-  min-height: 400px;
+  // min-height: 400px;
 }
 
 .container > *:first-child {
   flex-grow: 1;
 }
+

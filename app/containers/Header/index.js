@@ -68,7 +68,7 @@ export class Header extends React.Component {
 
     return (
       <header className={`${styles.header} ${styles['align-center']}`}>
-        <div className={`${styles['align-center']}`}>
+        <div className={`${styles.title}`}>
           <a style={{backgroundImage: `url(${nypl})`}} className={`${styles.nypl}`} href='//nypl.org' target='_blank'>
           </a>
           <h1>

@@ -1,5 +1,6 @@
 api:
-  url: http://where-api.dev/
+  # url: http://where-api.dev/
+  url: http://30bc0f1e.ngrok.io/
 
 steps:
   - location

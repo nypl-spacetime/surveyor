@@ -7,6 +7,12 @@
   background-color: #080808;
 }
 
+.title {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .header h1 {
   font-weight: lighter;
   font-size: 30px;

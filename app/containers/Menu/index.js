@@ -5,19 +5,19 @@
  */
 /* eslint-disable react/prefer-stateless-function */
 
-import React from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import React from 'react'
+import { connect } from 'react-redux'
+// import { push } from 'react-router-redux'
 
 import {
   logOut
-} from '../App/actions';
+} from '../App/actions'
 
-import styles from './styles.css';
+import styles from './styles.css'
 
 export class Menu extends React.Component {
 
-  render() {
+  render () {
     var hasSubmissions = this.props.submissions && this.props.submissions.completed > 0
     var isAuthenicated = this.props.oauth && this.props.oauth.oauth && this.props.oauth.oauth.provider
 
@@ -44,30 +44,23 @@ export class Menu extends React.Component {
 
     var menuItems = [
       userSubmissionsLink,
-      (
-        <a className={`${styles.link}`} href='http://spacetime.nypl.org/here#all'>See <b>all</b> submissions on a map</a>
-      ),
-      (
-        <hr className={`${styles.hr}`} />
-      )
+      <a className={`${styles.link}`} href='http://spacetime.nypl.org/here#all'>See <b>all</b> submissions on a map</a>,
+      <hr className={`${styles.hr}`} />
     ]
 
     if (isAuthenicated) {
       menuItems = [
         ...menuItems,
-        (
-          <a className={`${styles.link}`} href='javascript:void(0);' onClick={this.props.logOut}>
-            Log out
-          </a>
-        ), (
-          <hr className={`${styles.hr}`} />
-        )
+        <a className={`${styles.link}`} href='javascript:void(0);' onClick={this.props.logOut}>
+          Log out
+        </a>,
+        <hr className={`${styles.hr}`} />
       ]
 
       if (this.props.allItems) {
         menuItems = [
           ...menuItems,
-          'Log in with a different provider:',
+          <span className={styles.divider}>Log in with a different provider:</span>,
           ...makeProviderList(this.props.oauth.oauth.provider)
         ]
       }
@@ -81,26 +74,26 @@ export class Menu extends React.Component {
     return (
       <div className={`${styles.menu} ${styles.arrow_box}`}>
         <ul>
-          {menuItems.filter((menuItem) => menuItem).map((menuItem, i) => (
+          {menuItems.map((menuItem, i) => (
             <li key={i}>
               {menuItem}
             </li>
           ))}
         </ul>
       </div>
-    );
+    )
   }
 
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     logOut: () => {
-      dispatch(logOut());
+      dispatch(logOut())
     }
 
     // changeRoute: (url) => dispatch(push(url)),
-  };
+  }
 }
 
-export default connect(null, mapDispatchToProps)(Menu);
+export default connect(null, mapDispatchToProps)(Menu)

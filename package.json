@@ -126,6 +126,7 @@
     "express": "^4.13.4",
     "field-of-view": "github:nypl-spacetime/field-of-view",
     "fontfaceobserver": "^1.7.1",
+    "hammerjs": "^2.0.8",
     "history": "^2.1.0",
     "immutable": "^3.8.1",
     "ip": "^1.1.2",
