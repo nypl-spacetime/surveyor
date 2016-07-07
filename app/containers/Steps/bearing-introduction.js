@@ -10,11 +10,15 @@ export class Step extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        Would you like to set the camera angle?
+      <div className={`${styles.container} sidebar-padding`}>
+        The location has been recorded. You can <a href="javascript:void(0);" onClick={this.props.skip}>locate another image</a> or tell us <a href='javascript:void(0);' onClick={this.next.bind(this)}>which way the camera is pointed</a> in this image.
+        
         <Buttons>
-          <Button onClick={this.props.skip} type='secondary'>Skip</Button>
-          <Button onClick={this.next.bind(this)} type='primary'>OK</Button>
+          <Button onClick={this.next.bind(this)} type='secondary'>Set Camera Angle</Button>
+        </Buttons>
+
+        <Buttons>
+          <Button onClick={this.props.skip} type='primary'>Next Image</Button>
         </Buttons>
       </div>
     );

@@ -1,3 +1,7 @@
 .container {
-  padding-left: 1em;
+  font-size: 20px;
+}
+
+:global(.button) {
+  color: green;
 }
