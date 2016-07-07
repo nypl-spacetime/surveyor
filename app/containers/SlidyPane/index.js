@@ -328,6 +328,14 @@ export class SlidyPane extends React.Component {
 
     return s
   }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.monitorResize)
+    window.removeEventListener('mousemove', this.dragMove)
+    window.removeEventListener('touchmove', this.dragMove)
+    window.removeEventListener('mouseup', this.dragEnd)
+    window.removeEventListener('touchend', this.dragEnd)
+  }
 }
 
 export default connect(createSelector(
