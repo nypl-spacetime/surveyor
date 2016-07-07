@@ -1,6 +1,55 @@
 .container {
   display: flex;
   flex-direction: row;
+  height: 100%;
+}
+
+.first {
+  width: 66%;
+  // flex-grow: 3;
+}
+
+.second {
+  width: 34%;
+  // flex-grow: 1;
+  // overflow: hidden;
+  min-height: 30px;
+  flex-grow: 1;
+  display: flex;
+}
+
+.second > * {
+  // position: absolute;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.horizontal .second > * {
+  left: 30px;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.vertical .second {
+  flex-direction: column;
+}
+
+.vertical .second > * {
+  bottom: 0;
+  flex-direction: column;
+  height: 100%;
+  // padding-top: 30px;
+}
+
+.horizontal .second > .resizer, .vertical .second > .resizer {
+  left: 0;
+  top: 0;
+  flex-grow: 0;
+}
+
+.vertical .second > .resizer {
+  height: 30px;
 }
 
 .resizer {
@@ -12,6 +61,11 @@
   cursor: col-resize;
   overflow: hidden;
   position: relative;
+  z-index: 10;
+
+  &.resizing {
+    opacity: 1;
+  }
 }
 
 .resizer span {
@@ -31,14 +85,6 @@
   content: '⋮';
 }
 
-.contents {
-  background-color: #fafafa;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 
 @media only screen and (max-width: $mobileWidth) {
   .container {

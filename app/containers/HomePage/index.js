@@ -25,12 +25,15 @@ import Loading from 'containers/Loading';
 
 import Image from 'containers/Image';
 import Sidebar from 'containers/Sidebar';
+import SlidyPane from 'containers/SlidyPane';
+import Metadata from 'containers/Metadata';
+import Geotagger from 'containers/Geotagger';
 
 import styles from './styles.css';
 
 export class HomePage extends React.Component {
 
-  componentWillMount = () => {
+  componentWillMount () {
     if (!this.props.uuid) {
       this.props.loadItem(this.props.params.uuid);
     }
@@ -63,10 +66,13 @@ export class HomePage extends React.Component {
       mainContent = <Loading />
     } else {
       mainContent = (
-        <div className={`${styles.container}`}>
+        <SlidyPane key={this.props.params.uuid}>
           <Image />
-          <Sidebar />
-        </div>
+          <div>
+            <Metadata />
+            <Geotagger />
+          </div>
+        </SlidyPane>
       );
     }
 

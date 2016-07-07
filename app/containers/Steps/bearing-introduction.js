@@ -4,12 +4,14 @@ import StepContainer from 'components/StepContainer';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
 
+import styles from './bearing-introduction.css';
+
 export class Step extends React.Component {
 
   render() {
     return (
-      <div>
-        BEaring camera??!?? wil je het doen?
+      <div className={styles.container}>
+        Would you like to set the camera angle?
         <Buttons>
           <Button onClick={this.props.skip} type='secondary'>Skip</Button>
           <Button onClick={this.next.bind(this)} type='primary'>OK</Button>

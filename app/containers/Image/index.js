@@ -18,6 +18,7 @@ import {
 import styles from './styles.css';
 
 export class Image extends React.Component {
+
   render() {
     var src = null
     if (this.props.item && this.props.item.image_link) {

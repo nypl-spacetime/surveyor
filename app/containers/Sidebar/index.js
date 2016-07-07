@@ -25,17 +25,16 @@ export class Sidebar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+
+    this.state = Object.assign({
       width: 450,
       minWidth: 300,
       maxWidth: 800,
 
       height: 450,
-      minHeight: 300,
-      maxHeight: 800,
-
+      
       resizeMode: 'horizontal'
-    };
+    }, this.getResizeBounds())
   }
 
   mobileWidth = parseInt(this.props.cssVariables.mobileWidth);
@@ -64,9 +63,12 @@ export class Sidebar extends React.Component {
       style = {
         height: `${this.state.height}px`,
         minHeight: `${this.state.minHeight}px`,
-        maxHeight: `${this.state.maxHeight}px`
+        maxHeight: `${this.state.maxHeight}px`,
+        minWidth: 'none',
+        maxWidth: 'none' 
       }
     }
+    // console.log('orientation now: ', this.orientation(), style)
 
     return (
       <div className={`${styles.container}`}>
@@ -85,7 +87,7 @@ export class Sidebar extends React.Component {
   }
 
   dragStart = (e) => {
-    console.log('STARTEN')
+    // console.log('STARTEN')
 
     this.contentsElement = findDOMNode(this.refs.contents);
 
@@ -108,8 +110,8 @@ export class Sidebar extends React.Component {
       this.startPos = xy.y - this.contentsElement.offsetTop
     }
 
-    console.log(xy, this.startPos, this.orientation())
-    console.log(screen.width, this.mobileWidth , window.devicePixelRatio)
+    // console.log(xy, this.startPos, this.orientation())
+    // console.log(screen.width, this.mobileWidth , window.devicePixelRatio)
 
     this.xy = xy
 
@@ -119,7 +121,24 @@ export class Sidebar extends React.Component {
     window.addEventListener('mouseup', this.dragEnd)
     window.addEventListener('touchend', this.dragEnd)
 
+    window.addEventListener("resize", this.updateResizeBounds)
+
     e.preventDefault()
+  }
+
+  updateResizeBounds = () => {
+    this.setState(getResizeBounds())
+  }
+
+  getResizeBounds = () => {
+    console.log('this.setState(', {
+      maxHeight: window.innerHeight * 0.80,
+      minHeight: window.innerHeight * 0.20
+    })
+    return {
+      maxHeight: window.innerHeight * 0.80,
+      minHeight: window.innerHeight * 0.20
+    }
   }
 
   dragMove = (e) => {
@@ -158,11 +177,10 @@ export class Sidebar extends React.Component {
         clientY -= this.startPos
       }
 
-      console.log(clientY, this.startPos, window.innerHeight)
+      console.log('inner y: ', clientY, this.startPos, window.innerHeight)
 
       this.contentsElement.style.width = null;
       this.contentsElement.style.height = `${window.innerHeight - clientY}px`
-
     }
     e.preventDefault()
   }
@@ -179,7 +197,7 @@ export class Sidebar extends React.Component {
   }
 
   resizerClick = (e) => {
-    console.log('CLICK')
+    // console.log('CLICK')
     var pos;
     if (e.changedTouches) {
       pos = {
@@ -193,18 +211,40 @@ export class Sidebar extends React.Component {
     var hasMoved = (pos.x !== this.xy.x && pos.y !== this.xy.y)
 
     if (!hasMoved) {
-      console.log('hasMoved', hasMoved)
+      // console.log('hasMoved', hasMoved)
 
-      // Find if current width is closer to minWidth or to maxWidth
-      var s = [this.state.minWidth, this.state.maxWidth]
-        .map((width) => Math.abs(width - this.contentsElement.clientWidth))
-        .reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+      var width = null;
+      var height = null;
 
-      if (s === 1) {
-        this.contentsElement.style.width = `${this.state.maxWidth}px`
+      if (this.orientation() === 'horizontal') {
+        // Find if current width is closer to minWidth or to maxWidth
+        var s = [this.state.minWidth, this.state.maxWidth]
+          .map((width) => Math.abs(width - this.contentsElement.clientWidth))
+          .reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+        // console.log('which way to go: ', s)
+
+        var currentState = ['expanded', 'collapsed'][s]
+        width = currentState === 'collapsed' ? this.state.maxWidth : this.state.minWidth
+
+      // orientation 'vertical'
       } else {
-        this.contentsElement.style.width = `${this.state.minWidth}px`
+        // Get index of greatest difference from the min/max
+        // i.e. 0 indicates contentsEl height is further from minHeight than maxHeight
+        //      1 indicates "          width  "  further from maxHeight
+        // console.log('comp: ', [this.state.minHeight, this.state.maxHeight], [this.state.minHeight, this.state.maxHeight].map((height) => Math.abs(height - this.contentsElement.clientHeight)))
+        var s = [this.state.minHeight, this.state.maxHeight]
+          .map((height) => Math.abs(height - this.contentsElement.clientHeight))
+          .reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+
+        var currentState = ['expanded', 'collapsed'][s]
+        // console.log('current state: ', currentState)
+        height = currentState === 'collapsed' ? this.state.maxHeight : this.state.minHeight
       }
+
+      this.contentsElement.style.height = height ? `${height}px` : 'auto'
+      this.contentsElement.style.width = width ? `${width}px` : 'auto'
+      console.log('setting to ', height ? `${height}px` : 'auto', width ? `${width}px` : 'auto')
+
     }
   }
 }

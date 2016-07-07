@@ -3,8 +3,10 @@
   /*min-height: 300px;*/
   /*max-height: 50%;*/
   /*height: 400px;*/
-  overflow-y: auto;
+  overflow: auto;
   font-size: 1rem;
+  margin-bottom: 0.5em;
+  background-color: #FFF;
 }
 
 .title {
@@ -28,6 +30,11 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;*/
+
+  &.longTitle {
+    font-size: 20px;
+  }
+
 }
 
 .subtitle {
@@ -37,22 +44,80 @@
 }
 
 .search-buttons {
-  display: inline;
+  display: inline-block;
   list-style-type: none;
 }
 
 .search-buttons li {
-  display: inline;
+  display: inline-block;
+  margin-right: 0.5em;
+
+  &:first-of-type {
+    margin-left: 0.5em;
+  }
+}
+
+.toggleMoreInfo {
+  margin-left: 1em;
+  display: none;
+}
+
+.search-buttons li a, .toggleMoreInfo {
+  font-size: 0.9em;
   background-color: #00a1b0;
   border-radius: 1rem;
   color: white;
-  display: inline-block;
   margin-top: 0.35rem;
   padding: 0.35rem 0.7rem 0.3rem;
-  margin-right: 0.5em;
 }
 
 .search-buttons a,
 .search-buttons a:visited {
   color: white;
+}
+
+.moreInfoOverlay {
+  position: relative;
+  width: 96%;
+  z-index: 1001;
+  opacity: 0.9;
+  left: 2%;
+  background-color: white;
+  padding: 20px;
+  box-shadow: -3px 3px 6px 6px rgba(68, 68, 68, 0.3);
+  border-radius: 5px;
+  display: none;
+}
+
+.moreInfoOverlay.active {
+  display: block;
+
+  @nest :global(.horizontal) & {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $mobileWidth) {
+  .title {
+    font-size: 20px;
+  }
+
+  .search-buttons {
+  }
+
+  html, body {
+    height: 100vh;
+  }
+
+  .moreInfo {
+    display: none;
+  }
+
+  .metadata {
+    overflow: visible;
+  }
+
+  .toggleMoreInfo {
+    display: inline-block;
+  }
 }

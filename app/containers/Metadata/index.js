@@ -22,6 +22,14 @@ import styles from './styles.css';
 
 export class Metadata extends React.Component {
 
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      showingMoreInfo: false
+    }
+  }
+
   render() {
     var collectionLink
     if (this.props.collection) {
@@ -74,23 +82,47 @@ export class Metadata extends React.Component {
       fontSize: `${fontSize}px`
     };
 
+    var titleClasses = styles.title
+    if (fontSize > 300) titleClasses.push(styles.longTitle)
+
     return (
       <div className={`${styles.metadata} sidebar-padding`}>
-        <h1 style={titleStyle} className={styles.title} title={this.props.title}>{this.props.title}</h1>
-        <h2 className={styles.subtitle}>From: {collectionLink}</h2>
-        {geoDateHeader}
-        <div>
-          Search in new tab:
-          <ul className={styles['search-buttons']}>
-            { this.props.searchButtons.map((searchButton, i) => {
-              return (<li key={i}>
-                <a target='_blank' href={searchButton.url}>{searchButton.title}</a>
-              </li>)
-            }) }
-          </ul>
+        <h1 className={titleClasses} title={this.props.title}>{this.props.title} <a href="javascript:void(0)" onClick={this.toggleMoreInfo} className={styles.toggleMoreInfo}>{ (() => this.state.showingMoreInfo ? 'Hide Info' : 'Show Info' )() }</a></h1>
+
+        <div className={styles.moreInfo}>
+          <h2 className={styles.subtitle}>From: {collectionLink}</h2>
+          {geoDateHeader}
+          <div>
+            Search in new tab:
+            <ul className={styles['search-buttons']}>
+              { this.props.searchButtons.map((searchButton, i) => {
+                return (<li key={i}>
+                  <a target='_blank' href={searchButton.url}>{searchButton.title}</a>
+                </li>)
+              }) }
+            </ul>
+          </div>
+        </div>
+        <div className={`${styles.moreInfoOverlay} ${(() => this.state.showingMoreInfo ? styles.active : '' )()}`}>
+          <h2 className={styles.subtitle}>From: {collectionLink}</h2>
+          {geoDateHeader}
+          <div>
+            Search in new tab:
+            <ul className={styles['search-buttons']}>
+              { this.props.searchButtons.map((searchButton, i) => {
+                return (<li key={i}>
+                  <a target='_blank' href={searchButton.url}>{searchButton.title}</a>
+                </li>)
+              }) }
+            </ul>
+          </div>
         </div>
       </div>
     );
+  }
+
+  toggleMoreInfo = () => {
+    this.setState({showingMoreInfo: ! this.state.showingMoreInfo})
   }
 
 }
