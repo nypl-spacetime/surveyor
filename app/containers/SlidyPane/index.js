@@ -29,7 +29,7 @@ export class SlidyPane extends React.Component {
     // e.g. below specifies pane one should occupy 60% of client width in horiz orientation
     firstPaneInitialSize: {
       horizontal: 0.6,
-      vertical: 0.80
+      vertical: 0.50
     }
   }
 
