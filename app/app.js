@@ -8,19 +8,16 @@
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
-// Load the favicon, the manifest.json file and the .htaccess file
-import 'file?name=[name].[ext]!./favicon.ico';
-import 'file?name=[name].[ext]!./.htaccess';
-
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyRouterMiddleware, Router, hashHistory } from 'react-router';
+import { applyRouterMiddleware, Router, useRouterHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import FontFaceObserver from 'fontfaceobserver';
+import { createHashHistory } from 'history';
 import useScroll from 'react-router-scroll';
 import configureStore from './store';
+import FontFaceObserver from 'fontfaceobserver';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -38,6 +35,8 @@ openSansObserver.check().then(() => {
 // this uses the singleton hashHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
 // e.g. `const hashHistory = useRouterHistory(createhashHistory)();`
+const hashHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+
 const initialState = {};
 const store = configureStore(initialState, hashHistory);
 
