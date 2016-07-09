@@ -1,8 +1,8 @@
-# NYPL Labs - Where?
+# Space/Time Directory - Surveyor
 
-See http://spacetime.nypl.org/where/.
+See http://spacetime.nypl.org/surveyor/.
 
-Where? is a web application (and [Chrome Extension](https://github.com/nypl-spacetime/where-tab)) for crowdsourced image geotagging. Where? is part of NYPL Labs' [Space/Time Directory project](http://spacetime.nypl.org/)
+Surveyor is a web application (and [Chrome Extension](https://github.com/nypl-spacetime/surveyor-tab)) for crowdsourced image geotagging. Surveyor is part of the [Space/Time Directory project](http://spacetime.nypl.org/).
 
 ## Example
 
@@ -43,14 +43,14 @@ See the [GeoJSON file](example/data.geojson) in the `example` directory for a co
 
 First, clone the GitHub repository:
 
-    git clone https://github.com/nypl-spacetime/where.git
+    git clone https://github.com/nypl-spacetime/surveyor.git
 
 Then, install all Node.js dependencies:
 
-    cd where
+    cd surveyor
     npm install
 
-Install a local version of the [Where API](https://github.com/nypl-spacetime/where-api), see its [README](https://github.com/nypl-spacetime/where-api) for installation instructions.
+Install a local version of the [Surveyor API](https://github.com/nypl-spacetime/surveyor-api), see its [README](https://github.com/nypl-spacetime/surveyor-api) for installation instructions.
 
 To start a development version on [http://localhost:3001](http://localhost:3001), run:
 
@@ -60,11 +60,11 @@ You can change the default port by editing [`config/default.yml`](config/default
 
 ## API
 
-See [Where? API](https://github.com/nypl-spacetime/where-api).
+See [Surveyor API](https://github.com/nypl-spacetime/surveyor-api).
 
 ## Other image collections
 
-Currently, Where? works with images from NYPL's [Digital Collections](http://digitalcollections.nypl.org/). However, it should be very easy to add images from other, non-NYPL collections.
+Currently, Surveyor works with images from NYPL's [Digital Collections](http://digitalcollections.nypl.org/). However, it should be very easy to add images from other, non-NYPL collections.
 
 ## Public Domain Thank You Animals
 

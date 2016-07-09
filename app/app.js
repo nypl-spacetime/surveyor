@@ -1,196 +1,93 @@
+/**
+ * app.js
+ *
+ * This is the entry file for the application, only setup and boilerplate
+ * code.
+ */
+
+// Needed for redux-saga es6 generator support
+import 'babel-polyfill';
+
+// Import all the third party stuff
 import React from 'react';
-import Image from './components/image';
-import Header from './components/header';
-import Loading from './components/loading';
-import GeoTagger from './components/geotagger';
-import Help from './components/help';
-import { findDOMNode } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { applyRouterMiddleware, Router, useRouterHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { createHashHistory } from 'history';
+import useScroll from 'react-router-scroll';
+import configureStore from './store';
+import FontFaceObserver from 'fontfaceobserver';
 
-import './app.scss';
+// Observe loading of Open Sans (to remove open sans, remove the <link> tag in
+// the index.html file and this observer)
+import styles from 'containers/App/styles.css';
+const openSansObserver = new FontFaceObserver('Kievit', {});
 
-const App = React.createClass({
-
-  getInitialState: function() {
-    return {
-      item: null,
-      token: this.getToken(),
-      collections: {},
-      startedGeoTagging: false,
-      error: null,
-      help: {
-        show: false,
-        step: ''
-      }
-    };
-  },
-
-  render: function() {
-    if (!this.state.item || this.state.error) {
-      return <Loading error={this.state.error} />
-    } else {
-      var uuid = this.state.item.uuid
-
-      var help
-      if (this.state.help.show) {
-        help = <Help close={this.closeHelp} />
-      }
-
-      return (
-        <div id='item'>
-          <Image key={'i' + uuid} ref='image' item={this.state.item} draggable={this.state.startedGeoTagging} />
-          <Header key={'h' + uuid} collections={this.state.collections} api={this.props.api} item={this.state.item} />
-          <GeoTagger defaults={this.props.defaults} uuid={uuid} showHelp={this.showHelp}
-            loadItem={this.loadItem} sendData={this.sendData} onStart={this.startGeoTagging} />
-          {help}
-        </div>
-      );
-    }
-  },
-
-  showHelp: function(step) {
-    this.setState({
-      help: {
-        show: true,
-        step: step
-      }
-    })
-  },
-
-  closeHelp: function() {
-    this.setState({
-      help: {
-        show: false,
-        step: ''
-      }
-    })
-  },
-
-  startGeoTagging: function() {
-    this.setState({
-      startedGeoTagging: true
-    });
-  },
-
-  componentDidMount: function() {
-    this.loadItem();
-    this.fetchCollections();
-  },
-
-  getToken: function() {
-    try {
-      return localStorage.getItem('token');
-    } catch (err) {
-      console.error('Error reading token from localStorage', err);
-      return null;
-    }
-  },
-
-  checkStatus: function(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
-    } else {
-      var error = new Error(response.statusText);
-      error.response = response;
-      throw error;
-    }
-  },
-
-  saveToken: function(response) {
-    var token = response.headers.get('Authorization');
-    localStorage.setItem('token', token);
-
-    return response;
-  },
-
-  parseJSON: function(response) {
-    return response.json();
-  },
-
-  loadItem: function() {
-    var token = this.state.token;
-
-    var options = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    };
-
-    if (token) {
-      options.headers = {
-        'Authorization': token
-      }
-    }
-    fetch(this.props.api.url + 'items/random', options)
-      .then(this.checkStatus)
-      .then(this.saveToken)
-      .then(this.parseJSON)
-      .then(json => {
-        this.setState({
-          item: json,
-          token: token
-        });
-      }).catch(err => {
-        console.error(err);
-        this.setState({
-          error: `could not load image from server (${err.message})`
-        });
-      });
-  },
-
-  sendData: function(step, stepIndex, completed, data, geometry, callback) {
-    if (!callback && geometry) {
-      callback = geometry;
-    }
-    if (!callback && data) {
-      callback = data;
-    }
-
-    var uuid = this.state.item.uuid;
-
-    fetch(this.props.api.url + 'items/' + uuid, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': this.state.token
-      },
-      body: JSON.stringify({
-        type: 'Feature',
-        properties: {
-          step: step,
-          stepIndex: stepIndex,
-          completed: completed,
-          data: data
-        },
-        geometry: geometry
-      })
-    })
-      .then(this.checkStatus)
-      .then(this.parseJSON)
-      .then(() => {
-        callback();
-      }).catch(err => {
-        console.error(err);
-        this.setState({
-          error: `could not send data to server (${err.message})`
-        });
-      });
-  },
-
-  fetchCollections: function() {
-    fetch(`${this.props.api.url}collections`)
-      .then(this.checkStatus)
-      .then(this.parseJSON)
-      .then(json => {
-        var collections = {};
-        json.forEach(c => collections[c.uuid] = c)
-        this.setState({
-          collections: collections
-        });
-      }).catch(err => {
-        console.error(`Error fetching collections`, err);
-      });
-  }
-
+// When Open Sans is loaded, add a font-family using Open Sans to the body
+openSansObserver.check().then(() => {
+  document.body.classList.add(styles.fontLoaded);
+}, () => {
+  document.body.classList.remove(styles.fontLoaded);
 });
 
-export default App;
+// Create redux store with history
+// this uses the singleton hashHistory provided by react-router
+// Optionally, this could be changed to leverage a created history
+// e.g. `const hashHistory = useRouterHistory(createhashHistory)();`
+const hashHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+
+const initialState = {};
+const store = configureStore(initialState, hashHistory);
+
+// Sync history and store, as the react-router-redux reducer
+// is under the non-default key ("routing"), selectLocationState
+// must be provided for resolving how to retrieve the "route" in the state
+import { selectLocationState } from 'containers/App/selectors';
+const history = syncHistoryWithStore(hashHistory, store, {
+  selectLocationState: selectLocationState(),
+});
+
+import sagas from 'containers/App/sagas';
+import { getHooks } from './utils/hooks';
+
+const { injectReducer, injectSagas } = getHooks(store);
+
+injectSagas(sagas);
+
+// Set up the router, wrapping all Routes in the App component
+import App from 'containers/App';
+import createRoutes from './routes';
+const rootRoute = {
+  component: App,
+  childRoutes: createRoutes(store),
+};
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router
+      history={history}
+      routes={rootRoute}
+      render={
+        // Scroll to top when going to a new page, imitating default browser
+        // behaviour
+        applyRouterMiddleware(
+          useScroll(
+            (prevProps, props) => {
+              if (!prevProps || !props) {
+                return true;
+              }
+
+              if (prevProps.location.pathname !== props.location.pathname) {
+                return [0, 0];
+              }
+
+              return true;
+            }
+          )
+        )
+      }
+    />
+  </Provider>,
+  document.getElementById('app')
+);

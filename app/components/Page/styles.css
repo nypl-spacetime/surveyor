@@ -1,0 +1,21 @@
+.container {
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.article {
+  width: 860px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2em;
+  box-sizing: border-box;
+}
+
+.article ul,
+.article ol {
+  margin: 1em;
+}
+
+.article img {
+  margin: 1em 0;
+}

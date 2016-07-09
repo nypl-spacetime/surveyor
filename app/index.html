@@ -1,13 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <title>NYPL Labs - Where?</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="images/favicon.png">
-</head>
-<body>
-  <div id="app"></div>
-  <script src="bundle.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Surveyor - Space/Time Directory</title>
+    <style>
+      @font-face {
+        font-family: 'MiloSlab';
+        font-weight: 300;
+        font-style: normal;
+        src: url("//ux-static.nypl.org/milo-web/milo-slab-pro-light/MiloSlabWebPro-Light.woff") format("woff"), url("//ux-static.nypl.org/milo-web/milo-slab-pro-light/MiloSlabWebPro-Light.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'MiloSlab';
+        font-style: italic;
+        font-weight: 300;
+        src: url("//ux-static.nypl.org/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic.woff") format("woff"), url("//ux-static.nypl.org/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'MiloSlab';
+        font-weight: normal;
+        font-style: normal;
+        src: url("//ux-static.nypl.org/milo-web/milo-slab-pro-regular/MiloSlabWebPro.woff") format("woff"), url("//ux-static.nypl.org/milo-web/milo-slab-pro-regular/MiloSlabWebPro.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'MiloSlab';
+        font-weight: normal;
+        font-style: italic;
+        src: url("//ux-static.nypl.org/milo-web/milo-slab-pro-regular-italic/MiloSlabWebPro-Italic.woff") format("woff"), url("//ux-static.nypl.org/milo-web/milo-slab-pro-regular-italic/MiloSlabWebPro-Italic.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'MiloSlab';
+        font-style: normal;
+        font-weight: 500;
+        src: url("//ux-static.nypl.org/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium.woff") format("woff"), url("//ux-static.nypl.org/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'Kievit';
+        font-weight: 300;
+        font-style: normal;
+        src: url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Light.woff") format("woff"), url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Light.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'Kievit';
+        font-weight: normal;
+        font-style: normal;
+        src: url("//ux-static.nypl.org/ff_kievit_web/KievitWeb.woff") format("woff"), url("//ux-static.nypl.org/ff_kievit_web/KievitWeb.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'Kievit';
+        font-weight: 500;
+        font-style: normal;
+        src: url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Medi.wof") format("woff");
+        src: url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Medi.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'Kievit';
+        font-weight: 500;
+        font-style: italic;
+        src: url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Medi.woff") format("woff"), url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Medi.eot") format("eot");
+      }
+
+      @font-face {
+        font-family: 'Kievit';
+        font-weight: bold;
+        font-style: normal;
+        src: url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Bold.woff") format("woff"), url("//ux-static.nypl.org/ff_kievit_web/KievitWeb-Bold.eot") format("eot");
+      }
+
+      /* NYPL ICON FONT RULES */
+      @font-face {
+        font-family: 'nyplicons';
+        /*src: url("//ux-static.nypl.org/nypl-moon/nypl-moon.eot");*/
+        src: url("//ux-static.nypl.org/nypl-moon/nypl-moon.eot") format("embedded-opentype"), url("//ux-static.nypl.org/nypl-moon/nypl-moon.ttf") format("truetype"), url("//ux-static.nypl.org/nypl-moon/nypl-moon.svg") format("svg");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /*@font-face {
+        font-family: "nyplicons";
+        src: url("./fonts/icomoon.eot");
+        src: url("./fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("./fonts/icomoon.svg#icomoon") format("svg"), url("./fonts/icomoon.woff") format("woff"), url("./fonts/icomoon.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }*/
+
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>

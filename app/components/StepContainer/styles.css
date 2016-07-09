@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  flex-grow: 1;
+  background-color: #FFF;
+
+  display: flex;
+  flex-direction: column;
+
+  // min-height: 400px;
+}
+
+.container > *:first-child {
+  flex-grow: 1;
+}
+

@@ -1,0 +1,38 @@
+.container {
+  width: 250px;
+}
+
+.error {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.lion {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.lion > * {
+  position: absolute;
+}
+
+.eye {
+  opacity: 0;
+  animation-iteration-count: infinite;
+  animation-name: eye-animation;
+  animation-duration: .5s;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+@keyframes eye-animation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,31 @@
+.timer-bar {
+  border-radius: 4px;
+  height: 4px;
+  background-color: #d0343a;
+  transition-property: width;
+  transition-timing-function: linear;
+}
+
+.animal {
+  margin: 0 auto;
+  width : 200px;
+  display: block;
+  margin-bottom: 20px;
+  animation-iteration-count: infinite;
+  animation-name: animal-animation;
+  animation-duration: .5s;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+@keyframes animal-animation {
+  from {
+    transform: rotate(-2deg);
+    -webkit-transform: rotate(-2deg);
+  }
+
+  to {
+    transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+  }
+}

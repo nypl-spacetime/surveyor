@@ -1,0 +1,8 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
