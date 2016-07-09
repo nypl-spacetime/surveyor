@@ -1,5 +1,5 @@
 api:
-  url: http://where-api.dev/
+  url: http://surveyor-api.dev/
 
 steps:
   - location

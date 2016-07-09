@@ -1,4 +1,5 @@
 # About Surveyor
+
 Welcome! Through mobile apps, online maps, and serendipity, we discover new things in our geography everyday. At NYPL, we're inviting you to discover our collections through the lens of geography and, in the process, allow others to discover geographically as well! How? NYPL Surveyor is an experiment in geotagging NYPL's Digital Collections. We've built an interactive interface for viewing and locating items from our rich collections. With each contribution, you're creating new knowledge around the Library's collections.
 
 This is a pilot experiment. As we receive the initial wave of submissions, we will be analyzing these contributions to build out quality control mechanisms and a map interface for discovering geotagged collections. We’ve started with just a few collections:  
@@ -22,7 +23,7 @@ Sometimes prints and photographs will be of the “A View From” type shots. Me
 
 ![The south prospect of the city of New York, in North America](http://images.nypl.org/index.php?id=53913&t=w)
 
-For these images place the marker in the approximate middle of the view. Where? has a second, optional step, allowing you to mark the full width of the image and the place where the images point of view. You can use this second step to more accurately tag these wide images.  
+For these images place the marker in the approximate middle of the view. Surveyor has a second, optional step, allowing you to mark the full width of the image and the place where the images point of view. You can use this second step to more accurately tag these wide images.  
 
 ### How do I geotag an item with multiple locations?
 
