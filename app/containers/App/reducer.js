@@ -68,7 +68,6 @@ const initialState = fromJS({
 });
 
 function appReducer(state = initialState, action) {
-  console.log('appReducer', action.type)
   switch (action.type) {
     case LOAD_ITEM:
       return state
