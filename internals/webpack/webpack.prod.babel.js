@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
 
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
@@ -48,6 +47,11 @@ module.exports = require('./webpack.base.babel')({
     }),
   ],
   plugins: [
+    new webpack.DefinePlugin({
+      __CONFIG__: JSON.stringify(config),
+      '__DEV__': false
+    }),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       children: true,
@@ -88,32 +92,6 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     // Extract the CSS into a seperate file
-    new ExtractTextPlugin('[name].[contenthash].css'),
-
-    // Put it in the end to capture all the HtmlWebpackPlugin's
-    // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
-    new OfflinePlugin({
-      // No need to cache .htaccess. See http://mxs.is/googmp,
-      // this is applied before any match in `caches` section
-      excludes: ['.htaccess'],
-
-      caches: {
-        main: [':rest:'],
-
-        // All chunks marked as `additional`, loaded after main section
-        // and do not prevent SW to install. Change to `optional` if
-        // do not want them to be preloaded at all (cached only when first loaded)
-        additional: ['*.chunk.js'],
-      },
-
-      // Removes warning for about `additional` section usage
-      safeToUseOptionalCaches: true,
-
-      AppCache: {
-        // Starting from offline-plugin:v3, AppCache by default caches only
-        // `main` section. This lets it use `additional` section too
-        caches: ['main', 'additional'],
-      },
-    }),
+    new ExtractTextPlugin('[name].[contenthash].css')
   ],
 });
