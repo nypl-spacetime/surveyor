@@ -370,10 +370,12 @@ export class Step extends React.Component {
       movestart: this.onMoveStart.bind(this)
     };
 
+    var options = this.state.initialView;
+
     return (
       <StepContainer>
         <div className={styles['map-container']}>
-          <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents}
+          <Map ref='map' options={options} defaults={this.props.defaults} mapEvents={mapEvents}
             mapCreated={this.mapCreated.bind(this)} />
         </div>
 

@@ -15,7 +15,8 @@ import {
   selectModsLocation,
   selectModsDate,
   selectCollectionForItem,
-  selectSearchButtons
+  selectSearchButtons,
+  selectCurrentStep
 } from 'containers/App/selectors';
 
 import styles from './styles.css';
@@ -85,11 +86,10 @@ export class Metadata extends React.Component {
     var titleClasses = styles.title
     if (fontSize > 300) titleClasses.push(styles.longTitle)
 
-    return (
-      <div className={`${styles.metadata} sidebar-padding`}>
-        <h1 className={titleClasses} title={this.props.title}>{this.props.title} <a href="javascript:void(0)" onClick={this.toggleMoreInfo} className={styles.toggleMoreInfo}>{ (() => this.state.showingMoreInfo ? 'Hide Info' : 'Show Info' )() }</a></h1>
-
-        <div className={styles.moreInfo}>
+    var searchLinks = null
+    if (this.props.currentStep === 'location') {
+      searchLinks = (
+        <div>
           <h2 className={styles.subtitle}>From: {collectionLink}</h2>
           {geoDateHeader}
           <div>
@@ -103,19 +103,21 @@ export class Metadata extends React.Component {
             </ul>
           </div>
         </div>
+      )
+    }
+
+    var toggleMoreInfoLink = null
+    if (searchLinks) toggleMoreInfoLink = <a href="javascript:void(0)" onClick={this.toggleMoreInfo} className={styles.toggleMoreInfo}>{ (() => this.state.showingMoreInfo ? 'Hide Info' : 'Show Info' )() }</a>
+
+    return (
+      <div className={`${styles.metadata} sidebar-padding`}>
+        <h1 className={titleClasses} title={this.props.title}>{ this.props.title} {toggleMoreInfoLink}</h1>
+
+        <div className={styles.moreInfo}>
+          {searchLinks}
+        </div>
         <div className={`${styles.moreInfoOverlay} ${(() => this.state.showingMoreInfo ? styles.active : '' )()}`}>
-          <h2 className={styles.subtitle}>From: {collectionLink}</h2>
-          {geoDateHeader}
-          <div>
-            Search in new tab:
-            <ul className={styles['search-buttons']}>
-              { this.props.searchButtons.map((searchButton, i) => {
-                return (<li key={i}>
-                  <a target='_blank' href={searchButton.url}>{searchButton.title}</a>
-                </li>)
-              }) }
-            </ul>
-          </div>
+          {searchLinks}
         </div>
       </div>
     );
@@ -161,8 +163,9 @@ export default connect(createSelector(
   selectModsLocation(),
   selectModsDate(),
   selectSearchButtons(),
-  (title, collection, location, date, searchButtons) => ({
-    title, collection, location, date, searchButtons
+  selectCurrentStep(),
+  (title, collection, location, date, searchButtons, currentStep) => ({
+    title, collection, location, date, searchButtons, currentStep
   })
 ))(Metadata);
 
