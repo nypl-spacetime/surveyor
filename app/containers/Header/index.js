@@ -40,22 +40,22 @@ export class Header extends React.Component {
   };
 
   render() {
-    var submissions = 0
+    var submissions = 0;
     if (this.props.submissions) {
-      submissions = this.props.submissions.completed
+      submissions = this.props.submissions.completed;
     }
 
     var authentication = 'Save score'
     if (this.props.oauth && this.props.oauth.oauth) {
-      authentication = this.props.oauth.oauth.data.name
+      authentication = this.props.oauth.oauth.data.name || 'Logged in';
     }
 
-    var menu = null
+    var menu = null;
     if (this.props.showMenu) {
       menu = (
         <Menu oauth={this.props.oauth} submissions={this.props.submissions}
           allItems={this.props.showAllMenuItems} />
-      )
+      );
     }
 
     return (
@@ -95,8 +95,8 @@ export class Header extends React.Component {
   }
 
   toggleMenu = (e) => {
-    this.props.toggleMenu(e.nativeEvent.shiftKey)
-    e.preventDefault()
+    this.props.toggleMenu(e.nativeEvent.shiftKey);
+    e.preventDefault();
   }
 
 }
