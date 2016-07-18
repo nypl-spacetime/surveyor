@@ -171,9 +171,16 @@ export function* resetItem() {
 export function* getItem() {
   const getUrl = (action) => {
     var uuid = action.uuid;
-    if (!uuid) {
+    const validUuid = /^\w{8}-(\w{4}-){3}\w{12}$/.test(uuid);
+
+    if (uuid && !validUuid) {
+      console.error(`Not a valid UUID: "${uuid}", using random item instead`);
+    }
+
+    if (!uuid || !validUuid) {
       uuid = 'random'
     }
+
     return `${API_URL}items/${uuid}`;
   }
 
