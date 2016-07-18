@@ -1,11 +1,14 @@
 .container {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  flex-grow: 1;
+  // height: 100%;
 }
 
 .first {
   width: 66%;
+  display: flex;
+  flex-direction: column;
   // flex-grow: 3;
 }
 
@@ -16,6 +19,8 @@
   min-height: 30px;
   flex-grow: 1;
   display: flex;
+  flex-direction: row;
+  position: relative;
 }
 
 .second > * {
@@ -23,10 +28,11 @@
   max-height: 100%;
   overflow: hidden;
   display: flex;
+  flex-grow: 1;
 }
 
 .horizontal .second > * {
-  left: 30px;
+  padding-left: 30px;
   flex-direction: column;
   flex-grow: 1;
 }
@@ -39,12 +45,14 @@
   bottom: 0;
   flex-direction: column;
   height: 100%;
-  // padding-top: 30px;
+  padding-top: 30px;
 }
 
 .horizontal .second > .resizer, .vertical .second > .resizer {
   left: 0;
+  padding-left: 0;
   top: 0;
+  padding-top: 0;
   flex-grow: 0;
 }
 
@@ -60,8 +68,10 @@
   color: white;
   cursor: col-resize;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   z-index: 10;
+  padding-left: 0;
+  left: 0;
 
   &.resizing {
     opacity: 1;
