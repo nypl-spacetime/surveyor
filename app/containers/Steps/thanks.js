@@ -1,8 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { createSelector } from 'reselect';
 
 import StepContainer from 'components/StepContainer';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
+
+import {
+  selectOAuth
+} from 'containers/App/selectors';
 
 import styles from './thanks.css';
 
@@ -31,15 +38,25 @@ export class Step extends React.Component {
   }
 
   render() {
-    var timerBarStyle = {
+    const timerBarStyle = {
       width: this.state.timerStarted ? '100%' : 0,
       transitionDuration: `${this.state.duration}s`
     };
+
+    let oauthQuestion;
+    if (!this.props.oauth || !this.props.oauth.oauth) {
+      oauthQuestion = (
+        <p className='centered'>
+          To save your score, please log in using the <b>Save score</b> option in the menu
+        </p>
+      )
+    }
 
     return (
       <StepContainer>
         <div className={` ${styles.container} sidebar-padding`}>
           <h3 className='centered'>Thank you!</h3>
+          {oauthQuestion}
           <img className={styles.animal} src={this.state.animalSrc}/>
           <div className={styles['timer-bar']} style={timerBarStyle} />
         </div>
@@ -74,68 +91,10 @@ export class Step extends React.Component {
   }
 }
 
-export default Step;
 
-//
-//
-
-//
-// const Step = React.createClass({
-//
-//   getInitialState: function() {
-//     return {
-//       timerStarted: false,
-//       duration: 2.5
-//     };
-//   },
-//
-//   intitialTimeout: null,
-//   timerBarTimeout: null,
-//
-//   render: function() {
-//     var timerBarStyle = {
-//       width: this.state.timerStarted ? '100%' : 0,
-//       transitionDuration: `${this.state.duration}s`
-//     };
-//
-//     return (
-//       <div className='geotagger-step all-margin-top opaque'>
-//         <h1>Thank you!</h1>
-//
-//         <div>
-//           <img className='centered-block geotagger-thanks-owl' src={owl} />
-//         </div>
-//         <div>
-//           <div className='geotagger-thanks-timer-bar' style={timerBarStyle} />
-//         </div>
-//         <div>
-//           <button className='button-green' onClick={this.done}>Show me another image</button>
-//         </div>
-//       </div>
-//     );
-//   },
-//
-//   componentDidMount() {
-//     this.intitialTimeout = setTimeout(() => {
-//       this.setState({
-//         timerStarted: true
-//       });
-//       // Initialize timer which proceeds to first step
-//       this.timerBarTimeout = setTimeout(this.done, this.state.duration * 1000);
-//     }, 100);
-//   },
-//
-//   done: function() {
-//     if (this.intitialTimeout) {
-//       clearTimeout(this.intitialTimeout);
-//     }
-//
-//     if (this.timerBarTimeout) {
-//       clearTimeout(this.timerBarTimeout);
-//     }
-//
-//     this.props.done();
-//   }
-// });
-//
-// export default Step;
+export default connect(createSelector(
+  selectOAuth(),
+  (oauth) => ({
+     oauth
+  })
+))(Step);

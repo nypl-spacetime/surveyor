@@ -400,9 +400,6 @@ export class Step extends React.Component {
 
 }
 
-// export default Step;
-
-// Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
   selectMapDefaults(),
   selectStepData('location'),
@@ -410,11 +407,3 @@ export default connect(createSelector(
     mapDefaults, locationStepData
   })
 ))(Step);
-
-// // Wrap the component to inject dispatch and state into it
-// export default connect(createSelector(
-//   selectStepData('location')
-//   (locationStepData) => ({
-//     locationStepData
-//   })
-// ), null)(Step);
