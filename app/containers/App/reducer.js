@@ -54,9 +54,7 @@ const initialState = fromJS({
   oauth: null,
   collections: [],
   steps: fromJS([]),
-  submissions: fromJS({
-    completed: 0
-  }),
+  submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
   menu: {
     shown: false,
@@ -66,6 +64,12 @@ const initialState = fromJS({
   loading: true,
   error: null
 });
+
+function initialSubmissions() {
+  return fromJS({
+    completed: 0
+  });
+}
 
 function newItem(state) {
   return state
@@ -149,7 +153,7 @@ function appReducer(state = initialState, action) {
     case LOG_OUT_SUCCESS:
       return state
         .set('oauth', null)
-        .set('submissions', 0)
+        .set('submissions', initialSubmissions());
     case LOAD_ITEM_ERROR:
       return state
         .set('loading', false)

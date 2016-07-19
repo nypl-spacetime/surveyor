@@ -91,8 +91,6 @@ function mapDispatchToProps (dispatch) {
     logOut: () => {
       dispatch(logOut())
     }
-
-    // changeRoute: (url) => dispatch(push(url)),
   }
 }
 

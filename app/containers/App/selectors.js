@@ -51,7 +51,7 @@ const selectSteps = () => createSelector(
 const selectSearchButtons = () => createSelector(
   selectGlobal(),
   (globalState) => {
-    const item = globalState.get('item')//.toJS();
+    const item = globalState.get('item');
     const reg = new RegExp(/\{(\w+)\}/g);
     return globalState.getIn(['config', 'search_buttons']).toJS()
       .map((searchButton) => {
