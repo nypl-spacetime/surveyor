@@ -67,10 +67,7 @@ export class Map extends React.Component {
     var map = L.map(node, {
       center: this.getOptions('center'),
       zoom: this.getOptions('zoom'),
-      maxZoom: this.getOptions('maxZoom'),
-      scrollWheelZoom: false,
-      // scrollWheelZoom: 'center',
-      doubleClickZoom: 'center'
+      maxZoom: this.getOptions('maxZoom')
     });
 
     var layer = L.tileLayer(this.getOptions('tileUrl'), {
