@@ -140,14 +140,14 @@ export class SlidyPane extends React.Component {
     if (this.orientation() === 'horizontal') {
       var firstRatio = customSize ? customSize : this.props.firstPaneInitialSize.horizontal
       return [
-        { width: this.containerWidth * firstRatio, height: 'auto' },
-        { width: this.containerWidth - this.containerWidth * firstRatio, height: 'auto' }
+        { width: this.containerWidth * firstRatio, height: 'inherit' },
+        { width: this.containerWidth - this.containerWidth * firstRatio, height: 'inherit' }
       ]
     } else {
       var firstRatio = customSize ? customSize : this.props.firstPaneInitialSize.vertical
       return [
-        { width: 'auto', height: this.containerHeight * firstRatio },
-        { width: 'auto', height: this.containerHeight - this.containerHeight * firstRatio }
+        { width: '100%', height: this.containerHeight * firstRatio },
+        { width: '100%', height: this.containerHeight - this.containerHeight * firstRatio }
       ]
     }
   }
@@ -241,7 +241,7 @@ export class SlidyPane extends React.Component {
         if (val && val > maxVal) val = maxVal
 
         if ((typeof val) === 'number') val = `${val}px`
-        else val = '100%'
+        else val = 'inherit'
 
         dimensions[ind][prop] = val
       })
