@@ -39,7 +39,7 @@ export class Step extends React.Component {
     return (
       <StepContainer>
         <div className='sidebar-padding'>
-          <h3>Thank you!</h3>
+          <h3 className='centered'>Thank you!</h3>
           <img className={styles.animal} src={this.state.animalSrc}/>
           <div className={styles['timer-bar']} style={timerBarStyle} />
         </div>

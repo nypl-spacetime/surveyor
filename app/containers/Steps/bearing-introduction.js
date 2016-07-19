@@ -11,9 +11,9 @@ export class Step extends React.Component {
   render() {
     return (
       <div className={`${styles.container} sidebar-padding`}>
-        <h3>Thanks!</h3>
+        <h3 className='centered'>Thanks!</h3>
         <p>If it's clear which way the camera is pointing, try <a href='javascript:void(0);' onClick={this.next.bind(this)}>setting the camera angle</a>. Otherwise, you can just continue to the <a href="javascript:void(0);" onClick={this.props.skip}>next image</a>.</p>
-        
+
         <Buttons>
           <Button onClick={this.next.bind(this)} type='secondary'>Set Camera Angle</Button>
         </Buttons>

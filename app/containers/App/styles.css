@@ -55,8 +55,6 @@ p {
   padding: 15px;
 }
 
-
-
 :global(.orientation-vertical) {
   display: none;
 }
@@ -69,6 +67,10 @@ p {
   :global(.orientation-horizontal) {
     display: none;
   }
+}
+
+:global(.centered) {
+  text-align: center;
 }
 
 body.fontLoaded {
