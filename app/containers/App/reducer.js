@@ -67,12 +67,17 @@ const initialState = fromJS({
   error: null
 });
 
+function newItem(state) {
+  return state
+    .set('steps', fromJS([]))
+    .set('uuid', null);
+}
+
 function appReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_ITEM:
       return state
         .set('error', null)
-        .set('loading', true)
         .set('uuid', null)
         .set('mods', null)
         .set('item', fromJS({}))
@@ -118,12 +123,7 @@ function appReducer(state = initialState, action) {
 
         return newState;
       } else {
-        // TODO: make function which resets items + steps!
-        return state
-          .set('steps', fromJS([]))
-          .set('loading', true)
-          .set('uuid', null);
-          // .set('item', null)
+        return newItem(state);
       }
     case SKIP_STEP_SUCCESS:
       const stepsWithData = state
@@ -135,14 +135,7 @@ function appReducer(state = initialState, action) {
         const stepsTotalCount = state.getIn(['config', 'steps']).size;
         return state.update('steps', (steps) => steps.setSize(stepsTotalCount - 1));
       } else {
-        // TODO: make function which resets items + steps!
-        return state
-          .set('uuid', null)
-          .set('loading', true)
-          .set('steps', fromJS([]));
-          // .set('item', null)
-          // .set('mods', null)
-          // .set('uuid', null)
+        return newItem(state);
       }
     case NEXT_STEP:
       var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size;
@@ -151,16 +144,7 @@ function appReducer(state = initialState, action) {
         return state
           .set('steps', state.get('steps').push(undefined));
       } else {
-        // TODO: make function which resets items + steps!
-        var newState = state
-          .set('uuid', null)
-          .set('loading', true)
-          .set('steps', fromJS([]));
-          // .set('item', null)
-          // .set('mods', null)
-          // .set('uuid', null)
-
-        return newState;
+        return newItem(state);
       }
     case LOG_OUT_SUCCESS:
       return state
