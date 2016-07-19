@@ -1,13 +1,14 @@
 .container {
   overflow-y: scroll;
   width: 100%;
+  padding: 2em 0;
 }
 
 .article {
-  width: 860px;
+  width: 760px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 2em;
+  padding-top: 2em;
   box-sizing: border-box;
 }
 

@@ -8,11 +8,14 @@ import styles from './styles.css';
 function Page(props) {
   return (
     <div className={styles.container}>
+      <Buttons>
+        <Button onClick={props.buttonAction} type='primary'>Back to Surveyor</Button>
+      </Buttons>
       <article className={styles.article}>
         {props.children}
       </article>
       <Buttons>
-        <Button onClick={props.buttonAction} type='primary'>Back</Button>
+        <Button onClick={props.buttonAction} type='primary'>Back to Surveyor</Button>
       </Buttons>
     </div>
   );
