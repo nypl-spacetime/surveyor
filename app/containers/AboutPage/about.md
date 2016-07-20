@@ -18,6 +18,10 @@ There are two guiding principles of geotagging in NYPL Surveyor: **take your bes
 
 With those two tenets in mind, you're all set to start surveying. You'll find that some items require a little research to pin correctly. For each item, we've included links to useful resources like our [Digital Collections](http://digitalcollections.nypl.org/) and [Map Warper](http://maps.nypl.org/warper/).
 
+
+## Contact Information  
+Questions? Comments? Contact us at [spacetime@nypl.org](mailto:oralhistory@nypl.org?Subject=Surveyor).
+
 ## Frequently Asked Questions
 
 #### How should you deal with “View From” shots?
