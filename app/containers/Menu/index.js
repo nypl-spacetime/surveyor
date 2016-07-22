@@ -7,7 +7,6 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-// import { push } from 'react-router-redux'
 
 import {
   logOut
@@ -36,16 +35,16 @@ export class Menu extends React.Component {
           .filter((provider) => provider.name !== omitProvider)
           .map((provider) => (
             <a className={`${styles.link}`} href={provider.connect}>
-              Log in with <img src={provider.icon} /> {provider.title}
+              Log in with {provider.title}
             </a>
           ))
       }
     }
 
     var menuItems = [
-      userSubmissionsLink,
-      <a className={`${styles.link}`} href='http://spacetime.nypl.org/here#all'>See <b>all</b> submissions on a map</a>,
-      <hr className={`${styles.hr}`} />
+      // userSubmissionsLink,
+      // <a className={`${styles.link}`} href='http://spacetime.nypl.org/here#all'>See <b>all</b> submissions on a map</a>,
+      // <hr className={`${styles.hr}`} />
     ]
 
     if (isAuthenicated) {
