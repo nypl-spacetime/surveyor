@@ -106,8 +106,8 @@ export class Metadata extends React.Component {
 
     return (
       <div className={`${styles.metadata} sidebar-padding`}>
-        <h1 className={titleClasses} title={this.props.title}>{ this.props.title} {toggleMoreInfoLink}</h1>
-
+        <h1 className={titleClasses} title={this.props.title}>{this.props.title}</h1>
+        {toggleMoreInfoLink}
         <div className={styles.moreInfo}>
           {searchLinks}
         </div>
