@@ -14,6 +14,7 @@ header a:visited {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -59,18 +60,16 @@ header a:visited {
   font-size: 17px;
 }
 
+.main {
+  padding-right: .7em;
+}
 
-/*@media only screen and (max-width: $mobileWidth) {
+@media only screen and (max-width: 800px) {
+  .subtitles {
+    display: none
+  }
+
   .header h1 {
     font-size: 24px;
   }
-
-  nav > a,
-  .submissions {
-    margin-right: .5rem;
-  }
-
-  .submissions {
-    font-size: 1.5rem;
-  }
-}*/
+}
