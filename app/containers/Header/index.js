@@ -1,8 +1,3 @@
-/*
- * Header
- *
- * Header header header
- */
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
@@ -22,6 +17,8 @@ import {
 import {
   toggleMenu
 } from '../App/actions';
+
+import HeaderComponent from 'components/Header';
 
 import Menu from 'containers/Menu';
 
@@ -59,28 +56,13 @@ export class Header extends React.Component {
     }
 
     return (
-      <header className={`${styles.header} ${styles['align-center']}`}>
-        <div className={`${styles.title}`}>
-          <a style={{backgroundImage: `url(${nypl})`}} className={`${styles.nypl}`} href='//nypl.org' target='_blank'>
-          </a>
-          <h1>
-            <Link to='/'>
-              <span className={`orientation-horizontal ${styles['subtitle-spacing']}`}>
-                <span className={`${styles['header-red']}`}>Space/Time Directory</span>
-                <span>:</span>
-              </span>
-              <span>
-                Surveyor
-              </span>
-            </Link>
-          </h1>
-        </div>
+      <HeaderComponent title='Surveyor' className={styles.header}>
         <nav className={`${styles.nav} ${styles['align-center']}`}>
           <a href='javascript:void(0)' onClick={this.toggleMenu} className={`${styles['align-center']}`}>
             <span className={`${styles.submissions}`}>
               {submissions}
             </span>
-            <span className={`${styles['header-red']} ${styles.authentication}`}>
+            <span className={`${styles.authentication}`}>
              {authentication}
             </span>
           </a>
@@ -90,7 +72,7 @@ export class Header extends React.Component {
           </Link>
         </nav>
         {menu}
-      </header>
+      </HeaderComponent>
     );
   }
 

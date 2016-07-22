@@ -1,22 +1,10 @@
 .header {
-  flex-shrink: 0;
-  height: 52px;
-  line-height: 1.5;
-  /*font-size: 1.3rem;*/
-
   background-color: #080808;
 }
 
-.title {
-  flex-grow: 1;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.header h1 {
-  font-weight: lighter;
-  font-size: 30px;
-  margin: 0;
+.header h1 a,
+.authentication {
+  color: #d0343a;
 }
 
 .align-center {
@@ -28,26 +16,7 @@
 nav > a,
 .submissions {
   margin-right: 1rem;
-}
-
-.header-red {
-  color: #d0343a;
-}
-
-.nypl {
-  width: 35px;
-  height: 35px;
-  background-size: contain;
-  background-position: center;
-  margin-top: -3px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-header,
-header a,
-header a:visited {
-  color: white;
+  line-height: 1em;
 }
 
 .submissions {
@@ -57,19 +26,4 @@ header a:visited {
 
 .subtitle-spacing {
   margin-right: .2em;
-}
-
-@media only screen and (max-width: $mobileWidth) {
-  .header h1 {
-    font-size: 24px;
-  }
-
-  nav > a,
-  .submissions {
-    margin-right: .5rem;
-  }
-
-  .submissions {
-    font-size: 1.5rem;
-  }
 }
