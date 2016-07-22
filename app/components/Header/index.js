@@ -13,7 +13,7 @@ function Header(props) {
         </a>
         <div className={styles.subtitles}>
           <h2>
-            <a href='http://nypl.org/' target='_blank'>The New York Public Library</a>
+            <a href='http://spacetime.nypl.org/' target='_blank'>The New York Public Library</a>
           </h2>
           <h3>
             <a href='http://spacetime.nypl.org/' target='_blank'>NYC Space/Time Directory</a>
