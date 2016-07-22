@@ -22,10 +22,10 @@ import FontFaceObserver from 'fontfaceobserver';
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 import styles from 'containers/App/styles.css';
-const openSansObserver = new FontFaceObserver('Kievit', {});
+const kievitObserver = new FontFaceObserver('Kievit', {});
 
 // When Open Sans is loaded, add a font-family using Open Sans to the body
-openSansObserver.check().then(() => {
+kievitObserver.check().then(() => {
   document.body.classList.add(styles.fontLoaded);
 }, () => {
   document.body.classList.remove(styles.fontLoaded);

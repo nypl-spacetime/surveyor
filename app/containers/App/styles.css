@@ -5,7 +5,9 @@
 }
 
 html {
-  font-size: 62.5%;
+  /*font-size: 62.5%;*/
+  font-size: 18px;
+  font-weight: 300;
 }
 
 html,
@@ -20,7 +22,11 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 300;
+}
+
+body.fontLoaded {
+  font-family: 'Kievit';
 }
 
 /* Typography
