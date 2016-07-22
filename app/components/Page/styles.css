@@ -1,7 +1,7 @@
 .container {
   overflow-y: auto;
   width: 100%;
-  padding: 2em 0;
+  padding-top: 2em;
   flex: 1;
 }
 
@@ -21,4 +21,8 @@
 .article img {
   margin: 1em 0;
   max-width: 100%;
+}
+
+.footer nav {
+  background-color: #080808;
 }

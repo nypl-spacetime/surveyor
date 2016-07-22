@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+import Footer from 'components/Footer';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
 
@@ -17,6 +18,7 @@ function Page(props) {
       <Buttons>
         <Button onClick={props.buttonAction} type='primary'>Back to Surveyor</Button>
       </Buttons>
+      <Footer className={styles.footer}/>
     </div>
   );
 }

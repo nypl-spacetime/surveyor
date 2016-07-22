@@ -1,0 +1,48 @@
+.footer {
+  width: 100%;
+  font-size: 0.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.footer .container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.footer nav {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer nav a {
+  text-align: center;
+  padding: 0 .5em;
+}
+
+.footer nav a,
+.footer nav a:visited {
+  color: white;
+}
+
+.footer nav a:hover {
+  text-decoration: underline;
+}
+
+.footer img {
+  margin: 0 auto;
+  width: 55px;
+}
+
+.footer p {
+  text-align: center;
+}
