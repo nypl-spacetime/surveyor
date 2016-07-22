@@ -11,7 +11,7 @@ Welcome! Through mobile apps, online maps, and serendipity, we discover new thin
 
 After we analyze the initial wave of submissions, we will build out quality control mechanisms and a map interface for discovering the geotagged collections.  
 
-NYPL Surveyor is project in the [NYC Space/Time Directory](http://spacetime.nypl.org/), a major civic initiative aimed at turning historical maps and other geographic sources into a digital time-travel service for New York City. Sign up for our mailing list to receive updates about the Space/Time Directory at **[INSERT LINK HERE WHEN AVAILABLE]**
+NYPL Surveyor is project in the [NYC Space/Time Directory](http://spacetime.nypl.org/), a major civic initiative aimed at turning historical maps and other geographic sources into a digital time-travel service for New York City. Sign up for our mailing list to receive updates about the NYC Space/Time Directory at **[INSERT LINK HERE WHEN AVAILABLE]**
 
 ## Rules & Guidance
 
@@ -47,7 +47,7 @@ If an image is low resolution and difficult to view, try viewing the item in our
 
 #### Historic addresses! How do I handle them?
 
-As history buffs and others know, New York City’s addresses aren't  static through time. Since street names change and numerical addresses have been reassigned throughout the years. How to accurately map historic materials is one of the big challenges we’re tackling with the Space/Time project. For Surveyor, pin the item based on the physical location rather than the street address.
+As history buffs and others know, New York City’s addresses aren't  static through time. Since street names change and numerical addresses have been reassigned throughout the years. How to accurately map historic materials is one of the big challenges we’re tackling with the NYC Space/Time Directory project. For Surveyor, pin the item based on the physical location rather than the street address.
 
 #### How do I tag an item when the buildings don’t exist anymore?
 
