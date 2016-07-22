@@ -2,6 +2,10 @@
   background-color: #080808;
 }
 
+.nav {
+  font-size: 24px;
+}
+
 .header h1 a,
 .authentication {
   color: #d0343a;
