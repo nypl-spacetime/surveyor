@@ -16,18 +16,10 @@ var about = require('html!./about.md');
 
 export class AboutPage extends React.Component {
 
-  /**
-   * Changes the route
-   *
-   * @param  {string} route The route we want to go to
-   */
   openRoute = (route) => {
     this.props.changeRoute(route);
   };
 
-  /**
-   * Changed route to '/'
-   */
   backToHomePage = () => {
     this.openRoute('/');
   };
