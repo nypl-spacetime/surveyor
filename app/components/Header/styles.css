@@ -1,4 +1,5 @@
 .header {
+  flex-shrink: 0;
   line-height: 1.5;
   padding: 6px;
 }
