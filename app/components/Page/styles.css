@@ -1,12 +1,13 @@
 .container {
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
   padding: 2em 0;
+  flex: 1;
 }
 
 .article {
   width: 760px;
-  max-width: 100%;
+  max-width: 90%;
   margin: 0 auto;
   padding-top: 2em;
   box-sizing: border-box;
@@ -19,4 +20,5 @@
 
 .article img {
   margin: 1em 0;
+  max-width: 100%;
 }
