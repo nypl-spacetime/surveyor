@@ -61,7 +61,7 @@ export class Metadata extends React.Component {
         <div>
           <span className='header-text'>
             {spans.map(function(span, i) {
-              return <span key={i}>{i ? span.key.toLowerCase() : span.key}: {span.value}{i < (spans.length - 1) ? ', ' : ''}</span>;
+              return <span key={i}>{span.key}: {span.value}{i < (spans.length - 1) ? '; ' : ''}</span>;
             })}
           </span>
         </div>
