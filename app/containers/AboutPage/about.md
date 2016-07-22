@@ -14,17 +14,19 @@ After we analyze the initial wave of submissions, we will build out quality cont
 NYPL Surveyor is project in the [NYC Space/Time Directory](http://spacetime.nypl.org/), a major civic initiative aimed at turning historical maps and other geographic sources into a digital time-travel service for New York City. Sign up for our mailing list to receive updates about the Space/Time Directory at **[INSERT LINK HERE WHEN AVAILABLE]**
 
 ## Rules & Guidance
-There are two guiding principles of geotagging in NYPL Surveyor: **take your best guess** and remember **it’s okay to skip**! With geotagger, we’re starting from scratch so even getting an item in the right time zone is helpful! This project is a shared effort and if you don’t recognize a location, others might. Feel free to skip items if you can't locate them on the map.  
+
+There are two guiding principles of geotagging in NYPL Surveyor: **take your best guess** and remember **it’s okay to skip**! With Surveyor, we’re starting from scratch so even getting an item in the right time zone is helpful! This project is a shared effort and if you don’t recognize a location, others might. Feel free to skip items if you can't locate them on the map.  
 
 With those two tenets in mind, you're all set to start surveying. You'll find that some items require a little research to pin correctly. For each item, we've included links to useful resources like our [Digital Collections](http://digitalcollections.nypl.org/) and [Map Warper](http://maps.nypl.org/warper/).
 
-
 ## Contact Information  
+
 Questions? Comments? Contact us at [spacetime@nypl.org](mailto:oralhistory@nypl.org?Subject=Surveyor).
 
 ## Frequently Asked Questions
 
 #### How should you deal with “View From” shots?
+
 Sometimes prints and photographs will be of the “A View From” type shots. Meaning, they depict a very wide view from one particular point in the city. How for instance, should you tag the following?   
 
 [![The south prospect of the city of New York, in North America](http://images.nypl.org/index.php?id=53913&t=w)](http://digitalcollections.nypl.org/items/510d47d9-7aba-a3d9-e040-e00a18064a99)
@@ -37,7 +39,7 @@ Some items contain multiple locations. For instance, this item from [Views of NY
 
 [![Bronx: 3rd Avenue - 135th Street](http://images.nypl.org/index.php?id=700001F&t=w)](http://digitalcollections.nypl.org/items/510d47dc-a06f-a3d9-e040-e00a18064a99)
 
-For items with multiple locations, simple select one location to geotag. Remember, we’re asking multiple people to tag each item and we’ll be able to programmatically recognize which items have multiple locations.  
+For items with multiple locations, simple select one location to geotag. Remember, we’re asking multiple people to tag each item and we’ll be able to programmatically recognize which items have multiple locations.
 
 #### How to handle low res images?
 
@@ -51,4 +53,4 @@ As history buffs and others know, New York City’s addresses aren't  static thr
 
 Tag the items where they would have stood when they existed. For instance, this lantern slide of the Crystal Palace should be pinned to the area which is now Bryant Park.  
 
- [![Crystal Palace, ca. 1853, from an engraving](http://images.nypl.org/index.php?id=465509&t=w)](http://digitalcollections.nypl.org/items/510d47da-ea3d-a3d9-e040-e00a18064a99)
+[![Crystal Palace, ca. 1853, from an engraving](http://images.nypl.org/index.php?id=465509&t=w)](http://digitalcollections.nypl.org/items/510d47da-ea3d-a3d9-e040-e00a18064a99)
