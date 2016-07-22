@@ -7,19 +7,6 @@ steps:
   - bearing
   - thanks
 
-search_buttons:
-  - title: NYPL Digital Collections
-    url: http://digitalcollections.nypl.org/items/{uuid}
-
-  - title: Google
-    url: https://www.google.com/search?q={title}
-
-  - title: Wikipedia
-    url: https://en.wikipedia.org/wiki/Special:Search?search={title}
-
-  - title: Map Warper
-    url: http://maps.nypl.org/warper/maps?field=text&query={title}
-
 css_variables:
   # mainColor: red
   # altColor: blue

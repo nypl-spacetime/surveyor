@@ -48,27 +48,6 @@ const selectSteps = () => createSelector(
   (globalState) => globalState.getIn(['config', 'steps']).toJS()
 );
 
-const selectSearchButtons = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    const item = globalState.get('item');
-    const reg = new RegExp(/\{(\w+)\}/g);
-    return globalState.getIn(['config', 'search_buttons']).toJS()
-      .map((searchButton) => {
-        var result;
-        while((result = reg.exec(searchButton.url)) !== null) {
-          const key = result[1];
-          if (item[key]) {
-            searchButton.url = searchButton.url.replace(`{${key}}`, item[key])
-          } else {
-            searchButton.url = ''
-          }
-        }
-        return searchButton
-      })
-  }
-);
-
 const selectUuid = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('uuid')
@@ -251,7 +230,6 @@ export {
   selectStepData,
   selectSteps,
   selectMapDefaults,
-  selectSearchButtons,
 
   selectCurrentUser,
   selectLoading,
