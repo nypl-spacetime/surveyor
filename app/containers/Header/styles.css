@@ -31,3 +31,18 @@ nav > a,
 .subtitle-spacing {
   margin-right: .2em;
 }
+
+@media only screen and (max-width: 800px) {
+  .nav {
+    font-size: 18px;
+  }
+
+  .submissions {
+    font-size: 2rem;
+  }
+
+  nav > a,
+  .submissions {
+    margin-right: .5em;
+  }
+}

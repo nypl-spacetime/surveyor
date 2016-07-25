@@ -39,10 +39,6 @@ export class App extends React.Component {
   }
 }
 
-App.propTypes = {
-  children: React.PropTypes.node,
-};
-
 function mapDispatchToProps(dispatch) {
   return {
     loadOAuth: () => {
@@ -58,5 +54,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// Wrap the component to inject dispatch and state into it
 export default connect(null, mapDispatchToProps)(App);

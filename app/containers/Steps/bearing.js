@@ -381,7 +381,7 @@ export class Step extends React.Component {
 
         <Buttons>
           <Button onClick={this.props.skip} type='secondary'>Skip</Button>
-          <Button onClick={this.submit.bind(this)} type='primary'>Submit</Button>
+          <Button onClick={this.submit.bind(this)} type='primary' disabled={!this.state.hasMoved}>Submit</Button>
         </Buttons>
       </StepContainer>
     );

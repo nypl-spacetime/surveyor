@@ -9,6 +9,8 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const WATCHED_INTRODUCTION = 'surveyor/App/WATCHED_INTRODUCTION';
+
 export const LOAD_COLLECTIONS = 'surveyor/App/LOAD_COLLECTIONS';
 export const LOAD_COLLECTIONS_SUCCESS = 'surveyor/App/LOAD_COLLECTIONS_SUCCESS';
 export const LOAD_COLLECTIONS_ERROR = 'surveyor/App/LOAD_COLLECTIONS_ERROR';

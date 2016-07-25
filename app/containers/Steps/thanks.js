@@ -8,7 +8,7 @@ import Button from 'components/Button';
 import Buttons from 'components/Buttons';
 
 import {
-  selectOAuth
+  selectLoggedIn
 } from 'containers/App/selectors';
 
 import styles from './thanks.css';
@@ -44,7 +44,8 @@ export class Step extends React.Component {
     };
 
     let oauthQuestion;
-    if (!this.props.oauth || !this.props.oauth.oauth) {
+
+    if (!this.props.loggedIn) {
       oauthQuestion = (
         <p className='centered'>
           To save your score, please log in using the <b>Save score</b> option in the menu
@@ -93,8 +94,8 @@ export class Step extends React.Component {
 
 
 export default connect(createSelector(
-  selectOAuth(),
-  (oauth) => ({
-     oauth
+  selectLoggedIn(),
+  (loggedIn) => ({
+    loggedIn
   })
 ))(Step);

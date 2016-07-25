@@ -6,9 +6,9 @@ import { createSelector } from 'reselect';
 
 const selectGlobal = () => (state) => state.get('global');
 
-const selectCurrentUser = () => createSelector(
+const selectWatchedIntroduction = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('currentUser')
+  (globalState) => globalState.get('watchedIntroduction')
 );
 
 const selectLoading = () => createSelector(
@@ -76,6 +76,14 @@ const selectOAuth = () => createSelector(
   (globalState) => globalState.get('oauth')
 );
 
+const selectLoggedIn = () => createSelector(
+  selectGlobal(),
+  (globalState) => {
+    const oauth = globalState.get('oauth');
+    return oauth && oauth.oauth;
+  }
+);
+
 const selectSubmissions = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('submissions').toJS()
@@ -86,19 +94,16 @@ const selectMods = () => createSelector(
   (globalState) => globalState.get('mods')
 );
 
-const selectModsTitle = () => createSelector(
+const selectTitle = () => createSelector(
   selectGlobal(),
   (globalState) => {
-    const mods = globalState.get('mods')
+    const item = globalState.get('item');
 
-    if (!mods) {
+    if (!item) {
       return null
     }
 
-    var titleInfo = mods.titleInfo.length ?
-      mods.titleInfo[0] : mods.titleInfo
-
-    return titleInfo.title['$'];
+    return item.title;
   }
 );
 
@@ -186,9 +191,6 @@ const selectCurrentStepIndex = (step) => createSelector(
   (globalState) => getCurrentStepIndex(globalState)
 );
 
-
-
-
 const selectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -208,14 +210,16 @@ const selectLocationState = () => {
 export {
   selectGlobal,
 
+  selectWatchedIntroduction,
   selectCurrentStep,
 
   selectUuid,
   selectItem,
   selectOAuth,
+  selectLoggedIn,
   selectSubmissions,
   selectMods,
-  selectModsTitle,
+  selectTitle,
   selectModsLocation,
   selectModsDate,
 
@@ -231,7 +235,6 @@ export {
   selectSteps,
   selectMapDefaults,
 
-  selectCurrentUser,
   selectLoading,
   selectError,
   selectLocationState

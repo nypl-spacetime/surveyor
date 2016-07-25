@@ -16,6 +16,8 @@
  */
 
 import {
+  WATCHED_INTRODUCTION,
+
   LOAD_ITEM,
   LOAD_ITEM_SUCCESS,
   LOAD_ITEM_ERROR,
@@ -51,6 +53,12 @@ import {
   LOG_OUT_SUCCESS,
   LOG_OUT_ERROR
 } from './constants';
+
+export function setIntroductionWatched() {
+  return {
+    type: WATCHED_INTRODUCTION
+  };
+}
 
 export function nextStep(uuid, step, stepIndex) {
   return {

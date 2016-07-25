@@ -11,6 +11,8 @@
  */
 
 import {
+  WATCHED_INTRODUCTION,
+
   LOAD_ITEM,
   LOAD_ITEM_SUCCESS,
   LOAD_ITEM_ERROR,
@@ -48,6 +50,7 @@ import { fromJS } from 'immutable';
 
 // The initial state of the App
 const initialState = fromJS({
+  watchedIntroduction: false,
   uuid: null,
   item: fromJS({}),
   mods: null,
@@ -60,8 +63,12 @@ const initialState = fromJS({
     shown: false,
     allItems: false
   },
-
   loading: true,
+  loaded: fromJS({
+    item: false,
+    submissions: false,
+    oauth: false
+  }),
   error: null
 });
 
@@ -77,8 +84,23 @@ function newItem(state) {
     .set('uuid', null);
 }
 
+function loadSuccesful(state, key) {
+  var newState = state.setIn(['loaded', key], true);
+
+  var allLoaded = true
+  for (var loaded of newState.get('loaded').values()) {
+    allLoaded = loaded && allLoaded
+  }
+
+  return newState
+    .set('loading', !allLoaded);
+}
+
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    case WATCHED_INTRODUCTION:
+      return state
+        .set('watchedIntroduction', true);
     case LOAD_ITEM:
       return state
         .set('error', null)
@@ -86,10 +108,10 @@ function appReducer(state = initialState, action) {
         .set('mods', null)
         .set('item', fromJS({}))
     case LOAD_ITEM_SUCCESS:
-      return state
-        .set('loading', false)
+      var newState = state
         .set('item', action.item)
         .set('uuid', action.item.uuid);
+      return loadSuccesful(newState, 'item');
     case LOAD_MODS_SUCCESS:
       return state
         .set('mods', action.mods);
@@ -97,11 +119,13 @@ function appReducer(state = initialState, action) {
       return state
         .set('collections', action.collections);
     case LOAD_OAUTH_SUCCESS:
-      return state
+      var newState = state
         .set('oauth', action.oauth);
+      return loadSuccesful(newState, 'oauth');
     case LOAD_SUBMISSIONS_SUCCESS:
-      return state
+      var newState = state
         .set('submissions', fromJS(action.submissions));
+      return loadSuccesful(newState, 'submissions');
     case TOGGLE_MENU:
       return state
         .setIn(['menu', 'shown'], !state.getIn(['menu', 'shown']))
@@ -163,12 +187,14 @@ function appReducer(state = initialState, action) {
           error: action.error
         });
     case LOAD_MODS_ERROR:
-      return state
-        .set('error', {
-          type: action.type,
-          message: 'Error loading metadata',
-          error: action.error
-        });
+      // Quietly fail when MODS fail to load
+      console.error('Error loading metadata');
+      return state;
+        // .set('error', {
+        //   type: action.type,
+        //   message: 'Error loading metadata',
+        //   error: action.error
+        // });
     case LOAD_COLLECTIONS_ERROR:
     case LOAD_OAUTH_ERROR:
     case LOAD_SUBMISSIONS_ERROR:

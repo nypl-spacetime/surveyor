@@ -5,7 +5,7 @@
 /* eslint-disable no-constant-condition */
 
 import { take, call, put, select } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
+import { push, replace } from 'react-router-redux';
 
 import {
   LOAD_REPOS,
@@ -150,7 +150,7 @@ export function* setRoute() {
       //   path += `/${step}`
       // }
 
-      yield(put(push(path)))
+      yield(put(replace(path)))
     }
   }
 }

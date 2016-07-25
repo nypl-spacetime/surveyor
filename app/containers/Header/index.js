@@ -66,6 +66,10 @@ export class Header extends React.Component {
              {authentication}
             </span>
           </a>
+          <Link to='/intro'>
+            <span className='orientation-horizontal'>Intro</span>
+            <span className='orientation-vertical'>?</span>
+          </Link>
           <Link to='/about'>
             <span className='orientation-horizontal'>About</span>
             <span className='orientation-vertical'>ⓘ</span>

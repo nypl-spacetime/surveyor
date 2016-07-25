@@ -12,7 +12,7 @@ import { createSelector } from 'reselect';
 
 import {
   selectUuid,
-  selectModsTitle,
+  selectTitle,
   selectModsLocation,
   selectModsDate,
   selectCollectionForItem,
@@ -126,7 +126,7 @@ export class Metadata extends React.Component {
 
 export default connect(createSelector(
   selectUuid(),
-  selectModsTitle(),
+  selectTitle(),
   selectCollectionForItem(),
   selectModsLocation(),
   selectModsDate(),

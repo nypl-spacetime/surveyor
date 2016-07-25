@@ -1,7 +1,6 @@
 .container {
   overflow-y: auto;
   width: 100%;
-  padding-top: 2em;
   flex: 1;
 }
 
@@ -9,8 +8,12 @@
   width: 760px;
   max-width: 90%;
   margin: 0 auto;
-  padding-top: 2em;
+  padding-top: 1em;
   box-sizing: border-box;
+}
+
+.article h1 {
+  text-align: center;
 }
 
 .article ul,

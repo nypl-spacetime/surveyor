@@ -25,7 +25,7 @@ Questions? Comments? Contact us at [spacetime@nypl.org](mailto:oralhistory@nypl.
 
 ## Frequently Asked Questions
 
-#### How should you deal with “View From” shots?
+### How should you deal with “View From” shots?
 
 Sometimes prints and photographs will be of the “A View From” type shots. Meaning, they depict a very wide view from one particular point in the city. How for instance, should you tag the following?   
 
@@ -33,7 +33,7 @@ Sometimes prints and photographs will be of the “A View From” type shots. Me
 
 For these images place the marker in the approximate middle of the view. In Surveyor, a second, optional step allows you to mark the full width of the image and note place where the images point of view. You can use this second step to more accurately tag these wide images.  
 
-#### How do I geotag an item with multiple locations?
+### How do I geotag an item with multiple locations?
 
 Some items contain multiple locations. For instance, this item from [Views of NYC](http://digitalcollections.nypl.org/items/510d47dc-a06f-a3d9-e040-e00a18064a99) contains three unique photos.
 
@@ -41,15 +41,15 @@ Some items contain multiple locations. For instance, this item from [Views of NY
 
 For items with multiple locations, simple select one location to geotag. Remember, we’re asking multiple people to tag each item and we’ll be able to programmatically recognize which items have multiple locations.
 
-#### How to handle low res images?
+### How to handle low res images?
 
 If an image is low resolution and difficult to view, try viewing the item in our Digital Collections, where higher resolution versions of the image are available. Each item will have an easy link to their Digital Collections page.  
 
-#### Historic addresses! How do I handle them?
+### Historic addresses! How do I handle them?
 
 As history buffs and others know, New York City’s addresses aren't  static through time. Since street names change and numerical addresses have been reassigned throughout the years. How to accurately map historic materials is one of the big challenges we’re tackling with the NYC Space/Time Directory project. For Surveyor, pin the item based on the physical location rather than the street address.
 
-#### How do I tag an item when the buildings don’t exist anymore?
+### How do I tag an item when the buildings don’t exist anymore?
 
 Tag the items where they would have stood when they existed. For instance, this lantern slide of the Crystal Palace should be pinned to the area which is now Bryant Park.  
 

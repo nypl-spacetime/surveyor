@@ -13,18 +13,23 @@ import { createSelector } from 'reselect';
 import {
   selectUuid,
   selectLoading,
-  selectError
+  selectError,
+  selectSubmissions,
+  selectLoggedIn,
+  selectWatchedIntroduction
 } from 'containers/App/selectors';
 
 import {
   loadItem
 } from '../App/actions';
 
+import Sidebar from 'components/Sidebar';
+import IntroSimple from 'containers/IntroSimple';
+
 import Error from 'containers/Error';
 import Loading from 'containers/Loading';
 
 import Image from 'containers/Image';
-import Sidebar from 'containers/Sidebar';
 import SlidyPane from 'containers/SlidyPane';
 import Metadata from 'containers/Metadata';
 import Geotagger from 'containers/Geotagger';
@@ -61,17 +66,25 @@ export class HomePage extends React.Component {
     let mainContent = null;
 
     if (this.props.error) {
-    mainContent = <Error />
+      mainContent = (
+        <Error />
+      );
     } else if (this.props.loading) {
-      mainContent = <Loading />
+      mainContent = (
+        <Loading />
+      );
+    } else if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
+      mainContent = (
+        <IntroSimple />
+      );
     } else {
       mainContent = (
         <SlidyPane key={this.props.params.uuid}>
           <Image />
-          <div>
+          <Sidebar>
             <Metadata />
             <Geotagger />
-          </div>
+          </Sidebar>
         </SlidyPane>
       );
     }
@@ -98,7 +111,10 @@ export default connect(createSelector(
   selectUuid(),
   selectLoading(),
   selectError(),
-  (uuid, loading, error) => ({
-    uuid, loading, error
+  selectSubmissions(),
+  selectLoggedIn(),
+  selectWatchedIntroduction(),
+  (uuid, loading, error, submissions, loggedIn, watchedIntroduction) => ({
+    uuid, loading, error, submissions, loggedIn, watchedIntroduction
   })
 ), mapDispatchToProps)(HomePage);
