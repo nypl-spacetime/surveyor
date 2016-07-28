@@ -87,6 +87,11 @@ export class Metadata extends React.Component {
     if (fontSize > 300) titleClasses.push(styles.longTitle)
 
     var searchLinks = null
+
+    // "Use outside resources like Wikipedia and Google Maps to scout out the location."
+
+
+
     if (this.props.currentStep === 'location') {
       searchLinks = (
         <div>

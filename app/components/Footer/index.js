@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import Article from 'components/Article';
-
 import nypl from 'images/nypl.svg';
 
 import styles from './styles.css';
@@ -25,7 +23,7 @@ function Footer(props) {
           © The New York Public Library, Astor, Lenox, and Tilden Foundation 2013-2016
         </p>
         <p>
-          <img src={nypl} />
+          <a href='http://www.nypl.org'><img src={nypl} /></a>
         </p>
       </div>
     </footer>

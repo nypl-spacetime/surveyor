@@ -226,10 +226,12 @@ export function loadItem(uuid) {
   };
 }
 
-export function toggleMenu(allItems) {
+export function toggleMenu(show, clientX, shiftKey) {
   return {
     type: TOGGLE_MENU,
-    allItems
+    show,
+    clientX,
+    shiftKey
   };
 }
 

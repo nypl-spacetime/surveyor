@@ -23,7 +23,9 @@ function Button(props) {
   }
 
   return (
-    <button className={classNames.join(' ')} onClick={onClick}>{props.children}</button>
+    <button tabindex='0' className={classNames.join(' ')} onClick={onClick}>
+      {props.children}
+    </button>
   );
 }
 

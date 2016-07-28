@@ -11,14 +11,16 @@ function Header(props) {
       <div className={`${styles['align-center']} ${styles.main}`}>
         <a style={{backgroundImage: `url(${nypl})`}} className={`${styles.logo}`} href='//nypl.org' target='_blank'>
         </a>
-        <div className={styles.subtitles}>
-          <h2>
-            <a href='http://spacetime.nypl.org/' target='_blank'>The New York Public Library</a>
-          </h2>
-          <h3>
-            <a href='http://spacetime.nypl.org/' target='_blank'>NYC Space/Time Directory</a>
-          </h3>
-        </div>
+        <a href='http://spacetime.nypl.org/' target='_blank'>
+          <div className={styles.subtitles}>
+            <h2>
+              The New York Public Library
+            </h2>
+            <h3>
+              NYC Space/Time Directory
+            </h3>
+          </div>
+        </a>
         <h1 className={styles.title}>
           <Link to='/'>
             {props.title}

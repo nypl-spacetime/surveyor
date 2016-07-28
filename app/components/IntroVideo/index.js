@@ -12,7 +12,7 @@ export class IntroVideo extends React.Component {
 
   render() {
     return (
-      <video className={styles.video} poster={poster} ref='video'
+      <video className={styles.video} poster={poster} ref='video' tabindex='0'
         onEnded={this.ended.bind(this)} onClick={this.play.bind(this)}>
         <source src={tutorial} type='video/mp4'/>
       </video>

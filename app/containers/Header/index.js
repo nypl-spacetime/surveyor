@@ -4,14 +4,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Link } from 'react-router';
+import { findDOMNode } from 'react-dom';
 
 import { createSelector } from 'reselect';
 
 import {
   selectOAuth,
   selectSubmissions,
-  selectShowMenu,
-  selectShowAllMenuItems
+  selectMenu
 } from 'containers/App/selectors';
 
 import {
@@ -48,17 +48,21 @@ export class Header extends React.Component {
     }
 
     var menu = null;
-    if (this.props.showMenu) {
+
+    if (this.props.menu.show) {
+      // TODO: compute y from height of header element
+      let y = 68;
       menu = (
         <Menu oauth={this.props.oauth} submissions={this.props.submissions}
-          allItems={this.props.showAllMenuItems} />
+          x={this.props.menu.clientX} y={y}
+          shiftKey={this.props.menu.shiftKey} />
       );
     }
 
     return (
       <HeaderComponent title='Surveyor' className={styles.header}>
         <nav className={`${styles.nav} ${styles['align-center']}`}>
-          <a href='javascript:void(0)' onClick={this.toggleMenu} className={`${styles['align-center']}`}>
+          <a href='javascript:void(0)' onClick={this.toggleMenu} className={`${styles['align-center']}`} ref='menu-link'>
             <span className={`${styles.submissions}`}>
               {submissions}
             </span>
@@ -81,7 +85,15 @@ export class Header extends React.Component {
   }
 
   toggleMenu = (e) => {
-    this.props.toggleMenu(e.nativeEvent.shiftKey);
+    let x = 0;
+    if (e.clientX) {
+      x = e.clientX;
+    } else {
+      var node = findDOMNode(this.refs['menu-link']);
+      x = node.getBoundingClientRect().right - node.offsetWidth / 2;
+    }
+
+    this.props.toggleMenu(true, x, e.nativeEvent.shiftKey);
     e.preventDefault();
   }
 
@@ -90,8 +102,8 @@ export class Header extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     changeRoute: (url) => dispatch(push(url)),
-    toggleMenu: (allItems) => {
-      dispatch(toggleMenu(allItems));
+    toggleMenu: (show, clientX, shiftKey) => {
+      dispatch(toggleMenu(show, clientX, shiftKey));
     },
   };
 }
@@ -100,9 +112,8 @@ function mapDispatchToProps(dispatch) {
 export default connect(createSelector(
   selectOAuth(),
   selectSubmissions(),
-  selectShowMenu(),
-  selectShowAllMenuItems(),
-  (oauth, submissions, showMenu, showAllMenuItems) => ({
-    oauth, submissions, showMenu, showAllMenuItems
+  selectMenu(),
+  (oauth, submissions, menu) => ({
+    oauth, submissions, menu
   })
 ), mapDispatchToProps)(Header);

@@ -15,10 +15,6 @@
   border-style: solid;
 }
 
-.button:focus {
-  outline: 0;
-}
-
 .button:not(.disabled):active {
   border-color: rgba(255, 255, 255, 1);
 }

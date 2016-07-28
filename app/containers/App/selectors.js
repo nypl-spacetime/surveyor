@@ -157,14 +157,9 @@ const selectModsDate = () => createSelector(
   }
 );
 
-const selectShowMenu = () => createSelector(
+const selectMenu = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.getIn(['menu', 'shown'])
-);
-
-const selectShowAllMenuItems = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.getIn(['menu', 'allItems'])
+  (globalState) => globalState.get('menu').toJS()
 );
 
 const getCurrentStepIndex = (state) => {
@@ -226,8 +221,7 @@ export {
   selectCurrentStepIndex,
   selectCollectionForItem,
 
-  selectShowMenu,
-  selectShowAllMenuItems,
+  selectMenu,
 
   selectConfig,
   selectCSSVariables,

@@ -59,10 +59,11 @@ const initialState = fromJS({
   steps: fromJS([]),
   submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
-  menu: {
-    shown: false,
-    allItems: false
-  },
+  menu: fromJS({
+    show: false,
+    clientX: -1,
+    shiftKey: false
+  }),
   loading: true,
   loaded: fromJS({
     item: false,
@@ -127,9 +128,14 @@ function appReducer(state = initialState, action) {
         .set('submissions', fromJS(action.submissions));
       return loadSuccesful(newState, 'submissions');
     case TOGGLE_MENU:
+      let clientX = action.clientX || -1;
+      let shiftKey = action.shiftKey || false;
       return state
-        .setIn(['menu', 'shown'], !state.getIn(['menu', 'shown']))
-        .setIn(['menu', 'allItems'], action.allItems);
+        .set('menu', fromJS({
+          show: action.show,
+          clientX,
+          shiftKey
+        }));
     case SUBMIT_STEP_SUCCESS:
       var wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size;
 

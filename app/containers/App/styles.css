@@ -29,6 +29,12 @@ body.fontLoaded {
   font-family: 'Kievit';
 }
 
+*:focus {
+  outline-width: thin;
+  outline-style: dotted;
+  outline-color: #d0343a;
+}
+
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 h1, h2, h3, h4, h5, h6 {
