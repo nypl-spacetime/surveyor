@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 
 var tutorial = 'https://s3.amazonaws.com/spacetime-nypl-org/assets/surveyor+tutorial.mp4';
 
-import poster from 'video/tutorial-poster.jpg';
+import poster from 'images/tutorial-poster.jpg';
 
 import styles from './styles.css';
 
