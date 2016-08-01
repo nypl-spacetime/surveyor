@@ -61,6 +61,10 @@ export class Geotagger extends React.Component {
   }
 
   skipStep() {
+    if (!this.props.uuid) {
+      return;
+    }
+
     this.props.skipStep(
       this.props.uuid,
       this.props.currentStep,
@@ -69,6 +73,10 @@ export class Geotagger extends React.Component {
   }
 
   submitStep(data, geometry) {
+    if (!this.props.uuid) {
+      return;
+    }
+
     this.props.submitStep(
       this.props.uuid,
       this.props.currentStep,
