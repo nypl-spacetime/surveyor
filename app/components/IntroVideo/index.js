@@ -1,8 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 
-// import tutorial from 'video/tutorial.mp4';
-var tutorial = 'https://dl.dropboxusercontent.com/u/12905316/space-time/tutorial.mp4';
+var tutorial = 'https://s3.amazonaws.com/spacetime-nypl-org/assets/surveyor+tutorial.mp4';
 
 import poster from 'video/tutorial-poster.jpg';
 
