@@ -11,7 +11,7 @@ Welcome! Through mobile apps, online maps, and serendipity, we discover new thin
 
 After we analyze the initial wave of submissions, we will build out quality control mechanisms and a map interface for discovering the geotagged collections.  
 
-NYPL Surveyor is project in the [NYC Space/Time Directory](http://spacetime.nypl.org/), a major civic initiative aimed at turning historical maps and other geographic sources into a digital time-travel service for New York City. <a href="http://pages.email.nypl.org/spacetimeupdates/">Sign up for our mailing list</a> to receive updates about the NYC Space/Time Directory.
+NYPL Surveyor is project in the [NYC Space/Time Directory](http://spacetime.nypl.org/), a major civic initiative aimed at turning historical maps and other geographic sources into a digital time-travel service for New York City. [Sign up for our mailing list](http://pages.email.nypl.org/spacetimeupdates/) to receive updates about the NYC Space/Time Directory.
 
 ## Rules & Guidance
 
