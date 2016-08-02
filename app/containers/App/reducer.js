@@ -56,7 +56,7 @@ const initialState = fromJS({
   mods: null,
   oauth: null,
   collections: [],
-  steps: fromJS([]),
+  steps: initialSteps(),
   submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
   menu: fromJS({
@@ -73,6 +73,10 @@ const initialState = fromJS({
   error: null
 });
 
+function initialSteps() {
+  return fromJS([]);
+}
+
 function initialSubmissions() {
   return fromJS({
     completed: 0
@@ -81,7 +85,7 @@ function initialSubmissions() {
 
 function newItem(state) {
   return state
-    .set('steps', fromJS([]))
+    .set('steps', initialSteps())
     .set('uuid', null);
 }
 
@@ -103,11 +107,12 @@ function appReducer(state = initialState, action) {
       return state
         .set('watchedIntroduction', true);
     case LOAD_ITEM:
-      return state
+      var newState = state
         .set('error', null)
-        .set('uuid', null)
         .set('mods', null)
         .set('item', fromJS({}))
+
+      return newItem(newState);
     case LOAD_ITEM_SUCCESS:
       var newState = state
         .set('item', action.item)
