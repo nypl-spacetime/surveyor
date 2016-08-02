@@ -55,15 +55,19 @@ export class Step extends React.Component {
 
     return (
       <StepContainer>
-        <div className={` ${styles.container} sidebar-padding`}>
+        <div className='center-vertically sidebar-padding'>
           <h3 className='centered'>Thank you!</h3>
           {oauthQuestion}
-          <img className={styles.animal} src={this.state.animalSrc}/>
-          <div className={styles['timer-bar']} style={timerBarStyle} />
+          <img className={styles.animal} src={this.state.animalSrc} alt />
         </div>
-        <Buttons>
-          <Button type='primary' onClick={this.next.bind(this)}>Next image</Button>
-        </Buttons>
+        <div>
+          <div className='sidebar-padding'>
+            <div className={styles['timer-bar']} style={timerBarStyle} />
+          </div>
+          <Buttons>
+            <Button type='primary' onClick={this.next.bind(this)}>Next image</Button>
+          </Buttons>
+        </div>
       </StepContainer>
     );
   }

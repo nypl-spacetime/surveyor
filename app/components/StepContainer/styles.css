@@ -2,8 +2,9 @@
   width: 100%;
   flex-grow: 2;
   flex-basis: 70%;
+  min-height: 300px;
 
-  background-color: #FFF;
+  background-color: #fff;
 
   display: flex;
   flex-direction: column;

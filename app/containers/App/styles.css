@@ -58,6 +58,20 @@ p {
   display: none;
 }
 
+:global(.center-vertically) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow-y: auto;
+}
+
+:global(.center-vertically) > * {
+  flex-shrink: 0;
+}
+
 @media only screen and (max-width: $mobileWidth) {
   :global(.orientation-vertical) {
     display: inherit;

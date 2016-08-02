@@ -69,28 +69,23 @@ export class Metadata extends React.Component {
     }
 
     const titleLength = this.props.title ? this.props.title.length : 0
-    // Default fontSize = 36px, approx 30 character
-    // per line, when metadata box has default width
 
-    var fontSize = 36;
-    if (titleLength > 300) {
-      fontSize = 16;
-    } else if (titleLength > 200) {
-      fontSize = 26;
+    let titleStyle;
+    if (titleLength > 100) {
+      titleStyle = {
+        fontSize: `1.6em`
+      };
+    } else if (titleLength > 50) {
+      titleStyle = {
+        fontSize: `1.8em`
+      };
     }
 
-    const titleStyle = {
-      fontSize: `${fontSize}px`
-    };
-
     var titleClasses = styles.title
-    if (fontSize > 300) titleClasses.push(styles.longTitle)
 
     var searchLinks = null
 
     // "Use outside resources like Wikipedia and Google Maps to scout out the location."
-
-
 
     if (this.props.currentStep === 'location') {
       searchLinks = (
@@ -101,6 +96,9 @@ export class Metadata extends React.Component {
             <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.uuid}`}>
               View in high resolution in NYPL Digital Collections
             </a>
+            <div>
+              Use outside resources like Wikipedia and Google Maps to scout out the location.
+            </div>
           </div>
         </div>
       )
@@ -111,7 +109,7 @@ export class Metadata extends React.Component {
 
     return (
       <div className={`${styles.metadata} sidebar-padding`}>
-        <h1 className={titleClasses} title={this.props.title}>{this.props.title}</h1>
+        <h1 style={titleStyle} className={titleClasses} title={this.props.title}>{this.props.title}</h1>
         {toggleMoreInfoLink}
         <div className={styles.moreInfo}>
           {searchLinks}

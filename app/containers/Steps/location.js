@@ -6,7 +6,6 @@ import StepContainer from 'components/StepContainer';
 import Button from 'components/Button';
 import Buttons from 'components/Buttons';
 
-import stepStyles from './steps.css';
 import styles from './location.css';
 
 export class Step extends React.Component {
