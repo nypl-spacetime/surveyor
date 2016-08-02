@@ -23,7 +23,7 @@ function Footer(props) {
           © The New York Public Library, Astor, Lenox, and Tilden Foundation 2013-2016
         </p>
         <p>
-          <a href='http://www.nypl.org'><img src={nypl} /></a>
+          <a href='http://www.nypl.org'><img alt='The New York Public Library' src={nypl} /></a>
         </p>
       </div>
     </footer>

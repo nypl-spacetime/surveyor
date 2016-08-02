@@ -9,7 +9,8 @@ function Header(props) {
   return (
     <header className={`${props.className} ${styles.header} ${styles['align-center']}`}>
       <div className={`${styles['align-center']} ${styles.main}`}>
-        <a style={{backgroundImage: `url(${nypl})`}} className={`${styles.logo}`} href='//nypl.org' target='_blank'>
+        <a href='//nypl.org' target='_blank'>
+          <img src={nypl} className={`${styles.logo}`} alt='The New York Public Library'/>
         </a>
         <a href='http://spacetime.nypl.org/' target='_blank'>
           <div className={styles.subtitles}>
