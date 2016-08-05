@@ -7,6 +7,10 @@
   margin-bottom: 1em;
 }
 
+.center {
+  text-align: center;
+}
+
 .lion {
   position: relative;
   width: 150px;

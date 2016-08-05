@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import {
-  selectUuid,
+  selectItem,
   selectSteps,
   selectCurrentStep,
   selectCurrentStepIndex
@@ -61,24 +61,26 @@ export class Geotagger extends React.Component {
   }
 
   skipStep() {
-    if (!this.props.uuid) {
+    if (!this.props.item.id) {
       return;
     }
 
     this.props.skipStep(
-      this.props.uuid,
+      this.props.item.provider,
+      this.props.item.id,
       this.props.currentStep,
       this.props.currentStepIndex
     )
   }
 
   submitStep(data, geometry) {
-    if (!this.props.uuid) {
+    if (!this.props.item.id) {
       return;
     }
 
     this.props.submitStep(
-      this.props.uuid,
+      this.props.item.provider,
+      this.props.item.id,
       this.props.currentStep,
       this.props.currentStepIndex,
       data,
@@ -89,14 +91,14 @@ export class Geotagger extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    nextStep: (uuid, step, stepIndex) => {
-      dispatch(nextStep(uuid, step, stepIndex));
+    nextStep: () => {
+      dispatch(nextStep());
     },
-    submitStep: (uuid, step, stepIndex, data, geometry) => {
-      dispatch(submitStep(uuid, step, stepIndex, data, geometry));
+    submitStep: (provider, id, step, stepIndex, data, geometry) => {
+      dispatch(submitStep(provider, id, step, stepIndex, data, geometry));
     },
-    skipStep: (uuid, step, stepIndex) => {
-      dispatch(skipStep(uuid, step, stepIndex));
+    skipStep: (provider, id, step, stepIndex) => {
+      dispatch(skipStep(provider, id, step, stepIndex));
     },
     dispatch
   };
@@ -104,11 +106,11 @@ function mapDispatchToProps(dispatch) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
-  selectUuid(),
+  selectItem(),
   selectSteps(),
   selectCurrentStep(),
   selectCurrentStepIndex(),
-  (uuid, steps, currentStep, currentStepIndex) => ({
-    uuid, steps, currentStep, currentStepIndex
+  (item, steps, currentStep, currentStepIndex) => ({
+    item, steps, currentStep, currentStepIndex
   })
 ), mapDispatchToProps)(Geotagger);

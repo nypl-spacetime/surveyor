@@ -23,7 +23,6 @@ export const LOAD_OAUTH = 'surveyor/App/LOAD_OAUTH';
 export const LOAD_OAUTH_SUCCESS = 'surveyor/App/LOAD_OAUTH_SUCCESS';
 export const LOAD_OAUTH_ERROR = 'surveyor/App/LOAD_OAUTH_ERROR';
 
-// data = uuid (null = random)
 export const LOAD_ITEM = 'surveyor/App/LOAD_ITEM';
 export const LOAD_ITEM_SUCCESS = 'surveyor/App/LOAD_ITEM_SUCCESS';
 export const LOAD_ITEM_ERROR = 'surveyor/App/LOAD_ITEM_ERROR';
@@ -37,14 +36,6 @@ export const SKIP_STEP_SUCCESS = 'surveyor/App/SKIP_STEP_SUCCESS';
 export const SKIP_STEP_ERROR = 'surveyor/App/SKIP_STEP_ERROR';
 
 export const NEXT_STEP = 'surveyor/App/NEXT_STEP';
-
-export const LOAD_MODS = 'surveyor/App/LOAD_MODS';
-export const LOAD_MODS_SUCCESS = 'surveyor/App/LOAD_MODS_SUCCESS';
-export const LOAD_MODS_ERROR = 'surveyor/App/LOAD_MODS_ERROR';
-
-export const LOAD_REPOS = 'surveyor/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'surveyor/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'surveyor/App/LOAD_REPOS_ERROR';
 
 export const TOGGLE_MENU = 'surveyor/App/TOGGLE_MENU';
 

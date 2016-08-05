@@ -17,7 +17,6 @@ import {
 import styles from './styles.css';
 
 var nypl = require('images/nypl-white.svg');
-var rainbow = require('images/nypl-rainbow.svg');
 var eye = require('images/error.svg');
 
 export class Error extends React.Component {
@@ -63,14 +62,14 @@ export class Error extends React.Component {
         <CenteredItemPage>
           <div className={styles.container}>
             <div className={styles.lion}>
-              <img src={rainbow} />
+              <img src={nypl} />
             </div>
             <div className={styles.error}>
               Wow! You've geotagged <b>all</b> available images...
             </div>
-            <Buttons>
-              <a href='http://spacetime.nypl.org/'>Find other projects to contribute to</a>
-            </Buttons>
+            <div className={styles.center}>
+              Find other projects to contribute to on the <a href='http://spacetime.nypl.org/'>website of the NYC Space/Time Directory</a>.
+            </div>
           </div>
         </CenteredItemPage>
       );

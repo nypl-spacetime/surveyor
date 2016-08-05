@@ -14,7 +14,6 @@ import {
   LOAD_OAUTH_SUCCESS,
   LOAD_ITEM,
   LOAD_ITEM_SUCCESS,
-  LOAD_MODS,
   LOAD_SUBMISSIONS,
 
   LOG_OUT,
@@ -34,7 +33,6 @@ import {
   collectionsLoaded, collectionsLoadingError,
   stepSubmitted, stepSubmitError,
   stepSkipped, stepSkipError,
-  modsLoaded, modsLoadingError,
   loadOAuth, oauthLoaded, oauthLoadingError,
   submissionsLoaded, submissionsLoadingError,
   reposLoaded, repoLoadingError,
@@ -44,7 +42,7 @@ import {
 import request from 'utils/request';
 
 import {
-  selectUuid,
+  selectItem,
   selectCurrentStep,
   selectCurrentStepIndex,
 } from 'containers/App/selectors';
@@ -56,7 +54,6 @@ export default [
   getSubmissions,
   getItem,
   getCollections,
-  getMods,
   getOAuth,
   submitStep,
   skipStep,
@@ -140,10 +137,10 @@ export function* setRoute() {
     yield take(LOAD_ITEM_SUCCESS);
 
     // const stepIndex = yield select(selectCurrentStepIndex());
-    const uuid = yield select(selectUuid());
+    const item = yield select(selectItem());
 
-    if (uuid) {
-      var path = `/${uuid}`
+    if (item) {
+      var path = `/${item.id}`
 
       // if (stepIndex > 0) {
       //   const step = yield select(selectCurrentStep());
@@ -170,18 +167,13 @@ export function* resetItem() {
 
 export function* getItem() {
   const getUrl = (action) => {
-    var uuid = action.uuid;
-    const validUuid = /^\w{8}-(\w{4}-){3}\w{12}$/.test(uuid);
+    var id = action.id;
 
-    if (uuid && !validUuid) {
-      console.error(`Not a valid UUID: "${uuid}", using random item instead`);
+    if (!id) {
+      return `${API_URL}items/random`;
     }
 
-    if (!uuid || !validUuid) {
-      uuid = 'random'
-    }
-
-    return `${API_URL}items/${uuid}`;
+    return `${API_URL}items/${action.provider}/${id}`;
   }
 
   yield* requestData(LOAD_ITEM, getUrl, {
@@ -191,7 +183,7 @@ export function* getItem() {
 }
 
 export function* submitStep() {
-  const getUrl = (action) => `${API_URL}items/${action.uuid}`;
+  const getUrl = (action) => `${API_URL}items/${action.provider}/${action.id}`;
 
   const fetchOptions = (action) => ({
     method: 'post',
@@ -214,7 +206,8 @@ export function* submitStep() {
     fetchOptions,
     actionSuccess: stepSubmitted,
     actionSuccessParams: (action, resultData) => [
-      action.uuid,
+      action.provider,
+      action.id,
       action.step,
       action.stepIndex,
       action.data,
@@ -225,7 +218,7 @@ export function* submitStep() {
 }
 
 export function* skipStep() {
-  const getUrl = (action) => `${API_URL}items/${action.uuid}`;
+  const getUrl = (action) => `${API_URL}items/${action.provider}/${action.id}`;
 
   const fetchOptions = (action) => ({
     method: 'post',
@@ -247,7 +240,8 @@ export function* skipStep() {
     fetchOptions,
     actionSuccess: stepSkipped,
     actionSuccessParams: (action, resultData) => [
-      action.uuid,
+      action.provider,
+      action.id,
       action.step,
       action.stepIndex
     ],
@@ -259,22 +253,6 @@ export function* getCollections() {
   yield* requestData(LOAD_COLLECTIONS, `${API_URL}collections`, {
     actionSuccess: collectionsLoaded,
     actionError: collectionsLoaded
-  });
-}
-
-export function* getMods() {
-  const getUrl = (action) => {
-    const uuid = action.item.uuid;
-    if (uuid) {
-      return `${API_URL}items/${uuid}/mods`;
-    } else {
-      return null;
-    }
-  }
-
-  yield* requestData(LOAD_ITEM_SUCCESS, getUrl, {
-    actionSuccess: modsLoaded,
-    actionError: modsLoadingError
   });
 }
 

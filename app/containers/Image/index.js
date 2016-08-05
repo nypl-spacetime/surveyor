@@ -20,9 +20,15 @@ import styles from './styles.css';
 export class Image extends React.Component {
 
   render() {
-    var src = null
-    if (this.props.item && this.props.item.image_link) {
-      src = this.props.item.image_link
+    let src = '';
+    if (this.props.item && this.props.item.image_urls) {
+      const urls = this.props.item.image_urls;
+      let index = 0;
+      if (urls.length === 2) {
+        index = 1;
+      }
+
+      src = this.props.item.image_urls[index].url;
     }
 
     var imageStyle = {

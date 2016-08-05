@@ -20,10 +20,6 @@ import {
   LOAD_COLLECTIONS_SUCCESS,
   LOAD_COLLECTIONS_ERROR,
 
-  LOAD_MODS,
-  LOAD_MODS_SUCCESS,
-  LOAD_MODS_ERROR,
-
   LOAD_OAUTH,
   LOAD_OAUTH_SUCCESS,
   LOAD_OAUTH_ERROR,
@@ -51,9 +47,7 @@ import { fromJS } from 'immutable';
 // The initial state of the App
 const initialState = fromJS({
   watchedIntroduction: false,
-  uuid: null,
-  item: fromJS({}),
-  mods: null,
+  item: initialItem(),
   oauth: null,
   collections: [],
   steps: initialSteps(),
@@ -73,6 +67,10 @@ const initialState = fromJS({
   error: null
 });
 
+function initialItem() {
+  return fromJS({});
+}
+
 function initialSteps() {
   return fromJS([]);
 }
@@ -86,7 +84,7 @@ function initialSubmissions() {
 function newItem(state) {
   return state
     .set('steps', initialSteps())
-    .set('uuid', null);
+    .set('item', initialItem());
 }
 
 function loadSuccesful(state, key) {
@@ -109,18 +107,12 @@ function appReducer(state = initialState, action) {
     case LOAD_ITEM:
       var newState = state
         .set('error', null)
-        .set('mods', null)
-        .set('item', fromJS({}))
 
       return newItem(newState);
     case LOAD_ITEM_SUCCESS:
       var newState = state
-        .set('item', action.item)
-        .set('uuid', action.item.uuid);
+        .set('item', action.item);
       return loadSuccesful(newState, 'item');
-    case LOAD_MODS_SUCCESS:
-      return state
-        .set('mods', action.mods);
     case LOAD_COLLECTIONS_SUCCESS:
       return state
         .set('collections', action.collections);
@@ -146,7 +138,8 @@ function appReducer(state = initialState, action) {
 
       if (!wasLastStep) {
         const stepData = {
-          uuid: action.uuid,
+          provider: action.provider,
+          id: action.id,
           step: action.step,
           data: action.data,
           geometry: action.geometry
@@ -197,15 +190,6 @@ function appReducer(state = initialState, action) {
           message: 'Error loading image',
           error: action.error
         });
-    case LOAD_MODS_ERROR:
-      // Quietly fail when MODS fail to load
-      console.error('Error loading metadata');
-      return state;
-        // .set('error', {
-        //   type: action.type,
-        //   message: 'Error loading metadata',
-        //   error: action.error
-        // });
     case LOAD_COLLECTIONS_ERROR:
     case LOAD_OAUTH_ERROR:
     case LOAD_SUBMISSIONS_ERROR:

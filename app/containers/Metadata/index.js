@@ -11,10 +11,10 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import {
-  selectUuid,
+  selectItem,
   selectTitle,
-  selectModsLocation,
-  selectModsDate,
+  selectItemMetadataLocation,
+  selectItemMetadataDate,
   selectCollectionForItem,
   selectCurrentStep
 } from 'containers/App/selectors';
@@ -35,7 +35,7 @@ export class Metadata extends React.Component {
     var collectionLink
     if (this.props.collection) {
       collectionLink = (
-        <a href={this.props.collection.url}>{this.props.collection.title}</a>
+        <a target='_blank' href={this.props.collection.url}>{this.props.collection.title}</a>
       )
     }
 
@@ -43,17 +43,17 @@ export class Metadata extends React.Component {
     if ((this.props.location && this.props.location[0]) || (this.props.date && this.props.date[0])) {
       var spans = [];
 
-      if (this.props.location[0]) {
+      if (this.props.location) {
         spans.push({
           key: 'Location',
-          value: this.props.location[0]
+          value: this.props.location
         });
       }
 
-      if (this.props.date[0]) {
+      if (this.props.date) {
         spans.push({
           key: 'Date',
-          value: this.props.date[0]
+          value: this.props.date
         });
       }
 
@@ -85,19 +85,17 @@ export class Metadata extends React.Component {
 
     var searchLinks = null
 
-    // "Use outside resources like Wikipedia and Google Maps to scout out the location."
-
-    if (this.props.currentStep === 'location') {
+    if (this.props.currentStep === 'location' || this.props.currentStep === 'bearing') {
       searchLinks = (
         <div>
           <h2 className={styles.subtitle}>From: {collectionLink}</h2>
           {geoDateHeader}
           <div>
-            <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.uuid}`}>
+            <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
               View in high resolution in NYPL Digital Collections
             </a>
             <div>
-              Use outside resources like Wikipedia and Google Maps to scout out the location.
+              Use outside resources like <a href='https://www.wikipedia.org/' target='_blank'>Wikipedia</a> and <a href='https://www.google.nl/maps/@40.7425428,-73.9664649,11.58z' target='_blank'>Google Maps</a> to scout out the location.
             </div>
           </div>
         </div>
@@ -128,13 +126,13 @@ export class Metadata extends React.Component {
 }
 
 export default connect(createSelector(
-  selectUuid(),
+  selectItem(),
   selectTitle(),
   selectCollectionForItem(),
-  selectModsLocation(),
-  selectModsDate(),
+  selectItemMetadataLocation(),
+  selectItemMetadataDate(),
   selectCurrentStep(),
-  (uuid, title, collection, location, date, currentStep) => ({
-    uuid, title, collection, location, date, currentStep
+  (item, title, collection, location, date, currentStep) => ({
+    item, title, collection, location, date, currentStep
   })
 ))(Metadata);

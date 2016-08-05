@@ -34,7 +34,7 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       }
     }, {
-      path: '/(:uuid)',
+      path: '/(:id)',
       name: 'home',
       getComponent(nextState, cb) {
         System.import('containers/HomePage')

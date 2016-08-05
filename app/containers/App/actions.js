@@ -26,10 +26,6 @@ import {
   LOAD_COLLECTIONS_SUCCESS,
   LOAD_COLLECTIONS_ERROR,
 
-  LOAD_MODS,
-  LOAD_MODS_SUCCESS,
-  LOAD_MODS_ERROR,
-
   LOAD_OAUTH,
   LOAD_OAUTH_SUCCESS,
   LOAD_OAUTH_ERROR,
@@ -60,19 +56,17 @@ export function setIntroductionWatched() {
   };
 }
 
-export function nextStep(uuid, step, stepIndex) {
+export function nextStep() {
   return {
-    type: NEXT_STEP,
-    uuid,
-    step,
-    stepIndex
+    type: NEXT_STEP
   };
 }
 
-export function submitStep(uuid, step, stepIndex, data, geometry) {
+export function submitStep(provider, id, step, stepIndex, data, geometry) {
   return {
     type: SUBMIT_STEP,
-    uuid,
+    provider,
+    id,
     step,
     stepIndex,
     data,
@@ -80,10 +74,11 @@ export function submitStep(uuid, step, stepIndex, data, geometry) {
   };
 }
 
-export function stepSubmitted(uuid, step, stepIndex, data, geometry) {
+export function stepSubmitted(provider, id, step, stepIndex, data, geometry) {
   return {
     type: SUBMIT_STEP_SUCCESS,
-    uuid,
+    provider,
+    id,
     step,
     stepIndex,
     data,
@@ -98,19 +93,21 @@ export function stepSubmitError(error) {
   };
 }
 
-export function skipStep(uuid, step, stepIndex) {
+export function skipStep(provider, id, step, stepIndex) {
   return {
     type: SKIP_STEP,
-    uuid,
+    provider,
+    id,
     step,
     stepIndex
   };
 }
 
-export function stepSkipped(uuid, step, stepIndex) {
+export function stepSkipped(provider, id, step, stepIndex) {
   return {
     type: SKIP_STEP_SUCCESS,
-    uuid,
+    provider,
+    id,
     step,
     stepIndex
   };
@@ -123,10 +120,11 @@ export function stepSkipError(error) {
   };
 }
 
-export function loadItem(uuid) {
+export function loadItem(provider, id) {
   return {
     type: LOAD_ITEM,
-    uuid
+    provider,
+    id
   };
 }
 
@@ -164,27 +162,6 @@ export function collectionsLoadingError(error) {
   };
 }
 
-export function loadMods(uuid) {
-  return {
-    type: LOAD_MODS,
-    uuid
-  };
-}
-
-export function modsLoaded(mods) {
-  return {
-    type: LOAD_MODS_SUCCESS,
-    mods
-  };
-}
-
-export function modsLoadingError(error) {
-  return {
-    type: LOAD_MODS_ERROR,
-    error,
-  };
-}
-
 export function submissionsLoaded(submissions) {
   return {
     type: LOAD_SUBMISSIONS_SUCCESS,
@@ -219,10 +196,11 @@ export function oauthLoadingError(error) {
   };
 }
 
-export function loadItem(uuid) {
+export function loadItem(provider, id) {
   return {
     type: LOAD_ITEM,
-    uuid
+    provider,
+    id
   };
 }
 

@@ -48,50 +48,9 @@ const selectSteps = () => createSelector(
   (globalState) => globalState.getIn(['config', 'steps']).toJS()
 );
 
-const selectUuid = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('uuid')
-);
-
 const selectItem = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('item')
-);
-
-const selectCollectionForItem = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    var item = globalState.get('item')
-    if (item) {
-      const collections = globalState.get('collections')
-      return collections.find((collection) => collection.uuid === item.collection)
-    } else {
-      return null
-    }
-  }
-);
-
-const selectOAuth = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('oauth')
-);
-
-const selectLoggedIn = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    const oauth = globalState.get('oauth');
-    return oauth && oauth.oauth;
-  }
-);
-
-const selectSubmissions = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('submissions').toJS()
-);
-
-const selectMods = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('mods')
 );
 
 const selectTitle = () => createSelector(
@@ -107,54 +66,61 @@ const selectTitle = () => createSelector(
   }
 );
 
-const selectModsLocation = () => createSelector(
+const selectItemMetadataLocation = () => createSelector(
   selectGlobal(),
   (globalState) => {
-    const mods = globalState.get('mods')
+    const item = globalState.get('item');
 
-    if (!mods) {
+    if (!item || !item.meta) {
       return null
     }
 
-    var subject = mods.subject
-    if (!Array.isArray(subject)) {
-      subject = [subject]
-    }
-
-    var location = subject.filter((s) => s && s.geographic && s.geographic['$'])
-      .map((s) => s.geographic['$'])
-      .sort((a, b) => {
-        return b.length - a.length
-      })
-
-    return location
+    return item.meta.location;
   }
 );
 
-const selectModsDate = () => createSelector(
+const selectItemMetadataDate = () => createSelector(
   selectGlobal(),
   (globalState) => {
-    const mods = globalState.get('mods')
+    const item = globalState.get('item');
 
-    if (!mods) {
+    if (!item || !item.meta) {
       return null
     }
 
-    var originInfo = mods.originInfo
-    if (!Array.isArray(originInfo)) {
-      originInfo = [originInfo]
-    }
-
-    var date = originInfo.filter((o) => o.dateCreated || o.dateIssued || o.dateOther)
-      .map((o) => o.dateCreated || o.dateIssued || o.dateOther)
-      .filter((o) => o.keyDate)
-      .map(o => o['$'])
-      .sort((a, b) => {
-        return b.length - a.length;
-      })
-
-    return date
+    return item.meta.date;
   }
+);
+
+const selectCollectionForItem = () => createSelector(
+  selectGlobal(),
+  (globalState) => {
+    var item = globalState.get('item')
+    if (item) {
+      const collections = globalState.get('collections')
+      return collections.find((collection) => collection.id === item.collection_id)
+    } else {
+      return null
+    }
+  }
+);
+
+const selectOAuth = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('oauth')
+);
+
+const selectLoggedIn = () => createSelector(
+  selectGlobal(),
+  (globalState) => {
+    const oauth = globalState.get('oauth');
+    return oauth && oauth.oauth ? true : false;
+  }
+);
+
+const selectSubmissions = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('submissions').toJS()
 );
 
 const selectMenu = () => createSelector(
@@ -208,15 +174,14 @@ export {
   selectWatchedIntroduction,
   selectCurrentStep,
 
-  selectUuid,
   selectItem,
+  selectItemMetadataLocation,
+  selectItemMetadataDate,
   selectOAuth,
   selectLoggedIn,
   selectSubmissions,
-  selectMods,
+
   selectTitle,
-  selectModsLocation,
-  selectModsDate,
 
   selectCurrentStepIndex,
   selectCollectionForItem,

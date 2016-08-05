@@ -7,7 +7,12 @@ Welcome! Through mobile apps, online maps, and serendipity, we discover new thin
 * [Album of photographs depicting the construction of the Broadway line, New York City Subway.](http://digitalcollections.nypl.org/collections/album-of-photographs-depicting-the-construction-of-the-broadway-line-new-york#/?tab=about)  
 * [Album of photographs showing construction of the cable road on Broadway, New York City, in 1891.](http://digitalcollections.nypl.org/collections/album-of-photographs-showing-construction-of-the-cable-road-on-broadway-new-york#/?tab=about)  
 * [Pictorial Description of Broadway](http://digitalcollections.nypl.org/collections/pictorial-description-of-broadway#/?tab=about)  
+* [Morris Rosenfeld Photographs](http://digitalcollections.nypl.org/collections/morris-rosenfeld-photographs#/?tab=about)
+* [Collection of photographs of East River and Hudson River piers, Manhattan](http://digitalcollections.nypl.org/collections/collection-of-photographs-of-east-river-and-hudson-river-piers-manhattan#/?tab=about)
 * [Fifth Avenue, New York, from start to finish](http://digitalcollections.nypl.org/collections/fifth-avenue-new-york-from-start-to-finish#/?tab=about)  
+* [Outer Boroughs: New York beyond Manhattan](http://digitalcollections.nypl.org/collections/outer-boroughs-new-york-beyond-manhattan#/?tab=about)
+* [Collection of photographs of New York City](http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city#/?tab=about)
+* [Collection of photographs of New York City, 1931-1942](http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city-1931-1942#/?tab=about)
 
 After we analyze the initial wave of submissions, we will build out quality control mechanisms and a map interface for discovering the geotagged collections.  
 

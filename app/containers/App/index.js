@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import {
   loadOAuth,
-  loadItem,
   loadCollections
 } from '../App/actions';
 
@@ -38,9 +37,6 @@ function mapDispatchToProps(dispatch) {
     },
     loadCollections: () => {
       dispatch(loadCollections());
-    },
-    loadItem: (uuid) => {
-      dispatch(loadItem(uuid));
     },
     dispatch
   };

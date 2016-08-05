@@ -11,7 +11,7 @@ import { push } from 'react-router-redux';
 import { createSelector } from 'reselect';
 
 import {
-  selectUuid,
+  selectItem,
   selectLoading,
   selectError,
   selectSubmissions,
@@ -39,26 +39,28 @@ import styles from './styles.css';
 export class HomePage extends React.Component {
 
   componentWillMount () {
-    if (!this.props.uuid) {
-      this.props.loadItem(this.props.params.uuid);
+    if (!this.props.item.id) {
+      this.props.loadItem('nypl', this.props.params.id);
     }
   }
 
   componentWillReceiveProps(props) {
-    // user types in new route uuid
-    var newRouteUuid = this.props.uuid === this.props.params.uuid &&
-      props.uuid === this.props.uuid && props.uuid &&
-      props.params.uuid !== this.props.params.uuid;
+    // For now, only provider=nypl routes are supported!
 
-    // path is /:incorrect-uuid, user/app wants to go to /
-    var fromIncorrectUuidToRandomUuid = this.props.error && !props.params.uuid && this.props.params.uuid;
+    // user types in new route
+    var newRouteId = this.props.item.id === this.props.params.id &&
+      props.item.id === this.props.item.id && props.item.id &&
+      props.params.id !== this.props.params.id;
 
-    // path is /:incorrect-uuid, user types in new uuid
-    var fromIncorrectUuidToNewUuid = this.props.error && props.params.uuid && props.params.uuid !== this.props.params.uuid;
+    // path is /:incorrect-id, user/app wants to go to /
+    var fromIncorrectIdToRandomId = this.props.error && !props.params.id && this.props.params.id;
 
-    if (newRouteUuid || fromIncorrectUuidToRandomUuid || fromIncorrectUuidToNewUuid) {
-      // Call loadItem with uuid from route (or undefined)
-      this.props.loadItem(props.params.uuid);
+    // path is /:incorrect-id, user types in new id
+    var fromIncorrectIdToNewId = this.props.error && props.params.id && props.params.id !== this.props.params.id;
+
+    if (newRouteId || fromIncorrectIdToRandomId || fromIncorrectIdToNewId) {
+      // Call loadItem with id from route (or undefined)
+      this.props.loadItem('nypl', props.params.id);
     }
   }
 
@@ -79,7 +81,7 @@ export class HomePage extends React.Component {
       );
     } else {
       mainContent = (
-        <SlidyPane key={this.props.params.uuid}>
+        <SlidyPane key={this.props.params.id}>
           <Image />
           <Sidebar>
             <Metadata />
@@ -93,14 +95,10 @@ export class HomePage extends React.Component {
   }
 }
 
-HomePage.propTypes = {
-  loading: React.PropTypes.bool
-};
-
 function mapDispatchToProps(dispatch) {
   return {
-    loadItem: (uuid) => {
-      dispatch(loadItem(uuid));
+    loadItem: (provider, id) => {
+      dispatch(loadItem(provider, id));
     },
     dispatch
   };
@@ -108,13 +106,13 @@ function mapDispatchToProps(dispatch) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
-  selectUuid(),
+  selectItem(),
   selectLoading(),
   selectError(),
   selectSubmissions(),
   selectLoggedIn(),
   selectWatchedIntroduction(),
-  (uuid, loading, error, submissions, loggedIn, watchedIntroduction) => ({
-    uuid, loading, error, submissions, loggedIn, watchedIntroduction
+  (item, loading, error, submissions, loggedIn, watchedIntroduction) => ({
+    item, loading, error, submissions, loggedIn, watchedIntroduction
   })
 ), mapDispatchToProps)(HomePage);
