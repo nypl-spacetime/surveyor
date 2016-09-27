@@ -170,7 +170,8 @@ export function* getItem() {
     var id = action.id;
 
     if (!id) {
-      return `${API_URL}items/random`;
+      // TODO: read provider from config!
+      return `${API_URL}items/nypl/random`;
     }
 
     return `${API_URL}items/${action.provider}/${id}`;
