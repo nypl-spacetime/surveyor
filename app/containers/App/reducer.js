@@ -17,9 +17,6 @@ import {
   LOAD_ITEM_SUCCESS,
   LOAD_ITEM_ERROR,
 
-  LOAD_COLLECTIONS_SUCCESS,
-  LOAD_COLLECTIONS_ERROR,
-
   LOAD_OAUTH,
   LOAD_OAUTH_SUCCESS,
   LOAD_OAUTH_ERROR,
@@ -49,7 +46,6 @@ const initialState = fromJS({
   watchedIntroduction: false,
   item: initialItem(),
   oauth: null,
-  collections: [],
   steps: initialSteps(),
   submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
@@ -113,9 +109,6 @@ function appReducer(state = initialState, action) {
       var newState = state
         .set('item', action.item);
       return loadSuccesful(newState, 'item');
-    case LOAD_COLLECTIONS_SUCCESS:
-      return state
-        .set('collections', action.collections);
     case LOAD_OAUTH_SUCCESS:
       var newState = state
         .set('oauth', action.oauth);
@@ -190,7 +183,6 @@ function appReducer(state = initialState, action) {
           message: 'Error loading image',
           error: action.error
         });
-    case LOAD_COLLECTIONS_ERROR:
     case LOAD_OAUTH_ERROR:
     case LOAD_SUBMISSIONS_ERROR:
     return state

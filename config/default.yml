@@ -1,5 +1,9 @@
 api:
-  url: http://surveyor-api.dev/
+  url: http://brick-by-brick.dev/
+
+tasks:
+  provider: nypl
+  task: geotag-photo
 
 steps:
   - location

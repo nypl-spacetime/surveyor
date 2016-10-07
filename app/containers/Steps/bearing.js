@@ -37,8 +37,8 @@ export class Step extends React.Component {
       initialView: {
         zoom: zoom,
         center: [
-          props.locationStepData.geometry.coordinates[1],
-          props.locationStepData.geometry.coordinates[0]
+          props.locationStepData.data.geometry.coordinates[1],
+          props.locationStepData.data.geometry.coordinates[0]
         ]
       }
     };
@@ -245,8 +245,8 @@ export class Step extends React.Component {
 
     // Set latLng of image location to the results of previous step
     var locationLatLng = [
-      this.props.locationStepData.geometry.coordinates[1],
-      this.props.locationStepData.geometry.coordinates[0]
+      this.props.locationStepData.data.geometry.coordinates[1],
+      this.props.locationStepData.data.geometry.coordinates[0]
     ];
 
     // Set latLng of camera south east of map center, three thirds of
@@ -392,9 +392,10 @@ export class Step extends React.Component {
       var data = {
         angle: this.fieldOfView.properties.angle,
         bearing: this.roundNumber(this.fieldOfView.properties.bearing),
-        distance: this.roundNumber(this.fieldOfView.properties.distance)
+        distance: this.roundNumber(this.fieldOfView.properties.distance),
+        geometry: this.fieldOfView.geometry
       }
-      this.props.submit(data, this.fieldOfView.geometry);
+      this.props.submit(data);
     }
   }
 

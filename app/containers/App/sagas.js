@@ -9,7 +9,6 @@ import { push, replace } from 'react-router-redux';
 
 import {
   LOAD_REPOS,
-  LOAD_COLLECTIONS,
   LOAD_OAUTH,
   LOAD_OAUTH_SUCCESS,
   LOAD_ITEM,
@@ -30,7 +29,6 @@ import {
 import {
   loadItem,
   itemLoaded, itemLoadingError,
-  collectionsLoaded, collectionsLoadingError,
   stepSubmitted, stepSubmitError,
   stepSkipped, stepSkipError,
   loadOAuth, oauthLoaded, oauthLoadingError,
@@ -53,7 +51,6 @@ export default [
   setRoute,
   getSubmissions,
   getItem,
-  getCollections,
   getOAuth,
   submitStep,
   skipStep,
@@ -62,6 +59,8 @@ export default [
 ];
 
 const API_URL = __CONFIG__.api.url
+const PROVIDER = __CONFIG__.tasks.provider
+const TASK = __CONFIG__.tasks.task
 
 function isFunction(functionToCheck) {
   var getType = {};
@@ -170,8 +169,7 @@ export function* getItem() {
     var id = action.id;
 
     if (!id) {
-      // TODO: read provider from config!
-      return `${API_URL}items/nypl/random`;
+      return `${API_URL}tasks/${TASK}/items/random`;
     }
 
     return `${API_URL}items/${action.provider}/${id}`;
@@ -193,13 +191,10 @@ export function* submitStep() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      type: 'Feature',
-      properties: {
-        step: action.step,
-        stepIndex: action.stepIndex,
-        data: action.data
-      },
-      geometry: action.geometry
+      step: action.step,
+      stepIndex: action.stepIndex,
+      task: TASK,
+      data: action.data
     })
   })
 
@@ -220,7 +215,6 @@ export function* submitStep() {
 
 export function* skipStep() {
   const getUrl = (action) => `${API_URL}items/${action.provider}/${action.id}`;
-
   const fetchOptions = (action) => ({
     method: 'post',
     headers: {
@@ -228,12 +222,10 @@ export function* skipStep() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      type: 'Feature',
-      properties: {
-        step: action.step,
-        stepIndex: action.stepIndex,
-        skipped: true
-      }
+      step: action.step,
+      stepIndex: action.stepIndex,
+      task: TASK,
+      skipped: true
     })
   });
 
@@ -250,13 +242,6 @@ export function* skipStep() {
   });
 }
 
-export function* getCollections() {
-  yield* requestData(LOAD_COLLECTIONS, `${API_URL}collections`, {
-    actionSuccess: collectionsLoaded,
-    actionError: collectionsLoaded
-  });
-}
-
 export function* getLogOut() {
   yield* requestData(LOG_OUT, `${API_URL}oauth/disconnect`, {
     actionSuccess: logOutSuccess,
@@ -265,7 +250,7 @@ export function* getLogOut() {
 }
 
 export function* getSubmissions() {
-  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}submissions/count`, {
+  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}/tasks/${TASK}/submissions/count`, {
     actionSuccess: submissionsLoaded,
     actionError: submissionsLoadingError
   });

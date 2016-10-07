@@ -53,58 +53,6 @@ const selectItem = () => createSelector(
   (globalState) => globalState.get('item')
 );
 
-const selectTitle = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    const item = globalState.get('item');
-
-    if (!item) {
-      return null
-    }
-
-    return item.title;
-  }
-);
-
-const selectItemMetadataLocation = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    const item = globalState.get('item');
-
-    if (!item || !item.meta) {
-      return null
-    }
-
-    return item.meta.location;
-  }
-);
-
-const selectItemMetadataDate = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    const item = globalState.get('item');
-
-    if (!item || !item.meta) {
-      return null
-    }
-
-    return item.meta.date;
-  }
-);
-
-const selectCollectionForItem = () => createSelector(
-  selectGlobal(),
-  (globalState) => {
-    var item = globalState.get('item')
-    if (item) {
-      const collections = globalState.get('collections')
-      return collections.find((collection) => collection.id === item.collection_id)
-    } else {
-      return null
-    }
-  }
-);
-
 const selectOAuth = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('oauth')
@@ -175,16 +123,12 @@ export {
   selectCurrentStep,
 
   selectItem,
-  selectItemMetadataLocation,
-  selectItemMetadataDate,
+
   selectOAuth,
   selectLoggedIn,
   selectSubmissions,
 
-  selectTitle,
-
   selectCurrentStepIndex,
-  selectCollectionForItem,
 
   selectMenu,
 

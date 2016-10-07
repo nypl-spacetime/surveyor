@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-  loadOAuth,
-  loadCollections
+  loadOAuth
 } from '../App/actions';
 
 import Header from 'containers/Header';
@@ -17,7 +16,6 @@ export class App extends React.Component {
 
   componentWillMount = () => {
     this.props.loadOAuth();
-    this.props.loadCollections();
   }
 
   render() {
@@ -34,9 +32,6 @@ function mapDispatchToProps(dispatch) {
   return {
     loadOAuth: () => {
       dispatch(loadOAuth());
-    },
-    loadCollections: () => {
-      dispatch(loadCollections());
     },
     dispatch
   };

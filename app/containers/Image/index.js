@@ -21,14 +21,14 @@ export class Image extends React.Component {
 
   render() {
     let src = '';
-    if (this.props.item && this.props.item.image_urls) {
-      const urls = this.props.item.image_urls;
+    if (this.props.item && this.props.item.data && this.props.item.data.image_urls) {
+      const urls = this.props.item.data.image_urls;
       let index = 0;
       if (urls.length === 2) {
         index = 1;
       }
 
-      src = this.props.item.image_urls[index].url;
+      src = this.props.item.data.image_urls[index].url;
     }
 
     var imageStyle = {
@@ -51,12 +51,6 @@ export default connect(createSelector(
   })
 ))(Image);
 
-//
-// import React from 'react';
-// import { findDOMNode } from 'react-dom';
-//
-// import './image.scss';
-//
 // const Image = React.createClass({
 //
 //   getInitialState: function() {
