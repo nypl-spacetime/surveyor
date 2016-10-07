@@ -73,7 +73,7 @@ export class Geotagger extends React.Component {
     )
   }
 
-  submitStep(data, geometry) {
+  submitStep(data) {
     if (!this.props.item.id) {
       return;
     }
@@ -83,8 +83,7 @@ export class Geotagger extends React.Component {
       this.props.item.id,
       this.props.currentStep,
       this.props.currentStepIndex,
-      data,
-      geometry
+      data
     )
   }
 }

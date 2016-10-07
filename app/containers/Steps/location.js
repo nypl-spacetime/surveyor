@@ -48,10 +48,11 @@ export class Step extends React.Component {
     if (this.state.hasMoved) {
       var view = this.refs.map.getWrappedInstance().getView();
       this.props.submit({
-        zoom: view.zoom
-      }, {
-        type: 'Point',
-        coordinates: view.center
+        zoom: view.zoom,
+        geometry: {
+          type: 'Point',
+          coordinates: view.center
+        }
       });
     }
   }

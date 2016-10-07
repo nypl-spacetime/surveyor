@@ -12,10 +12,6 @@ import { createSelector } from 'reselect';
 
 import {
   selectItem,
-  selectTitle,
-  selectItemMetadataLocation,
-  selectItemMetadataDate,
-  selectCollectionForItem,
   selectCurrentStep
 } from 'containers/App/selectors';
 
@@ -32,28 +28,32 @@ export class Metadata extends React.Component {
   }
 
   render() {
+    const collection = (this.props.item && this.props.item.collection) || {}
+    const itemData = (this.props.item && this.props.item.data) || {}
+
     var collectionLink
-    if (this.props.collection) {
+    if (collection.url) {
+      const title = collection.title || 'Digital Collections'
       collectionLink = (
-        <a target='_blank' href={this.props.collection.url}>{this.props.collection.title}</a>
+        <a target='_blank' href={collection.url}>{title}</a>
       )
     }
 
     var geoDateHeader;
-    if ((this.props.location && this.props.location[0]) || (this.props.date && this.props.date[0])) {
+    if (itemData.location || itemData.date) {
       var spans = [];
 
-      if (this.props.location) {
+      if (itemData.location) {
         spans.push({
           key: 'Location',
-          value: this.props.location
+          value: itemData.location
         });
       }
 
-      if (this.props.date) {
+      if (itemData.date) {
         spans.push({
           key: 'Date',
-          value: this.props.date
+          value: itemData.date
         });
       }
 
@@ -68,7 +68,7 @@ export class Metadata extends React.Component {
       )
     }
 
-    const titleLength = this.props.title ? this.props.title.length : 0
+    const titleLength = itemData.title ? itemData.title.length : 0
 
     let titleStyle;
     if (titleLength > 100) {
@@ -107,7 +107,7 @@ export class Metadata extends React.Component {
 
     return (
       <div className={`${styles.metadata} sidebar-padding`}>
-        <h1 style={titleStyle} className={titleClasses} title={this.props.title}>{this.props.title}</h1>
+        <h1 style={titleStyle} className={titleClasses} title={itemData.title}>{itemData.title}</h1>
         {toggleMoreInfoLink}
         <div className={styles.moreInfo}>
           {searchLinks}
@@ -127,12 +127,8 @@ export class Metadata extends React.Component {
 
 export default connect(createSelector(
   selectItem(),
-  selectTitle(),
-  selectCollectionForItem(),
-  selectItemMetadataLocation(),
-  selectItemMetadataDate(),
   selectCurrentStep(),
-  (item, title, collection, location, date, currentStep) => ({
-    item, title, collection, location, date, currentStep
+  (item, currentStep) => ({
+    item, currentStep
   })
 ))(Metadata);
