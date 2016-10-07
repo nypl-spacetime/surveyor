@@ -250,7 +250,7 @@ export function* getLogOut() {
 }
 
 export function* getSubmissions() {
-  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}/tasks/${TASK}/submissions/count`, {
+  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}tasks/${TASK}/submissions/count`, {
     actionSuccess: submissionsLoaded,
     actionError: submissionsLoadingError
   });
