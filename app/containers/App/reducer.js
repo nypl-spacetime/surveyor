@@ -131,7 +131,7 @@ function appReducer(state = initialState, action) {
 
       if (!wasLastStep) {
         const stepData = {
-          provider: action.provider,
+          organizationId: action.organizationId,
           id: action.id,
           step: action.step,
           data: action.data,

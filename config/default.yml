@@ -2,8 +2,11 @@ api:
   url: http://brick-by-brick.dev/
 
 tasks:
-  provider: nypl
-  task: geotag-photo
+  organizationId: nypl
+  taskId: geotag-photo
+  collections:
+    - 66614620-c6ca-012f-0a98-58d385a7bc34 # 5th Ave start to finish
+    - 812e5770-c60c-012f-7167-58d385a7bc34 # Changing New York
 
 steps:
   - location

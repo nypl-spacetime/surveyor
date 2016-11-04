@@ -59,8 +59,9 @@ export default [
 ];
 
 const API_URL = __CONFIG__.api.url
-const PROVIDER = __CONFIG__.tasks.provider
-const TASK = __CONFIG__.tasks.task
+const ORGANIZATION_ID = __CONFIG__.tasks.organizationId
+const TASK_ID = __CONFIG__.tasks.taskId
+const COLLECTIONS = __CONFIG__.tasks.collections
 
 function isFunction(functionToCheck) {
   var getType = {};
@@ -169,10 +170,10 @@ export function* getItem() {
     var id = action.id;
 
     if (!id) {
-      return `${API_URL}tasks/${TASK}/items/random`;
+      return `${API_URL}tasks/${TASK_ID}/items/random?collection=${COLLECTIONS.join(',')}`;
     }
 
-    return `${API_URL}items/${action.provider}/${id}`;
+    return `${API_URL}items/${action.organizationId}/${id}`;
   }
 
   yield* requestData(LOAD_ITEM, getUrl, {
@@ -182,7 +183,7 @@ export function* getItem() {
 }
 
 export function* submitStep() {
-  const getUrl = (action) => `${API_URL}items/${action.provider}/${action.id}`;
+  const getUrl = (action) => `${API_URL}items/${action.organizationId}/${action.id}`;
 
   const fetchOptions = (action) => ({
     method: 'post',
@@ -193,7 +194,7 @@ export function* submitStep() {
     body: JSON.stringify({
       step: action.step,
       stepIndex: action.stepIndex,
-      task: TASK,
+      taskId: TASK_ID,
       data: action.data
     })
   })
@@ -202,7 +203,7 @@ export function* submitStep() {
     fetchOptions,
     actionSuccess: stepSubmitted,
     actionSuccessParams: (action, resultData) => [
-      action.provider,
+      action.organizationId,
       action.id,
       action.step,
       action.stepIndex,
@@ -214,7 +215,7 @@ export function* submitStep() {
 }
 
 export function* skipStep() {
-  const getUrl = (action) => `${API_URL}items/${action.provider}/${action.id}`;
+  const getUrl = (action) => `${API_URL}items/${action.organizationId}/${action.id}`;
   const fetchOptions = (action) => ({
     method: 'post',
     headers: {
@@ -224,7 +225,7 @@ export function* skipStep() {
     body: JSON.stringify({
       step: action.step,
       stepIndex: action.stepIndex,
-      task: TASK,
+      taskId: TASK_ID,
       skipped: true
     })
   });
@@ -233,7 +234,7 @@ export function* skipStep() {
     fetchOptions,
     actionSuccess: stepSkipped,
     actionSuccessParams: (action, resultData) => [
-      action.provider,
+      action.organizationId,
       action.id,
       action.step,
       action.stepIndex
@@ -250,7 +251,7 @@ export function* getLogOut() {
 }
 
 export function* getSubmissions() {
-  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}tasks/${TASK}/submissions/count`, {
+  yield* requestData(LOAD_OAUTH_SUCCESS, `${API_URL}tasks/${TASK_ID}/submissions/count`, {
     actionSuccess: submissionsLoaded,
     actionError: submissionsLoadingError
   });

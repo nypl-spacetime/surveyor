@@ -66,7 +66,7 @@ export class Geotagger extends React.Component {
     }
 
     this.props.skipStep(
-      this.props.item.provider,
+      this.props.item.organization.id,
       this.props.item.id,
       this.props.currentStep,
       this.props.currentStepIndex
@@ -79,7 +79,7 @@ export class Geotagger extends React.Component {
     }
 
     this.props.submitStep(
-      this.props.item.provider,
+      this.props.item.organization.id,
       this.props.item.id,
       this.props.currentStep,
       this.props.currentStepIndex,
@@ -93,11 +93,11 @@ function mapDispatchToProps(dispatch) {
     nextStep: () => {
       dispatch(nextStep());
     },
-    submitStep: (provider, id, step, stepIndex, data, geometry) => {
-      dispatch(submitStep(provider, id, step, stepIndex, data, geometry));
+    submitStep: (organizationId, id, step, stepIndex, data, geometry) => {
+      dispatch(submitStep(organizationId, id, step, stepIndex, data, geometry));
     },
-    skipStep: (provider, id, step, stepIndex) => {
-      dispatch(skipStep(provider, id, step, stepIndex));
+    skipStep: (organizationId, id, step, stepIndex) => {
+      dispatch(skipStep(organizationId, id, step, stepIndex));
     },
     dispatch
   };
