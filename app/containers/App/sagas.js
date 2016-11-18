@@ -173,7 +173,7 @@ export function* getItem() {
       return `${API_URL}tasks/${TASK_ID}/items/random?collection=${COLLECTIONS.join(',')}`;
     }
 
-    return `${API_URL}items/${action.organizationId}/${id}`;
+    return `${API_URL}organizations/${action.organizationId}/items/${id}`;
   }
 
   yield* requestData(LOAD_ITEM, getUrl, {
@@ -183,7 +183,7 @@ export function* getItem() {
 }
 
 export function* submitStep() {
-  const getUrl = (action) => `${API_URL}items/${action.organizationId}/${action.id}`;
+  const getUrl = (action) => `${API_URL}submissions`
 
   const fetchOptions = (action) => ({
     method: 'post',
@@ -194,8 +194,16 @@ export function* submitStep() {
     body: JSON.stringify({
       step: action.step,
       stepIndex: action.stepIndex,
-      taskId: TASK_ID,
-      data: action.data
+      data: action.data,
+      item: {
+        id: action.id
+      },
+      organization: {
+        id: action.organizationId
+      },
+      task: {
+        id: TASK_ID
+      }
     })
   })
 
@@ -215,7 +223,8 @@ export function* submitStep() {
 }
 
 export function* skipStep() {
-  const getUrl = (action) => `${API_URL}items/${action.organizationId}/${action.id}`;
+  const getUrl = (action) => `${API_URL}submissions`
+
   const fetchOptions = (action) => ({
     method: 'post',
     headers: {
@@ -225,8 +234,16 @@ export function* skipStep() {
     body: JSON.stringify({
       step: action.step,
       stepIndex: action.stepIndex,
-      taskId: TASK_ID,
-      skipped: true
+      skipped: true,
+      item: {
+        id: action.id
+      },
+      organization: {
+        id: action.organizationId
+      },
+      task: {
+        id: TASK_ID
+      }
     })
   });
 

@@ -31,57 +31,62 @@ export class Error extends React.Component {
 
   render() {
     const error = this.props.error
+    const status = error.error.status
 
-    const wasRandomItem = error && error.error &&
-      error.error.status === 404 && error.error.url &&
-      error.error.url.endsWith('random')
-
-    var message = error ? error.message : ''
-
-    if (!wasRandomItem) {
+    if (status === 401) {
+      // Unauthorized! User should log in
       return (
         <CenteredItemPage>
           <div className={styles.container}>
-            <div className={styles.lion}>
-              <img src={nypl} />
-              <img src={eye} className={styles.eye}/>
-            </div>
-            <div className={styles.error}>{message}</div>
-            <Buttons>
-              <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
-            </Buttons>
+            <div className={styles.error}>Unauthorized — please log in by clicking Save score in the menu</div>
           </div>
         </CenteredItemPage>
-      );
+      )
     } else {
-      // TODO: if /items/random returns 404,
-      // user has geotagged ALL availeble items!
-      // this should be celebrated!
+      const wasRandomItem = error && error.error &&
+        error.error.status === 404 && error.error.url &&
+        error.error.url.endsWith('random')
 
-      return (
-        <CenteredItemPage>
-          <div className={styles.container}>
-            <div className={styles.lion}>
-              <img src={nypl} />
-            </div>
-            <div className={styles.error}>
-              Wow! You've geotagged <b>all</b> available images...
-            </div>
-            <div className={styles.center}>
-              Find other projects to contribute to on the <a href='http://spacetime.nypl.org/'>website of the NYC Space/Time Directory</a>.
-            </div>
-          </div>
-        </CenteredItemPage>
-      );
+      var message = error ? error.message : ''
 
+      if (!wasRandomItem) {
+        return (
+          <CenteredItemPage>
+            <div className={styles.container}>
+              <div className={styles.lion}>
+                <img src={nypl} />
+                <img src={eye} className={styles.eye}/>
+              </div>
+              <div className={styles.error}>{message}</div>
+              <Buttons>
+                <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
+              </Buttons>
+            </div>
+          </CenteredItemPage>
+        );
+      } else {
+        // TODO: if /items/random returns 404,
+        // user has geotagged ALL availeble items!
+        // this should be celebrated!
+
+        return (
+          <CenteredItemPage>
+            <div className={styles.container}>
+              <div className={styles.lion}>
+                <img src={nypl} />
+              </div>
+              <div className={styles.error}>
+                Wow! You've geotagged <b>all</b> available images...
+              </div>
+              <div className={styles.center}>
+                Find other projects to contribute to on the <a href='http://spacetime.nypl.org/'>website of the NYC Space/Time Directory</a>.
+              </div>
+            </div>
+          </CenteredItemPage>
+        );
+      }
     }
   }
-
-  spacetime() {
-    // this.openAbout()
-    // location.reload();
-  }
-
 
   reload() {
     this.openAbout()

@@ -36,7 +36,7 @@ export class Menu extends React.Component {
         return this.props.oauth.providers
           .filter((provider) => provider.name !== omitProvider)
           .map((provider) => (
-            <a className={`${styles.link}`} href={provider.connect}>
+            <a className={`${styles.link}`} href={provider.url}>
               Log in with {provider.title}
             </a>
           ))
