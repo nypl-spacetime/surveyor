@@ -1,4 +1,4 @@
-/*eslint-disable*/
+/* global mkdir, echo, exec */
 
 // No need to build the DLL in production
 if (process.env.NODE_ENV === 'production') {
@@ -28,7 +28,7 @@ mkdir('-p', outputPath)
 echo('Building the Webpack DLL...')
 
 /**
- * Create a manifest so npm install doesnt warn us
+ * Create a manifest so npm install doesn't warn us
  */
 if (!exists(dllManifestPath)) {
   writeFile(
@@ -40,7 +40,6 @@ if (!exists(dllManifestPath)) {
       repository: pkg.repository,
       version: pkg.version
     }), null, 2),
-
     'utf8'
   )
 }

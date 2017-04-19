@@ -1,13 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './styles.css';
+import styled from 'styled-components'
 
-function CenteredItemPage(props) {
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+function CenteredItemPage (props) {
   return (
-    <div className={styles.container}>
+    <Container>
       {props.children}
-    </div>
-  );
+    </Container>
+  )
 }
 
-export default CenteredItemPage;
+export default CenteredItemPage

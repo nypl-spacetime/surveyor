@@ -1,38 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 
-import styles from './styles.css';
+import Menu from 'components/Menu'
 
-import nypl from 'images/nypl-white.svg';
+import { StyledHeader, Logo, Subtitles } from './styles'
 
-function Header(props) {
+import nypl from 'images/nypl-white.svg'
+
+export default function Header (props) {
   return (
-    <header className={`${props.className} ${styles.header} ${styles['align-center']}`}>
-      <div className={`${styles['align-center']} ${styles.main}`}>
-        <a href='//nypl.org' target='_blank'>
-          <img src={nypl} className={`${styles.logo}`} alt='The New York Public Library'/>
-        </a>
-        <a href='http://spacetime.nypl.org/' target='_blank'>
-          <div className={styles.subtitles}>
-            <h2>
-              The New York Public Library
-            </h2>
-            <h3>
-              NYC Space/Time Directory
-            </h3>
+    <StyledHeader className='align-center'>
+      <div className='align-center'>
+        <Logo style={{backgroundImage: `url(${nypl})`}} href='//nypl.org' target='_blank'>
+          <span>The New York Public Library</span>
+        </Logo>
+        <Subtitles>
+          <div>
+            <a href='http://nypl.org/' target='_blank'>The New York Public Library</a>
           </div>
-        </a>
-        <h1 className={styles.title}>
+          <div>
+            <a href='http://spacetime.nypl.org/' target='_blank'>NYC Space/Time Directory</a>
+          </div>
+        </Subtitles>
+        <h1>
           <Link to='/'>
-            {props.title}
+            Surveyor
           </Link>
         </h1>
       </div>
-      <div>
+      <Menu path={props.path}>
         {props.children}
-      </div>
-    </header>
-  );
+      </Menu>
+    </StyledHeader>
+  )
 }
-
-export default Header;

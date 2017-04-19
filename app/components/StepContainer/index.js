@@ -1,17 +1,17 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import styles from './styles.css';
+import { Container } from './styles'
 
-function StepContainer(props) {
+function StepContainer (props) {
   return (
-    <div className={styles.container}>
+    <Container>
       {props.children}
-    </div>
-  );
+    </Container>
+  )
 }
 
 StepContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node.isRequired
+}
 
-export default StepContainer;
+export default StepContainer

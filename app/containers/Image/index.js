@@ -1,158 +1,50 @@
-/*
- * Header
- *
- * Header header header
- */
-/* eslint-disable react/prefer-stateless-function */
+import React from 'react'
+import { connect } from 'react-redux'
 
-import React from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
 import {
   selectItem
-} from 'containers/App/selectors';
+} from 'containers/App/selectors'
 
-import styles from './styles.css';
+import { StyledContainer, StyledImage, ScreenReaderImage, DigitalCollections } from './styles'
 
 export class Image extends React.Component {
-
-  render() {
-    let src = '';
+  render () {
+    let src
+    let title
     if (this.props.item && this.props.item.data && this.props.item.data.image_urls) {
-      const urls = this.props.item.data.image_urls;
-      let index = 0;
+      const urls = this.props.item.data.image_urls
+      let index = 0
       if (urls.length === 2) {
-        index = 1;
+        index = 1
       }
 
-      src = this.props.item.data.image_urls[index].url;
+      src = this.props.item.data.image_urls[index].url
+      title = this.props.item.data.title
     }
 
-    var imageStyle = {
+    const imageStyle = {
       backgroundImage: `url(${src})`
-    };
+    }
 
     return (
-      <div className={`${styles.container}`}>
-        <div ref='image' className={`${styles.image}`} style={imageStyle} />
-      </div>
-    );
+      <StyledContainer>
+        <ScreenReaderImage src={src} alt={title} className='only-screen-reader' />
+        <StyledImage style={imageStyle} />
+        <DigitalCollections>
+          <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
+            View in high resolution in Digital Collections
+          </a>
+        </DigitalCollections>
+      </StyledContainer>
+    )
   }
 }
 
-// Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
   selectItem(),
   (item) => ({
     item
   })
-))(Image);
-
-// const Image = React.createClass({
-//
-//   getInitialState: function() {
-//     return {
-//       dragoffset: [0, 0]
-//     };
-//   },
-//
-//   dragging: false,
-//   tempDragoffset: [0, 0],
-//   draggingDragoffset: [0, 0],
-//
-//   render: function() {
-//     var uuid = this.props.item.uuid;
-//     var url = `http://digitalcollections.nypl.org/items/${uuid}`;
-//
-//     var imageStyle = {
-//       backgroundImage: `url(${this.props.item.image_link})`,
-//       transform: `translate(${this.state.dragoffset[0]}px,${this.state.dragoffset[1]}px)`
-//     };
-//
-//     var className = 'item-image' + (this.props.draggable ? ' draggable' : '');
-//
-//     return (
-//       <div className='item-image-container'>
-//         <div ref='image' className={className} style={imageStyle}
-//           onMouseDown={this.startDrag} />
-//       </div>
-//     );
-//   },
-//
-//   startDrag: function(e) {
-//     if (this.props.draggable) {
-//       this.dragging = true;
-//       var pageX = e.pageX || e.clientX + (document.documentElement.scrollLeft ?
-//         document.documentElement.scrollLeft :
-//         document.body.scrollLeft);
-//       var pageY = e.pageY || e.clientY + (document.documentElement.scrollTop ?
-//         document.documentElement.scrollTop :
-//         document.body.scrollTop);
-//
-//       this.draggingDragoffset = [
-//         pageX - this.state.dragoffset[0],
-//         pageY - this.state.dragoffset[1]
-//       ];
-//
-//       if (e.stopPropagation) {
-//         e.stopPropagation();
-//       }
-//       if (e.preventDefault) {
-//         e.preventDefault();
-//       }
-//
-//       e.cancelBubble = true;
-//       e.returnValue = false;
-//       return false;
-//     }
-//
-//   },
-//
-//   endDrag: function() {
-//     this.dragging = false;
-//
-//     this.setState({
-//       dragoffset: this.tempDragoffset
-//     });
-//   },
-//
-//   moveDrag: function(e) {
-//     if (this.props.draggable && this.dragging) {
-//       var pageX = e.pageX || e.clientX + (document.documentElement.scrollLeft ?
-//         document.documentElement.scrollLeft :
-//         document.body.scrollLeft);
-//       var pageY = e.pageY || e.clientY + (document.documentElement.scrollTop ?
-//         document.documentElement.scrollTop :
-//         document.body.scrollTop);
-//
-//       var top = (pageY - this.draggingDragoffset[0]) + 'px';
-//       var left = (pageX - this.draggingDragoffset[1]) + 'px';
-//
-//       this.tempDragoffset = [
-//         e.pageX - this.draggingDragoffset[0],
-//         e.pageY - this.draggingDragoffset[1]
-//       ];
-//
-//       var transform = `translate(${this.tempDragoffset[0]}px,${this.tempDragoffset[1]}px)`;
-//
-//       var node = findDOMNode(this.refs.image);
-//       node.style.transform = transform;
-//     }
-//   },
-//
-//   componentDidMount: function() {
-//     window.addEventListener('mousemove', this.moveDrag);
-//     window.addEventListener('mouseup', this.endDrag);
-//   },
-//
-//   componentWillUnmount: function() {
-//     window.removeEventListener('mousemove', this.moveDrag);
-//     window.removeEventListener('mouseup', this.endDrag);
-//   }
-//
-// });
-//
-// export default Image;
+))(Image)

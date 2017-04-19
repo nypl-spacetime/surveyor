@@ -1,13 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './styles.css';
-
-function Sidebar(props) {
+function Sidebar (props) {
   return (
-    <div className={`${styles.container}`}>
+    <div>
       {props.children}
     </div>
-  );
+  )
 }
 
-export default Sidebar;
+export default Sidebar

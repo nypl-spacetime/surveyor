@@ -1,23 +1,26 @@
-/**
- *
- * Buttons.react.js
- *
- */
+import React, { PropTypes } from 'react'
+import styled from 'styled-components'
 
-import React, { PropTypes } from 'react';
+export const StyledButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  flex-shrink: 0;
+`
 
-import styles from './styles.css';
-
-function Buttons(props) {
+function Buttons (props) {
   return (
-    <div className={styles.buttons}>
+    <StyledButtons>
       {props.children}
-    </div>
-  );
+    </StyledButtons>
+  )
 }
 
 Buttons.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node.isRequired
+}
 
-export default Buttons;
+export default Buttons

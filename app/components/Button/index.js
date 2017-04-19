@@ -1,38 +1,35 @@
-/**
- *
- * Button.react.js
- *
- * A common button, if you pass it a prop "route" it'll render a link to a react-router route
- * otherwise it'll render a link with an onclick
- */
+import React from 'react'
 
-import React, { PropTypes } from 'react';
+import { StyledButton, StyledLink } from './styles'
 
-import styles from './styles.css';
+function Button (props) {
+  const type = props.disabled ? 'disabled' : props.type
 
-function Button(props) {
-  var classNames = [
-    styles.button,
-    (props.type && styles[props.type]) ? styles[props.type] : '',
-    props.disabled ? styles.disabled : ''
-  ];
+  if (props.to) {
+    let to
+    if (!props.disabled) {
+      to = props.to
+    }
 
-  var onClick;
-  if (!props.disabled) {
-    onClick = props.onClick
+    return (
+      <StyledLink tabIndex='0' to={to}
+        disabled={props.disabled} type={type}>
+        {props.children}
+      </StyledLink>
+    )
+  } else if (props.onClick) {
+    let onClick
+    if (!props.disabled) {
+      onClick = props.onClick
+    }
+
+    return (
+      <StyledButton tabIndex='0' onClick={onClick}
+        disabled={props.disabled} type={type}>
+        {props.children}
+      </StyledButton>
+    )
   }
-
-  return (
-    <button tabindex='0' className={classNames.join(' ')} onClick={onClick}>
-      {props.children}
-    </button>
-  );
 }
 
-Button.propTypes = {
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
-};
-
-export default Button;
+export default Button

@@ -8,7 +8,7 @@ import {
   selectCSSVariables
 } from 'containers/App/selectors'
 
-import styles from './styles.css'
+import { Container, First, Second, Resizer } from './styles'
 
 export class SlidyPane extends React.Component {
 
@@ -52,14 +52,14 @@ export class SlidyPane extends React.Component {
       maxWidth: 800,
 
       height: 450,
-      
+
       resizeMode: 'horizontal',
 
       dragging: false,
       userFirstPaneSize: null,
 
       orientation: this.orientation(),
-      dimensions: this.getInitialDimensions(),
+      dimensions: this.getInitialDimensions()
     })
 
     window.addEventListener('resize', this.monitorResize)
@@ -70,10 +70,13 @@ export class SlidyPane extends React.Component {
   }
 
   recordContainerBounds () {
-    var el = null
-    if (this.refs.container) el = findDOMNode(this.refs.container)
-    this.containerWidth = el ? el.clientWidth : window.innerWidth
-    this.containerHeight = el ? el.clientHeight : window.innerHeight
+    let element
+    if (this.refs.container) {
+      element = findDOMNode(this.refs.container)
+    }
+
+    this.containerWidth = element ? element.clientWidth : window.innerWidth
+    this.containerHeight = element ? element.clientHeight : window.innerHeight
   }
 
   monitorResize = () => {
@@ -86,7 +89,6 @@ export class SlidyPane extends React.Component {
     } else if (this.containerWidth >= this.mobileWidth) {
       this.updateDimensions()
     }
-
   }
 
   // TODO: >= or >?
@@ -95,7 +97,6 @@ export class SlidyPane extends React.Component {
   }
 
   dragStart = (e) => {
-
     this.children = [findDOMNode(this.refs.first), findDOMNode(this.refs.second)]
 
     this.setState({dragging: true})
@@ -114,7 +115,6 @@ export class SlidyPane extends React.Component {
       this.startPos = xy.x - this.children[1].offsetLeft
     } else {
       this.startPos = xy.y - this.children[1].offsetTop + findDOMNode(this.refs.container).offsetTop
-      
     }
 
     this.xy = xy
@@ -134,17 +134,16 @@ export class SlidyPane extends React.Component {
   }
 
   getInitialDimensions () {
-
     var customSize = this.state && this.state.userFirstPaneSize ? this.state.userFirstPaneSize : null
 
     if (this.orientation() === 'horizontal') {
-      var firstRatio = customSize ? customSize : this.props.firstPaneInitialSize.horizontal
+      let firstRatio = customSize || this.props.firstPaneInitialSize.horizontal
       return [
         { width: this.containerWidth * firstRatio, height: 'inherit' },
         { width: this.containerWidth - this.containerWidth * firstRatio, height: 'inherit' }
       ]
     } else {
-      var firstRatio = customSize ? customSize : this.props.firstPaneInitialSize.vertical
+      let firstRatio = customSize || this.props.firstPaneInitialSize.vertical
       return [
         { width: '100%', height: this.containerHeight * firstRatio },
         { width: '100%', height: this.containerHeight - this.containerHeight * firstRatio }
@@ -163,11 +162,12 @@ export class SlidyPane extends React.Component {
   } */
 
   dragEnd = (e) => {
-
     window.removeEventListener('mousemove', this.dragMove)
     window.removeEventListener('touchmove', this.dragMove)
 
-    this.setState({dragging: false })
+    this.setState({
+      dragging: false
+    })
 
     // If touch device, fire click:
     if (e.changedTouches) {
@@ -183,23 +183,22 @@ export class SlidyPane extends React.Component {
     var dims = {}
 
     if (this.orientation() === 'horizontal') {
-      var clientX;
+      var clientX
       if (e.changedTouches) {
-        clientX = e.changedTouches[0].pageX;
+        clientX = e.changedTouches[0].pageX
       } else {
-        clientX = e.clientX ? e.clientX : e.pageX;
+        clientX = e.clientX ? e.clientX : e.pageX
       }
 
       clientX -= this.startPos
       dims.width = clientX
-      
     } else {
-      var clientY;
+      var clientY
 
       if (e.changedTouches) {
-        clientY = e.changedTouches[0].pageY;
+        clientY = e.changedTouches[0].pageY
       } else {
-        clientY = e.clientY ? e.clientY : e.pageY;
+        clientY = e.clientY ? e.clientY : e.pageY
       }
 
       clientY -= this.startPos
@@ -208,7 +207,7 @@ export class SlidyPane extends React.Component {
     }
 
     this.setFirstDimensions(dims, () => {
-      var firstRatio = null;
+      var firstRatio = null
       if (this.orientation() === 'horizontal') firstRatio = parseInt(this.state.dimensions[0].width) / this.containerWidth
       else firstRatio = parseInt(this.state.dimensions[0].height) / this.containerHeight
       this.setState({ userFirstPaneSize: firstRatio })
@@ -216,20 +215,20 @@ export class SlidyPane extends React.Component {
     e.preventDefault()
   }
 
-  setFirstDimensions = (dims, cb) => {
-    var dims = [dims]
+  setFirstDimensions = (dims, callback) => {
+    dims = [dims]
     dims.push({
       width: this.containerWidth - dims[0].width,
       height: this.containerHeight - parseInt(dims[0].height)
     })
-    this.setDimensions(dims, cb)
+    this.setDimensions(dims, callback)
   }
 
-  setDimensions = (dims, cb) => {
-    var dimensions = [{}, {}]
-    ;[0, 1].forEach((ind) => {
-      ;['width', 'height'].forEach((prop) => {
+  setDimensions = (dims, callback) => {
+    let dimensions = [{}, {}]
 
+    Array.from([0, 1]).forEach((ind) => {
+      Array.from(['width', 'height']).forEach((prop) => {
         var val = dims[ind] && (typeof dims[ind][prop]) === 'number' ? dims[ind][prop] : null
 
         var minVal = this.props.minSize[this.orientation()][ind]
@@ -246,44 +245,54 @@ export class SlidyPane extends React.Component {
         dimensions[ind][prop] = val
       })
     })
-    this.setState({ dimensions: dimensions }, cb)
+    this.setState({ dimensions: dimensions }, callback)
   }
 
   render () {
-    return (
-      <div className={[styles.container, this.state.orientation, styles[this.state.orientation]].join(' ')} ref='container'>
-        <div className={styles.first} ref='first' style={{ width: this.state.dimensions[0].width, height: this.state.dimensions[0].height }}>
-          {this.props.children[0]}
-        </div>
-        <div className={styles.second} ref='second' style={{ width: this.state.dimensions[1].width, height: this.state.dimensions[1].height }}>
-          <div className={`${styles.resizer}${this.state.dragging ? ` ${styles.resizing}` : ''}`}
-            onClick={this.resizerClick}
-            onMouseDown={this.dragStart}
-            onTouchStart={this.dragStart} >
-            <span></span>
-          </div>
-          {this.props.children[1]}
+    const orientation = this.state.orientation
 
-        </div>
-      </div>
+    const firstStyle = {
+      width: this.state.dimensions[0].width,
+      height: this.state.dimensions[0].height
+    }
+    const secondStyle = {
+      width: this.state.dimensions[1].width,
+      height: this.state.dimensions[1].height
+    }
+
+    return (
+      <Container orientation={orientation} ref='container'>
+        <First ref='first' style={firstStyle}>
+          {this.props.children[0]}
+        </First>
+        <Second ref='second' style={secondStyle}>
+          <Resizer dragging={this.state.dragging} onClick={this.resizerClick}
+            onMouseDown={this.dragStart} onTouchStart={this.dragStart} >
+            <span />
+          </Resizer>
+          {this.props.children[1]}
+        </Second>
+      </Container>
     )
   }
 
-  /* 
-   * When resizer clicked, toggle active pane
-   */
-  resizerClick = (e) => {
-    if (!this.clickDragged(e)) {
+  // When resizer clicked, toggle active pane
+  resizerClick = (event) => {
+    if (!this.clickDragged(event)) {
+      if (this.expandedPane() === 0) {
+        this.expandPane(1)
+      } else {
+        this.expandPane(0)
+      }
 
-      if (this.expandedPane() === 0) this.expandPane(1)
-      else this.expandPane(0)
-
-      this.setState({ userFirstPaneSize: null })
+      this.setState({
+        userFirstPaneSize: null
+      })
     }
   }
 
   clickDragged = (e) => {
-    var pos;
+    let pos
     if (e.changedTouches) {
       pos = {
         x: e.changedTouches[0].pageX,
@@ -293,7 +302,7 @@ export class SlidyPane extends React.Component {
       pos = e.clientY ? {x: e.clientX, y: e.clientY} : {x: e.pageX, y: e.pageY}
     }
 
-    var hasMoved = (pos.x !== this.xy.x || pos.y !== this.xy.y)
+    const hasMoved = (pos.x !== this.xy.x || pos.y !== this.xy.y)
     return hasMoved
   }
 
@@ -309,13 +318,27 @@ export class SlidyPane extends React.Component {
     return this.orientation() === 'horizontal' ? this.containerWidth : this.containerHeight
   }
 
-  expandPane (ind) {
+  expandPane (index) {
     if (this.orientation() === 'horizontal') {
-      if (ind === 0) this.setFirstDimensions({ width: this.getMaxSize(0) })
-      else this.setFirstDimensions({ width: this.getMinSize(0) })
+      if (index === 0) {
+        this.setFirstDimensions({
+          width: this.getMaxSize(0)
+        })
+      } else {
+        this.setFirstDimensions({
+          width: this.getMinSize(0)
+        })
+      }
     } else {
-      if (ind === 0) this.setFirstDimensions({ height: this.getMaxSize(0) })
-      else this.setFirstDimensions({ height: this.getMinSize(0) })
+      if (index === 0) {
+        this.setFirstDimensions({
+          height: this.getMaxSize(0)
+        })
+      } else {
+        this.setFirstDimensions({
+          height: this.getMinSize(0)
+        })
+      }
     }
   }
 
@@ -324,7 +347,7 @@ export class SlidyPane extends React.Component {
     var prop = this.orientation() === 'horizontal' ? 'width' : 'height'
     var s = [this.getMinSize(0), this.getMaxSize(0)]
       .map((boundary) => Math.abs(boundary - parseInt(this.state.dimensions[0][prop])))
-      .reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+      .reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0)
 
     return s
   }
@@ -344,4 +367,3 @@ export default connect(createSelector(
     cssVariables
   })
 ))(SlidyPane)
-
