@@ -7,7 +7,7 @@ import {
   selectItem
 } from 'containers/App/selectors'
 
-import { StyledContainer, StyledImage, ScreenReaderImage, DigitalCollections } from './styles'
+import { StyledContainer, ImageContainer, ScreenReaderImage, DigitalCollections } from './styles'
 
 export class Image extends React.Component {
   render () {
@@ -31,7 +31,9 @@ export class Image extends React.Component {
     return (
       <StyledContainer>
         <ScreenReaderImage src={src} alt={title} className='only-screen-reader' />
-        <StyledImage style={imageStyle} />
+        <ImageContainer>
+          <div style={imageStyle} />
+        </ImageContainer>
         <DigitalCollections>
           <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
             View in high resolution in Digital Collections

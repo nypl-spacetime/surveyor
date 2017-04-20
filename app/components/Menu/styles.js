@@ -22,13 +22,18 @@ export const Nav = styled.nav`
   & > * {
     display: inline-block;
     padding: 5px 12px 5px 12px;
+    border-radius: 3px;
   }
 
-  & > *:first-child {
+  &:hover > * {
+    border-radius: 0;
+  }
+
+  &:hover > *:first-child {
     border-radius: 3px 0 0 3px;
   }
 
-  & > *:last-child {
+  &:hover > *:last-child {
     border-radius: 0 3px 3px 0;
   }
 `
