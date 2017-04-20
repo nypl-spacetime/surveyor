@@ -1,17 +1,13 @@
+/* global __CONFIG__ */
+
 import styled, { keyframes } from 'styled-components'
 
-// const headerColor = __CONFIG__.cssVariables.headerColor
-
-// .container {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-end;
-// }
+const mainColor = __CONFIG__.cssVariables.mainColor
 
 export const TimerBar = styled.div`
   border-radius: 4px;
   height: 4px;
-  background-color: #d0343a;
+  background-color: ${mainColor};
   transition-property: width;
   transition-timing-function: linear;
 `

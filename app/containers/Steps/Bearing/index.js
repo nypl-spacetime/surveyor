@@ -20,33 +20,43 @@ export class Step extends React.Component {
 
   constructor (props) {
     super(props)
-    const zoom = Math.min(props.locationStepData.data.zoom + 2, props.mapDefaults.maxZoom)
     this.state = {
       hasMoved: false,
-      angle: 40,
       initialView: {
-        zoom: zoom,
+        zoom: props.locationStepData.data.zoom,
         center: [
           props.locationStepData.data.geometry.coordinates[1],
           props.locationStepData.data.geometry.coordinates[0]
         ]
+      },
+      fieldOfView: {
+        type: 'Feature',
+        properties: {
+          angle: 40
+        },
+        geometry: {
+          type: 'LineString',
+          coordinates: [
+            props.locationStepData.data.geometry.coordinates,
+            props.locationStepData.data.geometry.coordinates
+          ]
+        }
       }
     }
   }
-
-  // mapMoving = false
-  // mapMovingLatLng = null
 
   // onSliderInput (e) {
   //   this.setState({
   //     angle: parseInt(e.target.value)
   //   });
-
   //   this.updateFieldOfView()
   // }
 
+  roundNumber (n) {
+    return Math.round(n * 100) / 100
+  }
+
   onCameraChange () {
-    console.log('vissen')
     if (!this.state.hasMoved) {
       this.setState({
         hasMoved: true
@@ -56,12 +66,13 @@ export class Step extends React.Component {
 
   render () {
     const options = this.state.initialView
+    const fieldOfView = this.state.fieldOfView
 
     return (
       <StepContainer>
         <MapContainer>
           <Map ref='map' mode='camera' cameraChange={this.onCameraChange.bind(this)}
-            options={options} defaults={this.props.defaults} />
+            options={options} fieldOfView={fieldOfView} defaults={this.props.defaults} />
         </MapContainer>
         <Buttons>
           <Button onClick={this.props.skip} type='secondary'>Skip</Button>
@@ -73,14 +84,14 @@ export class Step extends React.Component {
 
   submit () {
     if (this.state.hasMoved) {
-      console.log('grijp fov!')
-    //   var data = {
-    //     angle: this.fieldOfView.properties.angle,
-    //     bearing: this.roundNumber(this.fieldOfView.properties.bearing),
-    //     distance: this.roundNumber(this.fieldOfView.properties.distance),
-    //     geometry: this.fieldOfView.geometry
-    //   }
-    //   this.props.submit(data);
+      const fieldOfView = this.refs.map.getWrappedInstance().getFieldOfView()
+      const data = {
+        angle: fieldOfView.properties.angle,
+        bearing: this.roundNumber(fieldOfView.properties.bearing),
+        distance: this.roundNumber(fieldOfView.properties.distance),
+        geometry: fieldOfView.geometry
+      }
+      this.props.submit(data)
     }
   }
 }

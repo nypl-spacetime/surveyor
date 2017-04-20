@@ -48,7 +48,7 @@ export class Step extends React.Component {
     if (!this.props.loggedIn) {
       oauthQuestion = (
         <p className='centered'>
-          To save your score, please log in using the <b>Save score</b> option in the menu
+          To save your score, please log in using the <b>Save score</b> option in the menu.
         </p>
       )
     }

@@ -18,6 +18,8 @@ import crosshairShadowImage from 'images/crosshair-shadow.svg'
 
 import cameraImage from '../../../node_modules/leaflet-geotag-photo/images/camera.svg'
 import targetImage from '../../../node_modules/leaflet-geotag-photo/images/target.svg'
+import controlCameraImg from '../../../node_modules/leaflet-geotag-photo/images/camera-icon.svg'
+import controlCrosshairImg from '../../../node_modules/leaflet-geotag-photo/images/crosshair-icon.svg'
 
 export class Map extends React.Component {
 
@@ -44,9 +46,11 @@ export class Map extends React.Component {
     )
   }
 
-  roundCoordinate = (coordinate) => Math.round(coordinate * 1000000) / 1000000
+  roundCoordinate (coordinate) {
+    return Math.round(coordinate * 1000000) / 1000000
+  }
 
-  getView = () => {
+  getView () {
     if (this.map) {
       const center = this.map.getCenter()
       return {
@@ -59,13 +63,21 @@ export class Map extends React.Component {
     }
   }
 
-  getMap = () => this.map
+  getFieldOfView () {
+    if (this.camera) {
+      return this.camera.getFieldOfView()
+    }
+  }
 
-  getOptions = (key) => {
+  getMap () {
+    return this.map
+  }
+
+  getOptions (key) {
     return this.props.options[key] || this.props.defaults[key]
   }
 
-  componentDidMount = () => {
+  componentDidMount () {
     const node = findDOMNode(this.refs.map)
 
     const map = L.map(node, {
@@ -85,34 +97,10 @@ export class Map extends React.Component {
       const imgShadow = `<img src="${crosshairShadowImage}" class="crosshair-shadow" />`
       const imgHere = `<img src="${crosshairHereImage}" class="crosshair-here" />`
 
-      L.GeotagPhoto.crosshair({
+      this.crosshair = L.GeotagPhoto.crosshair({
         crosshairHTML: `<div class="crosshair">${imgShadow}${imgHere}</div>`
       }).addTo(map)
     } else if (this.props.mode === 'camera') {
-      // TODO: remove magic numbers! 😶
-      const cameraPoint = [6.83442, 52.43369]
-      const targetPoint = [6.83342, 52.43469]
-
-      const points = {
-        type: 'Feature',
-        properties: {
-          angle: 20
-        },
-        geometry: {
-          type: 'GeometryCollection',
-          geometries: [
-            {
-              type: 'Point',
-              coordinates: cameraPoint
-            },
-            {
-              type: 'Point',
-              coordinates: targetPoint
-            }
-          ]
-        }
-      }
-
       const cameraIcon = L.icon({
         iconUrl: cameraImage,
         iconSize: [38, 38],
@@ -125,10 +113,14 @@ export class Map extends React.Component {
         iconAnchor: [90, 16]
       })
 
-      const camera = L.GeotagPhoto.camera(points, {
+      const camera = L.GeotagPhoto.camera(this.props.fieldOfView, {
         cameraIcon,
-        targetIcon
+        targetIcon,
+        controlCameraImg,
+        controlCrosshairImg
       }).addTo(map)
+
+      this.camera = camera
 
       if (this.props.cameraChange) {
         camera.on('change', this.props.cameraChange)
@@ -149,7 +141,7 @@ export class Map extends React.Component {
     setInterval(() => this.checkSize(), 500)
   }
 
-  checkSize = () => {
+  checkSize () {
     var node = findDOMNode(this.refs.container)
     if (node) {
       var dimensions = { width: node.clientWidth, height: node.clientHeight }
