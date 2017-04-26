@@ -42,6 +42,7 @@ export class AboutPage extends React.Component {
           a digital time-travel service for New York City. <a href='http://pages.email.nypl.org/spacetimeupdates/'>
           Sign up for our mailing list</a> to receive updates about the NYC Space/Time Directory.
         </p>
+        <SurveyorButton />
         <h2>Rules &amp; Guidance</h2>
         <p>
           There are two guiding principles of geotagging in NYPL Surveyor: <strong>take your best

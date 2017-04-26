@@ -19,4 +19,8 @@ export const Submissions = styled.span`
 
 export const Title = styled.span`
   color: ${mainColor};
+  max-width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `

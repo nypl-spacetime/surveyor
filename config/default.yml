@@ -5,7 +5,9 @@ cssVariables:
   padding: 10px
 
   headerHeight: 50px
+
   mobileWidth: 800px
+  mobileHeight: 800px
 
   mainColor: '#d0343a'
   outlineColor: '#d0343a'

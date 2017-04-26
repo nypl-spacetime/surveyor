@@ -35,10 +35,6 @@ export const StyledHeader = styled.header`
   }
 
   @media (max-width: ${mobileWidth}) {
-    & {
-      justify-content: center;
-    }
-
     & > * {
       margin: 0 5px;
     }

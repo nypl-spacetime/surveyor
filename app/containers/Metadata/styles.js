@@ -9,6 +9,7 @@ export const Container = styled.div`
   overflow: auto;
   font-size: 1rem;
   padding: ${padding};
+  flex-shrink: 0;
 `
 
 export const Title = styled.h1`
