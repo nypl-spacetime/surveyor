@@ -2,32 +2,20 @@
  * TEST WEBPACK CONFIGURATION
  */
 
-const path = require('path');
-const webpack = require('webpack');
+const webpack = require('webpack')
 const modules = [
   'app',
-  'node_modules',
-];
+  'node_modules'
+]
 
 module.exports = {
   devtool: 'inline-source-map',
-  isparta: {
-    babel: {
-      presets: ['es2015', 'react', 'stage-0'],
-    },
-  },
   module: {
     // Some libraries don't like being run through babel.
     // If they gripe, put them here.
     noParse: [
       /node_modules(\\|\/)sinon/,
-      /node_modules(\\|\/)acorn/,
-    ],
-    preLoaders: [
-      { test: /\.js$/,
-        loader: 'isparta',
-        include: path.resolve('app/'),
-      },
+      /node_modules(\\|\/)acorn/
     ],
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
@@ -37,16 +25,16 @@ module.exports = {
       // imports-loader allows for global vars to be injected into the module.
       // See https://github.com/webpack/webpack/issues/304
       { test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
-        loader: 'imports?define=>false,require=>false',
+        loader: 'imports?define=>false,require=>false'
       },
       { test: /\.js$/,
         loader: 'babel',
-        exclude: [/node_modules/],
+        exclude: [/node_modules/]
       },
-      { test: /\.jpe?g$|\.gif$|\.png$/i,
-        loader: 'null-loader',
-      },
-    ],
+      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
+        loader: 'null-loader'
+      }
+    ]
   },
 
   plugins: [
@@ -56,8 +44,8 @@ module.exports = {
     // drop any unreachable code.
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
     })],
 
   // Some node_modules pull in Node-specific dependencies.
@@ -69,7 +57,7 @@ module.exports = {
     fs: 'empty',
     child_process: 'empty',
     net: 'empty',
-    tls: 'empty',
+    tls: 'empty'
   },
 
   // required for enzyme to work properly
@@ -77,14 +65,13 @@ module.exports = {
     jsdom: 'window',
     'react/addons': true,
     'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': 'window',
+    'react/lib/ReactContext': 'window'
   },
   resolve: {
-    modulesDirectories: modules,
     modules,
     alias: {
       // required for enzyme to work properly
-      sinon: 'sinon/pkg/sinon',
-    },
-  },
-};
+      sinon: 'sinon/pkg/sinon'
+    }
+  }
+}

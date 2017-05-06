@@ -1,28 +1,157 @@
 api:
   url: http://brick-by-brick.dev/
 
+cssVariables:
+  padding: 10px
+
+  headerHeight: 50px
+
+  mobileWidth: 900px
+  mobileHeight: 600px
+
+  mainColor: '#d0343a'
+  outlineColor: '#d0343a'
+
+  imageBackground: 'rgb(50,50,50)'
+
+  pageBackground: '#fefefe'
+  pageColor: '#333'
+
+  headerBackground: '#111'
+  headerColor: white
+
+  disabledBackground: '#dededf'
+  resizerWidth: '20px'
+
+collections:
+  - uuid: a1f0cf50-c5f3-012f-5ec8-58d385a7bc34
+    title: Dinanda Nooney Brooklyn photograph collection
+    url: http://digitalcollections.nypl.org/collections/dinanda-nooney-brooklyn-photograph-collection#/?tab=about
+    include: false
+
+  - uuid: 22f5f390-c5f0-012f-2796-58d385a7bc34
+    title: The Eno collection of New York City views
+    url: http://digitalcollections.nypl.org/collections/the-eno-collection-of-new-york-city-views#/?tab=about
+    include: false
+
+  - uuid: 812e5770-c60c-012f-7167-58d385a7bc34
+    title: Changing New York
+    url: http://digitalcollections.nypl.org/collections/changing-new-york#/?tab=about
+    include: true
+
+  - uuid: e6de27b0-c6bd-012f-afaa-58d385a7bc34
+    title: Album of photographs depicting the construction of the Broadway line, New
+      York City Subway.
+    url: http://digitalcollections.nypl.org/collections/album-of-photographs-depicting-the-construction-of-the-broadway-line-new-york#/?tab=about
+    include: false
+
+  - uuid: 5a39e290-c6f5-012f-5a89-58d385a7bc34
+    title: Album of photographs showing construction of the cable road on Broadway,
+      New York City, in 1891.
+    url: http://digitalcollections.nypl.org/collections/album-of-photographs-showing-construction-of-the-cable-road-on-broadway-new-york#/?tab=about
+    include: false
+
+  - uuid: 34007fd0-c6d2-012f-5566-58d385a7bc34
+    title: Pictorial Description of Broadway
+    url: http://digitalcollections.nypl.org/collections/pictorial-description-of-broadway#/?tab=about
+    include: false
+
+  - uuid: 66614620-c6ca-012f-0a98-58d385a7bc34
+    title: Fifth Avenue, New York, from start to finish
+    url: http://digitalcollections.nypl.org/collections/fifth-avenue-new-york-from-start-to-finish#/?tab=about
+    include: true
+
+  - uuid: 43a4cad0-7267-0132-4582-58d385a7bbd0
+    title: Morris Rosenfeld Photographs
+    url: http://digitalcollections.nypl.org/collections/morris-rosenfeld-photographs#/?tab=about
+    include: false
+
+  - uuid: 47d7a790-c6ce-012f-a61c-58d385a7bc34
+    title: Collection of photographs of East River and Hudson River piers, Manhattan
+    url: http://digitalcollections.nypl.org/collections/collection-of-photographs-of-east-river-and-hudson-river-piers-manhattan#/?tab=about
+    include: false
+
+  - uuid: 439afdd0-c62b-012f-66d1-58d385a7bc34
+    title: Detroit Publishing Company postcards
+    url: http://digitalcollections.nypl.org/collections/detroit-publishing-company-postcards#/?tab=about
+    include: false
+
+  - uuid: 0f38cb80-c5ae-012f-b01b-58d385a7bc34
+    title: Doors, NYC
+    url: http://digitalcollections.nypl.org/collections/doors-nyc#/?tab=about
+    include: false
+
+  - uuid: aa9332d0-8a24-0132-6303-58d385a7b928
+    title: 'Outer Boroughs: New York beyond Manhattan'
+    url: http://digitalcollections.nypl.org/collections/outer-boroughs-new-york-beyond-manhattan#/?tab=about
+    include: false
+
+  - uuid: 5a9b7c30-c5ec-012f-32f8-58d385a7bc34
+    title: Collection of photographs of New York City
+    url: http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city#/?tab=about
+    include: false
+
+  - uuid: 36bd8b70-c60e-012f-f701-58d385a7bc34
+    title: Collection of photographs of New York City, 1931-1942
+    url: http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city-1931-1942#/?tab=about
+    include: false
+
+  - uuid: 726a47e0-c6cb-012f-fceb-58d385a7bc34
+    title: 'Movie Houses of the Outer Boroughs: Past Glory and Adaptive Reuse, 1998-2001'
+    url: http://digitalcollections.nypl.org/collections/movie-houses-of-the-outer-boroughs-past-glory-and-adaptive-reuse-1998-2001#/?tab=about
+    include: false
+
+  - uuid: b5533200-c6f6-012f-a39f-58d385a7bc34
+    title: 'Villas on the Hudson: a collection of photo-lithographs of thirty-one country
+      residences'
+    url: http://digitalcollections.nypl.org/collections/villas-on-the-hudson-a-collection-of-photo-lithographs-of-thirty-one-country#/?tab=about
+    include: false
+
+  - uuid: 0378bd40-c6b4-012f-18bd-58d385a7bc34
+    title: Central park in 1862
+    url: http://digitalcollections.nypl.org/collections/central-park-in-1862-collection-of-photographs-in-portfolio-without-text#/?tab=about
+    include: false
+
+  - uuid: e48572c0-c5d6-012f-97ee-58d385a7bc34
+    title: Photographs taken by inspectors of the New York City Tenement House Department
+    url: http://digitalcollections.nypl.org/collections/photographs-taken-by-inspectors-of-the-new-york-city-tenement-house-department#/?tab=about
+    include: false
+
+  - uuid: 1e5da0d0-c6c0-012f-cb11-58d385a7bc34
+    title: Photographs of the construction of the Holland Tunnel, 1919-1927
+    url: http://digitalcollections.nypl.org/collections/photographs-of-the-construction-of-the-holland-tunnel-1919-1927#/?tab=about
+    include: false
+
+  - uuid: 282137f0-c610-012f-cf2a-58d385a7bc34
+    title: Photographs of the Catskill water supply system in process of construction
+    url: http://digitalcollections.nypl.org/collections/photographs-of-the-catskill-water-supply-system-in-process-of-construction#/?tab=about
+    include: false
+
+  - uuid: 8ab643a0-c6eb-012f-5bd7-58d385a7bc34
+    title: Street views of New York City
+    url: http://digitalcollections.nypl.org/collections/street-views-of-new-york-city#/?tab=about
+    include: false
+
+  - uuid: 3ba13340-c5ee-012f-c8d6-58d385a7bc34
+    title: Staten Island post cards
+    url: http://digitalcollections.nypl.org/collections/staten-island-post-cards#/?tab=about
+    include: false
+
+  - uuid: c693e190-44f4-0133-bf20-00505686d14e
+    title: Collection of photographs of New York City, New York State and more by Max
+      Hubacher
+    url: http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city-new-york-state-and-more-by-max#/?tab=about
+    include: true
+
 tasks:
   organizationId: nypl
   taskId: geotag-photo
-  collections:
-    - 66614620-c6ca-012f-0a98-58d385a7bc34 # 5th Ave start to finish
-    - 812e5770-c60c-012f-7167-58d385a7bc34 # Changing New York
 
 steps:
   - location
-  - bearing-introduction
+  - bearingintroduction
   - bearing
   - thanks
-
-css_variables:
-  # mainColor: red
-  # altColor: blue
-  mobileWidth: 800px
-  textColor: ''
-  linkColor: '#d0343a'
-  headerBackground: ''
-  appBackground: ''
-  sidebarBackground: ''
 
 defaults:
   map:
@@ -32,7 +161,7 @@ defaults:
     # attribution: 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />'
     tileUrl: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
     subdomains: abcd
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    attribution: '&copy; OpenStreetMap contributors, &copy; Carto'
     # scrollWheelZoom: false
     scrollWheelZoom: center
     doubleClickZoom: center

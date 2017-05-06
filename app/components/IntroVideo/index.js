@@ -1,33 +1,37 @@
-import React from 'react';
-import { findDOMNode } from 'react-dom';
+import React from 'react'
+import { findDOMNode } from 'react-dom'
+import styled from 'styled-components'
 
-var tutorial = 'https://s3.amazonaws.com/spacetime-nypl-org/assets/surveyor+tutorial.mp4';
+const tutorial = 'https://s3.amazonaws.com/spacetime-nypl-org/assets/surveyor+tutorial.mp4'
 
-import poster from 'images/tutorial-poster.jpg';
+import poster from 'images/tutorial-poster.jpg'
 
-import styles from './styles.css';
+export const StyledVideo = styled.video`
+  width: 100%;
+  cursor: pointer;
+`
 
 export class IntroVideo extends React.Component {
 
-  render() {
+  render () {
     return (
-      <video className={styles.video} poster={poster} ref='video' tabindex='0'
+      <StyledVideo poster={poster} ref='video' tabindex='0'
         onEnded={this.ended.bind(this)} onClick={this.play.bind(this)}>
-        <source src={tutorial} type='video/mp4'/>
-      </video>
-    );
+        <source src={tutorial} type='video/mp4' />
+      </StyledVideo>
+    )
   }
 
-  play() {
-    var node = findDOMNode(this.refs.video);
-    node.play();
-    node.setAttribute('controls', 'controls');
+  play () {
+    var node = findDOMNode(this.refs.video)
+    node.play()
+    node.setAttribute('controls', 'controls')
   }
 
-  ended() {
-    var node = findDOMNode(this.refs.video);
-    node.load();
+  ended () {
+    var node = findDOMNode(this.refs.video)
+    node.load()
   }
 }
 
-export default IntroVideo;
+export default IntroVideo

@@ -2,7 +2,7 @@
 
 See http://spacetime.nypl.org/surveyor/.
 
-Surveyor is a web application (and [Chrome Extension](https://github.com/nypl-spacetime/surveyor-tab)) for crowdsourced image geotagging. Surveyor is part of the [Space/Time Directory project](http://spacetime.nypl.org/).
+Surveyor is a web application (and [Chrome Extension](https://github.com/nypl-spacetime/surveyor-tab)) for crowdsourced image geotagging. Surveyor is part of the [NYC Space/Time Directory project](http://spacetime.nypl.org/).
 
 ## Example
 
@@ -60,11 +60,15 @@ You can change the default port by editing [`config/default.yml`](config/default
 
 ## API
 
-See [Surveyor API](https://github.com/nypl-spacetime/surveyor-api).
+brick-by-brick
+
+See [brick-by-brick](https://github.com/nypl-spacetime/brick-by-brick).
 
 ## Other image collections
 
-Currently, Surveyor works with images from NYPL's [Digital Collections](http://digitalcollections.nypl.org/). However, it should be very easy to add images from other, non-NYPL collections.
+Currently, Surveyor works with images from NYPL's [Digital Collections](http://digitalcollections.nypl.org/). However, it's very easy to add images from other, non-NYPL collections.
+
+
 
 ## Public Domain Thank You Animals
 

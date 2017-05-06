@@ -1,54 +1,44 @@
-/*
- * Header
- *
- * Header header header
- */
-/* eslint-disable react/prefer-stateless-function */
+import React from 'react'
+import { connect } from 'react-redux'
 
-import React from 'react';
-import { connect } from 'react-redux';
-
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
 import {
   selectItem,
   selectSteps,
   selectCurrentStep,
   selectCurrentStepIndex
-} from 'containers/App/selectors';
+} from 'containers/App/selectors'
 
 import {
   nextStep,
   submitStep,
   skipStep
-} from '../App/actions';
+} from '../App/actions'
 
-var StepContainers = {};
-
-function requireAll(r) {
-  r.keys().forEach((filename, i) => {
-    const step = filename.match(/\.\/(.*)\.js/)[1];
-    StepContainers[step] = r(filename).default;
-  });
+let StepContainers = {}
+function requireAll (r) {
+  r.keys().forEach((filename) => {
+    const step = filename.match(/\/(.*)\/index\.js$/)[1].toLowerCase()
+    StepContainers[step] = r(filename).default
+  })
 }
-requireAll(require.context('containers/Steps/', false, /\.js$/));
+requireAll(require.context('containers/Steps/', true, /index\.js$/))
 
 export class Geotagger extends React.Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
       steps: this.props.steps.map(step => ({
         step: step,
         component: StepContainers[step]
       }))
-    };
+    }
   }
 
-  render() {
-    var step = this.state.steps[this.props.currentStepIndex];
-
+  render () {
+    const step = this.state.steps[this.props.currentStepIndex]
     return React.createElement(step.component, {
       next: this.nextStep.bind(this),
       submit: this.submitStep.bind(this),
@@ -56,13 +46,13 @@ export class Geotagger extends React.Component {
     })
   }
 
-  nextStep() {
+  nextStep () {
     this.props.nextStep()
   }
 
-  skipStep() {
+  skipStep () {
     if (!this.props.item.id) {
-      return;
+      return
     }
 
     this.props.skipStep(
@@ -73,9 +63,9 @@ export class Geotagger extends React.Component {
     )
   }
 
-  submitStep(data) {
+  submitStep (data) {
     if (!this.props.item.id) {
-      return;
+      return
     }
 
     this.props.submitStep(
@@ -88,22 +78,21 @@ export class Geotagger extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     nextStep: () => {
-      dispatch(nextStep());
+      dispatch(nextStep())
     },
     submitStep: (organizationId, id, step, stepIndex, data, geometry) => {
-      dispatch(submitStep(organizationId, id, step, stepIndex, data, geometry));
+      dispatch(submitStep(organizationId, id, step, stepIndex, data, geometry))
     },
     skipStep: (organizationId, id, step, stepIndex) => {
-      dispatch(skipStep(organizationId, id, step, stepIndex));
+      dispatch(skipStep(organizationId, id, step, stepIndex))
     },
     dispatch
-  };
+  }
 }
 
-// Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
   selectItem(),
   selectSteps(),
@@ -112,4 +101,4 @@ export default connect(createSelector(
   (item, steps, currentStep, currentStepIndex) => ({
     item, steps, currentStep, currentStepIndex
   })
-), mapDispatchToProps)(Geotagger);
+), mapDispatchToProps)(Geotagger)

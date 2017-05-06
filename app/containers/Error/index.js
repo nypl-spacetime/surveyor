@@ -1,35 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import { push } from 'react-router-redux';
-import { Link } from 'react-router';
+import CenteredItemPage from 'components/CenteredItemPage'
 
-import CenteredItemPage from 'components/CenteredItemPage';
-import Button from 'components/Button';
-import Buttons from 'components/Buttons';
-
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
 import {
   selectError
-} from 'containers/App/selectors';
+} from 'containers/App/selectors'
 
-import styles from './styles.css';
+import { Container, Lion, Eye, ErrorMessage, Centered } from './styles'
 
-var nypl = require('images/nypl-white.svg');
-var eye = require('images/error.svg');
+const nypl = require('images/nypl.svg')
+const eye = require('images/error.svg')
 
 export class Error extends React.Component {
 
-  openRoute = (route) => {
-    this.props.changeRoute(route);
-  };
-
-  openAbout = () => {
-    this.openRoute('/');
-  };
-
-  render() {
+  render () {
     const error = this.props.error
     const status = error.error.status
 
@@ -37,9 +24,11 @@ export class Error extends React.Component {
       // Unauthorized! User should log in
       return (
         <CenteredItemPage>
-          <div className={styles.container}>
-            <div className={styles.error}>Unauthorized — please log in by clicking Save score in the menu</div>
-          </div>
+          <Container>
+            <ErrorMessage>
+              Unauthorized — please log in by clicking Save score in the menu
+            </ErrorMessage>
+          </Container>
         </CenteredItemPage>
       )
     } else {
@@ -47,23 +36,20 @@ export class Error extends React.Component {
         error.error.status === 404 && error.error.url &&
         error.error.url.endsWith('random')
 
-      var message = error ? error.message : ''
+      const message = error ? error.message : ''
 
       if (!wasRandomItem) {
         return (
           <CenteredItemPage>
-            <div className={styles.container}>
-              <div className={styles.lion}>
+            <Container>
+              <Lion>
                 <img src={nypl} />
-                <img src={eye} className={styles.eye}/>
-              </div>
-              <div className={styles.error}>{message}</div>
-              <Buttons>
-                <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
-              </Buttons>
-            </div>
+                <Eye src={eye} />
+              </Lion>
+              <ErrorMessage>{message}</ErrorMessage>
+            </Container>
           </CenteredItemPage>
-        );
+        )
       } else {
         // TODO: if /items/random returns 404,
         // user has geotagged ALL availeble items!
@@ -71,40 +57,27 @@ export class Error extends React.Component {
 
         return (
           <CenteredItemPage>
-            <div className={styles.container}>
-              <div className={styles.lion}>
+            <Container>
+              <Lion>
                 <img src={nypl} />
-              </div>
-              <div className={styles.error}>
+              </Lion>
+              <ErrorMessage>
                 Wow! You've geotagged <b>all</b> available images...
-              </div>
-              <div className={styles.center}>
+              </ErrorMessage>
+              <Centered>
                 Find other projects to contribute to on the <a href='http://spacetime.nypl.org/'>website of the NYC Space/Time Directory</a>.
-              </div>
-            </div>
+              </Centered>
+            </Container>
           </CenteredItemPage>
-        );
+        )
       }
     }
   }
-
-  reload() {
-    this.openAbout()
-    // location.reload();
-  }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    changeRoute: (url) => dispatch(push(url)),
-    dispatch
-  };
-}
-
-// Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
   selectError(),
   (error) => ({
     error
   })
-), mapDispatchToProps)(Error);
+))(Error)

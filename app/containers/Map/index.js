@@ -1,17 +1,25 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { findDOMNode } from 'react-dom';
+import React from 'react'
+import { connect } from 'react-redux'
+import { findDOMNode } from 'react-dom'
 
-import L from 'leaflet';
+import L from 'leaflet'
+require('leaflet-geotag-photo')
 
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
 import {
   selectMapDefaults
-} from 'containers/App/selectors';
+} from 'containers/App/selectors'
 
-import '../../../node_modules/leaflet/dist/leaflet.css';
-import styles from './styles.css';
+import { StyledContainer, StyledMap } from './styles'
+
+import crosshairHereImage from 'images/crosshair-here.svg'
+import crosshairShadowImage from 'images/crosshair-shadow.svg'
+
+import cameraImage from '../../../node_modules/leaflet-geotag-photo/images/camera.svg'
+import targetImage from '../../../node_modules/leaflet-geotag-photo/images/target.svg'
+import controlCameraImg from '../../../node_modules/leaflet-geotag-photo/images/camera-icon.svg'
+import controlCrosshairImg from '../../../node_modules/leaflet-geotag-photo/images/crosshair-icon.svg'
 
 export class Map extends React.Component {
 
@@ -30,88 +38,134 @@ export class Map extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
-      <div className={styles.mapContainer} ref='cont'>
-        <div className={`${styles.map}`} ref='map' />
-      </div>
+      <StyledContainer ref='container'>
+        <StyledMap ref='map' />
+      </StyledContainer>
     )
   }
 
-  roundCoordinate = (coordinate) => Math.round(coordinate * 1000000) / 1000000;
+  roundCoordinate (coordinate) {
+    return Math.round(coordinate * 1000000) / 1000000
+  }
 
-  getView = () => {
+  getView () {
     if (this.map) {
-      var center = this.map.getCenter();
+      const center = this.map.getCenter()
       return {
         center: [
           center.lng,
           center.lat
         ].map(this.roundCoordinate),
-        zoom: this.map.getZoom(),
-      };
-    } else {
-      return null;
+        zoom: this.map.getZoom()
+      }
     }
   }
 
-  getMap = () => this.map;
-
-  getOptions = (key) => {
-    return this.props.options[key] || this.props.defaults[key];
+  getFieldOfView () {
+    if (this.camera) {
+      return this.camera.getFieldOfView()
+    }
   }
 
-  componentDidMount = () => {
-    var node = findDOMNode(this.refs.map);
+  getMap () {
+    return this.map
+  }
 
-    var map = L.map(node, {
+  getOptions (key) {
+    return this.props.options[key] || this.props.defaults[key]
+  }
+
+  componentDidMount () {
+    const node = findDOMNode(this.refs.map)
+
+    const map = L.map(node, {
       center: this.getOptions('center'),
       zoom: this.getOptions('zoom'),
       maxZoom: this.getOptions('maxZoom'),
       scrollWheelZoom: this.getOptions('scrollWheelZoom'),
       doubleClickZoom: this.getOptions('doubleClickZoom')
-    });
+    })
 
-    var layer = L.tileLayer(this.getOptions('tileUrl'), {
+    map.attributionControl.setPrefix('')
+
+    L.tileLayer(this.getOptions('tileUrl'), {
       subdomains: this.getOptions('subdomains').toString(),
       attribution: this.getOptions('attribution')
-    }).addTo(map);
+    }).addTo(map)
+
+    if (this.props.mode === 'crosshair') {
+      const imgShadow = `<img src="${crosshairShadowImage}" role="none" class="crosshair-shadow" />`
+      const imgHere = `<img src="${crosshairHereImage}" alt="Location where photo was taken" class="crosshair-here" />`
+
+      this.crosshair = L.geotagPhoto.crosshair({
+        crosshairHTML: `<div class="crosshair">${imgShadow}${imgHere}</div>`
+      }).addTo(map)
+    } else if (this.props.mode === 'camera') {
+      const cameraIcon = L.icon({
+        iconUrl: cameraImage,
+        iconSize: [38, 38],
+        iconAnchor: [19, 19]
+      })
+
+      const targetIcon = L.icon({
+        iconUrl: targetImage,
+        iconSize: [180, 32],
+        iconAnchor: [90, 16]
+      })
+
+      const camera = L.geotagPhoto.camera(this.props.fieldOfView, {
+        cameraIcon,
+        targetIcon,
+        controlCameraImg,
+        controlCrosshairImg
+      }).addTo(map)
+
+      this.camera = camera
+
+      if (this.props.cameraChange) {
+        camera.on('change', this.props.cameraChange)
+      }
+    }
 
     if (this.props.mapEvents) {
-      Object.keys(this.props.mapEvents).forEach((event) => map.on(event, this.props.mapEvents[event]));
+      Object.keys(this.props.mapEvents)
+        .forEach((event) => map.on(event, this.props.mapEvents[event]))
     }
 
     if (this.props.mapCreated) {
-      this.props.mapCreated(map);
+      this.props.mapCreated(map)
     }
 
-    this.map = map;
+    this.map = map
 
     setInterval(() => this.checkSize(), 500)
   }
 
-  checkSize = () => {
-    var node = findDOMNode(this.refs.cont);
+  checkSize () {
+    var node = findDOMNode(this.refs.container)
     if (node) {
       var dimensions = { width: node.clientWidth, height: node.clientHeight }
-      if (this.state.dimensions.width != dimensions.width || this.state.dimensions.height != dimensions.height) {
+      if (this.state.dimensions.width !== dimensions.width || this.state.dimensions.height !== dimensions.height) {
         this.map.invalidateSize()
-        this.setState({ dimensions })
+        this.setState({
+          dimensions
+        })
       }
     }
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     dispatch
-  };
+  }
 }
 
-// Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
   selectMapDefaults(),
   (defaults) => ({
     defaults
   })
-), mapDispatchToProps, null, { withRef: true })(Map);
+), mapDispatchToProps, null, { withRef: true })(Map)

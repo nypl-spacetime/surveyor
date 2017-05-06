@@ -1,23 +1,19 @@
-/**
- *
- * Buttons.react.js
- *
- */
+import React from 'react'
+import styled from 'styled-components'
 
-import React, { PropTypes } from 'react';
+export const StyledButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: ${(props) => props.justifyContent ? props.justifyContent : 'center'};
+  // width: 100%;
+`
 
-import styles from './styles.css';
-
-function Buttons(props) {
+function Buttons (props) {
   return (
-    <div className={styles.buttons}>
+    <StyledButtons justifyContent={props.justifyContent}>
       {props.children}
-    </div>
-  );
+    </StyledButtons>
+  )
 }
 
-Buttons.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Buttons;
+export default Buttons

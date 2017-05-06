@@ -1,134 +1,86 @@
-/*
- * Header
- *
- * Header header header
- */
-/* eslint-disable react/prefer-stateless-function */
+import React from 'react'
+import { connect } from 'react-redux'
 
-import React from 'react';
-import { connect } from 'react-redux';
-
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
 import {
   selectItem,
-  selectCurrentStep
-} from 'containers/App/selectors';
+  selectCurrentStep,
+  selectShowMetadata
+} from 'containers/App/selectors'
 
-import styles from './styles.css';
+import { Container, MetadataToggle, MetadataContainer, Title, Field } from './styles'
+
+import iconLocation from 'images/icon-location.svg'
+import iconDate from 'images/icon-date.svg'
 
 export class Metadata extends React.Component {
 
-  constructor (props) {
-    super(props)
+  render () {
+    const show = this.props.showMetadata
 
-    this.state = {
-      showingMoreInfo: false
-    }
-  }
-
-  render() {
-    const collection = (this.props.item && this.props.item.collection) || {}
     const itemData = (this.props.item && this.props.item.data) || {}
 
-    var collectionLink
-    if (collection.url) {
-      const title = collection.title || 'Digital Collections'
-      collectionLink = (
-        <a target='_blank' href={collection.url}>{title}</a>
+    // const titleLength = itemData.title ? itemData.title.length : 0
+
+    let titleStyle
+    // if (titleLength > 100) {
+    //   titleStyle = {
+    //     fontSize: `1.6em`
+    //   }
+    // } else if (titleLength > 50) {
+    //   titleStyle = {
+    //     fontSize: `1.8em`
+    //   }
+    // }
+
+    // let metadata = (
+    //     <div>
+    //       <div>Collection: {collectionLink}</div>
+    //       {geoDateHeader}
+    //     </div>
+    //   )
+
+    let metadata = [
+      <Title style={titleStyle} title={itemData.title}>{itemData.title}</Title>,
+      <div>
+        View in high resolution
+        in <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
+          Digital Collections
+        </a>
+      </div>
+    ]
+
+    if (itemData.location) {
+      metadata.push(
+        <Field><img title='Location' alt='Location of this item' src={iconLocation} /> {itemData.location}</Field>
       )
     }
 
-    var geoDateHeader;
-    if (itemData.location || itemData.date) {
-      var spans = [];
-
-      if (itemData.location) {
-        spans.push({
-          key: 'Location',
-          value: itemData.location
-        });
-      }
-
-      if (itemData.date) {
-        spans.push({
-          key: 'Date',
-          value: itemData.date
-        });
-      }
-
-      geoDateHeader = (
-        <div>
-          <span className='header-text'>
-            {spans.map(function(span, i) {
-              return <span key={i}>{span.key}: {span.value}{i < (spans.length - 1) ? '; ' : ''}</span>;
-            })}
-          </span>
-        </div>
+    if (itemData.date) {
+      metadata.push(
+        <Field><img title='Date' alt='Date or year of this item' src={iconDate} /> {itemData.date}</Field>
       )
     }
-
-    const titleLength = itemData.title ? itemData.title.length : 0
-
-    let titleStyle;
-    if (titleLength > 100) {
-      titleStyle = {
-        fontSize: `1.6em`
-      };
-    } else if (titleLength > 50) {
-      titleStyle = {
-        fontSize: `1.8em`
-      };
-    }
-
-    var titleClasses = styles.title
-
-    var searchLinks = null
-
-    if (this.props.currentStep === 'location' || this.props.currentStep === 'bearing') {
-      searchLinks = (
-        <div>
-          <h2 className={styles.subtitle}>From: {collectionLink}</h2>
-          {geoDateHeader}
-          <div>
-            <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
-              View in high resolution in NYPL Digital Collections
-            </a>
-            <div>
-              Use outside resources like <a href='https://www.wikipedia.org/' target='_blank'>Wikipedia</a> and <a href='https://www.google.nl/maps/@40.7425428,-73.9664649,11.58z' target='_blank'>Google Maps</a> to scout out the location.
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-    var toggleMoreInfoLink = null
-    if (searchLinks) toggleMoreInfoLink = <a href="javascript:void(0)" onClick={this.toggleMoreInfo} className={styles.toggleMoreInfo}>{ (() => this.state.showingMoreInfo ? 'Hide Info' : 'Show Info' )() }</a>
 
     return (
-      <div className={`${styles.metadata} sidebar-padding`}>
-        <h1 style={titleStyle} className={titleClasses} title={itemData.title}>{itemData.title}</h1>
-        {toggleMoreInfoLink}
-        <div className={styles.moreInfo}>
-          {searchLinks}
-        </div>
-        <div className={`${styles.moreInfoOverlay} ${(() => this.state.showingMoreInfo ? styles.active : '' )()}`}>
-          {searchLinks}
-        </div>
-      </div>
-    );
+      <Container>
+        <MetadataToggle show={!show}>
+          Click to show title & metadata
+        </MetadataToggle>
+        <MetadataContainer show={show}>
+          {metadata.map((item, index) => <div key={index}>{item}</div>)}
+        </MetadataContainer>
+      </Container>
+    )
   }
-
-  toggleMoreInfo = () => {
-    this.setState({showingMoreInfo: ! this.state.showingMoreInfo})
-  }
-
 }
 
 export default connect(createSelector(
   selectItem(),
   selectCurrentStep(),
-  (item, currentStep) => ({
-    item, currentStep
+  selectShowMetadata(),
+  (item, currentStep, showMetadata) => ({
+    item, currentStep, showMetadata
   })
-))(Metadata);
+))(Metadata)
