@@ -17,7 +17,10 @@ import {
   NEXT_STEP,
   LOG_OUT,
   LOG_OUT_SUCCESS,
-  LOG_OUT_ERROR
+  LOG_OUT_ERROR,
+  SET_PANE_MODE,
+  SET_PANE_INDEX,
+  TOGGLE_METADATA
 } from './constants'
 
 export function setIntroductionWatched () {
@@ -161,5 +164,25 @@ export function logOutSuccess () {
 export function logOutError () {
   return {
     type: LOG_OUT_ERROR
+  }
+}
+
+export function setPaneMode (mode) {
+  return {
+    type: SET_PANE_MODE,
+    mode
+  }
+}
+
+export function setPaneIndex (index) {
+  return {
+    type: SET_PANE_INDEX,
+    index
+  }
+}
+
+export function toggleMetadata () {
+  return {
+    type: TOGGLE_METADATA
   }
 }

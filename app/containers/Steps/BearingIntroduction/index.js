@@ -19,11 +19,11 @@ export class Step extends React.Component {
             Otherwise, you can just continue to the next image.
           </p>
           <p>
-            <Explanation src={explanation} />
+            <Explanation alt='Camera and target' title='Camera and target' src={explanation} />
           </p>
         </div>
         <div>
-          <Buttons>
+          <Buttons justifyContent='flex-end'>
             <Button onClick={this.props.skip} type='secondary'>Skip</Button>
             <Button onClick={this.next.bind(this)} type='primary'>Continue</Button>
           </Buttons>

@@ -1,8 +1,4 @@
-/* global __CONFIG__ */
-
 import styled from 'styled-components'
-
-const mainColor = __CONFIG__.cssVariables.mainColor
 
 export const StyledButton = styled.button`
   display: flex;
@@ -18,7 +14,6 @@ export const Submissions = styled.span`
 `
 
 export const Title = styled.span`
-  color: ${mainColor};
   max-width: 130px;
   overflow: hidden;
   white-space: nowrap;

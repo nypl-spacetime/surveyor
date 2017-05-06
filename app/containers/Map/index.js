@@ -88,16 +88,18 @@ export class Map extends React.Component {
       doubleClickZoom: this.getOptions('doubleClickZoom')
     })
 
+    map.attributionControl.setPrefix('')
+
     L.tileLayer(this.getOptions('tileUrl'), {
       subdomains: this.getOptions('subdomains').toString(),
       attribution: this.getOptions('attribution')
     }).addTo(map)
 
     if (this.props.mode === 'crosshair') {
-      const imgShadow = `<img src="${crosshairShadowImage}" class="crosshair-shadow" />`
-      const imgHere = `<img src="${crosshairHereImage}" class="crosshair-here" />`
+      const imgShadow = `<img src="${crosshairShadowImage}" role="none" class="crosshair-shadow" />`
+      const imgHere = `<img src="${crosshairHereImage}" alt="Location where photo was taken" class="crosshair-here" />`
 
-      this.crosshair = L.GeotagPhoto.crosshair({
+      this.crosshair = L.geotagPhoto.crosshair({
         crosshairHTML: `<div class="crosshair">${imgShadow}${imgHere}</div>`
       }).addTo(map)
     } else if (this.props.mode === 'camera') {
@@ -113,7 +115,7 @@ export class Map extends React.Component {
         iconAnchor: [90, 16]
       })
 
-      const camera = L.GeotagPhoto.camera(this.props.fieldOfView, {
+      const camera = L.geotagPhoto.camera(this.props.fieldOfView, {
         cameraIcon,
         targetIcon,
         controlCameraImg,

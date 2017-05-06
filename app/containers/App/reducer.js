@@ -2,7 +2,6 @@
 
 import {
   WATCHED_INTRODUCTION,
-  LOAD_ITEM,
   LOAD_ITEM_SUCCESS,
   LOAD_ITEM_ERROR,
   LOAD_OAUTH_SUCCESS,
@@ -15,25 +14,38 @@ import {
   SKIP_STEP_ERROR,
   NEXT_STEP,
   LOG_OUT_SUCCESS,
-  LOG_OUT_ERROR
+  LOG_OUT_ERROR,
+  SET_PANE_INDEX,
+  SET_PANE_MODE,
+  TOGGLE_METADATA
 } from './constants'
 import { fromJS } from 'immutable'
 
 // Initial state
 const initialState = fromJS({
   watchedIntroduction: true, // false,
+  panes: fromJS({
+    index: 0,
+    mode: 'split' // 'single' or 'split'
+  }),
+  showMetadata: true,
   item: initialItem(),
   oauth: initialOAuth(),
   steps: initialSteps(),
   submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
-  loading: true,
   loaded: fromJS({
     item: false,
     submissions: false,
     oauth: false
   }),
   error: null
+  // error: {
+  //   item: null,
+  //   submissions: null,
+  //   oauth: null,
+  //   submit: null
+  // }
 })
 
 function initialOAuth () {
@@ -58,18 +70,13 @@ function newItem (state) {
   return state
     .set('steps', initialSteps())
     .set('item', initialItem())
+    .set('showMetadata', true)
+    .setIn(['panes', 'index'], 0)
+    .setIn(['loaded', 'item'], false)
 }
 
 function loadSuccesful (state, key) {
-  var newState = state.setIn(['loaded', key], true)
-
-  var allLoaded = true
-  for (var loaded of newState.get('loaded').values()) {
-    allLoaded = loaded && allLoaded
-  }
-
-  return newState
-    .set('loading', !allLoaded)
+  return state.setIn(['loaded', key], true)
 }
 
 function appReducer (state = initialState, action) {
@@ -79,10 +86,15 @@ function appReducer (state = initialState, action) {
     case WATCHED_INTRODUCTION:
       return state
         .set('watchedIntroduction', true)
-    case LOAD_ITEM:
-      state = state
-        .set('error', null)
-      return newItem(state)
+    case TOGGLE_METADATA:
+      return state
+        .set('showMetadata', !state.get('showMetadata'))
+    case SET_PANE_INDEX:
+      return state
+        .setIn(['panes', 'index'], action.index)
+    case SET_PANE_MODE:
+      return state
+        .setIn(['panes', 'mode'], action.mode)
     case LOAD_ITEM_SUCCESS:
       state = state
         .set('item', fromJS(action.item))
@@ -146,7 +158,6 @@ function appReducer (state = initialState, action) {
         .set('submissions', initialSubmissions())
     case LOAD_ITEM_ERROR:
       return state
-        .set('loading', false)
         .set('error', {
           type: action.type,
           message: 'Error loading image',

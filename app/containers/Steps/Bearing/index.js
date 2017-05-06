@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import Map from 'containers/Map'
+import PaneButton from 'containers/PaneButton'
 
 import StepContainer from 'components/StepContainer'
 import Button from 'components/Button'
@@ -74,9 +75,12 @@ export class Step extends React.Component {
           <Map ref='map' mode='camera' cameraChange={this.onCameraChange.bind(this)}
             options={options} fieldOfView={fieldOfView} defaults={this.props.defaults} />
         </MapContainer>
-        <Buttons>
-          <Button onClick={this.props.skip} type='secondary'>Skip</Button>
-          <Button onClick={this.submit.bind(this)} type='primary' disabled={!this.state.hasMoved}>Submit</Button>
+        <Buttons justifyContent='space-between'>
+          <PaneButton index={0} />
+          <Buttons justifyContent='flex-end'>
+            <Button onClick={this.props.skip} type='secondary'>Skip</Button>
+            <Button onClick={this.submit.bind(this)} type='primary' disabled={!this.state.hasMoved}>Submit</Button>
+          </Buttons>
         </Buttons>
       </StepContainer>
     )

@@ -1,10 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 import CenteredItemPage from 'components/CenteredItemPage'
-import Button from 'components/Button'
-import Buttons from 'components/Buttons'
 
 import { createSelector } from 'reselect'
 
@@ -18,14 +15,6 @@ const nypl = require('images/nypl.svg')
 const eye = require('images/error.svg')
 
 export class Error extends React.Component {
-
-  openRoute = (route) => {
-    this.props.changeRoute(route)
-  }
-
-  openAbout = () => {
-    this.openRoute('/')
-  }
 
   render () {
     const error = this.props.error
@@ -58,9 +47,6 @@ export class Error extends React.Component {
                 <Eye src={eye} />
               </Lion>
               <ErrorMessage>{message}</ErrorMessage>
-              <Buttons>
-                <Button type='primary' onClick={this.reload.bind(this)}>Try again</Button>
-              </Buttons>
             </Container>
           </CenteredItemPage>
         )
@@ -87,17 +73,6 @@ export class Error extends React.Component {
       }
     }
   }
-
-  reload () {
-    this.openAbout()
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    changeRoute: (url) => dispatch(push(url)),
-    dispatch
-  }
 }
 
 export default connect(createSelector(
@@ -105,4 +80,4 @@ export default connect(createSelector(
   (error) => ({
     error
   })
-), mapDispatchToProps)(Error)
+))(Error)

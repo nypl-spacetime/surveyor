@@ -1,6 +1,6 @@
  /* global __CONFIG__ */
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from 'react-router'
 
 const headerHeight = __CONFIG__.cssVariables.headerHeight
@@ -9,6 +9,7 @@ const headerBackground = __CONFIG__.cssVariables.headerBackground
 const mainColor = __CONFIG__.cssVariables.mainColor
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 const hamburgerWidth = headerHeight
+const borderRadius = '3px'
 
 export const Hamburger = styled.div`
   font-size: calc(${hamburgerWidth} - 2 * 10px);
@@ -45,10 +46,6 @@ export const MenuContainer = styled.div`
       margin: 0;
       flex-direction: column;
     }
-
-    & > a {
-
-    }
   }
 `
 
@@ -56,35 +53,46 @@ export const Nav = styled.nav`
   margin: 0 5px;
   display: flex;
 
-  & a {
-    color: ${headerColor};
-  }
-
-  & > * {
-    display: inline-block;
-    padding: 5px 12px 5px 12px;
-    border-radius: 3px;
-  }
-
   &:hover > * {
     border-radius: 0;
   }
 
   &:hover > *:first-child {
-    border-radius: 3px 0 0 3px;
+    border-radius: ${borderRadius} 0 0 ${borderRadius};
   }
 
   &:hover > *:last-child {
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 ${borderRadius} ${borderRadius} 0;
   }
 `
 
-export const StyledLink = styled(Link)`
-  background-color: ${(props) => props.selected ? mainColor : 'none'};
+export const PaneNav = styled(Nav)`
+  @media (max-width: ${mobileWidth}) {
+    display: none;
+  }
+`
 
+const MenuItem = css`
+  display: inline-block;
+  padding: 5px 12px 5px 12px;
+  border-radius: ${borderRadius};
+  background-color: ${(props) => props.selected ? mainColor : 'none'};
   transition: background-color 0.2s;
 
   &:hover {
     background-color: ${mainColor};
   }
+
+  & > img {
+    width: 17px;
+  }
+`
+
+export const StyledButton = styled.button`
+  ${MenuItem}
+`
+
+export const StyledLink = styled(Link)`
+  ${MenuItem}
+  color: ${headerColor} !important;
 `

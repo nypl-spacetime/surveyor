@@ -30,15 +30,15 @@ injectGlobal`
     height: 100%;
   }
 
-  ::selection {
-    background: ${outlineColor};
-  }
+  // ::selection {
+  //   background: ${outlineColor};
+  // }
 
-  :focus {
-    outline: 2px solid ${outlineColor};
-    outline: auto -webkit-focus-ring-color;
-    outline-color: ${outlineColor};
-  }
+  // :focus {
+  //   outline: 2px solid ${outlineColor};
+  //   outline: auto -webkit-focus-ring-color;
+  //   outline-color: ${outlineColor};
+  // }
 
   /* Typography
   –––––––––––––––––––––––––––––––––––––––––––––––––– */

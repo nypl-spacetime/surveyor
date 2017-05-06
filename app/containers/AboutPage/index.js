@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import {
+  selectItem,
   selectCollections
 } from 'containers/App/selectors'
 
@@ -42,7 +43,7 @@ export class AboutPage extends React.Component {
           a digital time-travel service for New York City. <a href='http://pages.email.nypl.org/spacetimeupdates/'>
           Sign up for our mailing list</a> to receive updates about the NYC Space/Time Directory.
         </p>
-        <SurveyorButton />
+        <SurveyorButton id={this.props.item.id} />
         <h2>Rules &amp; Guidance</h2>
         <p>
           There are two guiding principles of geotagging in NYPL Surveyor: <strong>take your best
@@ -76,21 +77,6 @@ export class AboutPage extends React.Component {
           For these images place the marker in the approximate middle of the view. In Surveyor, a
           second, optional step allows you to mark the full width of the image and note place where
           the images point of view. You can use this second step to more accurately tag these wide images.
-        </p>
-
-        <h3>How do I geotag an item with multiple locations?</h3>
-        <p>
-          Some items contain multiple locations. For instance, this item
-          from <a href='http://digitalcollections.nypl.org/items/510d47dc-a06f-a3d9-e040-e00a18064a99'>Views of
-          NYC</a> contains three unique photos.
-        </p>
-        <p>
-          <a href='http://digitalcollections.nypl.org/items/510d47dc-a06f-a3d9-e040-e00a18064a99'><img src='http://images.nypl.org/index.php?id=700001F&amp;t=w' alt='Bronx: 3rd Avenue - 135th Street' /></a>
-        </p>
-        <p>
-          For items with multiple locations, simple select one location to geotag. Remember, we’re asking
-          multiple people to tag each item and we’ll be able to programmatically recognize which items
-          have multiple locations.
         </p>
         <h3>How to handle low res images?</h3>
         <p>
@@ -145,11 +131,34 @@ export class AboutPage extends React.Component {
                 <kbd>[</kbd> <kbd>]</kbd>
               </td>
               <td>
-                Maximize photo or map pane
+                Switch between photo or map pane
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <kbd>1</kbd> <kbd>2</kbd>
+              </td>
+              <td>
+                Switch between single pane mode and split pane mode
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <kbd>L</kbd>
+              </td>
+              <td>
+                Lights out — toggle metadata display
               </td>
             </tr>
           </tbody>
         </KeyboardTable>
+
+        <h2>Data</h2>
+        <p>
+
+        All submissions are open data. Concensus algorithm.
+        See GitHub for more information
+        </p>
 
         <h2>Acknowledgements</h2>
         <p>
@@ -167,7 +176,6 @@ export class AboutPage extends React.Component {
         <p>
           <img src={knightFoundation} alt='Knight Foundation Logo' style={{width: '50%', opacity: 0.88}} />
         </p>
-
         <h2>Accessibility</h2>
         <p>
           <a href='https://www.nypl.org/'>The New York Public Library</a> strives to ensure that
@@ -195,15 +203,16 @@ export class AboutPage extends React.Component {
           for people with disabilities at the <a href='https://www.nypl.org/locations/'>research
           centers and branch libraries</a> of The New York Public Library, please visit <a href='http://nypl.org/accessibility'>nypl.org/accessibility</a> or email <a href='mailto:accessibility@nypl.org'>accessibility@nypl.org</a>.
         </p>
-        <SurveyorButton />
+        <SurveyorButton id={this.props.item.id} />
       </Page>
     )
   }
 }
 
 export default connect(createSelector(
+  selectItem(),
   selectCollections(),
-  (collections) => ({
-    collections
+  (item, collections) => ({
+    item, collections
   })
 ))(AboutPage)

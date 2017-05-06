@@ -6,11 +6,13 @@ cssVariables:
 
   headerHeight: 50px
 
-  mobileWidth: 800px
-  mobileHeight: 800px
+  mobileWidth: 900px
+  mobileHeight: 600px
 
   mainColor: '#d0343a'
   outlineColor: '#d0343a'
+
+  imageBackground: 'rgb(50,50,50)'
 
   pageBackground: '#fefefe'
   pageColor: '#333'
@@ -159,7 +161,7 @@ defaults:
     # attribution: 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />'
     tileUrl: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
     subdomains: abcd
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    attribution: '&copy; OpenStreetMap contributors, &copy; Carto'
     # scrollWheelZoom: false
     scrollWheelZoom: center
     doubleClickZoom: center

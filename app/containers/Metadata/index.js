@@ -5,81 +5,72 @@ import { createSelector } from 'reselect'
 
 import {
   selectItem,
-  selectCurrentStep
+  selectCurrentStep,
+  selectShowMetadata
 } from 'containers/App/selectors'
 
-import { Container, Title } from './styles'
+import { Container, MetadataToggle, MetadataContainer, Title, Field } from './styles'
+
+import iconLocation from 'images/icon-location.svg'
+import iconDate from 'images/icon-date.svg'
 
 export class Metadata extends React.Component {
 
   render () {
-    const collection = (this.props.item && this.props.item.collection) || {}
+    const show = this.props.showMetadata
+
     const itemData = (this.props.item && this.props.item.data) || {}
 
-    var collectionLink
-    if (collection.url) {
-      const title = collection.title || 'Digital Collections'
-      collectionLink = (
-        <a target='_blank' href={collection.url}>{title}</a>
-      )
-    }
-
-    let geoDateHeader
-    if (itemData.location || itemData.date) {
-      let fields = []
-
-      if (itemData.location) {
-        fields.push({
-          key: 'Location',
-          value: itemData.location
-        })
-      }
-
-      if (itemData.date) {
-        fields.push({
-          key: 'Date',
-          value: itemData.date
-        })
-      }
-
-      geoDateHeader = (
-        <div>
-          {fields.map((field, index) => (
-            <div key={index}>
-              {field.key}: {field.value}
-            </div>
-          ))}
-        </div>
-      )
-    }
-
-    const titleLength = itemData.title ? itemData.title.length : 0
+    // const titleLength = itemData.title ? itemData.title.length : 0
 
     let titleStyle
-    if (titleLength > 100) {
-      titleStyle = {
-        fontSize: `1.6em`
-      }
-    } else if (titleLength > 50) {
-      titleStyle = {
-        fontSize: `1.8em`
-      }
+    // if (titleLength > 100) {
+    //   titleStyle = {
+    //     fontSize: `1.6em`
+    //   }
+    // } else if (titleLength > 50) {
+    //   titleStyle = {
+    //     fontSize: `1.8em`
+    //   }
+    // }
+
+    // let metadata = (
+    //     <div>
+    //       <div>Collection: {collectionLink}</div>
+    //       {geoDateHeader}
+    //     </div>
+    //   )
+
+    let metadata = [
+      <Title style={titleStyle} title={itemData.title}>{itemData.title}</Title>,
+      <div>
+        View in high resolution
+        in <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
+          Digital Collections
+        </a>
+      </div>
+    ]
+
+    if (itemData.location) {
+      metadata.push(
+        <Field><img title='Location' alt='Location of this item' src={iconLocation} /> {itemData.location}</Field>
+      )
     }
 
-    let metadata
-    if (this.props.currentStep === 'location' || this.props.currentStep === 'bearing') {
-      metadata = (
-        <div>
-          <div>Collection: {collectionLink}</div>
-          {geoDateHeader}
-        </div>
+    if (itemData.date) {
+      metadata.push(
+        <Field><img title='Date' alt='Date or year of this item' src={iconDate} /> {itemData.date}</Field>
       )
     }
 
     return (
       <Container>
-        <Title style={titleStyle} title={itemData.title}>{itemData.title}</Title>
-        {metadata}
+        <MetadataToggle show={!show}>
+          Click to show title & metadata
+        </MetadataToggle>
+        <MetadataContainer show={show}>
+          {metadata.map((item, index) => <div key={index}>{item}</div>)}
+        </MetadataContainer>
       </Container>
     )
   }
@@ -88,7 +79,8 @@ export class Metadata extends React.Component {
 export default connect(createSelector(
   selectItem(),
   selectCurrentStep(),
-  (item, currentStep) => ({
-    item, currentStep
+  selectShowMetadata(),
+  (item, currentStep, showMetadata) => ({
+    item, currentStep, showMetadata
   })
 ))(Metadata)

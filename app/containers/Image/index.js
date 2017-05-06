@@ -4,10 +4,20 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import {
-  selectItem
+  selectItem,
+  selectPaneMode
 } from 'containers/App/selectors'
 
-import { StyledContainer, ImageContainer, ScreenReaderImage, DigitalCollections } from './styles'
+import {
+  setPaneIndex,
+  toggleMetadata
+} from '../App/actions'
+
+import Buttons from 'components/Buttons'
+import Metadata from 'containers/Metadata'
+import PaneButton from 'containers/PaneButton'
+
+import { StyledContainer, ImageContainer, ScreenReaderImage, TopBottom } from './styles'
 
 export class Image extends React.Component {
   render () {
@@ -30,23 +40,40 @@ export class Image extends React.Component {
 
     return (
       <StyledContainer>
+        <TopBottom onClick={this.onClick.bind(this)}>
+          <Metadata />
+          <Buttons justifyContent='flex-end'>
+            <PaneButton index={1} />
+          </Buttons>
+        </TopBottom>
         <ScreenReaderImage src={src} alt={title} className='only-screen-reader' />
-        <ImageContainer>
+        <ImageContainer onClick={this.onClick.bind(this)}>
           <div style={imageStyle} />
         </ImageContainer>
-        <DigitalCollections>
-          <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
-            View in high resolution in Digital Collections
-          </a>
-        </DigitalCollections>
       </StyledContainer>
     )
+  }
+
+  toMapPane () {
+    this.props.setPaneIndex(1)
+  }
+
+  onClick () {
+    // this.props.toggleMetadata()
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    setPaneIndex: (index) => dispatch(setPaneIndex(index)),
+    toggleMetadata: () => dispatch(toggleMetadata())
   }
 }
 
 export default connect(createSelector(
+  selectPaneMode(),
   selectItem(),
-  (item) => ({
-    item
+  (paneMode, item) => ({
+    paneMode, item
   })
-))(Image)
+), mapDispatchToProps)(Image)

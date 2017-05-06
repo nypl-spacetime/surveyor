@@ -6,9 +6,11 @@ const mainColor = __CONFIG__.cssVariables.mainColor
 
 const slide = keyframes`
   0% {
-    transform: translateY(-4px); }
+    transform: translateY(-4px);
+  }
   100% {
-    transform: translateY(0); }
+    transform: translateY(0);
+  }
 `
 
 export const StyledMenu = styled.ul`
@@ -60,7 +62,6 @@ export const StyledMenuItem = styled.li`
 
   &:hover {
     background-color: ${mainColor};
-
   }
 
   &:hover a {

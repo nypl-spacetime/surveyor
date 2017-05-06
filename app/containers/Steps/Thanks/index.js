@@ -44,7 +44,6 @@ export class Step extends React.Component {
     }
 
     let oauthQuestion
-
     if (!this.props.loggedIn) {
       oauthQuestion = (
         <p className='centered'>
@@ -64,7 +63,7 @@ export class Step extends React.Component {
           <div className='sidebar-padding'>
             <TimerBar style={timerBarStyle} />
           </div>
-          <Buttons>
+          <Buttons justifyContent='flex-end'>
             <Button type='primary' onClick={this.next.bind(this)}>Next image</Button>
           </Buttons>
         </div>

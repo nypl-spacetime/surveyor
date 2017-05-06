@@ -3,9 +3,11 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router'
 
+const padding = __CONFIG__.cssVariables.padding
 const mainColor = __CONFIG__.cssVariables.mainColor
 const pageBackground = __CONFIG__.cssVariables.pageBackground
 const disabledBackground = __CONFIG__.cssVariables.disabledBackground
+const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 
 const colors = {
   primary: pageBackground,
@@ -23,9 +25,9 @@ const chunk = css`
   cursor: ${(props) => props.type !== 'disabled' ? 'pointer' : 'inherit'};
   box-sizing: border-box;
   border-radius: 2rem;
-
+  flex-shrink: 0;
   display: inline-block;
-  margin: 0.6rem;
+  margin: ${padding};
   padding: 0.5rem 1.3rem;
 
   // text-transform: uppercase;
@@ -46,6 +48,12 @@ const chunk = css`
 
   &:hover {
     border-color: ${(props) => props.type !== 'disabled' ? mainColor : pageBackground};
+  }
+
+  @media (max-width: ${mobileWidth}) {
+    // font-size: 90%;
+    // margin: 0.3rem;
+    padding: 0.4rem 0.8rem;
   }
 `
 

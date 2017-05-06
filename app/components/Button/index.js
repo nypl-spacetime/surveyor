@@ -17,7 +17,7 @@ function Button (props) {
         {props.children}
       </StyledLink>
     )
-  } else if (props.onClick) {
+  } else {
     let onClick
     if (!props.disabled) {
       onClick = props.onClick

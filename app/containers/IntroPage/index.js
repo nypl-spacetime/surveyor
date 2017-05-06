@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { createSelector } from 'reselect'
+
+import {
+  selectItem
+} from 'containers/App/selectors'
 
 import {
   setIntroductionWatched
@@ -11,14 +16,14 @@ import SurveyorButton from 'components/SurveyorButton'
 
 export class IntroPage extends React.Component {
 
-  openRoute = (route) => {
-    this.props.changeRoute(route)
-  }
+  // openRoute = (route) => {
+  //   this.props.changeRoute(route)
+  // }
 
-  toSurveyor = () => {
-    this.props.setIntroductionWatched()
-    this.openRoute('/')
-  }
+  // toSurveyor = () => {
+  //   this.props.setIntroductionWatched()
+  //   this.openRoute('/')
+  // }
 
   render () {
     // <IntroVideo />
@@ -40,7 +45,7 @@ export class IntroPage extends React.Component {
           step of marking the direction and angle of the view. Not sure about the location or
           want a different challenge? It's always okay to skip!
         </p>
-        <SurveyorButton />
+        <SurveyorButton id={this.props.item.id} />
       </Page>
     )
   }
@@ -53,4 +58,10 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(IntroPage)
+export default connect(createSelector(
+  selectItem(),
+  (item) => ({
+    item
+  })
+), mapDispatchToProps)(IntroPage)
+

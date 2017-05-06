@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { createSelector } from 'reselect'
 
 import {
@@ -16,15 +15,11 @@ import {
   loadItem
 } from '../App/actions'
 
-import Sidebar from 'components/Sidebar'
-
 import IntroSimple from 'containers/IntroSimple'
 import Error from 'containers/Error'
 import Loading from 'containers/Loading'
-
+import Panes from 'containers/Panes'
 import Image from 'containers/Image'
-import SlidyPane from 'containers/SlidyPane'
-import Metadata from 'containers/Metadata'
 import Geotagger from 'containers/Geotagger'
 
 export class HomePage extends React.Component {
@@ -73,13 +68,10 @@ export class HomePage extends React.Component {
       )
     } else {
       mainContent = (
-        <SlidyPane key={this.props.params.id}>
+        <Panes>
           <Image />
-          <Sidebar>
-            <Metadata />
-            <Geotagger />
-          </Sidebar>
-        </SlidyPane>
+          <Geotagger />
+        </Panes>
       )
     }
 

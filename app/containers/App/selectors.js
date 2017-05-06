@@ -9,7 +9,12 @@ const selectWatchedIntroduction = () => createSelector(
 
 const selectLoading = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('loading')
+  (globalState) => {
+    const loaded = globalState.get('loaded').toJS()
+    return !Object
+      .values(loaded)
+      .reduce((acc, val) => acc && val, true)
+  }
 )
 
 const selectError = () => createSelector(
@@ -73,6 +78,21 @@ const selectSubmissions = () => createSelector(
   (globalState) => globalState.get('submissions').toJS()
 )
 
+const selectPaneMode = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.getIn(['panes', 'mode'])
+)
+
+const selectPaneIndex = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.getIn(['panes', 'index'])
+)
+
+const selectShowMetadata = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('showMetadata')
+)
+
 const getCurrentStepIndex = (state) => {
   // return index of current step:
   //   state.steps holds all submitted steps,
@@ -130,5 +150,8 @@ export {
   selectMapDefaults,
   selectLoading,
   selectError,
-  selectLocationState
+  selectPaneMode,
+  selectPaneIndex,
+  selectLocationState,
+  selectShowMetadata
 }

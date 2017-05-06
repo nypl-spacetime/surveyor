@@ -25,3 +25,8 @@ export const NEXT_STEP = 'surveyor/App/NEXT_STEP'
 export const LOG_OUT = 'surveyor/App/LOG_OUT'
 export const LOG_OUT_SUCCESS = 'surveyor/App/LOG_OUT_SUCCESS'
 export const LOG_OUT_ERROR = 'surveyor/App/LOG_OUT_ERROR'
+
+export const SET_PANE_INDEX = 'surveyor/App/SET_PANE_INDEX'
+export const SET_PANE_MODE = 'surveyor/App/SET_PANE_MODE'
+
+export const TOGGLE_METADATA = 'surveyor/App/TOGGLE_META_DATA'

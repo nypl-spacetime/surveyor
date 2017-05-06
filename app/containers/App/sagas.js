@@ -42,7 +42,7 @@ const API_URL = __CONFIG__.api.url
 const TASK_ID = __CONFIG__.tasks.taskId
 
 function isFunction (functionToCheck) {
-  var getType = {}
+  const getType = {}
   return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]'
 }
 
@@ -50,7 +50,7 @@ function* requestData (constant, getUrl, options) {
   while (true) {
     const action = yield take(constant)
 
-    var url
+    let url
     if (isFunction(getUrl)) {
       url = getUrl(action)
     } else {
@@ -62,7 +62,7 @@ function* requestData (constant, getUrl, options) {
         credentials: 'include'
       }
 
-      var fetchOptions = options.fetchOptions
+      let fetchOptions = options.fetchOptions
 
       // If options.fetchOptions is a function, call this function
       if (fetchOptions && isFunction(fetchOptions)) {
@@ -97,7 +97,7 @@ function* requestData (constant, getUrl, options) {
       // If actionSuccess is present in options, call this function when
       //   request call is successful
       if (options.actionSuccess) {
-        var actionSuccessParams = (action, resultData) => [resultData]
+        let actionSuccessParams = (action, resultData) => [resultData]
 
         if (options.actionSuccessParams) {
           actionSuccessParams = options.actionSuccessParams
@@ -118,7 +118,7 @@ export function* setRoute () {
     const item = yield select(selectItem())
 
     if (item) {
-      var path = `/${item.id}`
+      const path = `/${item.id}`
 
       // if (stepIndex > 0) {
       //   const step = yield select(selectCurrentStep());
@@ -148,7 +148,7 @@ export function* getItem () {
   const collectionUuids = collections.map((collection) => collection.uuid)
 
   const getUrl = (action) => {
-    var id = action.id
+    const id = action.id
 
     if (!id) {
       return `${API_URL}tasks/${TASK_ID}/items/random?collection=${collectionUuids.join(',')}`

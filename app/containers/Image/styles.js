@@ -2,20 +2,21 @@
 
 import styled from 'styled-components'
 
+const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 const padding = __CONFIG__.cssVariables.padding
-const headerColor = __CONFIG__.cssVariables.headerColor
+const imageBackground = __CONFIG__.cssVariables.imageBackground
 
 export const StyledContainer = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
 
-  background-color: black;
+  background-color: ${imageBackground};
   position: relative;
 `
 
 export const ImageContainer = styled.div`
-  padding: ${padding};
+  padding: calc(2 * ${padding});
   width: 100%;
   height: 100%;
 
@@ -28,25 +29,24 @@ export const ImageContainer = styled.div`
   }
 `
 
-export const ScreenReaderImage = styled.img`
-  width: 100px;
-`
-
-export const DigitalCollections = styled.div`
+export const TopBottom = styled.div`
   width: 100%;
+  height: 100%;
   position: absolute;
   display: flex;
-  justify-content: center;
-  bottom: ${padding};
+  flex-direction: column;
+  justify-content: space-between;
+`
 
-  & a {
-    text-align: center;
-    display: inline-block;
-    box-sizing: border-box;
-    border-radius: 2rem;
-    padding: 0.5rem 1.3rem;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: ${headerColor};
+export const ButtonContainer = styled.div`
+  display: ${(props) => props.paneMode === 'single' ? 'flex' : 'none'};
+  justify-content: flex-end;
+
+  @media (max-width: ${mobileWidth}) {
+    display: flex;
   }
 `
 
+export const ScreenReaderImage = styled.img`
+  width: 100px;
+`

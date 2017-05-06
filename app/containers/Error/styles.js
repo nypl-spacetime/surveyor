@@ -6,7 +6,6 @@ export const Container = styled.div`
 
 export const ErrorMessage = styled.div`
   text-align: center;
-  margin-bottom: 1em;
 `
 
 export const Centered = styled.div`

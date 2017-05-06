@@ -23,12 +23,13 @@ export default function Header (props) {
           </div>
         </Subtitles>
         <h1>
-          <Link to='/'>
+          <Link to={props.homepageLink}>
             Surveyor
           </Link>
         </h1>
       </div>
-      <Menu path={props.path}>
+      <Menu path={props.path} paneMode={props.paneMode}
+        singlePaneClick={props.singlePaneClick} splitPaneClick={props.splitPaneClick} >
         {props.children}
       </Menu>
     </StyledHeader>
