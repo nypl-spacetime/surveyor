@@ -73,10 +73,6 @@ injectGlobal`
   /* Centering & Padding
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-  .center-vertically {
-
-  }
-
   .sidebar-padding {
     padding: ${padding};
   }
@@ -114,7 +110,6 @@ injectGlobal`
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
   .crosshair {
-    position: absolute;
     width: 100px;
     height: 100px;
   }

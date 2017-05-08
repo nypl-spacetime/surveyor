@@ -11,8 +11,10 @@ export default function AuthMenuButton (props) {
 
   return (
     <StyledButton {...props}>
-      <Submissions>{submissions}</Submissions>
-      <Title>{title}</Title>
+      <span>
+        <Submissions>{submissions}</Submissions>
+        <Title>{title}</Title>
+      </span>
     </StyledButton>
   )
 }
