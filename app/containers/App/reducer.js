@@ -168,7 +168,7 @@ function appReducer (state = initialState, action) {
       return state
         .set('error', {
           type: action.type,
-          message: 'Error connecting to API',
+          message: 'Error getting data from server',
           error: action.error
         })
     case SKIP_STEP_ERROR:
@@ -176,7 +176,7 @@ function appReducer (state = initialState, action) {
       return state
         .set('error', {
           type: action.type,
-          message: 'Error submitting data to API',
+          message: 'Error submitting data',
           error: action.error
         })
     case LOG_OUT_ERROR:
