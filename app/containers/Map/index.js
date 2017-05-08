@@ -91,7 +91,7 @@ export class Map extends React.Component {
     map.attributionControl.setPrefix('')
 
     L.tileLayer(this.getOptions('tileUrl'), {
-      subdomains: this.getOptions('subdomains').toString(),
+      // subdomains: this.getOptions('subdomains'),
       attribution: this.getOptions('attribution')
     }).addTo(map)
 

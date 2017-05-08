@@ -162,13 +162,9 @@ steps:
 
 defaults:
   map:
-    # grayscale: true
-    # tileUrl: http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png
-    # subdomains: 1234
-    # attribution: 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />'
-    tileUrl: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
-    subdomains: abcd
-    attribution: '&copy; OpenStreetMap contributors, &copy; Carto'
+    tileUrl: 'https://api.mapbox.com/styles/v1/nypllabs/cj2gmix25005o2rpapartqm07/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ'
+    attribution: '&copy; Mapbox, &copy; OpenStreetMap'
+
     # scrollWheelZoom: false
     scrollWheelZoom: center
     doubleClickZoom: center
