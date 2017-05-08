@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import {
+  selectLoading,
   selectOAuth,
   selectSubmissions
 } from 'containers/App/selectors'
@@ -29,6 +30,10 @@ export class AuthMenu extends React.Component {
   }
 
   render () {
+    if (this.props.loading) {
+      return null
+    }
+
     // const hasSubmissions = this.props.submissions && this.props.submissions.completed > 0
     const isAuthenicated = this.props.oauth && this.props.oauth.oauth && this.props.oauth.oauth.provider
 
@@ -139,9 +144,10 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(createSelector(
+  selectLoading(),
   selectOAuth(),
   selectSubmissions(),
-  (oauth, submissions) => ({
-    oauth, submissions
+  (loading, oauth, submissions) => ({
+    loading, oauth, submissions
   })
 ), mapDispatchToProps)(AuthMenu)
