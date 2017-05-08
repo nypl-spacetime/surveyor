@@ -15,7 +15,7 @@ import { Animal, TimerBar } from './styles'
 
 const requireAll = (requireContext) => requireContext.keys().map(requireContext)
 
-var thankYouAnimals = requireAll(
+const thankYouAnimals = requireAll(
   require.context('images/public-domain-animals/', false, /-small.png$/)
 )
 

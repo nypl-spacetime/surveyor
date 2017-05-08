@@ -72,6 +72,10 @@ export const Logo = styled.a`
     height: 1px;
     overflow: hidden;
   }
+
+  @media (max-width: ${mobileWidth}) {
+    width: 2em;
+  }
 `
 
 export const Subtitles = styled.div`

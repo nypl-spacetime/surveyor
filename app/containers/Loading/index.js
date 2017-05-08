@@ -32,7 +32,7 @@ export class Loading extends React.Component {
   }
 
   render () {
-    var loading = `Loading${(new Array(this.state.dots + 1).join('.'))}`
+    const loading = `Loading${(new Array(this.state.dots + 1).join('.'))}`
     return (
       <CenteredItemPage>
         <Container>

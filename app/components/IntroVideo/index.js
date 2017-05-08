@@ -23,13 +23,13 @@ export class IntroVideo extends React.Component {
   }
 
   play () {
-    var node = findDOMNode(this.refs.video)
+    const node = findDOMNode(this.refs.video)
     node.play()
     node.setAttribute('controls', 'controls')
   }
 
   ended () {
-    var node = findDOMNode(this.refs.video)
+    const node = findDOMNode(this.refs.video)
     node.load()
   }
 }

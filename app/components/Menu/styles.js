@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 
 const headerHeight = __CONFIG__.cssVariables.headerHeight
 const headerColor = __CONFIG__.cssVariables.headerColor
+const padding = __CONFIG__.cssVariables.padding
 const headerBackground = __CONFIG__.cssVariables.headerBackground
 const mainColor = __CONFIG__.cssVariables.mainColor
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
@@ -14,10 +15,10 @@ const borderRadius = '3px'
 export const Hamburger = styled.div`
   font-size: calc(${hamburgerWidth} - 2 * 10px);
   text-align: center;
-  padding: 10px;
+  padding: ${padding} 0;
   display: none;
 
-  width: ${hamburgerWidth};
+  width: 1em;
   height: ${hamburgerWidth};
 
   @media (max-width: ${mobileWidth}) {
@@ -50,7 +51,6 @@ export const MenuContainer = styled.div`
 `
 
 export const Nav = styled.nav`
-  margin: 0 5px;
   display: flex;
 
   &:hover > * {
@@ -67,6 +67,8 @@ export const Nav = styled.nav`
 `
 
 export const PaneNav = styled(Nav)`
+  margin-right: ${padding};
+
   @media (max-width: ${mobileWidth}) {
     display: none;
   }

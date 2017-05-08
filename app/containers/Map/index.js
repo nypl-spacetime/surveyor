@@ -144,9 +144,9 @@ export class Map extends React.Component {
   }
 
   checkSize () {
-    var node = findDOMNode(this.refs.container)
+    const node = findDOMNode(this.refs.container)
     if (node) {
-      var dimensions = { width: node.clientWidth, height: node.clientHeight }
+      const dimensions = { width: node.clientWidth, height: node.clientHeight }
       if (this.state.dimensions.width !== dimensions.width || this.state.dimensions.height !== dimensions.height) {
         this.map.invalidateSize()
         this.setState({
