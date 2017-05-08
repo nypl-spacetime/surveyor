@@ -9,6 +9,7 @@ import {
 
 import Page from 'components/Page'
 import SurveyorButton from 'components/SurveyorButton'
+import DigitalCollectionsImage from 'components/DigitalCollectionsImage'
 
 import { KeyboardTable } from './styles'
 
@@ -70,9 +71,8 @@ export class AboutPage extends React.Component {
           depict a very wide view from one particular point in the city. How for instance, should
           you tag the following?
         </p>
-        <p>
-          <a href='http://digitalcollections.nypl.org/items/510d47d9-7aba-a3d9-e040-e00a18064a99'><img src='http://images.nypl.org/index.php?id=53913&amp;t=w' alt='The south prospect of the city of New York, in North America' /></a>
-        </p>
+        <DigitalCollectionsImage uuid='510d47d9-7aba-a3d9-e040-e00a18064a99'
+          imageId='53913' title='The south prospect of the city of New York, in North America' />
         <p>
           For these images place the marker in the approximate middle of the view. In Surveyor, a
           second, optional step allows you to mark the full width of the image and note place where
@@ -97,9 +97,8 @@ export class AboutPage extends React.Component {
           Tag the items where they would have stood when they existed. For instance, this lantern
           slide of the Crystal Palace should be pinned to the area which is now Bryant Park.
         </p>
-        <p>
-          <a href='http://digitalcollections.nypl.org/items/510d47da-ea3d-a3d9-e040-e00a18064a99'><img src='http://images.nypl.org/index.php?id=465509&amp;t=w' alt='Crystal Palace, ca. 1853, from an engraving' /></a>
-        </p>
+        <DigitalCollectionsImage uuid='510d47da-ea3d-a3d9-e040-e00a18064a99'
+          imageId='465509' title='Crystal Palace, ca. 1853, from an engraving' />
         <h2>Keyboard Navigation</h2>
         <KeyboardTable>
           <thead>
