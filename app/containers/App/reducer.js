@@ -17,7 +17,8 @@ import {
   LOG_OUT_ERROR,
   SET_PANE_INDEX,
   SET_PANE_MODE,
-  TOGGLE_METADATA
+  TOGGLE_METADATA,
+  SET_ERROR
 } from './constants'
 import { fromJS } from 'immutable'
 
@@ -161,6 +162,13 @@ function appReducer (state = initialState, action) {
         .set('error', {
           type: action.type,
           message: 'Error loading image',
+          error: action.error
+        })
+    case SET_ERROR:
+      return state
+        .set('error', {
+          type: action.type,
+          message: action.error.message,
           error: action.error
         })
     case LOAD_OAUTH_ERROR:

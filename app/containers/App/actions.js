@@ -20,7 +20,8 @@ import {
   LOG_OUT_ERROR,
   SET_PANE_MODE,
   SET_PANE_INDEX,
-  TOGGLE_METADATA
+  TOGGLE_METADATA,
+  SET_ERROR
 } from './constants'
 
 export function setIntroductionWatched () {
@@ -145,6 +146,13 @@ export function oauthLoaded (oauth) {
 export function oauthLoadingError (error) {
   return {
     type: LOAD_OAUTH_ERROR,
+    error
+  }
+}
+
+export function setError (error) {
+  return {
+    type: SET_ERROR,
     error
   }
 }

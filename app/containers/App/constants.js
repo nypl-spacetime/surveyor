@@ -22,6 +22,8 @@ export const SKIP_STEP_ERROR = 'surveyor/App/SKIP_STEP_ERROR'
 
 export const NEXT_STEP = 'surveyor/App/NEXT_STEP'
 
+export const SET_ERROR = 'surveyor/App/SET_ERROR'
+
 export const LOG_OUT = 'surveyor/App/LOG_OUT'
 export const LOG_OUT_SUCCESS = 'surveyor/App/LOG_OUT_SUCCESS'
 export const LOG_OUT_ERROR = 'surveyor/App/LOG_OUT_ERROR'
