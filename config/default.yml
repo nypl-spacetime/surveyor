@@ -143,6 +143,13 @@ collections:
     url: http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city-new-york-state-and-more-by-max#/?tab=about
     include: true
 
+  - uuid: 681c1dd0-c637-012f-41ef-58d385a7bc34
+    title: Collection of photographs taken by Daniel B. Austin and his associate, Adam Dove,
+      depicting buildings, street scenes and Brooklyn and Long Island views, particularly
+      Flatbush, Gravesend and New Utrecht, and generally for the period 1885-1914
+    url: https://digitalcollections.nypl.org/collections/collection-of-photographs-taken-by-daniel-b-austin-and-his-associate-adam-dove#/?tab=about
+    include: true
+
 tasks:
   organizationId: nypl
   taskId: geotag-photo
