@@ -69,6 +69,18 @@ export class Map extends React.Component {
     }
   }
 
+  setCameraAndTargetLatLng (cameraLatLng, targetLatLng) {
+    if (this.camera) {
+      this.camera.setCameraAndTargetLatLng(cameraLatLng, targetLatLng)
+    }
+  }
+
+  setAngle (angle) {
+    if (this.camera) {
+      this.camera.setAngle(angle)
+    }
+  }
+
   getMap () {
     return this.map
   }
@@ -91,7 +103,6 @@ export class Map extends React.Component {
     map.attributionControl.setPrefix('')
 
     L.tileLayer(this.getOptions('tileUrl'), {
-      // subdomains: this.getOptions('subdomains'),
       attribution: this.getOptions('attribution')
     }).addTo(map)
 

@@ -21,6 +21,7 @@ export class Step extends React.Component {
 
   constructor (props) {
     super(props)
+
     this.state = {
       hasMoved: false,
       initialView: {
@@ -73,7 +74,7 @@ export class Step extends React.Component {
       <StepContainer>
         <MapContainer>
           <Map ref='map' mode='camera' cameraChange={this.onCameraChange.bind(this)}
-            options={options} fieldOfView={fieldOfView} defaults={this.props.defaults} />
+            defaults={this.props.defaults} options={options} fieldOfView={fieldOfView} />
         </MapContainer>
         <Buttons justifyContent='space-between'>
           <PaneButton index={0} />
@@ -84,6 +85,29 @@ export class Step extends React.Component {
         </Buttons>
       </StepContainer>
     )
+  }
+
+  componentDidMount () {
+    const mapComponent = this.refs.map.getWrappedInstance()
+    const map = mapComponent.getMap()
+    const mapContainer = map.getContainer()
+
+    const fromCenter = 0.1
+
+    const cameraPoint = [
+      mapContainer.clientWidth * (0.5 + fromCenter),
+      mapContainer.clientHeight * (0.5 + fromCenter)
+    ]
+
+    const targetPoint = [
+      mapContainer.clientWidth * (0.5 - fromCenter),
+      mapContainer.clientHeight * (0.5 - fromCenter)
+    ]
+
+    const cameraLatLng = map.containerPointToLatLng(cameraPoint)
+    const targetLatLng = map.containerPointToLatLng(targetPoint)
+
+    mapComponent.setCameraAndTargetLatLng(cameraLatLng, targetLatLng)
   }
 
   submit () {
