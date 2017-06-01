@@ -149,13 +149,13 @@ injectGlobal`
 
   @media (max-width: ${mobileWidth}) {
     .hide-on-mobile {
-      display: none;
+      display: none !important;
     }
   }
 
   @media (min-width: ${mobileWidth}) {
     .show-on-mobile {
-      display: none;
+      display: none !important;
     }
   }
 `

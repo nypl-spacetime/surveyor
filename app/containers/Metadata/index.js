@@ -41,12 +41,12 @@ export class Metadata extends React.Component {
       <Title long={title.length > 80} title={itemData.title}>
         {title}
       </Title>,
-      <div>
+      <Field>
         View in high resolution
         in <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
           Digital Collections
         </a>
-      </div>
+      </Field>
     ]
 
     if (itemData.location) {
