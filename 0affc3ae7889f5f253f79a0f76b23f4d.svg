@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-219 280.7 303 217" style="enable-background:new -219 280.7 303 217;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#4B4B4B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#4B4B4B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:5.8878,7.8503;}
+	.st2{opacity:0.2;fill:#3388FF;}
+	.st3{fill:#4B4B4B;}
+	.st4{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
+	.st5{font-size:16px;}
+	.st6{fill:#4A4A4A;}
+	.st7{opacity:0.2;enable-background:new    ;}
+</style>
+<g>
+	<g>
+		<line class="st0" x1="34.1" y1="391" x2="31.4" y2="392.2"/>
+		<line class="st1" x1="24.2" y1="395.5" x2="-109.1" y2="457.9"/>
+		<polyline class="st0" points="-112.7,459.5 -115.4,460.9 -114.1,458 		"/>
+		<line class="st1" x1="-110.8" y1="451" x2="-48.4" y2="317.7"/>
+		<line class="st0" x1="-46.8" y1="314" x2="-45.5" y2="311.4"/>
+	</g>
+</g>
+<polygon class="st2" points="-115.4,460.9 -45.5,311.4 34.1,391 "/>
+<path id="Rectangle-2" class="st3" d="M-117.2,447.9l-7.4-7.4l-14.8,14.8l29.6,29.6l14.8-14.8l-7.4-7.4l3.7-3.7l-14.8-14.8
+	L-117.2,447.9z"/>
+<text transform="matrix(1 0 0 1 -114.6058 312.6999)" class="st4 st5">Angle</text>
+<text transform="matrix(1 0 0 1 -205.8177 471.0501)" class="st4 st5">Camera</text>
+<text transform="matrix(1 0 0 1 19.7505 351.1501)" class="st4 st5">Subject</text>
+<g>
+	<circle class="st6" cx="-5.7" cy="351.1" r="6"/>
+	<circle class="st7" cx="-5.7" cy="351.1" r="15.9"/>
+</g>
+<g>
+	<circle class="st6" cx="-45.5" cy="311.4" r="6"/>
+	<circle class="st7" cx="-45.5" cy="311.4" r="15.9"/>
+</g>
+</svg>
