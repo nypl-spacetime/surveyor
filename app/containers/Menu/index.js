@@ -7,6 +7,10 @@ import {
   selectSubmissions
 } from 'containers/App/selectors'
 
+import {
+  logOut
+} from 'containers/App/actions'
+
 import Dropdown from 'containers/Dropdown'
 import AuthMenuButton from 'components/AuthMenuButton'
 
@@ -49,7 +53,7 @@ export class Menu extends React.Component {
 
     if (isAuthenicated) {
       menuItems = [
-        <StyledA href={this.props.oauth.disconnect}>Log out</StyledA>
+        <StyledButton onClick={this.props.logOut}>Log out</StyledButton>
       ]
 
       if (this.state.shiftKey) {
@@ -106,10 +110,16 @@ export class Menu extends React.Component {
   }
 }
 
+function mapDispatchToProps (dispatch) {
+  return {
+    logOut: () => dispatch(logOut())
+  }
+}
+
 export default connect(createSelector(
   selectOAuth(),
   selectSubmissions(),
   (oauth, submissions) => ({
     oauth, submissions
   })
-))(Menu)
+), mapDispatchToProps)(Menu)
