@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Article from 'components/Article'
+import Page from 'components/Page'
 
 import { StyledFooter } from './styles'
 
@@ -23,7 +23,7 @@ function Footer (props) {
           Terms and Conditions
         </a>
       </nav>
-      <Article>
+      <Page>
         <p>
           A <a href='http://spacetime.nypl.org/'>NYC Space/Time Directory</a> project
         </p>
@@ -33,7 +33,7 @@ function Footer (props) {
         <p>
           <img src={nypl} alt='The New York Public Library' />
         </p>
-      </Article>
+      </Page>
     </StyledFooter>
   )
 }

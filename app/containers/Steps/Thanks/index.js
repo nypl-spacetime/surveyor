@@ -1,23 +1,35 @@
+/* global __CONFIG__ */
+
 import React from 'react'
 import { connect } from 'react-redux'
 
 import { createSelector } from 'reselect'
 
-import StepContainer from 'components/StepContainer'
 import Button from 'components/Button'
-import Buttons from 'components/Buttons'
+import Flex from 'components/Flex'
 
 import {
   selectLoggedIn
 } from 'containers/App/selectors'
 
-import { Animal, TimerBar } from './styles'
+import { TextStep, Animal, TimerBarContainer, TimerBar } from '../styles'
 
-const requireAll = (requireContext) => requireContext.keys().map(requireContext)
+const configAnimals = __CONFIG__.animals
+const animalsByUuid = {}
+configAnimals.forEach((animal) => {
+  animalsByUuid[animal.uuid] = animal
+})
 
-const thankYouAnimals = requireAll(
-  require.context('images/public-domain-animals/', false, /-small.png$/)
-)
+function requireAll (r) {
+  return r.keys().map((filename) => {
+    const uuid = filename.match(/\.\/(.*)\.small\.png$/)[1]
+    return {
+      src: r(filename),
+      ...animalsByUuid[uuid]
+    }
+  })
+}
+const animals = requireAll(require.context('images/public-domain-animals/', false, /\.small\.png$/))
 
 export class Step extends React.Component {
 
@@ -29,12 +41,17 @@ export class Step extends React.Component {
     this.state = {
       timerStarted: false,
       duration: 2.5,
-      animalSrc: this.randomAnimal()
+      animal: this.randomAnimal()
     }
   }
 
   randomAnimal () {
-    return thankYouAnimals[Math.floor(Math.random() * thankYouAnimals.length)]
+    const animal = animals[Math.floor(Math.random() * animals.length)]
+
+    return {
+      src: animal.src,
+      name: animal.name
+    }
   }
 
   render () {
@@ -46,28 +63,30 @@ export class Step extends React.Component {
     let oauthQuestion
     if (!this.props.loggedIn) {
       oauthQuestion = (
-        <p className='centered'>
+        <p>
           To save your score, please log in using the <b>Save score</b> option in the menu.
         </p>
       )
     }
 
+    const thanks = `The ${this.state.animal.name} says thanks!`
+
     return (
-      <StepContainer>
-        <div className='center-vertically sidebar-padding'>
-          <h3 className='centered'>Thank you!</h3>
+      <TextStep>
+        <div>
+          <h2>Thank you!</h2>
           {oauthQuestion}
-          <Animal src={this.state.animalSrc} alt='Thanks!' />
+          <Animal src={this.state.animal.src} alt={thanks} />
         </div>
         <div>
-          <div className='sidebar-padding'>
+          <TimerBarContainer>
             <TimerBar style={timerBarStyle} />
-          </div>
-          <Buttons justifyContent='flex-end'>
-            <Button type='primary' onClick={this.next.bind(this)}>Next image</Button>
-          </Buttons>
+          </TimerBarContainer>
+          <Flex justifyContent='flex-end'>
+            <Button type='submit' onClick={this.next.bind(this)}>Next image</Button>
+          </Flex>
         </div>
-      </StepContainer>
+      </TextStep>
     )
   }
 

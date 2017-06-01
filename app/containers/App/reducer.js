@@ -24,7 +24,7 @@ import { fromJS } from 'immutable'
 
 // Initial state
 const initialState = fromJS({
-  watchedIntroduction: true, // false,
+  watchedIntroduction: false,
   panes: fromJS({
     index: 0,
     mode: 'split' // 'single' or 'split'
@@ -32,7 +32,10 @@ const initialState = fromJS({
   showMetadata: true,
   item: initialItem(),
   oauth: initialOAuth(),
+
   steps: initialSteps(),
+  intermediarySteps: initialSteps(),
+
   submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
   loaded: fromJS({
@@ -41,12 +44,6 @@ const initialState = fromJS({
     oauth: false
   }),
   error: null
-  // error: {
-  //   item: null,
-  //   submissions: null,
-  //   oauth: null,
-  //   submit: null
-  // }
 })
 
 function initialOAuth () {
@@ -73,7 +70,7 @@ function newItem (state) {
     .set('item', initialItem())
     .set('showMetadata', true)
     .setIn(['panes', 'index'], 0)
-    .setIn(['loaded', 'item'], false)
+    // .setIn(['loaded', 'item'], false)
 }
 
 function loadSuccesful (state, key) {

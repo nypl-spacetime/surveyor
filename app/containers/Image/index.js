@@ -5,20 +5,23 @@ import { createSelector } from 'reselect'
 
 import {
   selectItem,
-  selectPaneMode
+  selectPaneMode,
+  selectCurrentStepIndex
 } from 'containers/App/selectors'
 
 import {
+  loadItem,
   setError,
   setPaneIndex,
   toggleMetadata
 } from '../App/actions'
 
-import Buttons from 'components/Buttons'
+import Button from 'components/Button'
+import Flex from 'components/Flex'
 import Metadata from 'containers/Metadata'
 import PaneButton from 'containers/PaneButton'
 
-import { StyledContainer, LoadingImage, ImageContainer, ScreenReaderImage, TopBottom } from './styles'
+import { StyledContainer, LoadingImage, ImageContainer, NewImageContainer, ScreenReaderImage } from './styles'
 
 export class Image extends React.Component {
 
@@ -31,6 +34,10 @@ export class Image extends React.Component {
   }
 
   componentDidMount () {
+    this.addImageLoadingEvents()
+  }
+
+  addImageLoadingEvents () {
     const imageNode = findDOMNode(this.refs.image)
 
     if (imageNode.complete) {
@@ -38,6 +45,15 @@ export class Image extends React.Component {
     } else {
       imageNode.addEventListener('load', this.imageLoaded.bind(this))
       imageNode.addEventListener('error', this.imageError.bind(this))
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.item.id !== prevProps.item.id) {
+      this.addImageLoadingEvents()
+      this.setState({
+        imageLoaded: false
+      })
     }
   }
 
@@ -62,27 +78,39 @@ export class Image extends React.Component {
 
     const loading = this.state.imageLoaded ? null : <div>Loading image…</div>
 
+    let newImageButton
+    if (this.props.currentStepIndex === 0) {
+      newImageButton = <Button onClick={this.loadNewImage.bind(this)} type='new'>New</Button>
+    }
+
     return (
       <StyledContainer>
         <LoadingImage>
           {loading}
         </LoadingImage>
-        <TopBottom onClick={this.onClick.bind(this)}>
-          <Metadata />
-          <Buttons justifyContent='flex-end'>
-            <PaneButton index={1} />
-          </Buttons>
-        </TopBottom>
         <ScreenReaderImage ref='image' src={src} alt={title} className='only-screen-reader' />
         <ImageContainer onClick={this.onClick.bind(this)}>
           <div style={imageStyle} />
         </ImageContainer>
+        <Flex direction='column' justifyContent='space-between' fill>
+          <Metadata />
+          <Flex justifyContent='space-between'>
+            <NewImageContainer>
+              {newImageButton}
+            </NewImageContainer>
+            <PaneButton index={1} />
+          </Flex>
+        </Flex>
       </StyledContainer>
     )
   }
 
   imageError () {
     this.props.setError(new Error('Failed to load image'))
+  }
+
+  loadNewImage () {
+    this.props.loadItem()
   }
 
   imageLoaded () {
@@ -96,12 +124,13 @@ export class Image extends React.Component {
   }
 
   onClick () {
-    // this.props.toggleMetadata()
+    this.props.toggleMetadata()
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
+    loadItem: () => dispatch(loadItem()),
     setError: (error) => dispatch(setError(error)),
     setPaneIndex: (index) => dispatch(setPaneIndex(index)),
     toggleMetadata: () => dispatch(toggleMetadata())
@@ -111,7 +140,8 @@ function mapDispatchToProps (dispatch) {
 export default connect(createSelector(
   selectPaneMode(),
   selectItem(),
-  (paneMode, item) => ({
-    paneMode, item
+  selectCurrentStepIndex(),
+  (paneMode, item, currentStepIndex) => ({
+    paneMode, item, currentStepIndex
   })
 ), mapDispatchToProps)(Image)

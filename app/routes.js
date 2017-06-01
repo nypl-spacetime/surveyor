@@ -9,22 +9,6 @@ const loadModule = (cb) => (componentModule) => {
 export default function createRoutes (store) {
   return [
     {
-      path: '/intro',
-      name: 'intro',
-      getComponent (nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/IntroPage')
-        ])
-
-        const renderRoute = loadModule(cb)
-
-        importModules.then(([component]) => {
-          renderRoute(component)
-        })
-
-        importModules.catch(errorLoading)
-      }
-    }, {
       path: '/about',
       name: 'about',
       getComponent (nextState, cb) {

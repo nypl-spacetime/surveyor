@@ -8,7 +8,7 @@
 	.st2{fill:none;stroke:#FFFFFF;stroke-width:34;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
 <g>
-	<rect x="18" y="17.8" class="st1" width="220" height="220"/>
-	<line class="st1" x1="128" y1="18" x2="128" y2="238"/>
+	<line class="st2" x1="37.5" y1="37.5" x2="218.5" y2="218.5"/>
+	<line class="st2" x1="218.5" y1="37.5" x2="37.5" y2="218.5"/>
 </g>
 </svg>

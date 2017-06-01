@@ -5,6 +5,9 @@ import styled from 'styled-components'
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 
 export const StyledButton = styled.button`
+  padding: 0;
+  margin-right: 10px;
+
   & > span {
     display: flex;
     align-items: center;
@@ -12,6 +15,10 @@ export const StyledButton = styled.button`
 
   & > span > * {
     margin-right: 10px;
+  }
+
+  @media (max-width: ${mobileWidth}) {
+    margin-right: 0;
   }
 `
 
@@ -28,4 +35,8 @@ export const Title = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  @media (max-width: ${mobileWidth}) {
+    display: none;
+  }
 `

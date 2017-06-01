@@ -7,8 +7,6 @@
 	.st1{fill:none;stroke:#FFFFFF;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st2{fill:none;stroke:#FFFFFF;stroke-width:34;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
-<g>
-	<rect x="18" y="17.8" class="st1" width="220" height="220"/>
-	<line class="st1" x1="128" y1="18" x2="128" y2="238"/>
-</g>
+<path class="st0" d="M218.1,20.3H38.2C28,20.3,19.4,28.7,19.4,39v109.4c0,10.2,8.5,17.6,18.8,17.6h49.3l40.6,69.6l40.6-69.6h49.3
+	c10.2,0,18.5-7.4,18.5-17.6V39C236.6,28.7,228.3,20.3,218.1,20.3z"/>
 </svg>

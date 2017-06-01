@@ -16,13 +16,11 @@ export class Panes extends React.Component {
 
     return (
       <Container>
-        <Container>
-          {this.props.children.map((child, index) => (
-            <Pane index={index} panes={this.props.children.length}
-              paneWidth={100 / panes} key={index}
-              currentPaneIndex={this.props.paneIndex} paneMode={this.props.paneMode}>{child}</Pane>
-          ))}
-        </Container>
+        {this.props.children.map((child, index) => (
+          <Pane index={index} panes={this.props.children.length}
+            paneWidth={100 / panes} key={index}
+            currentPaneIndex={this.props.paneIndex} paneMode={this.props.paneMode}>{child}</Pane>
+        ))}
       </Container>
     )
   }

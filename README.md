@@ -39,6 +39,10 @@ To:
 
 See the [GeoJSON file](example/data.geojson) in the `example` directory for a complete data file, including bearing information.
 
+## Chrome Extension
+
+(and [Chrome Extension](https://github.com/nypl-spacetime/surveyor-tab))
+
 ## Installation & Usage
 
 First, clone the GitHub repository:
@@ -68,12 +72,10 @@ See [brick-by-brick](https://github.com/nypl-spacetime/brick-by-brick).
 
 Currently, Surveyor works with images from NYPL's [Digital Collections](http://digitalcollections.nypl.org/). However, it's very easy to add images from other, non-NYPL collections.
 
-
-
 ## Public Domain Thank You Animals
 
-- http://digitalcollections.nypl.org/items/510d47da-9f1f-a3d9-e040-e00a18064a99
-- http://digitalcollections.nypl.org/items/510d47da-9ed9-a3d9-e040-e00a18064a99
-- http://digitalcollections.nypl.org/items/510d47da-9eda-a3d9-e040-e00a18064a99
-- http://digitalcollections.nypl.org/items/510d47da-9f5a-a3d9-e040-e00a18064a99
-- http://digitalcollections.nypl.org/items/510d47da-b502-a3d9-e040-e00a18064a99
+- [Chinese owl](http://digitalcollections.nypl.org/items/510d47da-9f1f-a3d9-e040-e00a18064a99)
+- [Wrinkle-lipped free-tailed bat](http://digitalcollections.nypl.org/items/510d47da-9ed9-a3d9-e040-e00a18064a99)
+- [Asiatic wildcat](http://digitalcollections.nypl.org/items/510d47da-9eda-a3d9-e040-e00a18064a99)
+- [Black-necked stork](http://digitalcollections.nypl.org/items/510d47da-9f5a-a3d9-e040-e00a18064a99)
+- [Tawny eagle](http://digitalcollections.nypl.org/items/510d47da-b502-a3d9-e040-e00a18064a99)

@@ -18,7 +18,7 @@ import {
 } from 'containers/App/selectors'
 
 import Header from 'components/Header'
-import AuthMenu from 'containers/AuthMenu'
+import Menu from 'containers/Menu'
 
 import { Container, Contents } from './styles'
 
@@ -31,14 +31,10 @@ export class App extends React.Component {
   componentDidMount () {
     this.boundKeyDown = this.keyDown.bind(this)
     window.addEventListener('keydown', this.boundKeyDown)
-
-    this.boundFocusChange = this.focusChange.bind(this)
-    window.addEventListener('focusin', this.boundFocusChange)
   }
 
   componentWillUnmount () {
     window.removeEventListener('keydown', this.boundKeyDown)
-    window.removeEventListener('focusin', this.boundFocusChange)
   }
 
   render () {
@@ -53,9 +49,9 @@ export class App extends React.Component {
       <Container on>
         <Helmet titleTemplate={`%s - ${defaultTitle}`}
           defaultTitle={defaultTitle} />
-        <Header path={this.props.location.pathname.slice(1)} paneMode={this.props.paneMode} homepageLink={homepageLink}
-          singlePaneClick={this.singlePaneClick.bind(this)} splitPaneClick={this.splitPaneClick.bind(this)}>
-          <AuthMenu />
+        <Header homepageLink={homepageLink}>
+          <Menu path={this.props.location.pathname.slice(1)} paneMode={this.props.paneMode} homepageLink={homepageLink}
+            singlePaneClick={this.singlePaneClick.bind(this)} splitPaneClick={this.splitPaneClick.bind(this)} />
         </Header>
         <Contents>
           {this.props.children}
@@ -78,14 +74,6 @@ export class App extends React.Component {
     if (!this.props.params.id) {
       this.props.changeRoute('/' + (this.props.item.id || ''))
     }
-  }
-
-  focusChange (event) {
-    // TODO:
-    //   Can we use this event to find out if a user used TAB to focus an element
-    //   in the map pane when photo pane was active, and vice versa?
-    //   And if so, move to that pane?
-    //   Or is there an easier way?
   }
 
   keyDown (event) {

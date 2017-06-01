@@ -5,53 +5,28 @@ import { Link } from 'react-router'
 
 const headerHeight = __CONFIG__.cssVariables.headerHeight
 const headerColor = __CONFIG__.cssVariables.headerColor
-const padding = __CONFIG__.cssVariables.padding
-const headerBackground = __CONFIG__.cssVariables.headerBackground
 const mainColor = __CONFIG__.cssVariables.mainColor
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 const hamburgerWidth = headerHeight
 const borderRadius = '3px'
-
-export const Hamburger = styled.div`
-  font-size: calc(${hamburgerWidth} - 2 * 10px);
-  text-align: center;
-  padding: ${padding} 0;
-  display: none;
-
-  width: 1em;
-  height: ${hamburgerWidth};
-
-  @media (max-width: ${mobileWidth}) {
-    display: block;
-  }
-`
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
 `
 
-export const MenuContainer = styled.div`
-  display: flex;
-  align-items: center;
+export const Hamburger = styled.button`
+  font-size: calc(${hamburgerWidth} - 2 * 10px);
+  display: none;
 
   @media (max-width: ${mobileWidth}) {
-    & > nav {
-      display: none;
-
-      position: absolute;
-      right: 0;
-      top: ${headerHeight};
-      background-color: ${headerBackground};
-      z-index: 9998;
-      margin: 0;
-      flex-direction: column;
-    }
+    display: block;
   }
 `
 
 export const Nav = styled.nav`
   display: flex;
+  align-items: center;
 
   &:hover > * {
     border-radius: 0;
@@ -64,10 +39,6 @@ export const Nav = styled.nav`
   &:hover > *:last-child {
     border-radius: 0 ${borderRadius} ${borderRadius} 0;
   }
-`
-
-export const PaneNav = styled(Nav)`
-  margin-right: ${padding};
 
   @media (max-width: ${mobileWidth}) {
     display: none;
@@ -94,7 +65,19 @@ export const StyledButton = styled.button`
   ${MenuItem}
 `
 
+export const StyledA = styled.a`
+  ${MenuItem}
+`
+
 export const StyledLink = styled(Link)`
   ${MenuItem}
   color: ${headerColor} !important;
+`
+
+export const DropDownItem = styled.li`
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `

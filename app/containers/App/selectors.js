@@ -22,11 +22,6 @@ const selectError = () => createSelector(
   (globalState) => globalState.get('error')
 )
 
-const selectConfig = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('config')
-)
-
 const selectMapDefaults = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.getIn(['config', 'defaults', 'map']).toJS()
@@ -41,6 +36,11 @@ const selectCollections = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.getIn(['config', 'collections']).toJS()
     .filter((collection) => collection.include)
+)
+
+const selectAnimals = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.getIn(['config', 'animals']).toJS()
 )
 
 const selectStepData = (step) => createSelector(
@@ -142,7 +142,7 @@ export {
   selectLoggedIn,
   selectSubmissions,
   selectCurrentStepIndex,
-  selectConfig,
+  selectAnimals,
   selectCollections,
   selectCSSVariables,
   selectStepData,

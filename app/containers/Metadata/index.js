@@ -9,7 +9,7 @@ import {
   selectShowMetadata
 } from 'containers/App/selectors'
 
-import { Container, MetadataToggle, MetadataContainer, Title, Field } from './styles'
+import { Container, Title, Field, Toggle } from './styles'
 
 import iconLocation from 'images/icon-location.svg'
 import iconDate from 'images/icon-date.svg'
@@ -17,32 +17,30 @@ import iconDate from 'images/icon-date.svg'
 export class Metadata extends React.Component {
 
   render () {
+    if (!this.props.item.data) {
+      return <div />
+    }
+
     const show = this.props.showMetadata
 
     const itemData = (this.props.item && this.props.item.data) || {}
 
-    // const titleLength = itemData.title ? itemData.title.length : 0
-
-    let titleStyle
-    // if (titleLength > 100) {
-    //   titleStyle = {
-    //     fontSize: `1.6em`
-    //   }
-    // } else if (titleLength > 50) {
-    //   titleStyle = {
-    //     fontSize: `1.8em`
-    //   }
-    // }
-
-    // let metadata = (
-    //     <div>
-    //       <div>Collection: {collectionLink}</div>
-    //       {geoDateHeader}
-    //     </div>
-    //   )
+    const maxTitleLength = 120
+    // Break long titles on first space before maxTitleLength
+    let title = itemData.title || ''
+    if (title.length > maxTitleLength) {
+      for (var i = maxTitleLength; i > 0; i--) {
+        if (title[i] === ' ') {
+          title = title.slice(0, i) + '…'
+          break
+        }
+      }
+    }
 
     let metadata = [
-      <Title style={titleStyle} title={itemData.title}>{itemData.title}</Title>,
+      <Title long={title.length > 80} title={itemData.title}>
+        {title}
+      </Title>,
       <div>
         View in high resolution
         in <a target='_blank' href={`http://digitalcollections.nypl.org/items/${this.props.item.id}`}>
@@ -65,12 +63,14 @@ export class Metadata extends React.Component {
 
     return (
       <Container>
-        <MetadataToggle show={!show}>
-          Click to show title & metadata
-        </MetadataToggle>
-        <MetadataContainer show={show}>
+        <Toggle show={!show}>
+          <div style={{opacity: 0.7}}>
+            <span>Metadata hidden — click to show</span>
+          </div>
+        </Toggle>
+        <Toggle show={show}>
           {metadata.map((item, index) => <div key={index}>{item}</div>)}
-        </MetadataContainer>
+        </Toggle>
       </Container>
     )
   }

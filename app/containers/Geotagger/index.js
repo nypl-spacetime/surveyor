@@ -40,10 +40,15 @@ export class Geotagger extends React.Component {
   render () {
     const step = this.state.steps[this.props.currentStepIndex]
     return React.createElement(step.component, {
+      new: this.newItem.bind(this),
       next: this.nextStep.bind(this),
       submit: this.submitStep.bind(this),
       skip: this.skipStep.bind(this)
     })
+  }
+
+  newItem () {
+    console.log('NIEUWE!')
   }
 
   nextStep () {

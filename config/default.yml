@@ -1,16 +1,21 @@
 api:
   url: http://brick-by-brick.dev/
 
+longTitleLength: 120
+
 cssVariables:
   padding: 10px
 
-  headerHeight: 50px
+  headerHeight: 56px
 
   mobileWidth: 900px
   mobileHeight: 600px
 
   mainColor: '#d0343a'
+
   outlineColor: '#d0343a'
+  outlineOpacity: 0.5
+  outlineWidth: 3px
 
   imageBackground: 'rgb(50,50,50)'
 
@@ -19,9 +24,6 @@ cssVariables:
 
   headerBackground: '#111'
   headerColor: white
-
-  disabledBackground: '#dededf'
-  resizerWidth: '20px'
 
 collections:
   - uuid: a1f0cf50-c5f3-012f-5ec8-58d385a7bc34
@@ -148,10 +150,44 @@ collections:
       depicting buildings, street scenes and Brooklyn and Long Island views, particularly
       Flatbush, Gravesend and New Utrecht, and generally for the period 1885-1914
     url: https://digitalcollections.nypl.org/collections/collection-of-photographs-taken-by-daniel-b-austin-and-his-associate-adam-dove#/?tab=about
-    include: true
+    include: false
+
+animals:
+  - uuid: 510d47da-9f1f-a3d9-e040-e00a18064a99
+    name: Chinese owl
+
+  - uuid: 510d47da-9ed9-a3d9-e040-e00a18064a99
+    name: Wrinkle-lipped free-tailed bat
+
+  - uuid: 510d47da-9eda-a3d9-e040-e00a18064a99
+    name: Asiatic wildcat
+
+  # - uuid: 510d47da-9f5a-a3d9-e040-e00a18064a99
+  #   name: Black-necked stork
+
+  # - uuid: 510d47da-b502-a3d9-e040-e00a18064a99
+  #   name: Tawny eagle
+
+  - uuid: 510d47da-9f4a-a3d9-e040-e00a18064a99
+    name: Bengal horned pheasant
+
+  - uuid: 510d47da-9f7d-a3d9-e040-e00a18064a99
+    name: Armed balistes
+
+  - uuid: 510d47da-9f72-a3d9-e040-e00a18064a99
+    name: Doubtful toad
+
+  - uuid: 510d47da-b4f3-a3d9-e040-e00a18064a99
+    name: Indian crested porcupine
+
+  - uuid: 510d47da-c2ed-a3d9-e040-e00a18064a99
+    name: Spinose land terrapin
+
+  - uuid: 510d47da-9f12-a3d9-e040-e00a18064a99
+    name: Collared hedge hog
 
 tasks:
-  organizationId: nypl
+  defaultOrganizationId: nypl
   taskId: geotag-photo
 
 steps:
@@ -169,5 +205,6 @@ defaults:
     scrollWheelZoom: center
     doubleClickZoom: center
     center: [40.75319,-73.98224]
-    zoom: 10
+    zoom: 13
     maxZoom: 18
+    keyboardPanDelta: 40

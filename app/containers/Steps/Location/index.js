@@ -2,12 +2,11 @@ import React from 'react'
 
 import Map from 'containers/Map'
 
-import StepContainer from 'components/StepContainer'
 import Button from 'components/Button'
-import Buttons from 'components/Buttons'
+import Flex from 'components/Flex'
 import PaneButton from 'containers/PaneButton'
 
-import { MapContainer } from './styles'
+import { Container, ButtonContainer, MapContainer } from '../styles'
 
 export class Step extends React.Component {
 
@@ -20,35 +19,42 @@ export class Step extends React.Component {
 
   render () {
     const mapEvents = {
-      movestart: this.onMoveStart.bind(this)
+      movestart: this.onMoveStart.bind(this),
+      moveend: this.onMoveEnd.bind(this)
     }
 
     return (
-      <StepContainer>
+      <Container>
         <MapContainer>
           <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} mode='crosshair' />
         </MapContainer>
-        <Buttons justifyContent='space-between'>
-          <PaneButton index={0} />
-          <Buttons justifyContent='flex-end'>
-            <Button onClick={this.props.skip} type='secondary'>Skip</Button>
-            <Button onClick={this.submit.bind(this)} type='primary' disabled={!this.state.hasMoved}>Submit</Button>
-          </Buttons>
-        </Buttons>
-      </StepContainer>
+        <ButtonContainer>
+          <Flex justifyContent='space-between'>
+            <PaneButton index={0} />
+            <Flex justifyContent='flex-end'>
+              <Button onClick={this.props.skip} type='skip'>Skip</Button>
+              <Button onClick={this.submit.bind(this)} type='submit' disabled={!this.state.hasMoved}>Submit</Button>
+            </Flex>
+          </Flex>
+        </ButtonContainer>
+      </Container>
     )
+  }
+
+  getData () {
+    const view = this.refs.map.getWrappedInstance().getView()
+    return {
+      zoom: view.zoom,
+      geometry: {
+        type: 'Point',
+        coordinates: view.center
+      }
+    }
   }
 
   submit () {
     if (this.state.hasMoved) {
-      const view = this.refs.map.getWrappedInstance().getView()
-      this.props.submit({
-        zoom: view.zoom,
-        geometry: {
-          type: 'Point',
-          coordinates: view.center
-        }
-      })
+      this.props.submit(this.getData())
     }
   }
 
@@ -58,6 +64,16 @@ export class Step extends React.Component {
         hasMoved: true
       })
     }
+  }
+
+  onMoveEnd () {
+    console.log('store map center as intermediary step data')
+    // this.props.storeIntermediary(this.getData())
+    // if (!this.state.hasMoved) {
+    //   this.setState({
+    //     hasMoved: true
+    //   })
+    // }
   }
 }
 

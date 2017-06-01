@@ -1,32 +1,54 @@
 import React from 'react'
 
-import { StyledButton, StyledLink } from './styles'
+import { themes, StyledButton, StyledLink, StyledFakeButton } from './styles'
 
 function Button (props) {
-  const type = props.disabled ? 'disabled' : props.type
+  const theme = Object.assign({}, themes.default, themes[props.type], props.disabled ? themes.disabled : null)
+
+  let onClick
+  let tabIndex = -1
+  if (!props.disabled) {
+    onClick = props.onClick
+    tabIndex = 0
+  }
+
+  let image
+  if (theme.image) {
+    image = <img src={theme.image} />
+  }
+
+  let contents = (
+    <div>
+      {image}
+      <span>
+        {props.children}
+      </span>
+    </div>
+  )
+
+  const style = {
+    backgroundColor: theme.backgroundColor,
+    cursor: theme.cursor
+  }
 
   if (props.to) {
-    let to
-    if (!props.disabled) {
-      to = props.to
-    }
-
     return (
-      <StyledLink tabIndex='0' to={to}
-        disabled={props.disabled} type={type}>
-        {props.children}
+      <StyledLink tabIndex={tabIndex} to={props.to}
+        style={style}>
+        {contents}
       </StyledLink>
     )
-  } else {
-    let onClick
-    if (!props.disabled) {
-      onClick = props.onClick
-    }
-
+  } else if (props.fake) {
     return (
-      <StyledButton tabIndex='0' onClick={onClick}
-        disabled={props.disabled} type={type}>
-        {props.children}
+      <StyledFakeButton style={style}>
+        {contents}
+      </StyledFakeButton>
+    )
+  } else {
+    return (
+      <StyledButton tabIndex={tabIndex} onClick={onClick}
+        style={style}>
+        {contents}
       </StyledButton>
     )
   }

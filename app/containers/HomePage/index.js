@@ -15,7 +15,7 @@ import {
   loadItem
 } from '../App/actions'
 
-import IntroSimple from 'containers/IntroSimple'
+import IntroModal from 'containers/IntroModal'
 import Error from 'containers/Error'
 import Loading from 'containers/Loading'
 import Panes from 'containers/Panes'
@@ -64,7 +64,7 @@ export class HomePage extends React.Component {
       )
     } else if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
       mainContent = (
-        <IntroSimple />
+        <IntroModal />
       )
     } else {
       mainContent = (

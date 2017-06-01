@@ -2,8 +2,10 @@
 
 import styled from 'styled-components'
 
+const padding = __CONFIG__.cssVariables.padding
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
-const mapColor = __CONFIG__.cssVariables.mapColor
+const headerColor = __CONFIG__.cssVariables.headerColor
+const headerBackground = __CONFIG__.cssVariables.headerBackground
 
 export const StyledFooter = styled.footer`
   width: 100%;
@@ -12,21 +14,23 @@ export const StyledFooter = styled.footer`
   flex-direction: column;
   margin-top: 1em;
   margin-bottom: 1em;
-  font-size: 0.8rem;
+  // font-size: 0.8rem;
 
   & nav {
     width: 100%;
-    background-color: ${mapColor};
+    background-color: ${headerBackground};
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 12px;
-    padding-bottom: 10px;
+    padding-top: ${padding};
+    padding-bottom: ${padding};
     text-align: center;
   }
 
+  & nav,
   & nav a,
   & nav a:visited {
+    color: ${headerColor};
     margin: 0 .5em;
   }
 
@@ -34,7 +38,7 @@ export const StyledFooter = styled.footer`
     text-decoration: underline;
   }
 
-  & img {
+  & p img {
     margin: 0 auto;
     width: 55px;
   }

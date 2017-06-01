@@ -152,4 +152,10 @@ injectGlobal`
       display: none;
     }
   }
+
+  @media (min-width: ${mobileWidth}) {
+    .show-on-mobile {
+      display: none;
+    }
+  }
 `

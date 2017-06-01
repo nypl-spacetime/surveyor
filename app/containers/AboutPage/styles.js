@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const KeyboardTable = styled.table`
+export const Table = styled.table`
   width: 100%;
 
   & th,
@@ -11,12 +11,18 @@ export const KeyboardTable = styled.table`
     vertical-align: top;
   }
 
-  td {
+  & td {
     border-top: 2px solid rgba(0, 0, 0, 0.08);
   }
 
-  tr td:first-child {
-    min-width: 5em;
+  & tr td:first-child {
+    min-width: 11em;
+  }
+`
+
+export const KeyboardTable = styled(Table)`
+  & tr td:first-child kbd {
+    margin-left: 0.4em;
   }
 
   & kbd {

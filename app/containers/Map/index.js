@@ -17,9 +17,7 @@ import crosshairHereImage from 'images/crosshair-here.svg'
 import crosshairShadowImage from 'images/crosshair-shadow.svg'
 
 import cameraImage from '../../../node_modules/leaflet-geotag-photo/images/camera.svg'
-import targetImage from '../../../node_modules/leaflet-geotag-photo/images/target.svg'
-import controlCameraImg from '../../../node_modules/leaflet-geotag-photo/images/camera-icon.svg'
-import controlCrosshairImg from '../../../node_modules/leaflet-geotag-photo/images/crosshair-icon.svg'
+import markerImage from '../../../node_modules/leaflet-geotag-photo/images/marker.svg'
 
 export class Map extends React.Component {
 
@@ -92,6 +90,10 @@ export class Map extends React.Component {
   componentDidMount () {
     const node = findDOMNode(this.refs.map)
 
+    const focusDiv = document.createElement('div')
+    focusDiv.className = 'map-focus'
+    node.appendChild(focusDiv)
+
     const map = L.map(node, {
       center: this.getOptions('center'),
       zoom: this.getOptions('zoom'),
@@ -100,6 +102,7 @@ export class Map extends React.Component {
       doubleClickZoom: this.getOptions('doubleClickZoom')
     })
 
+    map.attributionControl.setPosition('topright')
     map.attributionControl.setPrefix('')
 
     L.tileLayer(this.getOptions('tileUrl'), {
@@ -120,23 +123,24 @@ export class Map extends React.Component {
         iconAnchor: [19, 19]
       })
 
-      const targetIcon = L.icon({
-        iconUrl: targetImage,
-        iconSize: [180, 32],
-        iconAnchor: [90, 16]
+      const markerIcon = L.icon({
+        iconUrl: markerImage,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
       })
 
       const camera = L.geotagPhoto.camera(this.props.fieldOfView, {
         cameraIcon,
-        targetIcon,
-        controlCameraImg,
-        controlCrosshairImg
+        targetIcon: markerIcon,
+        angleIcon: markerIcon,
+        control: false
       }).addTo(map)
 
       this.camera = camera
 
       if (this.props.cameraChange) {
         camera.on('change', this.props.cameraChange)
+        camera.on('input', this.props.cameraChange)
       }
     }
 

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import Menu from 'components/Menu'
-
 import { StyledHeader, Logo, Subtitles } from './styles'
 
 import nypl from 'images/nypl-white.svg'
@@ -28,10 +26,9 @@ export default function Header (props) {
           </Link>
         </h1>
       </div>
-      <Menu path={props.path} paneMode={props.paneMode}
-        singlePaneClick={props.singlePaneClick} splitPaneClick={props.splitPaneClick} >
+      <div>
         {props.children}
-      </Menu>
+      </div>
     </StyledHeader>
   )
 }

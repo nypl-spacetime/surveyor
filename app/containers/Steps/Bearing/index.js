@@ -6,11 +6,10 @@ import { createSelector } from 'reselect'
 import Map from 'containers/Map'
 import PaneButton from 'containers/PaneButton'
 
-import StepContainer from 'components/StepContainer'
 import Button from 'components/Button'
-import Buttons from 'components/Buttons'
+import Flex from 'components/Flex'
 
-import { MapContainer } from './styles'
+import { Container, ButtonContainer, MapContainer } from '../styles'
 
 import {
   selectMapDefaults,
@@ -47,19 +46,12 @@ export class Step extends React.Component {
     }
   }
 
-  // onSliderInput (e) {
-  //   this.setState({
-  //     angle: parseInt(e.target.value)
-  //   });
-  //   this.updateFieldOfView()
-  // }
-
-  roundNumber (n) {
-    return Math.round(n * 100) / 100
+  roundNumber (num) {
+    return Math.round(num * 100) / 100
   }
 
   onCameraChange () {
-    if (!this.state.hasMoved) {
+    if (this.state.initializedCamera && !this.state.hasMoved) {
       this.setState({
         hasMoved: true
       })
@@ -71,19 +63,21 @@ export class Step extends React.Component {
     const fieldOfView = this.state.fieldOfView
 
     return (
-      <StepContainer>
+      <Container>
         <MapContainer>
           <Map ref='map' mode='camera' cameraChange={this.onCameraChange.bind(this)}
             defaults={this.props.defaults} options={options} fieldOfView={fieldOfView} />
         </MapContainer>
-        <Buttons justifyContent='space-between'>
-          <PaneButton index={0} />
-          <Buttons justifyContent='flex-end'>
-            <Button onClick={this.props.skip} type='secondary'>Skip</Button>
-            <Button onClick={this.submit.bind(this)} type='primary' disabled={!this.state.hasMoved}>Submit</Button>
-          </Buttons>
-        </Buttons>
-      </StepContainer>
+        <ButtonContainer>
+          <Flex justifyContent='space-between'>
+            <PaneButton index={0} />
+            <Flex justifyContent='flex-end'>
+              <Button onClick={this.props.skip} type='skip'>Skip</Button>
+              <Button onClick={this.submit.bind(this)} type='submit' disabled={!this.state.hasMoved}>Submit</Button>
+            </Flex>
+          </Flex>
+        </ButtonContainer>
+      </Container>
     )
   }
 
@@ -108,6 +102,10 @@ export class Step extends React.Component {
     const targetLatLng = map.containerPointToLatLng(targetPoint)
 
     mapComponent.setCameraAndTargetLatLng(cameraLatLng, targetLatLng)
+
+    this.setState({
+      initializedCamera: true
+    })
   }
 
   submit () {

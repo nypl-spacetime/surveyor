@@ -32,6 +32,7 @@ export const StyledHeader = styled.header`
 
   & h1 a {
     color: ${mainColor};
+    font-weight: 300;
   }
 
   @media (max-width: ${mobileWidth}) {
@@ -41,12 +42,6 @@ export const StyledHeader = styled.header`
 
     & h1 {
       font-size: 2rem;
-    }
-  }
-
-  @media (max-width: 500px) {
-    & h1 {
-      font-size: 1rem;
     }
   }
 `
@@ -74,7 +69,7 @@ export const Logo = styled.a`
   }
 
   @media (max-width: ${mobileWidth}) {
-    width: 2em;
+    width: 30px;
   }
 `
 
