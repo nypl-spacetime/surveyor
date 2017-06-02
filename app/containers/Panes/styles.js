@@ -32,5 +32,6 @@ export const Pane = styled.div`
     width: 100%;
     visibility: ${(props) => props.index === props.currentPaneIndex ? 'visible' : 'hidden'};
     left: ${(props) => (props.index - props.currentPaneIndex) * 100 + '%'};
+    transition: ${(props) => props.index === props.currentPaneIndex ? visibleTransition : hiddenTransition};
   }
 `
