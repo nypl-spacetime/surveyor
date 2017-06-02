@@ -66,9 +66,10 @@ export class Menu extends React.Component {
       menuItems = this.makeProviderList()
     }
 
+    const hideFirst = 2
     menuItems = [
-      <StyledLink className='show-on-mobile' selected={surveying} to={this.props.homepageLink}>Start Surveying!</StyledLink>,
-      <StyledLink className='show-on-mobile' selected={aboutSelected} to='/about'>About</StyledLink>,
+      <StyledLink to={this.props.homepageLink}>Start Surveying!</StyledLink>,
+      <StyledLink to='/about'>About</StyledLink>,
       ...menuItems
     ]
 
@@ -79,7 +80,7 @@ export class Menu extends React.Component {
         <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>☰</Hamburger>
         <Dropdown show={this.state.showDropdown} onHide={this.hideDropdown.bind(this)}>
           {menuItems.map((item, index) => (
-            <DropDownItem key={index}>
+            <DropDownItem key={index} className={index < hideFirst ? 'show-on-mobile' : undefined}>
               {item}
             </DropDownItem>
           ))}
