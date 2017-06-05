@@ -7,9 +7,12 @@ function Button (props) {
 
   let onClick
   let tabIndex = -1
+  let className
   if (!props.disabled) {
     onClick = props.onClick
     tabIndex = 0
+  } else {
+    className = 'button-disabled'
   }
 
   let image
@@ -34,20 +37,20 @@ function Button (props) {
   if (props.to) {
     return (
       <StyledLink tabIndex={tabIndex} to={props.to}
-        style={style}>
+        style={style} className={className}>
         {contents}
       </StyledLink>
     )
   } else if (props.fake) {
     return (
-      <StyledFakeButton style={style}>
+      <StyledFakeButton style={style} className={className}>
         {contents}
       </StyledFakeButton>
     )
   } else {
     return (
       <StyledButton tabIndex={tabIndex} onClick={onClick}
-        style={style}>
+        style={style} className={className}>
         {contents}
       </StyledButton>
     )

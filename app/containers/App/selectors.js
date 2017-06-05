@@ -101,14 +101,26 @@ const getCurrentStepIndex = (state) => {
   return state.get('steps').size
 }
 
+const selectSavedStepData = () => createSelector(
+  selectGlobal(),
+  (globalState) => {
+    const currentStepIndex = getCurrentStepIndex(globalState)
+    const savedStepData = globalState
+      .getIn(['savedSteps', currentStepIndex])
+
+    if (savedStepData) {
+      return savedStepData.toJS()
+    }
+  }
+)
+
 const selectCurrentStep = () => createSelector(
   selectGlobal(),
   (globalState) => {
     // get name of current step
     const currentStepIndex = getCurrentStepIndex(globalState)
     return globalState
-      .getIn(['config', 'steps'])
-      .get(currentStepIndex)
+      .getIn(['config', 'steps', currentStepIndex])
   }
 )
 
@@ -146,6 +158,7 @@ export {
   selectCollections,
   selectCSSVariables,
   selectStepData,
+  selectSavedStepData,
   selectSteps,
   selectMapDefaults,
   selectLoading,

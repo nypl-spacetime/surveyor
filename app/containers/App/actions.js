@@ -8,6 +8,7 @@ import {
   LOAD_OAUTH_ERROR,
   LOAD_SUBMISSIONS_SUCCESS,
   LOAD_SUBMISSIONS_ERROR,
+  SAVE_STEP,
   SUBMIT_STEP,
   SUBMIT_STEP_SUCCESS,
   SUBMIT_STEP_ERROR,
@@ -36,27 +37,33 @@ export function nextStep () {
   }
 }
 
-export function submitStep (organizationId, id, step, stepIndex, data, geometry) {
+export function saveStep (stepIndex, data) {
+  return {
+    type: SAVE_STEP,
+    stepIndex,
+    data
+  }
+}
+
+export function submitStep (organizationId, id, step, stepIndex, data) {
   return {
     type: SUBMIT_STEP,
     organizationId,
     id,
     step,
     stepIndex,
-    data,
-    geometry
+    data
   }
 }
 
-export function stepSubmitted (organizationId, id, step, stepIndex, data, geometry) {
+export function stepSubmitted (organizationId, id, step, stepIndex, data) {
   return {
     type: SUBMIT_STEP_SUCCESS,
     organizationId,
     id,
     step,
     stepIndex,
-    data,
-    geometry
+    data
   }
 }
 

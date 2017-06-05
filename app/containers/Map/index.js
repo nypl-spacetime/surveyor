@@ -21,10 +21,6 @@ import markerImage from '../../../node_modules/leaflet-geotag-photo/images/marke
 
 export class Map extends React.Component {
 
-  static defaultProps = {
-    options: {}
-  }
-
   constructor (props) {
     super(props)
 
@@ -83,10 +79,6 @@ export class Map extends React.Component {
     return this.map
   }
 
-  getOptions (key) {
-    return this.props.options[key] || this.props.defaults[key]
-  }
-
   componentDidMount () {
     const node = findDOMNode(this.refs.map)
 
@@ -94,19 +86,23 @@ export class Map extends React.Component {
     focusDiv.className = 'map-focus'
     node.appendChild(focusDiv)
 
+    const center = (this.props.data && this.props.data.center) || this.props.defaults.center
+    const zoom = (this.props.data && this.props.data.zoom) || this.props.defaults.zoom
+
     const map = L.map(node, {
-      center: this.getOptions('center'),
-      zoom: this.getOptions('zoom'),
-      maxZoom: this.getOptions('maxZoom'),
-      scrollWheelZoom: this.getOptions('scrollWheelZoom'),
-      doubleClickZoom: this.getOptions('doubleClickZoom')
+      center,
+      zoom,
+      maxZoom: this.props.defaults.maxZoom,
+      scrollWheelZoom: this.props.defaults.scrollWheelZoom,
+      doubleClickZoom: this.props.defaults.doubleClickZoom,
+      keyboardPanDelta: this.props.defaults.keyboardPanDelta
     })
 
     map.attributionControl.setPosition('topright')
     map.attributionControl.setPrefix('')
 
-    L.tileLayer(this.getOptions('tileUrl'), {
-      attribution: this.getOptions('attribution')
+    L.tileLayer(this.props.defaults.tileUrl, {
+      attribution: this.props.defaults.attribution
     }).addTo(map)
 
     if (this.props.mode === 'crosshair') {
@@ -129,7 +125,8 @@ export class Map extends React.Component {
         iconAnchor: [16, 16]
       })
 
-      const camera = L.geotagPhoto.camera(this.props.fieldOfView, {
+      const fieldOfView = this.props.data && this.props.data.fieldOfView
+      const camera = L.geotagPhoto.camera(fieldOfView, {
         cameraIcon,
         targetIcon: markerIcon,
         angleIcon: markerIcon,
@@ -140,7 +137,10 @@ export class Map extends React.Component {
 
       if (this.props.cameraChange) {
         camera.on('change', this.props.cameraChange)
-        camera.on('input', this.props.cameraChange)
+      }
+
+      if (this.props.cameraInput) {
+        camera.on('input', this.props.cameraInput)
       }
     }
 

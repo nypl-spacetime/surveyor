@@ -46,10 +46,11 @@ const button = css`
 
   padding: 7px 8px;
   line-height: 1rem;
+  white-space: nowrap;
 
   flex-shrink: 0;
   display: inline-block;
-  margin: calc(${padding} / 2);
+  // margin: calc(${padding} / 2);
 
   color: white;
   & span {
@@ -77,15 +78,17 @@ const button = css`
   & img {
     width: 1.1rem;
     margin-top: -.2rem;
+    display: inline-block;
   }
 
-  &:hover img,
-  &:focus img {
+  &:not(.button-disabled):hover img,
+  &:not(.button-disabled):focus img {
     transition: transform 0.3s;
     transform: rotate(360deg);
   }
 
   & span {
+    display: inline-block;
     padding-left: 0.6rem;
   }
 

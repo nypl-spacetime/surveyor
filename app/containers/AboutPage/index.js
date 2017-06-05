@@ -5,7 +5,8 @@ import Helmet from 'react-helmet'
 
 import {
   selectItem,
-  selectCollections
+  selectCollections,
+  selectAnimals
 } from 'containers/App/selectors'
 
 import Button from 'components/Button'
@@ -17,6 +18,7 @@ import DigitalCollectionsImage from 'components/DigitalCollectionsImage'
 import { Table, KeyboardTable } from './styles'
 
 import knightFoundation from 'images/knight-foundation.png'
+import bat from 'images/510d47da-9ed9-a3d9-e040-e00a18064a99.large.png'
 
 export class AboutPage extends React.Component {
   render () {
@@ -89,7 +91,6 @@ export class AboutPage extends React.Component {
                   If you've found the correct location on the map, click Submit to send this location to the NYPL.
                 </td>
               </tr>
-
             </tbody>
           </Table>
 
@@ -227,6 +228,36 @@ export class AboutPage extends React.Component {
             All submissions are open data. Concensus algorithm.
             See GitHub for more information
           </p>
+
+          <h2>Public Domain Thank You Animals</h2>
+          <p>
+            Every time you submit the location of a photo, you're thanked by a thankful animal from our public domain image collections.
+          </p>
+          <img src={bat} alt='Wrinkle-lipped free-tailed bat' />
+
+          <Table>
+            <thead>
+              <tr>
+                <th scope='col'>Animal</th>
+                <th scope='col'>UUID</th>
+              </tr>
+            </thead>
+            <tbody>
+              { this.props.animals.map((animal, index) => (
+                <tr key={index}>
+                  <td>
+                    {animal.name}
+                  </td>
+                  <td>
+                    <a target='_blank' href={`https://digitalcollections.nypl.org/items/${animal.uuid}`}>
+                      <code>{animal.uuid}</code>
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
           <h2>Acknowledgements</h2>
           <p>
             Surveyor is part of the <a href='http://spacetime.nypl.org/'>NYC Space/Time
@@ -282,7 +313,8 @@ export class AboutPage extends React.Component {
 export default connect(createSelector(
   selectItem(),
   selectCollections(),
-  (item, collections) => ({
-    item, collections
+  selectAnimals(),
+  (item, collections, animals) => ({
+    item, collections, animals
   })
 ))(AboutPage)

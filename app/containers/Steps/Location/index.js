@@ -13,7 +13,8 @@ export class Step extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      hasMoved: false
+      initializedMap: false,
+      hasMoved: false || this.props.savedStepData
     }
   }
 
@@ -23,10 +24,22 @@ export class Step extends React.Component {
       moveend: this.onMoveEnd.bind(this)
     }
 
+    let data
+    if (this.props.savedStepData) {
+      const coordinates = this.props.savedStepData.geometry.coordinates
+      data = {
+        center: [
+          coordinates[1],
+          coordinates[0]
+        ],
+        zoom: this.props.savedStepData.zoom
+      }
+    }
+
     return (
       <Container>
         <MapContainer>
-          <Map ref='map' defaults={this.props.defaults} mapEvents={mapEvents} mode='crosshair' />
+          <Map ref='map' mapEvents={mapEvents} mode='crosshair' data={data} />
         </MapContainer>
         <ButtonContainer>
           <Flex justifyContent='space-between'>
@@ -41,13 +54,22 @@ export class Step extends React.Component {
     )
   }
 
+  componentDidMount () {
+    this.map = this.refs.map.getWrappedInstance()
+    this.setState({
+      initializedMap: true
+    })
+  }
+
   getData () {
-    const view = this.refs.map.getWrappedInstance().getView()
-    return {
-      zoom: view.zoom,
-      geometry: {
-        type: 'Point',
-        coordinates: view.center
+    if (this.state.initializedMap) {
+      const view = this.map.getView()
+      return {
+        zoom: view.zoom,
+        geometry: {
+          type: 'Point',
+          coordinates: view.center
+        }
       }
     }
   }
@@ -67,13 +89,9 @@ export class Step extends React.Component {
   }
 
   onMoveEnd () {
-    console.log('store map center as intermediary step data')
-    // this.props.storeIntermediary(this.getData())
-    // if (!this.state.hasMoved) {
-    //   this.setState({
-    //     hasMoved: true
-    //   })
-    // }
+    if (this.state.initializedMap) {
+      this.props.save(this.getData())
+    }
   }
 }
 

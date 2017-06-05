@@ -1,8 +1,8 @@
-# Space/Time Directory - Surveyor
+# NYC Space/Time Directory - Surveyor
 
 See http://spacetime.nypl.org/surveyor/.
 
-Surveyor is a web application (and [Chrome Extension](https://github.com/nypl-spacetime/surveyor-tab)) for crowdsourced image geotagging. Surveyor is part of the [NYC Space/Time Directory project](http://spacetime.nypl.org/).
+Surveyor is a web application for crowdsourced image [geotagging](https://en.wikipedia.org/wiki/Geotagging) of the historical photo collections of the New York Public Library. Surveyor is part of the [NYC Space/Time Directory project](http://spacetime.nypl.org/).
 
 ## Example
 

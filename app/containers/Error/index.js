@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Flex from 'components/Flex'
+import Button from 'components/Button'
 import CenteredItemPage from 'components/CenteredItemPage'
 
 import { createSelector } from 'reselect'
@@ -47,6 +49,7 @@ export class Error extends React.Component {
                 <Eye src={eye} />
               </Lion>
               <ErrorMessage>{message}</ErrorMessage>
+              <Flex><Button type='new' onClick={this.reload}>Reload page</Button></Flex>
             </Container>
           </CenteredItemPage>
         )
@@ -72,6 +75,10 @@ export class Error extends React.Component {
         )
       }
     }
+  }
+
+  reload () {
+    window.location.reload()
   }
 }
 

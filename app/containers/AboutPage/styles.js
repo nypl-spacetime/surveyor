@@ -14,15 +14,15 @@ export const Table = styled.table`
   & td {
     border-top: 2px solid rgba(0, 0, 0, 0.08);
   }
-
-  & tr td:first-child {
-    min-width: 11em;
-  }
 `
 
 export const KeyboardTable = styled(Table)`
   & tr td:first-child kbd {
     margin-left: 0.4em;
+  }
+
+  & tr td:first-child {
+    min-width: 11em;
   }
 
   & kbd {

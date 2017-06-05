@@ -39,6 +39,7 @@ export class PaneButton extends React.Component {
 
       buttonStyle = {
         backgroundImage: `url(${src})`,
+        backgroundColor: 'white',
         right: 0
       }
     }

@@ -22,25 +22,26 @@ export class Step extends React.Component {
     super(props)
 
     this.state = {
+      initializedMap: false,
       hasMoved: false,
-      initialView: {
+      initialData: {
         zoom: props.locationStepData.data.zoom,
         center: [
           props.locationStepData.data.geometry.coordinates[1],
           props.locationStepData.data.geometry.coordinates[0]
-        ]
-      },
-      fieldOfView: {
-        type: 'Feature',
-        properties: {
-          angle: 40
-        },
-        geometry: {
-          type: 'LineString',
-          coordinates: [
-            props.locationStepData.data.geometry.coordinates,
-            props.locationStepData.data.geometry.coordinates
-          ]
+        ],
+        fieldOfView: {
+          type: 'Feature',
+          properties: {
+            angle: 40
+          },
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              props.locationStepData.data.geometry.coordinates,
+              props.locationStepData.data.geometry.coordinates
+            ]
+          }
         }
       }
     }
@@ -50,23 +51,78 @@ export class Step extends React.Component {
     return Math.round(num * 100) / 100
   }
 
-  onCameraChange () {
-    if (this.state.initializedCamera && !this.state.hasMoved) {
+  onCameraInput () {
+    if (this.state.initializedMap && !this.state.hasMoved) {
       this.setState({
         hasMoved: true
       })
     }
   }
 
+  onCameraChange () {
+    this.saveData()
+  }
+
+  onMoveEnd () {
+    this.saveData()
+  }
+
+  saveData () {
+    if (this.state.initializedMap) {
+      this.props.save(this.getData())
+    }
+  }
+
+  getData () {
+    if (this.state.initializedMap) {
+      const fieldOfView = this.map.getFieldOfView()
+      const view = this.map.getView()
+
+      return {
+        angle: this.roundNumber(fieldOfView.properties.angle),
+        bearing: this.roundNumber(fieldOfView.properties.bearing),
+        distance: this.roundNumber(fieldOfView.properties.distance),
+        geometry: fieldOfView.geometry,
+        zoom: view.zoom,
+        center: {
+          type: 'Point',
+          coordinates: view.center
+        }
+      }
+    }
+  }
+
   render () {
-    const options = this.state.initialView
-    const fieldOfView = this.state.fieldOfView
+    let data
+    if (this.props.savedStepData) {
+      const center = this.props.savedStepData.center
+      data = {
+        center: [
+          center.coordinates[1],
+          center.coordinates[0]
+        ],
+        zoom: this.props.savedStepData.zoom,
+        fieldOfView: {
+          type: 'Feature',
+          properties: {
+            angle: this.props.savedStepData.angle
+          },
+          geometry: this.props.savedStepData.geometry.geometries[1]
+        }
+      }
+    } else {
+      data = this.state.initialData
+    }
+
+    const mapEvents = {
+      moveend: this.onMoveEnd.bind(this)
+    }
 
     return (
       <Container>
         <MapContainer>
-          <Map ref='map' mode='camera' cameraChange={this.onCameraChange.bind(this)}
-            defaults={this.props.defaults} options={options} fieldOfView={fieldOfView} />
+          <Map ref='map' mode='camera' data={data} mapEvents={mapEvents}
+            cameraChange={this.onCameraChange.bind(this)} cameraInput={this.onCameraInput.bind(this)} />
         </MapContainer>
         <ButtonContainer>
           <Flex justifyContent='space-between'>
@@ -82,42 +138,38 @@ export class Step extends React.Component {
   }
 
   componentDidMount () {
-    const mapComponent = this.refs.map.getWrappedInstance()
-    const map = mapComponent.getMap()
-    const mapContainer = map.getContainer()
+    this.map = this.refs.map.getWrappedInstance()
 
-    const fromCenter = 0.1
+    if (!this.props.savedStepData) {
+      const leafletMap = this.map.getMap()
+      const mapContainer = leafletMap.getContainer()
 
-    const cameraPoint = [
-      mapContainer.clientWidth * (0.5 + fromCenter),
-      mapContainer.clientHeight * (0.5 + fromCenter)
-    ]
+      const fromCenter = 0.1
 
-    const targetPoint = [
-      mapContainer.clientWidth * (0.5 - fromCenter),
-      mapContainer.clientHeight * (0.5 - fromCenter)
-    ]
+      const cameraPoint = [
+        mapContainer.clientWidth * (0.5 + fromCenter),
+        mapContainer.clientHeight * (0.5 + fromCenter)
+      ]
 
-    const cameraLatLng = map.containerPointToLatLng(cameraPoint)
-    const targetLatLng = map.containerPointToLatLng(targetPoint)
+      const targetPoint = [
+        mapContainer.clientWidth * (0.5 - fromCenter),
+        mapContainer.clientHeight * (0.5 - fromCenter)
+      ]
 
-    mapComponent.setCameraAndTargetLatLng(cameraLatLng, targetLatLng)
+      const cameraLatLng = leafletMap.containerPointToLatLng(cameraPoint)
+      const targetLatLng = leafletMap.containerPointToLatLng(targetPoint)
+
+      this.map.setCameraAndTargetLatLng(cameraLatLng, targetLatLng)
+    }
 
     this.setState({
-      initializedCamera: true
+      initializedMap: true
     })
   }
 
   submit () {
     if (this.state.hasMoved) {
-      const fieldOfView = this.refs.map.getWrappedInstance().getFieldOfView()
-      const data = {
-        angle: fieldOfView.properties.angle,
-        bearing: this.roundNumber(fieldOfView.properties.bearing),
-        distance: this.roundNumber(fieldOfView.properties.distance),
-        geometry: fieldOfView.geometry
-      }
-      this.props.submit(data)
+      this.props.submit(this.getData())
     }
   }
 }

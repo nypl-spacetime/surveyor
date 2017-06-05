@@ -12,6 +12,8 @@ export const LOAD_ITEM = 'surveyor/App/LOAD_ITEM'
 export const LOAD_ITEM_SUCCESS = 'surveyor/App/LOAD_ITEM_SUCCESS'
 export const LOAD_ITEM_ERROR = 'surveyor/App/LOAD_ITEM_ERROR'
 
+export const SAVE_STEP = 'surveyor/App/SAVE_STEP'
+
 export const SUBMIT_STEP = 'surveyor/App/SUBMIT_STEP'
 export const SUBMIT_STEP_SUCCESS = 'surveyor/App/SUBMIT_STEP_SUCCESS'
 export const SUBMIT_STEP_ERROR = 'surveyor/App/SUBMIT_STEP_ERROR'

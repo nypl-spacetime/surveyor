@@ -7,13 +7,15 @@ import {
   selectItem,
   selectSteps,
   selectCurrentStep,
+  selectSavedStepData,
   selectCurrentStepIndex
 } from 'containers/App/selectors'
 
 import {
   nextStep,
   submitStep,
-  skipStep
+  skipStep,
+  saveStep
 } from '../App/actions'
 
 let StepContainers = {}
@@ -40,19 +42,23 @@ export class Geotagger extends React.Component {
   render () {
     const step = this.state.steps[this.props.currentStepIndex]
     return React.createElement(step.component, {
-      new: this.newItem.bind(this),
       next: this.nextStep.bind(this),
       submit: this.submitStep.bind(this),
-      skip: this.skipStep.bind(this)
+      skip: this.skipStep.bind(this),
+      save: this.saveStep.bind(this),
+      savedStepData: this.props.savedStepData
     })
-  }
-
-  newItem () {
-    console.log('NIEUWE!')
   }
 
   nextStep () {
     this.props.nextStep()
+  }
+
+  saveStep (data) {
+    this.props.saveStep(
+      this.props.currentStepIndex,
+      data
+    )
   }
 
   skipStep () {
@@ -88,11 +94,14 @@ function mapDispatchToProps (dispatch) {
     nextStep: () => {
       dispatch(nextStep())
     },
-    submitStep: (organizationId, id, step, stepIndex, data, geometry) => {
-      dispatch(submitStep(organizationId, id, step, stepIndex, data, geometry))
+    submitStep: (organizationId, id, step, stepIndex, data) => {
+      dispatch(submitStep(organizationId, id, step, stepIndex, data))
     },
     skipStep: (organizationId, id, step, stepIndex) => {
       dispatch(skipStep(organizationId, id, step, stepIndex))
+    },
+    saveStep: (stepIndex, data) => {
+      dispatch(saveStep(stepIndex, data))
     },
     dispatch
   }
@@ -103,7 +112,8 @@ export default connect(createSelector(
   selectSteps(),
   selectCurrentStep(),
   selectCurrentStepIndex(),
-  (item, steps, currentStep, currentStepIndex) => ({
-    item, steps, currentStep, currentStepIndex
+  selectSavedStepData(),
+  (item, steps, currentStep, currentStepIndex, savedStepData) => ({
+    item, steps, currentStep, currentStepIndex, savedStepData
   })
 ), mapDispatchToProps)(Geotagger)

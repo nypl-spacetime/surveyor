@@ -12,6 +12,7 @@ import {
   SUBMIT_STEP_ERROR,
   SKIP_STEP_SUCCESS,
   SKIP_STEP_ERROR,
+  SAVE_STEP,
   NEXT_STEP,
   LOG_OUT_SUCCESS,
   LOG_OUT_ERROR,
@@ -33,8 +34,13 @@ const initialState = fromJS({
   item: initialItem(),
   oauth: initialOAuth(),
 
+  // steps hold step data after user submits (or skips)
+  // TODO: rename to stepData?
   steps: initialSteps(),
-  intermediarySteps: initialSteps(),
+
+  // savedSteps hold step data before user submits,
+  //   used to return to last map state between switching pages
+  savedSteps: initialSteps(),
 
   submissions: initialSubmissions(),
   config: fromJS(__CONFIG__),
@@ -109,12 +115,12 @@ function appReducer (state = initialState, action) {
       wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size
 
       if (!wasLastStep) {
+        // TODO: do we really need to store orgId, id, step?
         const stepData = {
           organizationId: action.organizationId,
           id: action.id,
           step: action.step,
-          data: action.data,
-          geometry: action.geometry
+          data: action.data
         }
 
         state = state
@@ -141,6 +147,13 @@ function appReducer (state = initialState, action) {
       } else {
         return newItem(state)
       }
+    case SAVE_STEP:
+      const savedStepsSize = state.get('savedSteps').size
+      if (savedStepsSize <= action.stepIndex) {
+        state = state.update('savedSteps', (savedSteps) => savedSteps.setSize(action.stepIndex + 1))
+      }
+
+      return state.setIn(['savedSteps', action.stepIndex], fromJS(action.data))
     case NEXT_STEP:
       wasLastStep = state.getIn(['config', 'steps']).size - 1 === state.get('steps').size
 
