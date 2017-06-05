@@ -23,7 +23,7 @@ export class Step extends React.Component {
 
     this.state = {
       initializedMap: false,
-      hasMoved: false,
+      hasMoved: false || this.props.savedStepData,
       initialData: {
         zoom: props.locationStepData.data.zoom,
         center: [
@@ -61,6 +61,7 @@ export class Step extends React.Component {
 
   onCameraChange () {
     this.saveData()
+    this.onCameraInput()
   }
 
   onMoveEnd () {

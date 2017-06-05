@@ -40,7 +40,7 @@ export class Step extends React.Component {
     super(props)
     this.state = {
       timerStarted: false,
-      duration: 2.5,
+      duration: 4,
       animal: this.randomAnimal()
     }
   }

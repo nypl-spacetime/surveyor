@@ -73,6 +73,7 @@ function initialSubmissions () {
 function newItem (state) {
   return state
     .set('steps', initialSteps())
+    .set('savedSteps', initialSteps())
     .set('item', initialItem())
     .set('showMetadata', true)
     .setIn(['panes', 'index'], 0)
