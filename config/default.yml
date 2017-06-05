@@ -162,11 +162,11 @@ animals:
   - uuid: 510d47da-9eda-a3d9-e040-e00a18064a99
     name: Asiatic wildcat
 
-  # - uuid: 510d47da-9f5a-a3d9-e040-e00a18064a99
-  #   name: Black-necked stork
+  - uuid: 510d47da-9f5a-a3d9-e040-e00a18064a99
+    name: Black-necked stork
 
-  # - uuid: 510d47da-b502-a3d9-e040-e00a18064a99
-  #   name: Tawny eagle
+  - uuid: 510d47da-b502-a3d9-e040-e00a18064a99
+    name: Tawny eagle
 
   - uuid: 510d47da-9f4a-a3d9-e040-e00a18064a99
     name: Bengal horned pheasant
@@ -204,7 +204,7 @@ defaults:
     # scrollWheelZoom: false
     scrollWheelZoom: center
     doubleClickZoom: center
-    center: [40.75319,-73.98224]
+    center: [40.75319, -73.98224]
     zoom: 13
     maxZoom: 18
     keyboardPanDelta: 40
