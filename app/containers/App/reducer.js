@@ -77,7 +77,6 @@ function newItem (state) {
     .set('item', initialItem())
     .set('showMetadata', true)
     .setIn(['panes', 'index'], 0)
-    // .setIn(['loaded', 'item'], false)
 }
 
 function loadSuccesful (state, key) {
@@ -102,6 +101,7 @@ function appReducer (state = initialState, action) {
         .setIn(['panes', 'mode'], action.mode)
     case LOAD_ITEM_SUCCESS:
       state = state
+        .set('showMetadata', true)
         .set('item', fromJS(action.item))
       return loadSuccesful(state, 'item')
     case LOAD_OAUTH_SUCCESS:
