@@ -5,7 +5,8 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
-import { persistStore, autoRehydrate } from 'redux-persist-immutable'
+import { persistStore, autoRehydrate, createTransform } from 'redux-persist-immutable'
+
 import createSagaMiddleware from 'redux-saga'
 import createReducer from './reducers'
 
@@ -40,9 +41,31 @@ export default function configureStore (initialState = {}, history) {
   store.runSaga = sagaMiddleware.run
   store.asyncReducers = {} // Async reducer registry
 
-  // begin periodically persisting the store
+  const deleteKeysTransform = createTransform(
+    (state) => state,
+    (state) => {
+      return state
+        .delete('config')
+        .delete('oauth')
+        .delete('submissions')
+        .set('showMetadata', true)
+        .setIn(['loaded', 'oauth'], false)
+        .setIn(['loaded', 'submissions'], false)
+        .delete('item')
+    },
+    {
+      whitelist: 'global'
+    }
+  )
+
+  // Begin periodically persisting the store
   persistStore(store, {
-    blacklist: 'route'
+    blacklist: [
+      'route'
+    ],
+    transforms: [
+      deleteKeysTransform
+    ]
   })
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
