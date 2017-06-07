@@ -239,7 +239,7 @@ export class AboutPage extends React.Component {
             <thead>
               <tr>
                 <th scope='col'>Animal</th>
-                <th scope='col'>UUID</th>
+                <th scope='col'>Digital Collections Identifier</th>
               </tr>
             </thead>
             <tbody>
