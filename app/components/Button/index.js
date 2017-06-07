@@ -17,7 +17,7 @@ function Button (props) {
 
   let image
   if (theme.image) {
-    image = <img src={theme.image} />
+    image = <img role='presentation' src={theme.image} />
   }
 
   let contents = (
