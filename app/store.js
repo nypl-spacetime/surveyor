@@ -46,12 +46,8 @@ export default function configureStore (initialState = {}, history) {
     (state) => {
       return state
         .delete('config')
-        .delete('oauth')
-        .delete('submissions')
+        .delete('error')
         .set('showMetadata', true)
-        .setIn(['loaded', 'oauth'], false)
-        .setIn(['loaded', 'submissions'], false)
-        .delete('item')
     },
     {
       whitelist: 'global'
