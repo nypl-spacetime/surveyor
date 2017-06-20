@@ -12,7 +12,7 @@ cssVariables:
     red: rgb(208, 52, 58)
     green: rgb(100, 128, 3)
     blue: rgb(2, 104, 202)
-    gray: rgb(204, 204, 204)
+    gray: rgb(110, 110, 110)
 
   outlineColor: '#d0343a'
   outlineOpacity: 0.5

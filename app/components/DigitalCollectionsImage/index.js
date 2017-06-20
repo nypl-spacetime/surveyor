@@ -23,7 +23,6 @@ function DigitalCollectionsImage (props) {
       </a>
       <Caption>
         <Title>{title}</Title>
-        <span>, from NYPL's Digital Collections.</span>
       </Caption>
     </p>
   )
