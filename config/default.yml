@@ -211,5 +211,6 @@ defaults:
     doubleClickZoom: center
     center: [40.75319, -73.98224]
     zoom: 13
+    minZoom: 6
     maxZoom: 18
     keyboardPanDelta: 40

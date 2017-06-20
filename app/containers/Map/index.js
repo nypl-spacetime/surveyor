@@ -92,6 +92,7 @@ export class Map extends React.Component {
     const map = L.map(node, {
       center,
       zoom,
+      minZoom: this.props.defaults.minZoom,
       maxZoom: this.props.defaults.maxZoom,
       scrollWheelZoom: this.props.defaults.scrollWheelZoom,
       doubleClickZoom: this.props.defaults.doubleClickZoom,
