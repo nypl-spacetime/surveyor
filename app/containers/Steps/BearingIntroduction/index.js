@@ -3,7 +3,7 @@ import React from 'react'
 import Button from 'components/Button'
 import Flex from 'components/Flex'
 
-import { Explanation, TextStep } from '../styles'
+import { Explanation, TextStep, Buttons } from '../styles'
 
 import explanation from 'images/bearing-explanation.svg'
 
@@ -21,10 +21,12 @@ export class Step extends React.Component {
             <Explanation alt='Camera and target' title='Camera and target' src={explanation} />
           </p>
         </div>
-        <Flex justifyContent='flex-end'>
-          <Button onClick={this.props.skip} type='skip'>Skip</Button>
-          <Button onClick={this.props.next} type='submit'>Continue</Button>
-        </Flex>
+        <Buttons>
+          <Flex justifyContent='flex-end'>
+            <Button onClick={this.props.skip} type='skip'>Skip</Button>
+            <Button onClick={this.props.next} type='submit'>Continue</Button>
+          </Flex>
+        </Buttons>
       </TextStep>
     )
   }

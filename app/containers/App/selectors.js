@@ -114,6 +114,16 @@ const selectSavedStepData = () => createSelector(
   }
 )
 
+const selectLastSavedStepData = () => createSelector(
+  selectGlobal(),
+  (globalState) => {
+    const savedSteps = globalState.get('savedSteps')
+    if (savedSteps.size) {
+      return savedSteps.get(savedSteps.size - 1).toJS()
+    }
+  }
+)
+
 const selectCurrentStep = () => createSelector(
   selectGlobal(),
   (globalState) => {
@@ -159,6 +169,7 @@ export {
   selectCSSVariables,
   selectStepData,
   selectSavedStepData,
+  selectLastSavedStepData,
   selectSteps,
   selectMapDefaults,
   selectLoading,

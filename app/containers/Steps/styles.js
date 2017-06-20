@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components'
 
 import Page from 'components/Page'
 
-const mainColor = __CONFIG__.cssVariables.mainColor
+const colors = __CONFIG__.cssVariables.colors
 const padding = __CONFIG__.cssVariables.padding
 
 export const Container = styled.div`
@@ -25,13 +25,19 @@ export const MapContainer = styled.div`
   }
 `
 
-export const ButtonContainer = styled.div`
-  padding: calc(${padding} / 2);
+export const BottomButtons = styled.div`
+  padding: ${padding};
   position: absolute;
   bottom: 0;
   width: 100%;
   z-index: 9999;
   pointer-events: none;
+`
+
+export const Buttons = styled.div`
+  & button {
+    margin-left: ${padding};
+  }
 `
 
 export const Explanation = styled.img`
@@ -44,10 +50,17 @@ export const Explanation = styled.img`
 
 export const TextStep = styled(Page)`
   height: 100%;
+  max-width: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+
+  & p {
+    max-width: 780px;
+    margin: 0 auto;
+  }
 
   & > {
     flex-shrink: 0;
@@ -62,7 +75,7 @@ export const TimerBarContainer = styled.div`
 
 export const TimerBar = styled.div`
   height: 5px;
-  background-color: ${mainColor};
+  background-color: ${colors.red};
   transition-property: width;
   transition-timing-function: linear;
 `
@@ -82,7 +95,8 @@ export const Animal = styled.img`
   margin: 0 auto;
   width : 200px;
   display: block;
-  margin-bottom: 20px;
+  margin-top: 2em;
+  margin-bottom: 2em;
   animation-iteration-count: infinite;
   animation-name: ${wiggle};
   animation-duration: .5s;

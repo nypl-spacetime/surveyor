@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const mainColor = __CONFIG__.cssVariables.mainColor
+const colors = __CONFIG__.cssVariables.colors
 
 const Container = styled.div`
   width: 100%;
@@ -14,12 +14,13 @@ const Container = styled.div`
   padding: 10px;
 
   & h2 {
-    border-bottom: solid 5px ${mainColor};
+    border-bottom: solid 5px ${colors.red};
   }
 
   & p img {
-    width: 100%;
     max-width: 780px;
+    margin: 0 auto;
+    display: block;
   }
 `
 

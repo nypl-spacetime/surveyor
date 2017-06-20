@@ -5,19 +5,20 @@ longTitleLength: 120
 
 cssVariables:
   padding: 10px
-
   headerHeight: 56px
-
   mobileWidth: 900px
-  mobileHeight: 600px
 
-  mainColor: '#d0343a'
+  colors:
+    red: rgb(208, 52, 58)
+    green: rgb(100, 128, 3)
+    blue: rgb(2, 104, 202)
+    gray: rgb(204, 204, 204)
 
   outlineColor: '#d0343a'
   outlineOpacity: 0.5
   outlineWidth: 3px
 
-  imageBackground: 'rgb(50,50,50)'
+  imageBackground: rgb(50, 50, 50)
 
   pageBackground: '#fefefe'
   pageColor: '#333'
@@ -184,7 +185,7 @@ animals:
     name: Spinose land terrapin
 
   - uuid: 510d47da-9f12-a3d9-e040-e00a18064a99
-    name: Collared hedge hog
+    name: Collared hedgehog
 
 tasks:
   defaultOrganizationId: nypl
@@ -198,6 +199,10 @@ steps:
 
 defaults:
   map:
+    mapbox:
+      username: nypllabs
+      styleId: cj2gmix25005o2rpapartqm07
+      accessToken: pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ
     tileUrl: 'https://api.mapbox.com/styles/v1/nypllabs/cj2gmix25005o2rpapartqm07/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ'
     attribution: '&copy; Mapbox, &copy; OpenStreetMap'
 

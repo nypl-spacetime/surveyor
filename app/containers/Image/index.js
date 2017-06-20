@@ -106,7 +106,7 @@ export class Image extends React.Component {
   }
 
   imageError () {
-    // this.props.setError(new Error('Failed to load image'))
+    this.props.setError(new Error('Failed to load image'))
   }
 
   loadNewImage () {

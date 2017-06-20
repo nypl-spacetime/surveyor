@@ -18,6 +18,7 @@ import { Container, Hamburger, Nav, StyledButton, StyledLink, StyledA, DropDownI
 
 import iconSinglePane from 'images/icon-single-pane.svg'
 import iconTwoPanes from 'images/icon-split-panes.svg'
+import iconHamburger from 'images/icon-hamburger.svg'
 
 export class Menu extends React.Component {
 
@@ -77,7 +78,9 @@ export class Menu extends React.Component {
       <Container>
         <AuthMenuButton className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}
           oauth={this.props.oauth} submissions={this.props.submissions} />
-        <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>☰</Hamburger>
+        <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>
+          <img aria-label='Menu' src={iconHamburger} alt='Menu' />
+        </Hamburger>
         <Dropdown show={this.state.showDropdown} onHide={this.hideDropdown.bind(this)}>
           {menuItems.map((item, index) => (
             <DropDownItem key={index} className={index < hideFirst ? 'show-on-mobile' : undefined}>

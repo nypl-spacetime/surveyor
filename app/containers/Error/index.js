@@ -78,7 +78,14 @@ export class Error extends React.Component {
   }
 
   reload () {
-    window.location.reload()
+    // try {
+    //   window.localStorage.clear()
+    // } catch (err) {
+    //   console.error(err.message)
+    // }
+
+    const parts = window.location.pathname.split('/#/')
+    window.location = parts[0]
   }
 }
 

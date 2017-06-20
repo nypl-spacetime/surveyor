@@ -64,7 +64,7 @@ export class Step extends React.Component {
     if (!this.props.loggedIn) {
       oauthQuestion = (
         <p>
-          To save your score, please log in using the authentication options in menu.
+          To save your score, please log in with Google, Facebook, Twitter or GitHub.
         </p>
       )
     }
@@ -75,9 +75,7 @@ export class Step extends React.Component {
       <TextStep>
         <div>
           <h2>Thank you!</h2>
-          <p>
-            Thanks, more data, NYC Space/Time Directory!
-          </p>
+          <p>Thanks for your submission!</p>
           {oauthQuestion}
           <Animal src={this.state.animal.src} alt={thanks} />
         </div>

@@ -61,5 +61,5 @@ export const ScreenReaderImage = styled.img`
 `
 
 export const NewImageContainer = styled.div`
-  padding: calc(${padding} / 2);
+  padding: ${padding};
 `

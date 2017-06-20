@@ -38,11 +38,6 @@ export const StyledFooter = styled.footer`
     text-decoration: underline;
   }
 
-  & p img {
-    margin: 0 auto;
-    width: 55px;
-  }
-
   & p {
     text-align: center;
     width: 100%;
@@ -55,4 +50,9 @@ export const StyledFooter = styled.footer`
       flex-direction: column;
     }
   }
+`
+
+export const Logo = styled.img`
+  margin: 0 auto;
+  width: 55px;
 `

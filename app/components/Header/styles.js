@@ -6,7 +6,7 @@ const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 const headerHeight = __CONFIG__.cssVariables.headerHeight
 const headerBackground = __CONFIG__.cssVariables.headerBackground
 const headerColor = __CONFIG__.cssVariables.headerColor
-const mainColor = __CONFIG__.cssVariables.mainColor
+const colors = __CONFIG__.cssVariables.colors
 
 export const StyledHeader = styled.header`
   background-color: ${headerBackground};
@@ -31,7 +31,7 @@ export const StyledHeader = styled.header`
   }
 
   & h1 a {
-    color: ${mainColor};
+    color: ${colors.red};
     font-weight: 300;
   }
 

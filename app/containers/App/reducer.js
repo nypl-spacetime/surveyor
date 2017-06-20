@@ -49,7 +49,7 @@ const initialState = fromJS({
     submissions: false,
     oauth: false
   }),
-  error: null
+  error: undefined
 })
 
 function initialOAuth () {

@@ -9,10 +9,9 @@ import PaneButton from 'containers/PaneButton'
 import Button from 'components/Button'
 import Flex from 'components/Flex'
 
-import { Container, ButtonContainer, MapContainer } from '../styles'
+import { Container, BottomButtons, Buttons, MapContainer } from '../styles'
 
 import {
-  selectMapDefaults,
   selectStepData
 } from 'containers/App/selectors'
 
@@ -125,15 +124,17 @@ export class Step extends React.Component {
           <Map ref='map' mode='camera' data={data} mapEvents={mapEvents}
             cameraChange={this.onCameraChange.bind(this)} cameraInput={this.onCameraInput.bind(this)} />
         </MapContainer>
-        <ButtonContainer>
-          <Flex justifyContent='space-between'>
-            <PaneButton index={0} />
-            <Flex justifyContent='flex-end'>
-              <Button onClick={this.props.skip} type='skip'>Skip</Button>
-              <Button onClick={this.submit.bind(this)} type='submit' disabled={!this.state.hasMoved}>Submit</Button>
+        <BottomButtons>
+          <Buttons>
+            <Flex justifyContent='space-between'>
+              <PaneButton index={0} />
+              <Flex justifyContent='flex-end'>
+                <Button onClick={this.props.skip} type='skip'>Skip</Button>
+                <Button onClick={this.submit.bind(this)} type='submit' disabled={!this.state.hasMoved}>Submit</Button>
+              </Flex>
             </Flex>
-          </Flex>
-        </ButtonContainer>
+          </Buttons>
+        </BottomButtons>
       </Container>
     )
   }
@@ -176,9 +177,8 @@ export class Step extends React.Component {
 }
 
 export default connect(createSelector(
-  selectMapDefaults(),
   selectStepData('location'),
-  (mapDefaults, locationStepData) => ({
-    mapDefaults, locationStepData
+  (locationStepData) => ({
+    locationStepData
   })
 ))(Step)

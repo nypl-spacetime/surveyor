@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const padding = __CONFIG__.cssVariables.padding
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
+const pageBackground = __CONFIG__.cssVariables.pageBackground
 
 export const Container = styled.div`
   flex-shrink: 0;
@@ -34,7 +35,8 @@ export const Button = styled.button`
   box-sizing: border-box;
   border-width: 2px;
   border-style: solid;
-  border-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.8);
+  background-color: ${pageBackground};
   transition: background-color 0.3s, border-color 0.3s;
 
   &:active {
@@ -49,4 +51,11 @@ export const Button = styled.button`
     width: 105px;
     height: 70px;
   }
+`
+
+export const Crosshair = styled.img`
+  height: 30px;
+  width: 100%;
+  top: -10px;
+  position: relative;
 `

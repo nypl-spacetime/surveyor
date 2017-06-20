@@ -6,7 +6,7 @@ import Button from 'components/Button'
 import Flex from 'components/Flex'
 import PaneButton from 'containers/PaneButton'
 
-import { Container, ButtonContainer, MapContainer } from '../styles'
+import { Container, BottomButtons, Buttons, MapContainer } from '../styles'
 
 export class Step extends React.Component {
 
@@ -25,7 +25,7 @@ export class Step extends React.Component {
     }
 
     let data
-    if (this.props.savedStepData) {
+    if (this.props.savedStepData && this.props.savedStepData.geometry) {
       const coordinates = this.props.savedStepData.geometry.coordinates
       data = {
         center: [
@@ -41,15 +41,17 @@ export class Step extends React.Component {
         <MapContainer>
           <Map ref='map' mapEvents={mapEvents} mode='crosshair' data={data} />
         </MapContainer>
-        <ButtonContainer>
-          <Flex justifyContent='space-between'>
-            <PaneButton index={0} />
-            <Flex justifyContent='flex-end'>
-              <Button onClick={this.props.skip} type='skip'>Skip</Button>
-              <Button onClick={this.submit.bind(this)} type='submit' disabled={!this.state.hasMoved}>Submit</Button>
+        <BottomButtons>
+          <Buttons>
+            <Flex justifyContent='space-between'>
+              <PaneButton index={0} />
+              <Flex justifyContent='flex-end'>
+                <Button onClick={this.props.skip} type='skip'>Skip</Button>
+                <Button onClick={this.submit.bind(this)} type='submit' disabled={!this.state.hasMoved}>Submit</Button>
+              </Flex>
             </Flex>
-          </Flex>
-        </ButtonContainer>
+          </Buttons>
+        </BottomButtons>
       </Container>
     )
   }

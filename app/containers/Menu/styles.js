@@ -3,12 +3,11 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router'
 
-const headerHeight = __CONFIG__.cssVariables.headerHeight
 const headerColor = __CONFIG__.cssVariables.headerColor
-const mainColor = __CONFIG__.cssVariables.mainColor
+const colors = __CONFIG__.cssVariables.colors
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
-const hamburgerWidth = headerHeight
 const borderRadius = '3px'
+const menuButtonImageSize = '17px'
 
 export const Container = styled.div`
   display: flex;
@@ -16,8 +15,12 @@ export const Container = styled.div`
 `
 
 export const Hamburger = styled.button`
-  font-size: calc(${hamburgerWidth} - 2 * 10px);
   display: none;
+
+  & img {
+    width: ${menuButtonImageSize};
+    height: ${menuButtonImageSize};
+  }
 
   @media (max-width: ${mobileWidth}) {
     display: block;
@@ -49,15 +52,16 @@ const MenuItem = css`
   display: inline-block;
   padding: 5px 12px 5px 12px;
   border-radius: ${borderRadius};
-  background-color: ${(props) => props.selected ? mainColor : 'none'};
+  background-color: ${(props) => props.selected ? colors.red : 'none'};
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: ${mainColor};
+    background-color: ${colors.red};
   }
 
   & > img {
-    width: 17px;
+    width: ${menuButtonImageSize};
+    height: ${menuButtonImageSize};
   }
 `
 

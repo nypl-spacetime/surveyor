@@ -116,6 +116,7 @@ injectGlobal`
 
   .crosshair-shadow {
     position: absolute;
+    width: 100px;
     top: 42px;
     animation: animation-grow 0.4s forwards ease-out;
   }
@@ -123,6 +124,7 @@ injectGlobal`
   .crosshair-here {
     position: absolute;
     bottom: 50px;
+    width: 100px;
     animation: animation-bounce 0.4s forwards ease-out;
   }
 

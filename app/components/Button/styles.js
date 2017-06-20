@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router'
 
 const padding = __CONFIG__.cssVariables.padding
-const mainColor = __CONFIG__.cssVariables.mainColor
 const mobileWidth = __CONFIG__.cssVariables.mobileWidth
+const colors = __CONFIG__.cssVariables.colors
 
 import iconReload from 'images/icon-reload.svg'
 import iconCross from 'images/icon-cross.svg'
@@ -20,22 +20,22 @@ export const themes = {
   },
   disabled: {
     cursor: 'inherit',
-    backgroundColor: '#ccc'
+    backgroundColor: colors.gray
   },
   skip: {
-    backgroundColor: mainColor,
+    backgroundColor: colors.red,
     image: iconCross
   },
   submit: {
-    backgroundColor: '#799a05',
+    backgroundColor: colors.green,
     image: iconCheck
   },
   new: {
-    backgroundColor: '#0268ca',
+    backgroundColor: colors.blue,
     image: iconReload
   },
   surveyor: {
-    backgroundColor: '#799a05',
+    backgroundColor: colors.green,
     image: iconSurveyor
   }
 }
@@ -77,6 +77,7 @@ const button = css`
 
   & img {
     width: 1.1rem;
+    height: 1.1rem;
     margin-top: -.2rem;
     display: inline-block;
   }

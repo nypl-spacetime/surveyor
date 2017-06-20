@@ -37,6 +37,8 @@ export class HomePage extends React.Component {
     const newRouteId = this.props.item.id === this.props.params.id &&
       props.item.id === this.props.item.id && props.item.id &&
       props.params.id !== this.props.params.id
+    // const newRouteId = props.params.id !== this.props.item.id
+    //   && props.params.id !== props.item.id
 
     // path is /:incorrect-id, user/app wants to go to /
     const fromIncorrectIdToRandomId = this.props.error && !props.params.id && this.props.params.id
