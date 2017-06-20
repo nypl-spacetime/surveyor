@@ -93,7 +93,7 @@ export class Image extends React.Component {
           <div style={imageStyle} />
         </ImageContainer>
         <Flex direction='column' justifyContent='space-between' fill>
-          <Metadata />
+          <Metadata toggleMetadata={this.props.toggleMetadata} />
           <Flex justifyContent='space-between'>
             <NewImageContainer>
               {newImageButton}

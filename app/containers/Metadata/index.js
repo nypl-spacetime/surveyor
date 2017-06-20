@@ -38,7 +38,8 @@ export class Metadata extends React.Component {
     }
 
     let metadata = [
-      <Title long={title.length > 80} title={itemData.title}>
+      <Title long={title.length > 80} title={itemData.title}
+        tabIndex={0} onClick={this.props.toggleMetadata} onKeyPress={this.handleKeyPress.bind(this)}>
         {title}
       </Title>,
       <Field>
@@ -65,7 +66,10 @@ export class Metadata extends React.Component {
       <Container>
         <Toggle show={!show}>
           <div style={{opacity: 0.7}}>
-            <span>Metadata hidden — click to show</span>
+            <span
+              tabIndex={0} onClick={this.props.toggleMetadata} onKeyPress={this.handleKeyPress.bind(this)}>
+              Metadata hidden — click to show
+            </span>
           </div>
         </Toggle>
         <Toggle show={show}>
@@ -73,6 +77,12 @@ export class Metadata extends React.Component {
         </Toggle>
       </Container>
     )
+  }
+
+  handleKeyPress (event) {
+    if (event.key === 'Enter') {
+      this.props.toggleMetadata()
+    }
   }
 }
 
