@@ -94,7 +94,7 @@ export class Step extends React.Component {
 
   render () {
     let data
-    if (this.props.savedStepData) {
+    if (this.props.savedStepData && this.props.savedStepData.center) {
       const center = this.props.savedStepData.center
       data = {
         center: [
@@ -162,6 +162,11 @@ export class Step extends React.Component {
       const targetLatLng = leafletMap.containerPointToLatLng(targetPoint)
 
       this.map.setCameraAndTargetLatLng(cameraLatLng, targetLatLng)
+    } else {
+      // Do this to fix strange error which causes all marker rotations
+      // to be reset (maybe React timing issie?)
+      const fieldOfView = this.map.getFieldOfView()
+      this.map.setAngle(fieldOfView.properties.angle)
     }
 
     this.setState({

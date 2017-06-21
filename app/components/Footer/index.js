@@ -13,9 +13,6 @@ function Footer (props) {
         <a href='http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy' target='_blank'>
           Privacy Policy
         </a>
-        <a href='http://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations' target='_blank'>
-          Rules and Regulations
-        </a>
         <a href='http://www.nypl.org/policy-patron-generated-web-content' target='_blank'>
           Policy on Patron-Generated Web Content
         </a>

@@ -81,8 +81,6 @@ export class AboutPage extends React.Component {
                   <Button fake type='skip'>Skip</Button>
                 </td>
                 <td>
-                  You can skip images that are too difficult to geotag, or images that do not show a clear location. <strong>You will never be presented this image again</strong>.
-
                   Skip the image. (You won’t see the current image again.)
                 </td>
               </tr>

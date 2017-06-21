@@ -14,8 +14,9 @@ export class Step extends React.Component {
         <div>
           <h2>Thanks!</h2>
           <p>
-            If it's clear which way the camera is pointing, try setting the camera angle.
-            Otherwise, you can just continue to the next image.
+            If it's clear which way the camera is pointing, you can go to the next
+            step and try to set the location and angle of the camera.
+            Otherwise, you can just skip this step and continue to the next image.
           </p>
           <p>
             <Explanation alt='Camera and target' title='Camera and target' src={explanation} />

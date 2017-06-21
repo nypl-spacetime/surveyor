@@ -25,7 +25,7 @@ export class Step extends React.Component {
     }
 
     let data
-    if (this.props.savedStepData && this.props.savedStepData.geometry) {
+    if (this.props.savedStepData && this.props.savedStepData.geometry && this.props.savedStepData.geometry.coordinates) {
       const coordinates = this.props.savedStepData.geometry.coordinates
       data = {
         center: [

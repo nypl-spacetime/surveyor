@@ -127,6 +127,7 @@ export class Map extends React.Component {
       })
 
       const fieldOfView = this.props.data && this.props.data.fieldOfView
+
       const camera = L.geotagPhoto.camera(fieldOfView, {
         cameraIcon,
         targetIcon: markerIcon,
@@ -156,6 +157,8 @@ export class Map extends React.Component {
 
     this.map = map
 
+    // Every 500ms, check the size of the Leaflet container,
+    // and invalidate if necessary
     setInterval(() => this.checkSize(), 500)
   }
 

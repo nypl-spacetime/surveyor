@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { replace } from 'react-router-redux'
 import { createSelector } from 'reselect'
 
 import {
@@ -14,7 +14,8 @@ import {
 import {
   selectItem,
   selectLoading,
-  selectPaneMode
+  selectPaneMode,
+  selectSavedStepData
 } from 'containers/App/selectors'
 
 import Header from 'components/Header'
@@ -31,10 +32,14 @@ export class App extends React.Component {
   componentDidMount () {
     this.boundKeyDown = this.keyDown.bind(this)
     window.addEventListener('keydown', this.boundKeyDown)
+
+    this.boundBeforeUnload = this.beforeUnload.bind(this)
+    window.addEventListener('beforeunload', this.boundBeforeUnload)
   }
 
   componentWillUnmount () {
     window.removeEventListener('keydown', this.boundKeyDown)
+    window.removeEventListener('beforeunload', this.boundBeforeUnload)
   }
 
   render () {
@@ -72,7 +77,15 @@ export class App extends React.Component {
 
   toGeotagger () {
     if (!this.props.params.id) {
-      this.props.changeRoute('/' + (this.props.item.id || ''))
+      this.props.replaceRoute('/' + (this.props.item.id || ''))
+    }
+  }
+
+  beforeUnload (event) {
+    if (this.props.savedStepData) {
+      const confirmationMessage = 'Do you want to leave Surveyor? The changes you made will not be saved.'
+      event.returnValue = confirmationMessage
+      return confirmationMessage
     }
   }
 
@@ -104,7 +117,7 @@ function mapDispatchToProps (dispatch) {
     setPaneMode: (mode) => dispatch(setPaneMode(mode)),
     setPaneIndex: (index) => dispatch(setPaneIndex(index)),
     toggleMetadata: () => dispatch(toggleMetadata()),
-    changeRoute: (url) => dispatch(push(url)),
+    replaceRoute: (url) => dispatch(replace(url)),
     dispatch
   }
 }
@@ -113,7 +126,8 @@ export default connect(createSelector(
   selectItem(),
   selectLoading(),
   selectPaneMode(),
-  (item, loading, paneMode) => ({
-    item, loading, paneMode
+  selectSavedStepData(),
+  (item, loading, paneMode, savedStepData) => ({
+    item, loading, paneMode, savedStepData
   })
 ), mapDispatchToProps)(App)

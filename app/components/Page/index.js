@@ -19,7 +19,7 @@ const Container = styled.div`
 
   & p img {
     max-width: 780px;
-    margin: 0 auto;
+    margin: 1em auto;
     display: block;
   }
 `
