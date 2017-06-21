@@ -87,6 +87,17 @@ injectGlobal`
     align-items: center;
   }
 
+  /* Buttons
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  button {
+    border: none;
+  }
+
+  button:-moz-focusring {
+    outline: 2px dotted;
+  }
+
   /* Screen Reader
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
