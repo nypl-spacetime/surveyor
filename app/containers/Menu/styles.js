@@ -49,6 +49,8 @@ export const Nav = styled.nav`
 `
 
 const MenuItem = css`
+  text-align: right;
+  line-height: 1.5em;
   display: inline-block;
   padding: 5px 12px 5px 12px;
   border-radius: ${borderRadius};

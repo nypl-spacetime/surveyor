@@ -25,6 +25,7 @@ import { fromJS } from 'immutable'
 
 // Initial state
 const initialState = fromJS({
+  hasTouch: 'ontouchstart' in window,
   watchedIntroduction: false,
   panes: fromJS({
     index: 0,

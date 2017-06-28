@@ -4,11 +4,14 @@ import { createSelector } from 'reselect'
 
 import {
   selectOAuth,
-  selectSubmissions
+  selectSubmissions,
+  selectLoggedIn,
+  selectWatchedIntroduction
 } from 'containers/App/selectors'
 
 import {
-  logOut
+  logOut,
+  setIntroductionWatched
 } from 'containers/App/actions'
 
 import Dropdown from 'containers/Dropdown'
@@ -44,17 +47,28 @@ export class Menu extends React.Component {
   }
 
   render () {
+    if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
+      return (
+        <Container>
+          <StyledButton onClick={this.toSurveyor.bind(this)}>Start Surveying!</StyledButton>
+        </Container>
+      )
+    }
+
+    const helpSelected = this.props.path === 'help'
     const aboutSelected = this.props.path === 'about'
-    const introSelected = this.props.path === 'intro'
-    const surveying = !aboutSelected && !introSelected
+    const surveying = !helpSelected && !aboutSelected
 
     const isAuthenicated = this.props.oauth && this.props.oauth.oauth && this.props.oauth.oauth.provider
 
     let menuItems
 
     if (isAuthenicated) {
+      const title = this.props.oauth.oauth.data && this.props.oauth.oauth.data.name
+      const logOutText = `Log out` + (title ? ` ${title}` : '')
+
       menuItems = [
-        <StyledButton onClick={this.props.logOut}>Log out</StyledButton>
+        <StyledButton onClick={this.props.logOut}>{logOutText}</StyledButton>
       ]
 
       if (this.state.shiftKey) {
@@ -70,6 +84,7 @@ export class Menu extends React.Component {
     const hideFirst = 2
     menuItems = [
       <StyledLink to={this.props.homepageLink}>Start Surveying!</StyledLink>,
+      <StyledLink to='/help'>Help</StyledLink>,
       <StyledLink to='/about'>About</StyledLink>,
       ...menuItems
     ]
@@ -93,10 +108,15 @@ export class Menu extends React.Component {
             onClick={this.props.splitPaneClick}><img alt='Switch to split pane mode' src={iconTwoPanes} /></StyledButton>
           <StyledButton selected={surveying && this.props.paneMode === 'single'} title='Single pane'
             onClick={this.props.singlePaneClick}><img alt='Switch to single pane mode' src={iconSinglePane} /></StyledButton>
+          <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
           <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
         </Nav>
       </Container>
     )
+  }
+
+  toSurveyor () {
+    this.props.setIntroductionWatched()
   }
 
   hideDropdown () {
@@ -116,14 +136,17 @@ export class Menu extends React.Component {
 
 function mapDispatchToProps (dispatch) {
   return {
-    logOut: () => dispatch(logOut())
+    logOut: () => dispatch(logOut()),
+    setIntroductionWatched: () => dispatch(setIntroductionWatched())
   }
 }
 
 export default connect(createSelector(
   selectOAuth(),
   selectSubmissions(),
-  (oauth, submissions) => ({
-    oauth, submissions
+  selectLoggedIn(),
+  selectWatchedIntroduction(),
+  (oauth, submissions, loggedIn, watchedIntroduction) => ({
+    oauth, submissions, loggedIn, watchedIntroduction
   })
 ), mapDispatchToProps)(Menu)

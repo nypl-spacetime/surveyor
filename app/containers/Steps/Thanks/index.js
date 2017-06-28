@@ -75,7 +75,9 @@ export class Step extends React.Component {
       <TextStep>
         <div>
           <h2>Thank you!</h2>
-          <p>Thanks for your submission!</p>
+          <p>
+           Your submission has been recorded.
+          </p>
           {oauthQuestion}
           <Animal src={this.state.animal.src} alt={thanks} />
         </div>

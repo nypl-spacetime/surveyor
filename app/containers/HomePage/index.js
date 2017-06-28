@@ -5,17 +5,13 @@ import { createSelector } from 'reselect'
 import {
   selectItem,
   selectLoading,
-  selectError,
-  selectSubmissions,
-  selectLoggedIn,
-  selectWatchedIntroduction
+  selectError
 } from 'containers/App/selectors'
 
 import {
   loadItem
 } from '../App/actions'
 
-import IntroModal from 'containers/IntroModal'
 import Error from 'containers/Error'
 import Loading from 'containers/Loading'
 import Panes from 'containers/Panes'
@@ -62,10 +58,6 @@ export class HomePage extends React.Component {
       mainContent = (
         <Loading />
       )
-    } else if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
-      mainContent = (
-        <IntroModal />
-      )
     } else {
       mainContent = (
         <Panes>
@@ -92,10 +84,7 @@ export default connect(createSelector(
   selectItem(),
   selectLoading(),
   selectError(),
-  selectSubmissions(),
-  selectLoggedIn(),
-  selectWatchedIntroduction(),
-  (item, loading, error, submissions, loggedIn, watchedIntroduction) => ({
-    item, loading, error, submissions, loggedIn, watchedIntroduction
+  (item, loading, error) => ({
+    item, loading, error
   })
 ), mapDispatchToProps)(HomePage)

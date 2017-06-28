@@ -28,7 +28,7 @@ export class Error extends React.Component {
         <CenteredItemPage>
           <Container>
             <ErrorMessage>
-              Unauthorized — please log in by clicking Save score in the menu
+              Unauthorized — please log in with Google, Facebook, Twitter or GitHub.
             </ErrorMessage>
           </Container>
         </CenteredItemPage>

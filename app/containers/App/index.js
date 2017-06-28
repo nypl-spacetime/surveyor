@@ -15,11 +15,15 @@ import {
   selectItem,
   selectLoading,
   selectPaneMode,
-  selectSavedStepData
+  selectSavedStepData,
+  selectSubmissions,
+  selectLoggedIn,
+  selectWatchedIntroduction
 } from 'containers/App/selectors'
 
 import Header from 'components/Header'
 import Menu from 'containers/Menu'
+import IntroModal from 'containers/IntroModal'
 
 import { Container, Contents } from './styles'
 
@@ -50,8 +54,16 @@ export class App extends React.Component {
       homepageLink += this.props.item.id
     }
 
+    let contents = this.props.children
+
+    if (!this.props.loading && !this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
+      contents = (
+        <IntroModal />
+      )
+    }
+
     return (
-      <Container on>
+      <Container>
         <Helmet titleTemplate={`%s - ${defaultTitle}`}
           defaultTitle={defaultTitle} />
         <Header homepageLink={homepageLink}>
@@ -59,7 +71,7 @@ export class App extends React.Component {
             singlePaneClick={this.singlePaneClick.bind(this)} splitPaneClick={this.splitPaneClick.bind(this)} />
         </Header>
         <Contents>
-          {this.props.children}
+          {contents}
         </Contents>
       </Container>
     )
@@ -91,7 +103,6 @@ export class App extends React.Component {
 
   keyDown (event) {
     const code = event.keyCode ? event.keyCode : event.which
-
     if (code === 219) {
       // Code: [
       this.props.setPaneIndex(0)
@@ -104,8 +115,8 @@ export class App extends React.Component {
     } else if (code === 50) {
       // Code: 2
       this.props.setPaneMode('split')
-    } else if (code === 76) {
-      // Code: L
+    } else if (code === 77) {
+      // Code: M
       this.props.toggleMetadata()
     }
   }
@@ -127,7 +138,10 @@ export default connect(createSelector(
   selectLoading(),
   selectPaneMode(),
   selectSavedStepData(),
-  (item, loading, paneMode, savedStepData) => ({
-    item, loading, paneMode, savedStepData
+  selectSubmissions(),
+  selectLoggedIn(),
+  selectWatchedIntroduction(),
+  (item, loading, paneMode, savedStepData, submissions, loggedIn, watchedIntroduction) => ({
+    item, loading, paneMode, savedStepData, submissions, loggedIn, watchedIntroduction
   })
 ), mapDispatchToProps)(App)

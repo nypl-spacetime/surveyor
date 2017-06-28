@@ -1,20 +1,6 @@
 import styled from 'styled-components'
 
-export const Table = styled.table`
-  width: 100%;
-
-  & th,
-  & td {
-    text-align: left;
-    border: 0;
-    padding: 0.5em 1em 0.5em 1em;
-    vertical-align: top;
-  }
-
-  & td {
-    border-top: 2px solid rgba(0, 0, 0, 0.08);
-  }
-`
+import Table from 'components/Table'
 
 export const KeyboardTable = styled(Table)`
   & tr td:first-child kbd {

@@ -6,6 +6,7 @@ import Page from 'components/Page'
 
 const colors = __CONFIG__.cssVariables.colors
 const padding = __CONFIG__.cssVariables.padding
+const mobileWidth = __CONFIG__.cssVariables.mobileWidth
 
 export const Container = styled.div`
   position: relative;
@@ -44,6 +45,10 @@ export const Explanation = styled.img`
   height: 200px;
   flex-shrink: 2;
   max-width: 100%;
+
+  @media (max-width: ${mobileWidth}) {
+    height: 150px;
+  }
 `
 
 export const TextStep = styled(Page)`

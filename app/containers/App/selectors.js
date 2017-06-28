@@ -2,6 +2,11 @@ import { createSelector } from 'reselect'
 
 const selectGlobal = () => (state) => state.get('global')
 
+const selectHasTouch = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('hasTouch')
+)
+
 const selectWatchedIntroduction = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('watchedIntroduction')
@@ -156,6 +161,7 @@ const selectLocationState = () => {
 }
 
 export {
+  selectHasTouch,
   selectGlobal,
   selectWatchedIntroduction,
   selectCurrentStep,

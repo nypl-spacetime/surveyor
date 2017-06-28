@@ -51,6 +51,12 @@ injectGlobal`
   h2 { font-size: 1.8rem; line-height: 1.5;  /*letter-spacing: -.05rem;*/ }
   h3 { font-size: 1.5rem; line-height: 1.6;  /*letter-spacing: 0;*/ }
 
+  @media (max-width: ${mobileWidth}) {
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 1rem;
+    }
+  }
+
   /* Larger than phablet */
   @media (min-width: 550px) {
     h1 { font-size: 3.0rem; }
