@@ -73,10 +73,54 @@ The photographer stands on the corner of Pike Street and Henry Street in Manhatt
 }
 ```
 
-Surveyor uses the [`field-of-view`](https://github.com/nypl-spacetime/field-of-view) library to generate this GeoJSON Feature and to compute the angle, bearing and distance. You can use [geojson.io](http://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22angle%22%3A36%2C%22bearing%22%3A170%2C%22distance%22%3A495%7D%2C%22geometry%22%3A%7B%22type%22%3A%22GeometryCollection%22%2C%22geometries%22%3A%5B%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B-73.992533%2C40.7130856%5D%7D%2C%7B%22type%22%3A%22LineString%22%2C%22coordinates%22%3A%5B%5B-73.9896355%2C40.7089532%5D%2C%5B-73.9933933%2C40.7084511%5D%5D%7D%5D%7D%7D) to view this GeoJSON object on a map.
+(Open this GeoJSON object in [geojson.io](http://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22angle%22%3A36%2C%22bearing%22%3A170%2C%22distance%22%3A495%7D%2C%22geometry%22%3A%7B%22type%22%3A%22GeometryCollection%22%2C%22geometries%22%3A%5B%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B-73.992533%2C40.7130856%5D%7D%2C%7B%22type%22%3A%22LineString%22%2C%22coordinates%22%3A%5B%5B-73.9896355%2C40.7089532%5D%2C%5B-73.9933933%2C40.7084511%5D%5D%7D%5D%7D%7D).)
 
-Once a user clicks the Submit button, Surveyor sends the GeoJSON data to [brick-by-brick](https://github.com/nypl-spacetime/brick-by-brick), an API for crowdsourcing tasks and submissions (and part of the NYC Space/Time Directory). Brick-by-brick is [explained in more detail below](#api).
+Surveyor uses the [`field-of-view`](https://github.com/nypl-spacetime/field-of-view) library to generate this GeoJSON Feature and to compute the angle, bearing and distance. Once a user clicks the Submit button, Surveyor sends the GeoJSON data to [brick-by-brick](https://github.com/nypl-spacetime/brick-by-brick), an API for crowdsourcing tasks and submissions (and part of the NYC Space/Time Directory). Brick-by-brick is [explained in more detail below](#api).
 
 When enough locations are submitted for a single image (for now, we require each image to be geotagged by at least five people), an algorithm will remove outliers, and try to determine the best submission. More information about this algorithm will be posted here soon.
 
 All geotagged images will  data will eventually be published as a [dataset in the NYC Space/Time Directory](http://spacetime.nypl.org/#data).
+
+## Other Image Collections
+
+Currently, Surveyor works with images from NYPL’s [Digital Collections](http://digitalcollections.nypl.org/) (see  Surveyor’s [About page](http://spacetime.nypl.org/surveyor/#about) for a list of these collections). However, it’s easy to use Surveyor to geotag your own collections of photos and images!
+
+To do this, follow the following steps:
+
+- Run your own instance of [brick-by-brick](https://github.com/nypl-spacetime/brick-by-brick)
+- Populate its database with your own photo collections:
+  - Surveyor uses [`dc-to-brick`](https://github.com/nypl-spacetime/dc-to-brick) to read images from Digital Collections and write data to its brick-by-brick database
+  - `dc-to-brick`, in turn, uses [`to-brick`](https://github.com/nypl-spacetime/to-brick), a Node.js library to connect to (and write to) any brick-by-brick database
+- Change all NYPL-related images and texts in Surveyor:
+  - [Help page](https://github.com/nypl-spacetime/surveyor/blob/master/app/containers/HelpPage/index.js)
+  - [About page](https://github.com/nypl-spacetime/surveyor/blob/master/app/containers/AboutPage/index.js)
+  - [Get Started page](https://github.com/nypl-spacetime/surveyor/blob/master/app/containers/GetStarted/index.js), and [images](https://github.com/nypl-spacetime/surveyor/tree/master/app/images/get-started)
+  - [Header](https://github.com/nypl-spacetime/surveyor/blob/master/app/components/Header/index.js), [footer](https://github.com/nypl-spacetime/surveyor/blob/master/app/components/Footer/index.js)
+- If you want users to be able to log in, you need to register OAuth Apps at one or more of the following providers (for more information, see [brick-by-brick’s README](https://github.com/nypl-spacetime/brick-by-brick)):
+  - GitHub
+  - Twitter
+  - Facebook
+  - Google
+
+In case you need help, you can [open an issue in this repository](https://github.com/nypl-spacetime/surveyor/issues), or send an email to spacetime@nypl.org.
+
+## Installation
+
+To run Surveyor locally, first clone this GitHub repository:
+
+    git clone https://github.com/nypl-spacetime/surveyor.git
+
+Then, install all Node.js dependencies:
+
+    cd surveyor
+    npm install
+
+By default, Surveyor expects brick-by-brick to run on http://brick-by-brick.dev/ (You can use [hotel](https://github.com/typicode/hotel) to set up local `.dev` domains). You can change Surveyor’s default configuration, edit [`config/default.yml`](config/default.yml).
+
+To start Surveyor, run:
+
+    npm start
+
+To build Surveyor, run:
+
+    npm run build
