@@ -81,6 +81,12 @@ When enough locations are submitted for a single image (for now, we require each
 
 All geotagged images will  data will eventually be published as a [dataset in the NYC Space/Time Directory](http://spacetime.nypl.org/#data).
 
+## API
+
+Surveyor depends on [brick-by-brick](https://github.com/nypl-spacetime/brick-by-brick), a simple JSON API for requesting and storing crowdsourcing data (and part of the NYC Space/Time Directory project). From brick-by-brick, Surveyor requests a random image to geotag, and when the user has found that image’ location, Surveyor sends this location back to brick-by-brick.
+
+For more information about brick-by-brick, see its [GitHub repository](https://github.com/nypl-spacetime/brick-by-brick).
+
 ## Other Image Collections
 
 Currently, Surveyor works with images from NYPL’s [Digital Collections](http://digitalcollections.nypl.org/) (see  Surveyor’s [About page](http://spacetime.nypl.org/surveyor/#about) for a list of these collections). However, it’s easy to use Surveyor to geotag your own collections of photos and images!
