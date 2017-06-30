@@ -40,10 +40,6 @@ export const Container = styled.div`
 `
 
 export const Toggle = styled.div`
-  pointer-events: none;
-  & a {
-    pointer-events: all;
-  }
   opacity: ${(props) => props.show ? 1 : 0};
   visibility: ${(props) => props.show ? 'visible' : 'hidden'};
   transition: ${(props) => props.show ? 'opacity 0.5s, visibility 0s 0s' : 'opacity 0.5s, visibility 0.5s 0.5s'};

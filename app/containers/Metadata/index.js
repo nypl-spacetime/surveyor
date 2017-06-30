@@ -6,7 +6,8 @@ import { createSelector } from 'reselect'
 import {
   selectItem,
   selectCurrentStep,
-  selectShowMetadata
+  selectShowMetadata,
+  selectHasTouch
 } from 'containers/App/selectors'
 
 import { Container, Title, Field, Toggle } from './styles'
@@ -39,7 +40,7 @@ export class Metadata extends React.Component {
 
     let metadata = [
       <Title long={title.length > 80} title={itemData.title}
-        tabIndex={0} onClick={this.props.toggleMetadata} onKeyPress={this.handleKeyPress.bind(this)}>
+        tabIndex={0} onKeyPress={this.handleKeyPress.bind(this)}>
         {title}
       </Title>,
       <Field>
@@ -62,13 +63,15 @@ export class Metadata extends React.Component {
       )
     }
 
+    const hiddenText = `Metadata hidden — ${this.props.hasTouch ? 'tap' : 'click'} image to show`
+
     return (
       <Container>
         <Toggle show={!show}>
           <div style={{opacity: 0.7}}>
             <span
               tabIndex={0} onClick={this.props.toggleMetadata} onKeyPress={this.handleKeyPress.bind(this)}>
-              Metadata hidden — click to show
+              {hiddenText}
             </span>
           </div>
         </Toggle>
@@ -90,7 +93,8 @@ export default connect(createSelector(
   selectItem(),
   selectCurrentStep(),
   selectShowMetadata(),
-  (item, currentStep, showMetadata) => ({
-    item, currentStep, showMetadata
+  selectHasTouch(),
+  (item, currentStep, showMetadata, hasTouch) => ({
+    item, currentStep, showMetadata, hasTouch
   })
 ))(Metadata)
