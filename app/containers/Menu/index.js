@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import {
+  selectLoading,
   selectOAuth,
   selectSubmissions,
   selectLoggedIn,
@@ -47,6 +48,10 @@ export class Menu extends React.Component {
   }
 
   render () {
+    if (this.props.loading) {
+      return null
+    }
+
     if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
       return (
         <Container>
@@ -142,11 +147,12 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(createSelector(
+  selectLoading(),
   selectOAuth(),
   selectSubmissions(),
   selectLoggedIn(),
   selectWatchedIntroduction(),
-  (oauth, submissions, loggedIn, watchedIntroduction) => ({
-    oauth, submissions, loggedIn, watchedIntroduction
+  (loading, oauth, submissions, loggedIn, watchedIntroduction) => ({
+    loading, oauth, submissions, loggedIn, watchedIntroduction
   })
 ), mapDispatchToProps)(Menu)
