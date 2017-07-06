@@ -35,7 +35,7 @@ collections:
   - uuid: 22f5f390-c5f0-012f-2796-58d385a7bc34
     title: The Eno collection of New York City views
     url: http://digitalcollections.nypl.org/collections/the-eno-collection-of-new-york-city-views#/?tab=about
-    include: false
+    include: true
 
   - uuid: 812e5770-c60c-012f-7167-58d385a7bc34
     title: Changing New York
@@ -67,7 +67,7 @@ collections:
   - uuid: 43a4cad0-7267-0132-4582-58d385a7bbd0
     title: Morris Rosenfeld Photographs
     url: http://digitalcollections.nypl.org/collections/morris-rosenfeld-photographs#/?tab=about
-    include: false
+    include: true
 
   - uuid: 47d7a790-c6ce-012f-a61c-58d385a7bc34
     title: Collection of photographs of East River and Hudson River piers, Manhattan
@@ -97,7 +97,7 @@ collections:
   - uuid: 36bd8b70-c60e-012f-f701-58d385a7bc34
     title: Collection of photographs of New York City, 1931-1942
     url: http://digitalcollections.nypl.org/collections/collection-of-photographs-of-new-york-city-1931-1942#/?tab=about
-    include: false
+    include: true
 
   - uuid: 726a47e0-c6cb-012f-fceb-58d385a7bc34
     title: 'Movie Houses of the Outer Boroughs: Past Glory and Adaptive Reuse, 1998-2001'
