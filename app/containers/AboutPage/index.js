@@ -12,7 +12,7 @@ import {
 import Table from 'components/Table'
 import Page from 'components/Page'
 import Footer from 'components/Footer'
-import SurveyorButton from 'components/SurveyorButton'
+import SurveyorButton from 'containers/SurveyorButton'
 
 import knightFoundation from 'images/knight-foundation.png'
 import bat from 'images/510d47da-9ed9-a3d9-e040-e00a18064a99.large.png'

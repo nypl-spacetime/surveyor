@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
+import { replace } from 'react-router-redux'
 
 import {
   selectLoading,
@@ -48,18 +49,6 @@ export class Menu extends React.Component {
   }
 
   render () {
-    if (this.props.loading) {
-      return null
-    }
-
-    if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
-      return (
-        <Container>
-          <StyledButton onClick={this.toSurveyor.bind(this)}>Start Surveying!</StyledButton>
-        </Container>
-      )
-    }
-
     const helpSelected = this.props.path === 'help'
     const aboutSelected = this.props.path === 'about'
     const surveying = !helpSelected && !aboutSelected
@@ -86,7 +75,7 @@ export class Menu extends React.Component {
       menuItems = this.makeProviderList()
     }
 
-    const hideFirst = 2
+    const hideFirst = 3
     menuItems = [
       <StyledLink to={this.props.homepageLink}>Start Surveying!</StyledLink>,
       <StyledLink to='/help'>Help</StyledLink>,
@@ -94,34 +83,47 @@ export class Menu extends React.Component {
       ...menuItems
     ]
 
-    return (
-      <Container>
-        <AuthMenuButton className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}
-          oauth={this.props.oauth} submissions={this.props.submissions} />
-        <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>
-          <img aria-label='Menu' src={iconHamburger} alt='Menu' />
-        </Hamburger>
-        <Dropdown show={this.state.showDropdown} onHide={this.hideDropdown.bind(this)}>
-          {menuItems.map((item, index) => (
-            <DropDownItem key={index} className={index < hideFirst ? 'show-on-mobile' : undefined}>
-              {item}
-            </DropDownItem>
-          ))}
-        </Dropdown>
-        <Nav>
-          <StyledButton selected={surveying && this.props.paneMode === 'split'} title='Split panes'
-            onClick={this.props.splitPaneClick}><img alt='Switch to split pane mode' src={iconTwoPanes} /></StyledButton>
-          <StyledButton selected={surveying && this.props.paneMode === 'single'} title='Single pane'
-            onClick={this.props.singlePaneClick}><img alt='Switch to single pane mode' src={iconSinglePane} /></StyledButton>
-          <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
-          <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
-        </Nav>
-      </Container>
-    )
+    if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
+      return (
+        <Container>
+          <Nav>
+            <StyledButton onClick={this.toSurveyor.bind(this)}>Start Surveying!</StyledButton>
+            <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
+            <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
+          </Nav>
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+          <AuthMenuButton className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}
+            oauth={this.props.oauth} submissions={this.props.submissions} />
+          <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>
+            <img aria-label='Menu' src={iconHamburger} alt='Menu' />
+          </Hamburger>
+          <Dropdown show={this.state.showDropdown} onHide={this.hideDropdown.bind(this)}>
+            {menuItems.map((item, index) => (
+              <DropDownItem key={index} className={index < hideFirst ? 'show-on-mobile' : undefined}>
+                {item}
+              </DropDownItem>
+            ))}
+          </Dropdown>
+          <Nav>
+            <StyledButton selected={surveying && this.props.paneMode === 'split'} title='Split panes'
+              onClick={this.props.splitPaneClick}><img alt='Switch to split pane mode' src={iconTwoPanes} /></StyledButton>
+            <StyledButton selected={surveying && this.props.paneMode === 'single'} title='Single pane'
+              onClick={this.props.singlePaneClick}><img alt='Switch to single pane mode' src={iconSinglePane} /></StyledButton>
+            <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
+            <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
+          </Nav>
+        </Container>
+      )
+    }
   }
 
   toSurveyor () {
     this.props.setIntroductionWatched()
+    this.props.replaceRoute('/')
   }
 
   hideDropdown () {
@@ -142,7 +144,8 @@ export class Menu extends React.Component {
 function mapDispatchToProps (dispatch) {
   return {
     logOut: () => dispatch(logOut()),
-    setIntroductionWatched: () => dispatch(setIntroductionWatched())
+    setIntroductionWatched: () => dispatch(setIntroductionWatched()),
+    replaceRoute: (url) => dispatch(replace(url))
   }
 }
 
