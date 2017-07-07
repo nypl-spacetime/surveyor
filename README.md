@@ -6,7 +6,7 @@ Help [The New York Public Library](https://www.nypl.org/) put New York City’s 
 
 Surveyor is a geotagging tool designed to enhance the metadata of items within [NYPL Digital Collections](https://digitalcollections.nypl.org/). It allows you to view and place images on a map of New York City. With each contribution through Surveyor, users create new knowledge about the Library’s collections!
 
-For more information, see Surveyor’s [About page](http://spacetime.nypl.org/surveyor/#about).
+For more information, see Surveyor’s [About page](http://spacetime.nypl.org/surveyor/#about), or read the [blog post on nypl.org](https://www.nypl.org/blog/2017/07/07/surveyor-photos-map).
 
 Surveyor was created for geotagging NYPL's collections, however, __it's easy to adapt Surveyor and use it to geotag any collection of photos.__ As long as your images are available online and have unique identifiers as well as basic metadata, you can use Surveyor. To find out how, see [Other Image Collections](#other-image-collections) below.
 
