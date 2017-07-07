@@ -45,8 +45,9 @@ export class SurveyorButton extends React.Component {
   }
 
   toSurveyor () {
+    const to = '/' + (this.props.id || '')
     this.props.setIntroductionWatched()
-    this.props.replaceRoute('/')
+    this.props.replaceRoute(to)
   }
 }
 

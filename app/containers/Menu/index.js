@@ -122,8 +122,9 @@ export class Menu extends React.Component {
   }
 
   toSurveyor () {
+    const to = this.props.homepageLink || ('/' + (this.props.id || ''))
     this.props.setIntroductionWatched()
-    this.props.replaceRoute('/')
+    this.props.replaceRoute(to)
   }
 
   hideDropdown () {
