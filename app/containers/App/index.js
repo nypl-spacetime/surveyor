@@ -13,6 +13,7 @@ import {
 
 import {
   selectItem,
+  selectError,
   selectLoading,
   selectPaneMode,
   selectSavedStepData
@@ -84,7 +85,7 @@ export class App extends React.Component {
   }
 
   beforeUnload (event) {
-    if (this.props.savedStepData) {
+    if (this.props.savedStepData && !this.props.error) {
       const confirmationMessage = 'Do you want to leave Surveyor? The changes you made will not be saved.'
       event.returnValue = confirmationMessage
       return confirmationMessage
@@ -124,11 +125,12 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(createSelector(
+  selectError(),
   selectItem(),
   selectLoading(),
   selectPaneMode(),
   selectSavedStepData(),
-  (item, loading, paneMode, savedStepData) => ({
-    item, loading, paneMode, savedStepData
+  (error, item, loading, paneMode, savedStepData) => ({
+    error, item, loading, paneMode, savedStepData
   })
 ), mapDispatchToProps)(App)
