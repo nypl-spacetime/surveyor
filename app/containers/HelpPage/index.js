@@ -23,11 +23,10 @@ export class HelpPage extends React.Component {
       <div>
         <Page>
           <Helmet title='Help' />
-          <h2>Help</h2>
+          <h2>Get Started Using Surveyor</h2>
           <p>
             Help <a href='https://nypl.org/'>The New York Public Library</a> put New York City’s history on the map!
           </p>
-          <h3>Get Started</h3>
           <GetStarted />
           <SurveyorButton id={this.props.item.id} />
           <h3>Keyboard Navigation</h3>

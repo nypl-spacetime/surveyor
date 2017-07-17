@@ -7,11 +7,6 @@ const selectHasTouch = () => createSelector(
   (globalState) => globalState.get('hasTouch')
 )
 
-const selectWatchedIntroduction = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('watchedIntroduction')
-)
-
 const selectLoading = () => createSelector(
   selectGlobal(),
   (globalState) => {
@@ -163,7 +158,6 @@ const selectLocationState = () => {
 export {
   selectHasTouch,
   selectGlobal,
-  selectWatchedIntroduction,
   selectCurrentStep,
   selectItem,
   selectOAuth,

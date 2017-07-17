@@ -1,5 +1,4 @@
 import {
-  WATCHED_INTRODUCTION,
   LOAD_ITEM,
   LOAD_ITEM_SUCCESS,
   LOAD_ITEM_ERROR,
@@ -24,12 +23,6 @@ import {
   TOGGLE_METADATA,
   SET_ERROR
 } from './constants'
-
-export function setIntroductionWatched () {
-  return {
-    type: WATCHED_INTRODUCTION
-  }
-}
 
 export function nextStep () {
   return {

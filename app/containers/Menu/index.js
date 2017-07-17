@@ -1,19 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
-import { replace } from 'react-router-redux'
 
 import {
   selectLoading,
   selectOAuth,
-  selectSubmissions,
-  selectLoggedIn,
-  selectWatchedIntroduction
+  selectSubmissions
 } from 'containers/App/selectors'
 
 import {
-  logOut,
-  setIntroductionWatched
+  logOut
 } from 'containers/App/actions'
 
 import Dropdown from 'containers/Dropdown'
@@ -83,48 +79,30 @@ export class Menu extends React.Component {
       ...menuItems
     ]
 
-    if (!this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
-      return (
-        <Container>
-          <Nav>
-            <StyledButton onClick={this.toSurveyor.bind(this)}>Start Surveying!</StyledButton>
-            <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
-            <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
-          </Nav>
-        </Container>
-      )
-    } else {
-      return (
-        <Container>
-          <AuthMenuButton className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}
-            oauth={this.props.oauth} submissions={this.props.submissions} />
-          <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>
-            <img aria-label='Menu' src={iconHamburger} alt='Menu' />
-          </Hamburger>
-          <Dropdown show={this.state.showDropdown} onHide={this.hideDropdown.bind(this)}>
-            {menuItems.map((item, index) => (
-              <DropDownItem key={index} className={index < hideFirst ? 'show-on-mobile' : undefined}>
-                {item}
-              </DropDownItem>
-            ))}
-          </Dropdown>
-          <Nav>
-            <StyledButton selected={surveying && this.props.paneMode === 'split'} title='Split panes'
-              onClick={this.props.splitPaneClick}><img alt='Switch to split pane mode' src={iconTwoPanes} /></StyledButton>
-            <StyledButton selected={surveying && this.props.paneMode === 'single'} title='Single pane'
-              onClick={this.props.singlePaneClick}><img alt='Switch to single pane mode' src={iconSinglePane} /></StyledButton>
-            <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
-            <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
-          </Nav>
-        </Container>
-      )
-    }
-  }
-
-  toSurveyor () {
-    const to = this.props.homepageLink || ('/' + (this.props.id || ''))
-    this.props.setIntroductionWatched()
-    this.props.replaceRoute(to)
+    return (
+      <Container>
+        <AuthMenuButton className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}
+          oauth={this.props.oauth} submissions={this.props.submissions} />
+        <Hamburger className='toggle-dropdown' onClick={this.toggleDropdown.bind(this)}>
+          <img aria-label='Menu' src={iconHamburger} alt='Menu' />
+        </Hamburger>
+        <Dropdown show={this.state.showDropdown} onHide={this.hideDropdown.bind(this)}>
+          {menuItems.map((item, index) => (
+            <DropDownItem key={index} className={index < hideFirst ? 'show-on-mobile' : undefined}>
+              {item}
+            </DropDownItem>
+          ))}
+        </Dropdown>
+        <Nav>
+          <StyledButton selected={surveying && this.props.paneMode === 'split'} title='Split panes'
+            onClick={this.props.splitPaneClick}><img alt='Switch to split pane mode' src={iconTwoPanes} /></StyledButton>
+          <StyledButton selected={surveying && this.props.paneMode === 'single'} title='Single pane'
+            onClick={this.props.singlePaneClick}><img alt='Switch to single pane mode' src={iconSinglePane} /></StyledButton>
+          <StyledLink selected={helpSelected} to='/help'>Help</StyledLink>
+          <StyledLink selected={aboutSelected} to='/about'>About</StyledLink>
+        </Nav>
+      </Container>
+    )
   }
 
   hideDropdown () {
@@ -144,9 +122,7 @@ export class Menu extends React.Component {
 
 function mapDispatchToProps (dispatch) {
   return {
-    logOut: () => dispatch(logOut()),
-    setIntroductionWatched: () => dispatch(setIntroductionWatched()),
-    replaceRoute: (url) => dispatch(replace(url))
+    logOut: () => dispatch(logOut())
   }
 }
 
@@ -154,9 +130,7 @@ export default connect(createSelector(
   selectLoading(),
   selectOAuth(),
   selectSubmissions(),
-  selectLoggedIn(),
-  selectWatchedIntroduction(),
-  (loading, oauth, submissions, loggedIn, watchedIntroduction) => ({
-    loading, oauth, submissions, loggedIn, watchedIntroduction
+  (loading, oauth, submissions) => ({
+    loading, oauth, submissions
   })
 ), mapDispatchToProps)(Menu)

@@ -1,7 +1,6 @@
  /* global __CONFIG__ */
 
 import {
-  WATCHED_INTRODUCTION,
   LOAD_ITEM_SUCCESS,
   LOAD_ITEM_ERROR,
   LOAD_OAUTH_SUCCESS,
@@ -26,7 +25,6 @@ import { fromJS } from 'immutable'
 // Initial state
 const initialState = fromJS({
   hasTouch: 'ontouchstart' in window,
-  watchedIntroduction: false,
   panes: fromJS({
     index: 0,
     mode: 'split' // 'single' or 'split'
@@ -88,9 +86,6 @@ function appReducer (state = initialState, action) {
   let wasLastStep
 
   switch (action.type) {
-    case WATCHED_INTRODUCTION:
-      return state
-        .set('watchedIntroduction', true)
     case TOGGLE_METADATA:
       return state
         .set('showMetadata', !state.get('showMetadata'))

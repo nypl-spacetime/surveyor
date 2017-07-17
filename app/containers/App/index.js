@@ -15,15 +15,11 @@ import {
   selectItem,
   selectLoading,
   selectPaneMode,
-  selectSavedStepData,
-  selectSubmissions,
-  selectLoggedIn,
-  selectWatchedIntroduction
+  selectSavedStepData
 } from 'containers/App/selectors'
 
 import Header from 'components/Header'
 import Menu from 'containers/Menu'
-import IntroModal from 'containers/IntroModal'
 
 import { Container, Contents } from './styles'
 
@@ -55,12 +51,6 @@ export class App extends React.Component {
     }
 
     let contents = this.props.children
-
-    if (!this.props.loading && !this.props.watchedIntroduction && !this.props.loggedIn && !(this.props.submissions.completed > 0)) {
-      contents = (
-        <IntroModal />
-      )
-    }
 
     return (
       <Container>
@@ -138,10 +128,7 @@ export default connect(createSelector(
   selectLoading(),
   selectPaneMode(),
   selectSavedStepData(),
-  selectSubmissions(),
-  selectLoggedIn(),
-  selectWatchedIntroduction(),
-  (item, loading, paneMode, savedStepData, submissions, loggedIn, watchedIntroduction) => ({
-    item, loading, paneMode, savedStepData, submissions, loggedIn, watchedIntroduction
+  (item, loading, paneMode, savedStepData) => ({
+    item, loading, paneMode, savedStepData
   })
 ), mapDispatchToProps)(App)
