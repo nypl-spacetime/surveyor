@@ -26,8 +26,8 @@ export class AboutPage extends React.Component {
           <h2>About Surveyor</h2>
           <p>
             Surveyor is a geotagging tool designed to enhance the metadata of items
-            within <a href='https://digitalcollections.nypl.org/'>NYPL Digital Collections</a>. It allows you to view and place images on a
-            map of New York City. With each contribution through Surveyor, users create
+            within <a href='https://digitalcollections.nypl.org/'>NYPL Digital Collections</a>. It allows you to
+            view and place images on a map of New York City. With each contribution through Surveyor, users create
             new knowledge about the Library’s collections!
           </p>
           <p>
@@ -35,6 +35,10 @@ export class AboutPage extends React.Component {
             control issues and develop a new map interface to allow for interactive exploration of geotagged items.
             A dataset containing the locations of all geotagged photos and images will be made available for download
             in NYPL’s <a href='http://spacetime.nypl.org/'>NYC Space/Time Directory</a>.
+          </p>
+          <p>
+            To learn more about how Surveyor works together with other NYPL
+            projects, <a href='https://www.nypl.org/blog/2017/07/07/surveyor-photos-map'>read our blog post on nypl.org</a>.
           </p>
           <h3>Collection Resources</h3>
           <p>
