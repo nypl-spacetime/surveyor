@@ -203,8 +203,11 @@ defaults:
       username: nypllabs
       styleId: cj2gmix25005o2rpapartqm07
       accessToken: pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ
-    tileUrl: 'https://api.mapbox.com/styles/v1/nypllabs/cj2gmix25005o2rpapartqm07/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ'
-    attribution: '&copy; Mapbox, &copy; OpenStreetMap'
+    # tileUrl: 'https://api.mapbox.com/styles/v1/nypllabs/cj2gmix25005o2rpapartqm07/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ'
+    # attribution: '&copy; Mapbox, &copy; OpenStreetMap'
+
+    tileUrl: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
 
     # scrollWheelZoom: false
     scrollWheelZoom: center
